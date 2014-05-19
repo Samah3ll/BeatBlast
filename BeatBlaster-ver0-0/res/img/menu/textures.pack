@@ -1,0 +1,40 @@
+
+textures.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Quit
+  rotate: false
+  xy: 2, 210
+  size: 307, 102
+  orig: 307, 102
+  offset: 0, 0
+  index: -1
+QuitSelected
+  rotate: false
+  xy: 2, 106
+  size: 307, 102
+  orig: 307, 102
+  offset: 0, 0
+  index: -1
+jouer
+  rotate: false
+  xy: 311, 210
+  size: 307, 102
+  orig: 307, 102
+  offset: 0, 0
+  index: -1
+jouerSelected
+  rotate: false
+  xy: 2, 2
+  size: 307, 102
+  orig: 307, 102
+  offset: 0, 0
+  index: -1
+menu20
+  rotate: false
+  xy: 2, 314
+  size: 720, 450
+  orig: 720, 450
+  offset: 0, 0
+  index: -1

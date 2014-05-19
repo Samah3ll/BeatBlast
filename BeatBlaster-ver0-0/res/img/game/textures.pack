@@ -1,0 +1,54 @@
+
+textures.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Block
+  rotate: false
+  xy: 2, 4
+  size: 49, 50
+  orig: 49, 50
+  offset: 0, 0
+  index: -1
+Runner01
+  rotate: false
+  xy: 53, 29
+  size: 20, 25
+  orig: 20, 25
+  offset: 0, 0
+  index: -1
+Runner02
+  rotate: false
+  xy: 75, 29
+  size: 20, 25
+  orig: 20, 25
+  offset: 0, 0
+  index: -1
+Runner03
+  rotate: false
+  xy: 97, 29
+  size: 20, 25
+  orig: 20, 25
+  offset: 0, 0
+  index: -1
+Runner04
+  rotate: false
+  xy: 53, 2
+  size: 20, 25
+  orig: 20, 25
+  offset: 0, 0
+  index: -1
+Runner05
+  rotate: false
+  xy: 75, 2
+  size: 20, 25
+  orig: 20, 25
+  offset: 0, 0
+  index: -1
+Runner06
+  rotate: false
+  xy: 97, 2
+  size: 20, 25
+  orig: 20, 25
+  offset: 0, 0
+  index: -1
