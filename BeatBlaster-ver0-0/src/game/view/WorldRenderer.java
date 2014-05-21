@@ -1,17 +1,14 @@
 package game.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
 
 import game.model.Block;
 import game.model.Plateform;
@@ -57,27 +54,30 @@ public class WorldRenderer {
 	public WorldRenderer(World w) {
 		this.world = w;
 		this.runner =  world.getRunner();
-		
 		this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
-		this.cam.position.set(world.getRunner().getPosition().x, world.getRunner().getPosition().y, 0);
-		//this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
-		this.cam.update();	    
+		//this.cam.position.set(world.getRunner().getPosition().x, world.getRunner().getPosition().y, 0);
+		this.cam.zoom = 80;
+		this.cam.update();
 		spriteBatch = new SpriteBatch();
 		loadTextures();
 		fps = new FPSLogger();
+		
 	}
 
 
 	public void render() {
-		//spriteBatch.setProjectionMatrix(cam.combined);
-		//moveCamera(runner.getPosition().x, CAMERA_HEIGHT / 2);
-	    //spriteBatch.setProjectionMatrix(cam.combined);
-		spriteBatch.begin();
+		GL10 gl = Gdx.graphics.getGL10();
+		 gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		 gl.glViewport(-360*2, -225*2, width*2, height*2); 
+		 cam.update();
+		 cam.apply(gl);
+	     spriteBatch.setProjectionMatrix(cam.combined);
+		spriteBatch.begin();		 
         	drawBlocks();
         	drawplateforms();
         	drawRunner();
         spriteBatch.end();
-        fps.log();
+        //fps.log();
 		
 	}
 	
@@ -142,13 +142,21 @@ public class WorldRenderer {
 			spriteBatch.draw(runnerFrame, runner.getPosition().x * ppuX, runner.getPosition().y * ppuY, Runner.getSize() * ppuX, Runner.getSize() * ppuY);
 		}
 	 
-	 
-	 public void moveCamera(float x,float y){
-		 if ((runner.getPosition().x > CAMERA_WIDTH / 2)) {
-			cam.position.set(x, y, 0);
-	        cam.update();
-	    }
-
+	
+	 public void moveCamera(boolean left, boolean up, boolean right, boolean down){
+		 
+		 if(left) {
+			 cam.translate(-3.5f, 0);
+		 }
+		 if(up){
+			 cam.translate(0, 0);
+		 }
+		 if(right){
+			 cam.translate(3.5f, 0);
+		 }
+		 if(down){
+			 cam.translate(0, 0);
+		 }
 	}
 
 

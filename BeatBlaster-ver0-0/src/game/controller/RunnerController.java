@@ -6,6 +6,7 @@ import java.util.Map;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
+
 import game.model.Block;
 import game.model.Runner;
 import game.model.Runner.State;
@@ -13,8 +14,8 @@ import game.model.World;
 
 public class RunnerController {
 	
-	enum Keys {
-		LEFT, RIGHT, JUMP, FIRE
+	public enum Keys {
+		LEFT, RIGHT, JUMP, FIRE, DOWN
 	}
 	
 	private static final long LONG_JUMP_PRESS 	= 150l;
@@ -24,7 +25,8 @@ public class RunnerController {
 	private static final float DAMP 			= 0.90f;
 	private static final float MAX_VEL 			= 4f;
 	
-	private static final float WIDTH = 20f;
+	private static final float WIDTH = 80f;
+	private static final float HEIGHT = 14f;
 	
 	private World 	world;
 	private Runner 	runner;
@@ -48,6 +50,7 @@ public class RunnerController {
 		keys.put(Keys.RIGHT, false);
 		keys.put(Keys.JUMP, false);
 		keys.put(Keys.FIRE, false);
+		keys.put(Keys.DOWN, false);
 	};
 
 	public RunnerController(World w) {
@@ -57,9 +60,7 @@ public class RunnerController {
 
 	public void update(float delta) {
 		processInput();		
-		
-		int initialX = (int) Math.floor( (runner.getPosition().x));
-		
+				
 		if (grounded && runner.getState().equals(State.JUMPING)) {
 			runner.setState(State.IDLE);
 		}
@@ -93,13 +94,14 @@ public class RunnerController {
 				runner.setState(State.IDLE);
 			}
 		}
-		/*if (runner.getPosition().x < 0) {
+		
+		if (runner.getPosition().x < 0) {
 			runner.getPosition().x = 0;
 			runner.setPosition(runner.getPosition());
 			if (!runner.getState().equals(State.JUMPING)) {
 				runner.setState(State.IDLE);
 			}
-		}*/
+		}
 		if (runner.getPosition().x > WIDTH - runner.getBounds().width ) {
 			runner.getPosition().x = WIDTH - runner.getBounds().width;
 			runner.setPosition(runner.getPosition());
@@ -107,11 +109,6 @@ public class RunnerController {
 				runner.setState(State.IDLE);
 			}
 		}
-		
-		if(runner.getPosition().x == initialX - 1) {
-			world.moveWorld();
-		}
-		
 	}//end of update
 	
 	private boolean processInput() {
@@ -134,6 +131,7 @@ public class RunnerController {
 				}
 			}
 		}
+		
 		if (keys.get(Keys.LEFT)) {						// left is pressed
 			runner.setFacingLeft(true);
 			if (!runner.getState().equals(State.JUMPING)) {
@@ -141,7 +139,6 @@ public class RunnerController {
 				grounded = true;
 			}
 			runner.getAcceleration().x = -ACCELERATION;
-			
 		} else if (keys.get(Keys.RIGHT)) {				// right is pressed
 			runner.setFacingLeft(false);
 			if (!runner.getState().equals(State.JUMPING)) {
@@ -149,7 +146,6 @@ public class RunnerController {
 				grounded = true;
 			}
 			runner.getAcceleration().x = ACCELERATION;
-			
 		} else {
 			if (!runner.getState().equals(State.JUMPING)) {
 				runner.setState(State.IDLE);
@@ -161,113 +157,112 @@ public class RunnerController {
 	}//end of processInput
 	
 	
-private void checkCollisionWithBlocks(float delta) {
+	private void checkCollisionWithBlocks(float delta) {
 				
-	runner.getVelocity().mul(delta);
-	
-	Rectangle runnerRect = rectPool.obtain();
-	runnerRect.set(runner.getBounds().x, runner.getBounds().y, runner.getBounds().width, runner.getBounds().height);
-	
-	int startX, endX;
-	int startY = (int) runner.getBounds().y;
-	int endY = (int) (runner.getBounds().y + runner.getBounds().height);	
-	
+		runner.getVelocity().mul(delta);
 		
-	if (runner.getVelocity().x < 0) {
-		startX = endX = (int) Math.floor(runner.getBounds().x + runner.getVelocity().x);
-	} else {
-		startX = endX = (int) Math.floor(runner.getBounds().x + runner.getBounds().width + runner.getVelocity().x);
-	}
-	
-	populateCollidableBlocks(startX, startY, endX, endY);
-	
-	runnerRect.x += runner.getVelocity().x;
-	
-	world.getCollisionRects().clear();
-	
-	for (Block block : collidable) {
-		if (block == null) {
-			continue;
-		}
+		Rectangle runnerRect = rectPool.obtain();
+		runnerRect.set(runner.getBounds().x, runner.getBounds().y, runner.getBounds().width, runner.getBounds().height);
 		
-		if (runnerRect.overlaps(block.getBounds()) && !runner.getBounds().overlaps(block.getBounds())) {
-			runner.getVelocity().x = 0;
-			runner.getAcceleration().x = 0;
-			world.getCollisionRects().add(block.getBounds());
-			break;
-		} else if (runnerRect.overlaps(block.getBounds()) && runner.getBounds().overlaps(block.getBounds())) {
+		int startX, endX;
+		int startY = (int) runner.getBounds().y;
+		int endY = (int) (runner.getBounds().y + runner.getBounds().height);	
+		
 			
-			if(runner.getVelocity().x > 0) {
-				runner.getPosition().x -= 0.05f;
-			} else if(runner.getVelocity().x < 0) {
-				runner.getPosition().x += 0.05f;
+		if (runner.getVelocity().x < 0) {
+			startX = endX = (int) Math.floor(runner.getBounds().x + runner.getVelocity().x);
+		} else {
+			startX = endX = (int) Math.floor(runner.getBounds().x + runner.getBounds().width + runner.getVelocity().x);
+		}
+		
+		populateCollidableBlocks(startX, startY, endX, endY);
+		runnerRect.x += runner.getVelocity().x;
+		
+		world.getCollisionRects().clear();
+		
+		for (Block block : collidable) {
+			if (block == null) {
+				continue;
 			}
-			runner.getVelocity().x = 0;
-			runner.getAcceleration().x = 0;
-			world.getCollisionRects().add(block.getBounds());
-			break;
-		}
-	}
-	
-	
-	runnerRect.x = runner.getPosition().x;
-	startX = (int) runner.getBounds().x;
-	endX = (int) (runner.getBounds().x + runner.getBounds().width);
-	
-	if (runner.getVelocity().y < 0) {
-		startY = endY = (int) Math.floor(runner.getBounds().y + runner.getVelocity().y);
-	} else {
-		startY = endY = (int) Math.floor(runner.getBounds().y + runner.getBounds().height + runner.getVelocity().y);
-	}
-	
-	if(startY < 0) {
-		startY = 0;
-	}
-	if(endY < 0) {
-		endY = 0;
-	}
-	
-	populateCollidableBlocks(startX, startY, endX, endY);
-	
-	runnerRect.y += runner.getVelocity().y;
-	//runnerRect.y += 0.1;
-	
-	if(runnerRect.y < 0) {
-		runnerRect.y = 0;
-	}
-		
-	for (Block block : collidable) {
-		if (block == null) {
-			continue;
+			
+			if (runnerRect.overlaps(block.getBounds()) && !runner.getBounds().overlaps(block.getBounds())) {
+				runner.getVelocity().x = 0;
+				runner.getAcceleration().x = 0;
+				world.getCollisionRects().add(block.getBounds());
+				break;
+			} else if (runnerRect.overlaps(block.getBounds()) && runner.getBounds().overlaps(block.getBounds())) {
+				
+				if(runner.getVelocity().x > 0) {
+					runner.getPosition().x -= 0.05f;
+				} else if(runner.getVelocity().x < 0) {
+					runner.getPosition().x += 0.05f;
+				}
+				runner.getVelocity().x = 0;
+				runner.getAcceleration().x = 0;
+				world.getCollisionRects().add(block.getBounds());
+				break;
+			}
 		}
 		
-		if (runnerRect.overlaps(block.getBounds()) && !runner.getBounds().overlaps(block.getBounds())) {
-			if (runner.getVelocity().y < 0) {
-				grounded = true;
+		
+		runnerRect.x = runner.getPosition().x;
+		startX = (int) runner.getBounds().x;
+		endX = (int) (runner.getBounds().x + runner.getBounds().width);
+		
+		if (runner.getVelocity().y < 0) {
+			startY = endY = (int) Math.floor(runner.getBounds().y + runner.getVelocity().y);
+		} else {
+			startY = endY = (int) Math.floor(runner.getBounds().y + runner.getBounds().height + runner.getVelocity().y);
+		}
+		
+		if(startY < 0) {
+			startY = 0;
+		}
+		if(endY < 0) {
+			endY = 0;
+		}
+		
+		populateCollidableBlocks(startX, startY, endX, endY);
+		
+		runnerRect.y += runner.getVelocity().y;
+		//runnerRect.y += 0.1;
+		
+		if(runnerRect.y < 0) {
+			runnerRect.y = 0;
+		}
+			
+		for (Block block : collidable) {
+			if (block == null) {
+				continue;
+			}
+			
+			if (runnerRect.overlaps(block.getBounds()) && !runner.getBounds().overlaps(block.getBounds())) {
+				if (runner.getVelocity().y < 0) {
+					grounded = true;
+					runner.getVelocity().y = 0;
+					
+				}
+				
 				runner.getVelocity().y = 0;
-				
+				runner.getAcceleration().y = 0;
+				world.getCollisionRects().add(block.getBounds());
+				break;
+			} else if(runnerRect.overlaps(block.getBounds()) && runner.getBounds().overlaps(block.getBounds())) {
+				runner.getVelocity().y = 0;
+				runner.getAcceleration().y = 0;
+				runner.getPosition().y += 0.05f;
+				world.getCollisionRects().add(block.getBounds());
+				break;
 			}
-			
-			runner.getVelocity().y = 0;
-			runner.getAcceleration().y = 0;
-			world.getCollisionRects().add(block.getBounds());
-			break;
-		} else if(runnerRect.overlaps(block.getBounds()) && runner.getBounds().overlaps(block.getBounds())) {
-			runner.getVelocity().y = 0;
-			runner.getAcceleration().y = 0;
-			runner.getPosition().y += 0.05f;
-			world.getCollisionRects().add(block.getBounds());
-			break;
 		}
-	}
-	
-	runnerRect.y = runner.getPosition().y;
-	
-	runner.getPosition().add(runner.getVelocity());
-	runner.getBounds().x = runner.getPosition().x;
-	runner.getBounds().y = runner.getPosition().y;
-	runner.getVelocity().mul(1 / delta);
-	//runner.getPosition().y += 0.01;
+		
+		runnerRect.y = runner.getPosition().y;
+		
+		runner.getPosition().add(runner.getVelocity());
+		runner.getBounds().x = runner.getPosition().x;
+		runner.getBounds().y = runner.getPosition().y;
+		runner.getVelocity().mul(1 / delta);
+		//runner.getPosition().y += 0.01;
 		
 	}//End of checkCollisionBlock
 
@@ -276,11 +271,16 @@ private void checkCollisionWithBlocks(float delta) {
 		for (int x = startX; x <= endX; x++) {
 			for (int y = startY; y <= endY; y++) {
 				if (x >= 0 && x < world.getLevel().getWidth() && y >=0 && y < world.getLevel().getHeight()) {
-					collidable.add(world.getLevel().get(x, y));
+					collidable.add(world.getLevel().get(x, y));					
 				}
 			}
-		}//End of populateCollisionBlock
+		}
 		
+	}//End of populateCollisionBlock
+	 
+	
+	public Map<Keys, Boolean> getKeys() {
+		return keys;
 	}
 	
 	// ** Key presses and touches **************** //
@@ -316,6 +316,16 @@ private void checkCollisionWithBlocks(float delta) {
 
 		public void fireReleased() {
 			keys.get(keys.put(Keys.FIRE, false));
+		}
+
+		public void downPressed() {
+			keys.get(keys.put(Keys.DOWN, false));
+			
+		}
+
+		public void downReleased() {
+			keys.get(keys.put(Keys.DOWN, false));
+			
 		}
 
 }

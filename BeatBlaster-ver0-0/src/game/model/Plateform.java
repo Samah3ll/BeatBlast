@@ -15,7 +15,7 @@ public abstract class Plateform {
 	private Vector2 position;
 	private int size;
 
-	private Block[][] blocks;
+	//private Block[][] blocks;
 	
 	
 	/**
@@ -27,10 +27,10 @@ public abstract class Plateform {
 	public Plateform(Vector2 pos, int size) {
 		this.position = pos;
 		this.size = size;
-		blocks = new Block[size][1];
+		/*blocks = new Block[size][1];
 		for(int i = 0; i < size; i++) {
 			blocks[i][0] = new BasicBlock( (int) (position.x + i), (int) position.y);
-		}
+		}*/
 	}
 	
 	/**
@@ -43,10 +43,10 @@ public abstract class Plateform {
 	public Plateform(int x, int y, int size) {
 		this.position = new Vector2(x, y);
 		this.size = size;
-		blocks = new Block[size][1];
+		/*blocks = new Block[size][1];
 		for(int i = 0; i < size; i++) {
 			blocks[i][0] = new BasicBlock( (int) (position.x + i), (int) position.y);
-		}
+		}*/
 	}
 	
 	/**
@@ -72,8 +72,9 @@ public abstract class Plateform {
 	public List<Block> getPlateformAsBlock() {
 		ArrayList<Block> blockList = new ArrayList<Block>();
 		for(int i = 0; i < size; i++) {
-			blockList.add(blocks[i][0]);
-			
+			//blockList.add(blocks[i][0]);
+			Block b = new BasicBlock(i, 0);
+			blockList.add(b);
 		}
 		return blockList;
 	}
@@ -88,6 +89,15 @@ public abstract class Plateform {
 		tmp.append("\t");
 		
 		return tmp.toString();
+	}
+
+	public void movePlateform(boolean goingLeft) {
+		if(goingLeft) {
+			this.position.x += 1;
+		} else {
+			this.position.x -= 1;
+		}
+		
 	}
 
 }

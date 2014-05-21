@@ -41,6 +41,13 @@ public abstract class Block {
 		this.bounds.setX(pos.x);
 		this.bounds.setY(pos.y);
 	}
+	
+	public Block(float x, float y) {
+		Vector2 pos = new Vector2(x, y);
+		this.position = pos;
+		this.bounds.setX(pos.x);
+		this.bounds.setY(pos.y);
+	}
 
 	public Rectangle getBounds() {
 		return bounds;
@@ -53,5 +60,15 @@ public abstract class Block {
 	public static float getSize() {
 		return SIZE;
 	}
+	
+	public void moveBlock(boolean goingLeft) {
+		if(goingLeft) {
+			position.x += 1;			
+		} else {
+			position.x -= 1;
+		}
+		bounds.setX(position.x);
+		bounds.setY(position.y);
+	}//end of moveBlock
 
 }

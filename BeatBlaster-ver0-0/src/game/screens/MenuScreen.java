@@ -19,9 +19,6 @@ import game.view.MenuRenderer;
  */
 public class MenuScreen implements Screen, InputProcessor {
 	
-	 private static final float BUTTON_WIDTH = 60f;
-	 private static final float BUTTON_HEIGHT = 20f;
-	 private static final float BUTTON_SPACING = 10f;
 	
 	private MenuController controller;
 	private MenuRenderer renderer;

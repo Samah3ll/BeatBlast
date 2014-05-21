@@ -65,7 +65,8 @@ public class Level {
 	public void addPlateform(Plateform p) {
 		plateforms[nbPlateform] = p;
 		nbPlateform++;
-		for(Block b : p.getPlateformAsBlock()) {
+		for(int i = 0; i < p.getSize(); i++) {
+			BasicBlock b = new BasicBlock((int) p.getPosition().x + i, (int) (p.getPosition().y));
 			addBlock(b);
 		}
 	}
@@ -131,13 +132,19 @@ public class Level {
 		return tmp.toString();
 	}
 
-	public void moveLevel() {
-		for(int i = 0; i < width; i++ ) {
+	public void moveLevel(boolean goingLeft) {
+		for(int i = 0; i < width-1; i++ ) {
 			for(int j = 0; j < height; j++) {
-				blocks[i][j] = blocks[i + 1][j];
+				if(blocks[i][j] != null) {
+					blocks[i][j].moveBlock(goingLeft);	
+				}							
 			}
 		}
 		
-	}
+		for(int k = 0; k < nbPlateform; k++) {
+			plateforms[k].movePlateform(goingLeft);
+		}
+		
+	}//end of moveLevel
 
 }

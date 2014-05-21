@@ -1,6 +1,6 @@
 package game.screens;
 
-import game.BeatBlaster;
+import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
+
 import game.controller.RunnerController;
 import game.model.World;
 import game.view.WorldRenderer;
@@ -23,30 +24,33 @@ public class GameScreen implements Screen, InputProcessor {
 	private WorldRenderer renderer;
 	private RunnerController controller;
 	
-	private int width, height;
+	//private int width, height;
 	
-	BeatBlaster game;
+	Game game;
 	
 	
 	public GameScreen(Game game) {
-		this.game = (BeatBlaster) game;
+		this.game = game;
 	}
 
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-				
+		Map<RunnerController.Keys, Boolean> m = controller.getKeys();
+		renderer.moveCamera(m.get(RunnerController.Keys.LEFT), m.get(RunnerController.Keys.JUMP),
+				m.get(RunnerController.Keys.RIGHT), m.get(RunnerController.Keys.DOWN));		
 		controller.update(delta);
 		renderer.render();
+		
 
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		renderer.setSize(width, height);
-		this.width = width;
-		this.height = height;
+		//this.width = width;
+		//this.height = height;
 
 	}
 
@@ -84,8 +88,8 @@ public class GameScreen implements Screen, InputProcessor {
 	}
 
 	@Override
-	public boolean keyDown(int keycode)
-		{if (keycode == Keys.LEFT)
+	public boolean keyDown(int keycode){
+		if (keycode == Keys.LEFT)
 	        controller.leftPressed();
 	    if (keycode == Keys.RIGHT)
 	        controller.rightPressed();
@@ -93,6 +97,8 @@ public class GameScreen implements Screen, InputProcessor {
 	        controller.jumpPressed();
 	    if (keycode == Keys.X)
 	        controller.firePressed();
+	    if (keycode == Keys.DOWN)
+	        controller.downPressed();
 	    return true;
 	}
 
@@ -106,6 +112,8 @@ public class GameScreen implements Screen, InputProcessor {
 	            controller.jumpReleased();
 	        if (keycode == Keys.X)
 	            controller.fireReleased();
+	        if (keycode == Keys.DOWN)
+		        controller.downReleased();
 	        return true;
 	}
 
