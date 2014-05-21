@@ -144,15 +144,16 @@ public class WorldRenderer {
 	 
 	
 	 public void moveCamera(boolean left, boolean up, boolean right, boolean down){
-		 
+		 float dx = runner.getVelocity().x;
+		 //float dy = runner.getVelocity().y;
 		 if(left) {
-			 cam.translate(-3.5f, 0);
+			 cam.translate(dx, 0);
 		 }
 		 if(up){
 			 cam.translate(0, 0);
 		 }
 		 if(right){
-			 cam.translate(3.5f, 0);
+			 cam.translate(dx, 0);
 		 }
 		 if(down){
 			 cam.translate(0, 0);
