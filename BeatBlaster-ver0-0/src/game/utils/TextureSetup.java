@@ -14,6 +14,10 @@ public class TextureSetup {
         TexturePacker2.process(path + "/res/img/menu",
 				    			path + "/res/img/menu",
 					"textures.pack");
+        //PauseScreen textures
+        TexturePacker2.process(path + "/res/img/pause",
+				    			path + "/res/img/pause",
+					"textures.pack");
         System.out.println("Done");
     }
 

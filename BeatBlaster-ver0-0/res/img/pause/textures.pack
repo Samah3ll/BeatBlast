@@ -1,0 +1,12 @@
+
+textures.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+pause
+  rotate: false
+  xy: 2, 2
+  size: 720, 450
+  orig: 720, 450
+  offset: 0, 0
+  index: -1

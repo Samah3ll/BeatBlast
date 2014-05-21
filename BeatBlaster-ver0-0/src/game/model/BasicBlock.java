@@ -22,4 +22,10 @@ public class BasicBlock extends Block {
 		this.bounds.height = SIZE;
 	}
 
+	public BasicBlock(float x, float y) {
+		super(x, y);
+		this.bounds.width = SIZE;
+		this.bounds.height = SIZE;
+	}
+
 }

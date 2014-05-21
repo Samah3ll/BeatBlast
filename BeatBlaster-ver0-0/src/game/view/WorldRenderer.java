@@ -1,9 +1,7 @@
 package game.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,8 +19,6 @@ public class WorldRenderer {
 	private static final float CAMERA_WIDTH = 20f;
 	private static final float CAMERA_HEIGHT = 14f;
 	private static final float RUNNING_FRAME_DURATION = 0.06f;
-	
-	private FPSLogger fps;
 	
 	private World world;
 	Runner runner;
@@ -55,12 +51,10 @@ public class WorldRenderer {
 		this.world = w;
 		this.runner =  world.getRunner();
 		this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
-		//this.cam.position.set(world.getRunner().getPosition().x, world.getRunner().getPosition().y, 0);
-		this.cam.zoom = 80;
+		this.cam.zoom = 72;
 		this.cam.update();
 		spriteBatch = new SpriteBatch();
 		loadTextures();
-		fps = new FPSLogger();
 		
 	}
 
@@ -68,7 +62,7 @@ public class WorldRenderer {
 	public void render() {
 		GL10 gl = Gdx.graphics.getGL10();
 		 gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		 gl.glViewport(-360*2, -225*2, width*2, height*2); 
+		 gl.glViewport(-width, -height, width*2, height*2);
 		 cam.update();
 		 cam.apply(gl);
 	     spriteBatch.setProjectionMatrix(cam.combined);
@@ -77,7 +71,6 @@ public class WorldRenderer {
         	drawplateforms();
         	drawRunner();
         spriteBatch.end();
-        //fps.log();
 		
 	}
 	
@@ -146,17 +139,33 @@ public class WorldRenderer {
 	 public void moveCamera(boolean left, boolean up, boolean right, boolean down){
 		 float dx = runner.getVelocity().x;
 		 //float dy = runner.getVelocity().y;
+		 float correction = 0.8f;
 		 if(left) {
 			 cam.translate(dx, 0);
+			 if(dx != 0) {
+				 cam.translate(-correction, 0);
+			 }
+			 
 		 }
 		 if(up){
 			 cam.translate(0, 0);
 		 }
 		 if(right){
 			 cam.translate(dx, 0);
+			 if(dx != 0) {
+				 cam.translate(correction, 0);
+			 }
 		 }
 		 if(down){
 			 cam.translate(0, 0);
+		 }
+		 
+		 if(cam.position.x < 0) {
+			 cam.position.x = 0;
+		 }
+		 
+		 if(cam.position.x/ppuX > world.getLevel().getWidth() - CAMERA_WIDTH) {
+			 cam.position.x = (world.getLevel().getWidth() - CAMERA_WIDTH) * ppuX;
 		 }
 	}
 
@@ -167,6 +176,17 @@ public class WorldRenderer {
         ppuX = (float)width / CAMERA_WIDTH;
         ppuY = (float)height / CAMERA_HEIGHT;
     }
+	
+	public void dispose() {
+		//spriteBatch.dispose();
+		runnerIdleLeft.getTexture().dispose();
+		runnerIdleRight.getTexture().dispose();
+		runnerFallLeft.getTexture().dispose();
+		runnerFallRight.getTexture().dispose();
+		runnerFrame.getTexture().dispose();
+		runnerJumpLeft.getTexture().dispose();
+		runnerJumpRight.getTexture().dispose();
+	}
 	
 
 }

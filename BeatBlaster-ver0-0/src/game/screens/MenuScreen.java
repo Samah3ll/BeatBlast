@@ -1,7 +1,5 @@
 package game.screens;
 
-import game.BeatBlaster;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -23,13 +21,13 @@ public class MenuScreen implements Screen, InputProcessor {
 	private MenuController controller;
 	private MenuRenderer renderer;
 	
-	private int width, height;
-	
-	BeatBlaster game;
+	Game game;
 	
 	
 	public MenuScreen(Game game) {
-		this.game = (BeatBlaster) game;
+		this.game = game;
+		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 	}
 	
 	/*
@@ -38,8 +36,6 @@ public class MenuScreen implements Screen, InputProcessor {
 	
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		renderer.render();
 		
@@ -58,6 +54,7 @@ public class MenuScreen implements Screen, InputProcessor {
 					break;
 				case (3) :
 					game.dispose();
+					break;
 			}
 		}
 		
@@ -121,8 +118,6 @@ public class MenuScreen implements Screen, InputProcessor {
 	@Override
 	public void resize(int width, int height) {
 		renderer.setSize(width, height);
-		this.width = width;
-		this.height = height;
 
 	}
 
@@ -157,7 +152,7 @@ public class MenuScreen implements Screen, InputProcessor {
 	public void dispose() {
 		// TODO Auto-generated method stub
 		Gdx.input.setInputProcessor(null);
-		//System.out.println("MenuSceen -> dispose");
+		renderer.dispose();
 	}
 	
 	/*

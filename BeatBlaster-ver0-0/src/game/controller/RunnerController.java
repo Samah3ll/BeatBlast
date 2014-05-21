@@ -15,18 +15,18 @@ import game.model.World;
 public class RunnerController {
 	
 	public enum Keys {
-		LEFT, RIGHT, JUMP, FIRE, DOWN
+		LEFT, RIGHT, JUMP, FIRE, DOWN, PAUSE
 	}
 	
-	private static final long LONG_JUMP_PRESS 	= 150l;
+	private static final long LONG_JUMP_PRESS 	= 100l;
 	private static final float ACCELERATION 	= 20f;
 	private static final float GRAVITY 			= -20f;
-	private static final float MAX_JUMP_SPEED	= 7f;
+	private static final float MAX_JUMP_SPEED	= 5f;
 	private static final float DAMP 			= 0.90f;
 	private static final float MAX_VEL 			= 4f;
 	
-	private static final float WIDTH = 80f;
-	private static final float HEIGHT = 14f;
+	private float width;
+	private float height;
 	
 	private World 	world;
 	private Runner 	runner;
@@ -51,11 +51,14 @@ public class RunnerController {
 		keys.put(Keys.JUMP, false);
 		keys.put(Keys.FIRE, false);
 		keys.put(Keys.DOWN, false);
+		keys.put(Keys.PAUSE, false);
 	};
 
 	public RunnerController(World w) {
 		this.world = w;
 		this.runner = world.getRunner();
+		this.width = w.getLevel().getWidth();
+		this.height = w.getLevel().getHeight();
 	}
 
 	public void update(float delta) {
@@ -102,8 +105,8 @@ public class RunnerController {
 				runner.setState(State.IDLE);
 			}
 		}
-		if (runner.getPosition().x > WIDTH - runner.getBounds().width ) {
-			runner.getPosition().x = WIDTH - runner.getBounds().width;
+		if (runner.getPosition().x > width - runner.getBounds().width ) {
+			runner.getPosition().x = width - runner.getBounds().width;
 			runner.setPosition(runner.getPosition());
 			if (!runner.getState().equals(State.JUMPING)) {
 				runner.setState(State.IDLE);
@@ -178,8 +181,6 @@ public class RunnerController {
 		populateCollidableBlocks(startX, startY, endX, endY);
 		runnerRect.x += runner.getVelocity().x;
 		
-		world.getCollisionRects().clear();
-		
 		for (Block block : collidable) {
 			if (block == null) {
 				continue;
@@ -188,7 +189,6 @@ public class RunnerController {
 			if (runnerRect.overlaps(block.getBounds()) && !runner.getBounds().overlaps(block.getBounds())) {
 				runner.getVelocity().x = 0;
 				runner.getAcceleration().x = 0;
-				world.getCollisionRects().add(block.getBounds());
 				break;
 			} else if (runnerRect.overlaps(block.getBounds()) && runner.getBounds().overlaps(block.getBounds())) {
 				
@@ -199,7 +199,6 @@ public class RunnerController {
 				}
 				runner.getVelocity().x = 0;
 				runner.getAcceleration().x = 0;
-				world.getCollisionRects().add(block.getBounds());
 				break;
 			}
 		}
@@ -245,13 +244,11 @@ public class RunnerController {
 				
 				runner.getVelocity().y = 0;
 				runner.getAcceleration().y = 0;
-				world.getCollisionRects().add(block.getBounds());
 				break;
 			} else if(runnerRect.overlaps(block.getBounds()) && runner.getBounds().overlaps(block.getBounds())) {
 				runner.getVelocity().y = 0;
 				runner.getAcceleration().y = 0;
 				runner.getPosition().y += 0.05f;
-				world.getCollisionRects().add(block.getBounds());
 				break;
 			}
 		}
@@ -281,6 +278,10 @@ public class RunnerController {
 	
 	public Map<Keys, Boolean> getKeys() {
 		return keys;
+	}
+	
+	public boolean isPaused() {
+		return keys.get(Keys.PAUSE);
 	}
 	
 	// ** Key presses and touches **************** //
@@ -325,6 +326,16 @@ public class RunnerController {
 
 		public void downReleased() {
 			keys.get(keys.put(Keys.DOWN, false));
+			
+		}
+		
+		public void pPressed() {
+			keys.get(keys.put(Keys.PAUSE, false));
+			
+		}
+		
+		public void pReleased() {
+			keys.get(keys.put(Keys.PAUSE, false));
 			
 		}
 

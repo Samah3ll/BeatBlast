@@ -10,6 +10,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 
 import game.controller.RunnerController;
+import game.model.BasicPlateform;
 import game.model.World;
 import game.view.WorldRenderer;
 
@@ -23,8 +24,6 @@ public class GameScreen implements Screen, InputProcessor {
 	private World world;
 	private WorldRenderer renderer;
 	private RunnerController controller;
-	
-	//private int width, height;
 	
 	Game game;
 	
@@ -43,20 +42,22 @@ public class GameScreen implements Screen, InputProcessor {
 		controller.update(delta);
 		renderer.render();
 		
+		if(controller.isPaused()) {
+			game.setScreen(new PauseScreen(game));
+		}
 
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		renderer.setSize(width, height);
-		//this.width = width;
-		//this.height = height;
+		//System.out.println("width : " + width + " ; height : " + height);
 
 	}
 
 	@Override
 	public void show() {
-		world = new World();
+		world = new World(/*inputData*/);
 		renderer = new WorldRenderer(world);
 		controller = new RunnerController(world);
 		Gdx.input.setInputProcessor(this);
@@ -84,6 +85,7 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void dispose() {
 		Gdx.input.setInputProcessor(null);
+		renderer.dispose();
 
 	}
 
@@ -99,6 +101,8 @@ public class GameScreen implements Screen, InputProcessor {
 	        controller.firePressed();
 	    if (keycode == Keys.DOWN)
 	        controller.downPressed();
+	    if (keycode == Keys.P)
+	        controller.pPressed();
 	    return true;
 	}
 
@@ -114,6 +118,8 @@ public class GameScreen implements Screen, InputProcessor {
 	            controller.fireReleased();
 	        if (keycode == Keys.DOWN)
 		        controller.downReleased();
+	        if (keycode == Keys.P)
+		        controller.pReleased();
 	        return true;
 	}
 

@@ -1,6 +1,5 @@
 package game.view;
 
-import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -11,9 +10,7 @@ public class MenuRenderer {
 	
 	private static final float CAMERA_WIDTH = 100f;
 	private static final float CAMERA_HEIGHT = 100f;
-	private static final float RUNNING_FRAME_DURATION = 0.06f;
-	
-	private FPSLogger fps;
+	//private static final float RUNNING_FRAME_DURATION = 0.06f;
 	
 	private OrthographicCamera cam;
 	
@@ -36,7 +33,6 @@ public class MenuRenderer {
 		this.cam.update();
 		spriteBatch = new SpriteBatch();
         loadTextures();
-        fps = new FPSLogger();
     }
 	
 	
@@ -63,7 +59,6 @@ public class MenuRenderer {
 	}
 	
 	public void render() {
-		fps.log();
         spriteBatch.begin();
             drawBackground();
             drawButtonGame();
@@ -95,6 +90,17 @@ public class MenuRenderer {
 	
 	private void drawButtonQuitSelected() {
 		spriteBatch.draw(buttonQuitSelected, 20f * ppuX, 5f * ppuY, 60f * ppuX, 30f * ppuY);
+	}
+
+
+	public void dispose() {
+		//spriteBatch.dispose();
+		background.getTexture().dispose();
+		buttonGame.getTexture().dispose();
+		buttonGameSelected.getTexture().dispose();
+		buttonQuit.getTexture().dispose();
+		buttonQuitSelected.getTexture().dispose();
+		
 	}
 
 

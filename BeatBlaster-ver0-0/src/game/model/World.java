@@ -1,5 +1,7 @@
 package game.model;
 
+import game.utils.LevelGenerator;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -13,13 +15,7 @@ public class World {
 	
 	private Runner runner;
 	private Level level;
-	
-	/** The collision boxes **/
-	Array<Rectangle> collisionRects = new Array<Rectangle>();
-	
-	public Array<Rectangle> getCollisionRects() {
-		    return collisionRects;
-		}
+	private LevelGenerator lg;
 	
 	public Runner getRunner() {
 		return runner;
@@ -29,16 +25,24 @@ public class World {
 		return level;
 	}
 	
-	public World() {
-		createDemoWorld();
+	public void setlevel(Level l) {
+		this.level = l;
+	}
+	
+	public World(/*inputData*/) {
+		runner = new Runner(new Vector2(7, 2));
+		lg = new LevelGenerator(300);
+		level = lg.generateLevel(/*inputData*/);
+		//createDemoWorld();
 	}
 	
 	/**
 	 * Crée le monde en initialisant son runner et son level et en ajoutant des block, plateform ou des monstres au level.
 	 */
 	private void createDemoWorld() {
+		
 		runner = new Runner(new Vector2(7, 2));
-		level = new Level(80, 15);			//Utiliser depuis WorldRenderer CAMERA_WIDTH et HEIGHT
+		level = new Level(80, 16);			//Utiliser depuis WorldRenderer CAMERA_WIDTH et HEIGHT
 		BasicBlock b = new BasicBlock(new Vector2(1,1));
 		level.addBlock(b);
 		BasicBlock b0 = new BasicBlock(new Vector2(1,10));
@@ -57,7 +61,7 @@ public class World {
 		for(int i = 0; i < 80; i++) {
 			BasicBlock b1 = new BasicBlock(new Vector2(i,0));
 			level.addBlock(b1);
-			BasicBlock b3 = new BasicBlock(new Vector2(i,14));
+			BasicBlock b3 = new BasicBlock(new Vector2(i,level.getHeight() - 1));
 			level.addBlock(b3);
 			if(i > 9 && i < 17) {
 				BasicBlock b4 = new BasicBlock(new Vector2(i,4));
@@ -65,12 +69,8 @@ public class World {
 			}
 			
 		}
-		//System.out.println(level.toString());
 
 	}//end of createDemoWorld
 	
-	public void moveWorld(boolean goingLeft) {
-		level.moveLevel(goingLeft);
-	}
 
 }
