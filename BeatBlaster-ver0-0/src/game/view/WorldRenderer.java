@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
 
 import game.model.Block;
 import game.model.Plateform;
@@ -30,6 +31,9 @@ public class WorldRenderer {
     private int height;
     private float ppuX;
     private float ppuY;
+    
+    //Pour la pause
+    private Vector2 positionWhenPaused;
     
     Matrix4 usualMatrix;
     
@@ -79,7 +83,14 @@ public class WorldRenderer {
 	}
 	
 	public void pause() {
-		spriteBatch.setProjectionMatrix(usualMatrix);
+		//spriteBatch.setProjectionMatrix(usualMatrix);
+		positionWhenPaused = runner.getPosition();	
+	}
+	
+	public void resume() {
+		System.out.println("runner repositionned at " + positionWhenPaused);
+		runner.setPosition(positionWhenPaused);
+		//render();
 	}
 	
 	private void loadTextures() {

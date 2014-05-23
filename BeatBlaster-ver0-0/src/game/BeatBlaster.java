@@ -6,7 +6,6 @@ import com.badlogic.gdx.Game;
 
 import game.screens.GameScreen;
 import game.screens.MenuScreen;
-import game.screens.PauseScreen;
 
 public class BeatBlaster extends Game {
 	
@@ -15,7 +14,6 @@ public class BeatBlaster extends Game {
 	public void create() {
 		//setScreen(new MenuScreen(this));
 		setScreen(new GameScreen(this));
-		//setScreen(new PauseScreen(this));
 	}
 	
 	public void dispose () {

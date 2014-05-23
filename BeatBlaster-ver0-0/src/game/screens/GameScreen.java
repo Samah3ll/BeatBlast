@@ -27,20 +27,23 @@ public class GameScreen implements Screen, InputProcessor {
 	
 	public GameScreen(Game game) {
 		this.game = game;
+		world = new World(/*inputData*/);
+		renderer = new WorldRenderer(world);
+		controller = new RunnerController(world);
+		
 	}
 
 	@Override
 	public void render(float delta) {
 		
-		if(!controller.isPaused()) {
-			Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
-			Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		if(controller.isPaused()) {					
+			game.pause();
+			this.hide();
+			game.setScreen(new PauseScreen(game, this));
+		}else if(!controller.isPaused()) {
 			renderer.moveCamera();		
 			controller.update(delta);
 			renderer.render();
-		}else if(controller.isPaused()) {
-			pause();
-			game.setScreen(new PauseScreen(game));
 		}
 
 	}
@@ -53,9 +56,14 @@ public class GameScreen implements Screen, InputProcessor {
 
 	@Override
 	public void show() {
-		world = new World(/*inputData*/);
-		renderer = new WorldRenderer(world);
-		controller = new RunnerController(world);
+		
+		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		
+		//world = new World(/*inputData*/);
+		//renderer = new WorldRenderer(world);
+		//controller = new RunnerController(world);
+		
 		Gdx.input.setInputProcessor(this);
 
 	}
@@ -68,14 +76,35 @@ public class GameScreen implements Screen, InputProcessor {
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 		renderer.pause();
+		world.getRunner().getAcceleration().x = 0;
+		world.getRunner().getAcceleration().y = 0;
+		world.getRunner().getVelocity().x = 0;
+		world.getRunner().getVelocity().y = 0;
 
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
+		game.resume();
+		game.setScreen(this);
+		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		
+		controller.getKeys().put(RunnerController.Keys.PAUSE, false);
+		Gdx.input.setInputProcessor(this);
+		//renderer.resume();
+	}
+	
+	public void resume(float delta) {
+		game.setScreen(this);
+		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		
+		controller.getKeys().put(RunnerController.Keys.PAUSE, false);
+		Gdx.input.setInputProcessor(this);
+		//renderer.resume();
+		//render(delta);
 
 	}
 

@@ -13,5 +13,32 @@ public class PauseController {
 	static {
 		keys.put(PauseKeys.UNPAUSE, false);
 	};
+	
+	
+	public boolean isUnpaused() {
+		return keys.get(PauseKeys.UNPAUSE);
+		
+		
+	}
+	
+	public void pPressed() {
+		Long start = System.currentTimeMillis();
+		while(System.currentTimeMillis() - start < 400) {
+		}
+		keys.get(keys.put(PauseKeys.UNPAUSE, true));
+		
+	}
+
+	public void pReleased() {
+		Long start = System.currentTimeMillis();
+		while(System.currentTimeMillis() - start < 400) {
+		}
+		keys.get(keys.put(PauseKeys.UNPAUSE, false));	
+		
+	}
+	
+	public Map<PauseKeys, Boolean> getKeys() {
+		return keys;
+	}
 
 }

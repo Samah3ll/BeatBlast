@@ -3,10 +3,17 @@ textures.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-pause
+resume
   rotate: false
   xy: 2, 2
-  size: 720, 450
-  orig: 720, 450
+  size: 307, 102
+  orig: 307, 102
+  offset: 0, 0
+  index: -1
+resume02
+  rotate: false
+  xy: 311, 2
+  size: 307, 102
+  orig: 307, 102
   offset: 0, 0
   index: -1

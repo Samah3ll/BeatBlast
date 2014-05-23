@@ -1,5 +1,7 @@
 package game.view;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -14,37 +16,40 @@ public class PauseRenderer {
 	
 	private SpriteBatch spriteBatch;
 	
-	private TextureRegion background;
+	private TextureRegion buttonResume;
 	
 	private int width;
     private int height;
     private float ppuX;
     private float ppuY;
     
+    //TODO:beaucoup de choses à enlever des commentaires ou a supprimer (penser ax imports).
+    
     public PauseRenderer() {
-    	this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
-		this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
-		this.cam.update();
+    	//this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
+		//this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
+		//this.cam.update();
 		spriteBatch = new SpriteBatch();
         loadTextures();
     }
 
+    
 	private void loadTextures() {
 		final String path = System.getProperty("user.dir");
 		TextureAtlas atlas = new TextureAtlas(path + "/res/img/pause/textures.pack");
-		background = atlas.findRegion("pause");
+		buttonResume = atlas.findRegion("resume02");
 		
 	}
-
+     
 	public void render() {
 		spriteBatch.begin();
-		  drawBackground();
+		  drawButtonResume();
 		spriteBatch.end();
 		
 	}
-
-	private void drawBackground() {
-		spriteBatch.draw(background, 0, 0, CAMERA_WIDTH * ppuX, CAMERA_HEIGHT * ppuY);
+	private void drawButtonResume() {
+		spriteBatch.draw(buttonResume, 100, 100, 307, 102);
+		System.out.println("draw button resume");
 		
 	}
 	
@@ -57,7 +62,7 @@ public class PauseRenderer {
     }
 	
 	public void dispose() {
-		
+		buttonResume.getTexture().dispose();
 	}
 
 }
