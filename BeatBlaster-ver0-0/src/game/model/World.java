@@ -2,9 +2,7 @@ package game.model;
 
 import game.utils.LevelGenerator;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 
 /**
  * La classe qui définit un monde. Un monde possède un niveau (Level) et un Runner.

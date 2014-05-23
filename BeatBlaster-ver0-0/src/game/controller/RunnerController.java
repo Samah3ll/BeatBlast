@@ -62,8 +62,7 @@ public class RunnerController {
 	}
 
 	public void update(float delta) {
-		processInput();		
-				
+		processInput();				
 		if (grounded && runner.getState().equals(State.JUMPING)) {
 			runner.setState(State.IDLE);
 		}
@@ -115,6 +114,8 @@ public class RunnerController {
 	}//end of update
 	
 	private boolean processInput() {
+		runner.getAcceleration().x = ACCELERATION;
+		runner.setFacingLeft(false);
 		
 		//Key jump pressed
 		if (keys.get(Keys.JUMP)) {
@@ -135,6 +136,24 @@ public class RunnerController {
 			}
 		}
 		
+		if(keys.get(Keys.LEFT)) {
+			runner.setFacingLeft(false);
+			if (!runner.getState().equals(State.JUMPING)) {
+				runner.setState(State.WALKING);
+				grounded = true;
+			}
+			runner.getAcceleration().x = ACCELERATION/2;
+		} else if(keys.get(Keys.RIGHT)) {
+			runner.setFacingLeft(false);
+			if (!runner.getState().equals(State.JUMPING)) {
+				runner.setState(State.WALKING);
+				grounded = true;
+			}
+			runner.getAcceleration().x = ACCELERATION * (3/2);
+		} else if(!runner.getState().equals(State.JUMPING)) {
+			runner.setState(State.WALKING);
+		}
+		/*
 		if (keys.get(Keys.LEFT)) {						// left is pressed
 			runner.setFacingLeft(true);
 			if (!runner.getState().equals(State.JUMPING)) {
@@ -155,7 +174,7 @@ public class RunnerController {
 			}
 			runner.getAcceleration().x = 0;
 			
-		}		
+		}	*/
 		return false;
 	}//end of processInput
 	
@@ -248,7 +267,9 @@ public class RunnerController {
 			} else if(runnerRect.overlaps(block.getBounds()) && runner.getBounds().overlaps(block.getBounds())) {
 				runner.getVelocity().y = 0;
 				runner.getAcceleration().y = 0;
+				//Paramètres à adapter en fonction de la vitesse du perso
 				runner.getPosition().y += 0.05f;
+				runner.getPosition().x += 0.1f;
 				break;
 			}
 		}
@@ -330,7 +351,7 @@ public class RunnerController {
 		}
 		
 		public void pPressed() {
-			keys.get(keys.put(Keys.PAUSE, false));
+			keys.get(keys.put(Keys.PAUSE, true));
 			
 		}
 		

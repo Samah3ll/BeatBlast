@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Matrix4;
 
 import game.model.Block;
 import game.model.Plateform;
@@ -30,6 +31,8 @@ public class WorldRenderer {
     private float ppuX;
     private float ppuY;
     
+    Matrix4 usualMatrix;
+    
     //Block texture
     private TextureRegion blockTexture;
     
@@ -51,6 +54,7 @@ public class WorldRenderer {
 		this.world = w;
 		this.runner =  world.getRunner();
 		this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
+		usualMatrix = cam.combined;
 		this.cam.zoom = 72;
 		this.cam.update();
 		spriteBatch = new SpriteBatch();
@@ -65,13 +69,17 @@ public class WorldRenderer {
 		 gl.glViewport(-width, -height, width*2, height*2);
 		 cam.update();
 		 cam.apply(gl);
-	     spriteBatch.setProjectionMatrix(cam.combined);
+	    spriteBatch.setProjectionMatrix(cam.combined);
 		spriteBatch.begin();		 
         	drawBlocks();
         	drawplateforms();
         	drawRunner();
         spriteBatch.end();
 		
+	}
+	
+	public void pause() {
+		spriteBatch.setProjectionMatrix(usualMatrix);
 	}
 	
 	private void loadTextures() {
@@ -136,37 +144,49 @@ public class WorldRenderer {
 		}
 	 
 	
-	 public void moveCamera(boolean left, boolean up, boolean right, boolean down){
+	 public void moveCamera(){
 		 float dx = runner.getVelocity().x;
 		 //float dy = runner.getVelocity().y;
-		 float correction = 0.8f;
-		 if(left) {
+		 
+		 //Correction pour que la caméra ne dépasse pas le runner ou l'inverse, peut être à modifier
+		 float correction = 0.65f;
+		 
+		 if(runner.getVelocity().x == 0) {
+			 dx = 0;
+		 }
+		 
+		 if(runner.getAcceleration().x == 0) {
+			 dx = 0;
+		 }
+		 
+		 //Déplacement de la caméra pour suivre le runner
+		 if(dx < 0) {
 			 cam.translate(dx, 0);
 			 if(dx != 0) {
 				 cam.translate(-correction, 0);
-			 }
-			 
+			 }			 
 		 }
-		 if(up){
+		 /*if(up){
 			 cam.translate(0, 0);
-		 }
-		 if(right){
+		 }*/
+		 if(dx > 0){
 			 cam.translate(dx, 0);
 			 if(dx != 0) {
 				 cam.translate(correction, 0);
 			 }
 		 }
-		 if(down){
+		 /*if(down){
 			 cam.translate(0, 0);
-		 }
+		 }*/
 		 
+		 //Pour que la caméra ne sorte pas du niveau
 		 if(cam.position.x < 0) {
 			 cam.position.x = 0;
-		 }
-		 
+		 }		 
 		 if(cam.position.x/ppuX > world.getLevel().getWidth() - CAMERA_WIDTH) {
 			 cam.position.x = (world.getLevel().getWidth() - CAMERA_WIDTH) * ppuX;
 		 }
+		 
 	}
 
 
@@ -187,6 +207,7 @@ public class WorldRenderer {
 		runnerJumpLeft.getTexture().dispose();
 		runnerJumpRight.getTexture().dispose();
 	}
+
 	
 
 }

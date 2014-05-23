@@ -1,7 +1,5 @@
 package game.screens;
 
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Game;
@@ -10,7 +8,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 
 import game.controller.RunnerController;
-import game.model.BasicPlateform;
 import game.model.World;
 import game.view.WorldRenderer;
 
@@ -34,15 +31,15 @@ public class GameScreen implements Screen, InputProcessor {
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		Map<RunnerController.Keys, Boolean> m = controller.getKeys();
-		renderer.moveCamera(m.get(RunnerController.Keys.LEFT), m.get(RunnerController.Keys.JUMP),
-				m.get(RunnerController.Keys.RIGHT), m.get(RunnerController.Keys.DOWN));		
-		controller.update(delta);
-		renderer.render();
 		
-		if(controller.isPaused()) {
+		if(!controller.isPaused()) {
+			Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
+			Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+			renderer.moveCamera();		
+			controller.update(delta);
+			renderer.render();
+		}else if(controller.isPaused()) {
+			pause();
 			game.setScreen(new PauseScreen(game));
 		}
 
@@ -51,7 +48,6 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void resize(int width, int height) {
 		renderer.setSize(width, height);
-		//System.out.println("width : " + width + " ; height : " + height);
 
 	}
 
@@ -73,6 +69,7 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
+		renderer.pause();
 
 	}
 
