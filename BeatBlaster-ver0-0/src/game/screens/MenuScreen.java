@@ -5,7 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
+
 import game.controller.MenuController;
 import game.controller.MenuController.MenuKeys;
 import game.view.MenuRenderer;
@@ -21,13 +24,22 @@ public class MenuScreen implements Screen, InputProcessor {
 	private MenuController controller;
 	private MenuRenderer renderer;
 	
+	private Music music;
+	
 	Game game;
+	
+	final String path = System.getProperty("user.dir");
 	
 	
 	public MenuScreen(Game game) {
 		this.game = game;
+		renderer = new MenuRenderer();
+		controller = new MenuController();
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		FileHandle musicFile = new FileHandle(path + "/res/audio/menu/Korobeinki.mp3");
+		music = Gdx.audio.newMusic(musicFile);
+		
 	}
 	
 	/*
@@ -38,16 +50,17 @@ public class MenuScreen implements Screen, InputProcessor {
 	public void render(float delta) {
 		
 		renderer.render();
-		
-		
+		 		
 		mouseSelection();
 		keyboardSelection();
 		controller.checkSelection();	
 		
 		if(controller.getKeys().get(MenuKeys.VALIDATE)) {
+			//Si on modifie le switch case il faut aussi modifier la méthode mouseSelection!
 			switch(controller.getSelectedButton()) {
 				case (1) : 
-					game.setScreen(new GameScreen(game));
+					music.stop();
+					game.setScreen(new SelectionScreen(game));
 					break;
 				case (2) :
 					//TODO :game.setScreen(new OptionScreen());
@@ -102,7 +115,8 @@ public class MenuScreen implements Screen, InputProcessor {
 				&& controller.getMousePosition().y > 65 && controller.getMousePosition().y < 112) {
 			controller.setSelectedButton(1);
 			if(controller.getMouseState()) {
-				game.setScreen(new GameScreen(game));
+				music.stop();
+				game.setScreen(new SelectionScreen(game));
 			}
 		}
 			
@@ -123,8 +137,6 @@ public class MenuScreen implements Screen, InputProcessor {
 
 	@Override
 	public void show() {
-		renderer = new MenuRenderer();
-		controller = new MenuController();
 		Gdx.input.setInputProcessor(this);
 
 	}
@@ -139,6 +151,7 @@ public class MenuScreen implements Screen, InputProcessor {
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
+		music.pause();
 
 	}
 
@@ -153,6 +166,7 @@ public class MenuScreen implements Screen, InputProcessor {
 		// TODO Auto-generated method stub
 		Gdx.input.setInputProcessor(null);
 		renderer.dispose();
+		music.dispose();
 	}
 	
 	/*
@@ -194,7 +208,7 @@ public class MenuScreen implements Screen, InputProcessor {
 	}
 
 	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {		
 		controller.mouseButtonReleased(screenX, screenY);
 		return true;
 	}

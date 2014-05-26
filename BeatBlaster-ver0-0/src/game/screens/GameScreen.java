@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL10;
 
 import game.controller.RunnerController;
@@ -24,13 +25,16 @@ public class GameScreen implements Screen, InputProcessor {
 	
 	Game game;
 	
+	Music selectedMusic;
 	
-	public GameScreen(Game game) {
+	
+	public GameScreen(Game game, Music selectedMusic) {
 		this.game = game;
+		this.selectedMusic = selectedMusic;
 		world = new World(/*inputData*/);
 		renderer = new WorldRenderer(world);
 		controller = new RunnerController(world);
-		
+		this.selectedMusic.play();
 	}
 
 	@Override

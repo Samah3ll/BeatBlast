@@ -1,9 +1,13 @@
 package game.view;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import game.controller.MenuController;
 
 public class MenuRenderer {
@@ -27,12 +31,18 @@ public class MenuRenderer {
     private float ppuX;
     private float ppuY;
     
+    private Music music;
+    final String path = System.getProperty("user.dir");
+    
     public MenuRenderer() {
     	this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
 		this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
 		this.cam.update();
 		spriteBatch = new SpriteBatch();
         loadTextures();
+        FileHandle musicFile = new FileHandle(path + "/res/audio/menu/Korobeinki.mp3");
+		music = Gdx.audio.newMusic(musicFile);
+		music.play();
     }
 	
 	
@@ -59,7 +69,7 @@ public class MenuRenderer {
 	}
 	
 	public void render() {
-        spriteBatch.begin();
+		spriteBatch.begin();
             drawBackground();
             drawButtonGame();
             drawButtonQuit();

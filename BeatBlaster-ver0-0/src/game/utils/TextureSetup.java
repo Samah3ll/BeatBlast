@@ -18,6 +18,10 @@ public class TextureSetup {
         TexturePacker2.process(path + "/res/img/pause",
 				    			path + "/res/img/pause",
 					"textures.pack");
+      //SelectionScreen textures
+        TexturePacker2.process(path + "/res/img/selection",
+				    			path + "/res/img/selection",
+					"textures.pack");
         System.out.println("Done");
     }
 

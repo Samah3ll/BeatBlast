@@ -23,7 +23,7 @@ public class PauseRenderer {
     private float ppuX;
     private float ppuY;
     
-    //TODO:beaucoup de choses à enlever des commentaires ou a supprimer (penser ax imports).
+    //TODO:beaucoup de choses à enlever des commentaires ou a supprimer (penser aux imports).
     
     public PauseRenderer() {
     	//this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
