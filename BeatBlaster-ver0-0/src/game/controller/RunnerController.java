@@ -267,9 +267,10 @@ public class RunnerController {
 			} else if(runnerRect.overlaps(block.getBounds()) && runner.getBounds().overlaps(block.getBounds())) {
 				runner.getVelocity().y = 0;
 				runner.getAcceleration().y = 0;
-				//Paramètres à adapter en fonction de la vitesse du perso
+				//Paramètres à adapter en fonction de la vitesse du runner
 				runner.getPosition().y += 0.05f;
 				runner.getPosition().x += 0.1f;
+				//fixPosition();
 				break;
 			}
 		}
@@ -280,7 +281,6 @@ public class RunnerController {
 		runner.getBounds().x = runner.getPosition().x;
 		runner.getBounds().y = runner.getPosition().y;
 		runner.getVelocity().mul(1 / delta);
-		//runner.getPosition().y += 0.01;
 		
 	}//End of checkCollisionBlock
 
@@ -303,6 +303,14 @@ public class RunnerController {
 	
 	public boolean isPaused() {
 		return keys.get(Keys.PAUSE);
+	}
+	
+	private void fixPosition() {
+		int y;
+		y = (int) Math.rint(runner.getPosition().y);
+		if(runner.getPosition().y < y) {
+			runner.getPosition().y = y;
+		}
 	}
 	
 	// ** Key presses and touches **************** //

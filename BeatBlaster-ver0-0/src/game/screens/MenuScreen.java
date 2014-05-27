@@ -39,6 +39,7 @@ public class MenuScreen implements Screen, InputProcessor {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		FileHandle musicFile = new FileHandle(path + "/res/audio/menu/Korobeinki.mp3");
 		music = Gdx.audio.newMusic(musicFile);
+		music.play();
 		
 	}
 	

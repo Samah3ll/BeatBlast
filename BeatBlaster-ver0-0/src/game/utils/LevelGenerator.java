@@ -25,13 +25,13 @@ public class LevelGenerator {
 			BasicBlock b1 = new BasicBlock(i, level.getHeight() - 1);
 			level.addBlock(b1);
 		}
-		
+		/*
 		for(Iterator<Integer> it = inputData.iterator(); it.hasNext();) {
 			float x = it.next()*0.001f*12;
 			BasicBlock b2 = new BasicBlock(x, 1);
 			level.addBlock(b2);
 		}
-		
+		*/
 		return level;
 	}
 }
