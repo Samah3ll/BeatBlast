@@ -27,6 +27,8 @@ public class RunnerController {
 	
 	private float width;
 	private float height;
+	private float ppuX;
+	private float ppuY;
 	
 	private World 	world;
 	private Runner 	runner;
@@ -282,6 +284,8 @@ public class RunnerController {
 		runner.getBounds().y = runner.getPosition().y;
 		runner.getVelocity().mul(1 / delta);
 		
+		//System.out.println("Runner position : " + runner.getPosition());
+		
 	}//End of checkCollisionBlock
 
 	private void populateCollidableBlocks(int startX, int startY, int endX, int endY) {
@@ -295,8 +299,7 @@ public class RunnerController {
 		}
 		
 	}//End of populateCollisionBlock
-	 
-	
+		
 	public Map<Keys, Boolean> getKeys() {
 		return keys;
 	}
@@ -311,6 +314,12 @@ public class RunnerController {
 		if(runner.getPosition().y < y) {
 			runner.getPosition().y = y;
 		}
+	}
+	
+	public void setSize(float ppuX, float ppuY) {
+		this.ppuX = ppuX;
+		this.ppuY = ppuY;
+		
 	}
 	
 	// ** Key presses and touches **************** //
@@ -367,5 +376,7 @@ public class RunnerController {
 			keys.get(keys.put(Keys.PAUSE, false));
 			
 		}
+
+		
 
 }

@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Runner02 {
 	
 	public enum State02 {
-		RUNNING, JUMPING
+		RUNNING, JUMPING, BLOCKED
 	}
 	
 	public enum Skin {
@@ -22,7 +22,7 @@ public class Runner02 {
 	Vector2 	velocity = new Vector2();
 	Rectangle 	bounds = new Rectangle();
 	State02		state = State02.JUMPING;
-	boolean		facingLeft = true;
+	boolean		facingLeft = false;
 	boolean 	canRun = false;
 	float       stateTime = 0;
 	

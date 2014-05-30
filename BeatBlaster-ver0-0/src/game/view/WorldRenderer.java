@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 
 import game.model.Block;
@@ -23,7 +22,7 @@ public class WorldRenderer {
 	private static final float RUNNING_FRAME_DURATION = 0.06f;
 	
 	private World world;
-	Runner runner;
+	private Runner runner;
 	private OrthographicCamera cam;
 	
 	private SpriteBatch spriteBatch;
@@ -34,8 +33,6 @@ public class WorldRenderer {
     
     //Pour la pause
     private Vector2 positionWhenPaused;
-    
-    Matrix4 usualMatrix;
     
     //Block texture
     private TextureRegion blockTexture;
@@ -56,9 +53,9 @@ public class WorldRenderer {
     
 	public WorldRenderer(World w) {
 		this.world = w;
-		this.runner =  world.getRunner();
+		//this.runner =  world.getRunner();
+		this.runner = world.getRunner();
 		this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
-		usualMatrix = cam.combined;
 		this.cam.zoom = 72;
 		this.cam.update();
 		spriteBatch = new SpriteBatch();
@@ -142,6 +139,7 @@ public class WorldRenderer {
 	
 	 private void drawRunner() {
 			runnerFrame = runner.isFacingLeft() ? runnerIdleLeft : runnerIdleRight;
+			//TODO:changer le State02.RUNNING en State.WALKING si on passe au runner
 			if(runner.getState().equals(State.WALKING)) {
 				runnerFrame = runner.isFacingLeft() ? walkLeftAnimation.getKeyFrame(runner.getStateTime(), true) : walkRightAnimation.getKeyFrame(runner.getStateTime(), true);
 			} else if (runner.getState().equals(State.JUMPING)) {
@@ -158,6 +156,7 @@ public class WorldRenderer {
 	 public void moveCamera(){
 		 float dx = runner.getVelocity().x;
 		 //float dy = runner.getVelocity().y;
+		 
 		 
 		 //Correction pour que la caméra ne dépasse pas le runner ou l'inverse, peut être à modifier
 		 float correction = 0.65f;
@@ -198,7 +197,7 @@ public class WorldRenderer {
 			 cam.position.x = (world.getLevel().getWidth() - CAMERA_WIDTH) * ppuX;
 		 }
 		 
-	}
+	}//End of moveCamera
 
 
 	public void setSize (int w, int h) {

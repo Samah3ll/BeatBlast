@@ -12,13 +12,18 @@ import com.badlogic.gdx.math.Vector2;
 public class World {
 	
 	private Runner runner;
+	//private Runner02 runner02;
 	private Level level;
 	private LevelGenerator lg;
 	
 	public Runner getRunner() {
 		return runner;
 	}
-	
+	/*
+	public Runner02 getRunner02() {
+		return runner02;
+	}
+	*/
 	public Level getLevel() {
 		return level;
 	}
@@ -29,6 +34,7 @@ public class World {
 	
 	public World(/*inputData*/) {
 		runner = new Runner(new Vector2(7, 2));
+		//runner02 = new Runner02(new Vector2(7,1));
 		lg = new LevelGenerator(300);
 		level = lg.generateLevel(/*inputData*/);
 		//createDemoWorld();
@@ -39,7 +45,7 @@ public class World {
 	 */
 	private void createDemoWorld() {
 		
-		runner = new Runner(new Vector2(7, 2));
+		//runner = new Runner(new Vector2(7, 2));
 		level = new Level(80, 16);			//Utiliser depuis WorldRenderer CAMERA_WIDTH et HEIGHT
 		BasicBlock b = new BasicBlock(new Vector2(1,1));
 		level.addBlock(b);

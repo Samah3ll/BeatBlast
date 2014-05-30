@@ -11,6 +11,8 @@ public class MenuController {
 		LEFT, RIGHT, VALIDATE, DOWN, UP
 	}
 	
+	private final long WAITTIME = 300;
+	
 	static boolean mouseIsPressed = false;
 	
 	static boolean playButtonSelected = false;
@@ -18,7 +20,7 @@ public class MenuController {
 	static boolean quitButtonSelected = false;
 	
 	//Désigne le boutton selectionné : 0 = pas de sélection; 1 = play; 2 = option; 3 = quit.
-	private int selectedButton = 0;
+	private int selectedButton = 0;	
 	
 	static Vector2 mousePosition = new Vector2(0, 0);
 	
@@ -48,7 +50,7 @@ public class MenuController {
 	}
 	
 	public void setPlayButtonSelected(boolean b) {
-		this.playButtonSelected = b;
+		MenuController.playButtonSelected = b;
 	}
 	
 	static public boolean isOptionButtonSelected() {
@@ -56,7 +58,7 @@ public class MenuController {
 	}
 	
 	public void setOptionButtonSelected(boolean b) {
-		this.optionButtonSelected = b;
+		MenuController.optionButtonSelected = b;
 	}
 	
 	static public boolean isQuitButtonSelected() {
@@ -64,7 +66,7 @@ public class MenuController {
 	}
 	
 	public void setQuitButtonSelected(boolean b) {
-		this.quitButtonSelected = b;
+		MenuController.quitButtonSelected = b;
 	}
 	
 	public int getSelectedButton() {
@@ -80,20 +82,18 @@ public class MenuController {
 	 */
 
 	public void upPressed() {
-		keys.get(keys.put(MenuKeys.UP, true));
-		long i = 0;
-		while(i < 199999999) {
-			i++;
+		Long start = System.currentTimeMillis();
+		while(System.currentTimeMillis() - start < WAITTIME ) {
 		}
+		keys.get(keys.put(MenuKeys.UP, true));
 		
 	}
 
 	public void downPressed() {
-		keys.get(keys.put(MenuKeys.DOWN, true));
-		long i = 0;
-		while(i < 199999999) {
-			i++;
+		Long start = System.currentTimeMillis();
+		while(System.currentTimeMillis() - start < WAITTIME) {
 		}
+		keys.get(keys.put(MenuKeys.DOWN, true));
 	}
 
 	public void enterPressed() {

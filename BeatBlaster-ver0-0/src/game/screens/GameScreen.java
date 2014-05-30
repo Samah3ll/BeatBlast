@@ -22,6 +22,7 @@ public class GameScreen implements Screen, InputProcessor {
 	private World world;
 	private WorldRenderer renderer;
 	private RunnerController controller;
+	//private RunnerController02 controller;
 	
 	Game game;
 	
@@ -31,9 +32,10 @@ public class GameScreen implements Screen, InputProcessor {
 	public GameScreen(Game game, Music selectedMusic) {
 		this.game = game;
 		this.selectedMusic = selectedMusic;
-		world = new World(/*inputData*/);
-		renderer = new WorldRenderer(world);
-		controller = new RunnerController(world);
+		this.world = new World(/*inputData*/);
+		this.renderer = new WorldRenderer(world);
+		//controller = new RunnerController02(world);
+		this.controller = new RunnerController(world);
 		this.selectedMusic.play();
 	}
 
@@ -81,10 +83,18 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void pause() {
 		renderer.pause();
+		
 		world.getRunner().getAcceleration().x = 0;
 		world.getRunner().getAcceleration().y = 0;
 		world.getRunner().getVelocity().x = 0;
 		world.getRunner().getVelocity().y = 0;
+		
+		/*
+		world.getRunner02().getAcceleration().x = 0;
+		world.getRunner02().getAcceleration().y = 0;
+		world.getRunner02().getVelocity().x = 0;
+		world.getRunner02().getVelocity().y = 0;
+		*/
 
 	}
 
