@@ -2,10 +2,14 @@ package game.view;
 
 import game.controller.SelectionController;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 public class SelectionRenderer {
 	
@@ -16,6 +20,7 @@ public class SelectionRenderer {
 	private OrthographicCamera cam;
 	
 	private SpriteBatch spriteBatch;
+	
 	
 	//Textures
 	private TextureRegion background;
@@ -50,11 +55,13 @@ public class SelectionRenderer {
 		buttonBack = atlas.findRegion("back");
 		buttonBackSelected = atlas.findRegion("backSelected");
 		
+		
 	}
 
 	public void render() {
 		spriteBatch.begin();
-			drawBackground();			
+			drawBackground();
+			drawMusicName();
 			if(SelectionController.isPlayButtonSelected()) {
 				drawButtonPlaySelected();
 			} else {
@@ -72,6 +79,20 @@ public class SelectionRenderer {
 			}
 		spriteBatch.end();
 		
+	}
+	
+	private void drawMusicName() {
+		TextButtonStyle style = new TextButtonStyle();
+		style.font = new BitmapFont();
+		style.fontColor = Color.RED;
+		TextButton b = new TextButton("Musique choisie : ", style);
+		b.translate(10 * ppuX, 50 * ppuY);
+		b.draw(spriteBatch, 1);
+		
+		//String name = 
+		TextButton b1 = new TextButton("ma musique",style);
+		b1.translate(26 * ppuX, 50 * ppuY);
+		b1.draw(spriteBatch, 1);
 	}
 	
 	private void drawBackground() {

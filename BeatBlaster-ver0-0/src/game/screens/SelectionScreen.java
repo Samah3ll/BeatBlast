@@ -1,5 +1,7 @@
 package game.screens;
 
+import java.util.HashMap;
+
 import game.controller.SelectionController;
 import game.controller.SelectionController.SelectionKeys;
 import game.view.SelectionRenderer;
@@ -22,6 +24,9 @@ public class SelectionScreen implements Screen, InputProcessor {
 	
 	Music selectedMusic;
 	final String path = System.getProperty("user.dir");
+	
+	HashMap<String, FileHandle> savedMusic = new HashMap<String, FileHandle>();
+	HashMap<String, String> savedMusicData = new HashMap<String, String>();
 	
 	public SelectionScreen(Game game) {
 		this.game = game;
@@ -68,13 +73,13 @@ public class SelectionScreen implements Screen, InputProcessor {
 	}
 	
 	private void mouseSelection() {
-		//TODO : modifier les valeurs pour qu'elles collent à cet écran.
+		//TODO modifier les valeurs pour qu'elles collent à cet écran.
 		//Selection par la sourie
 		if(controller.getMousePosition().x > 165 && controller.getMousePosition().x < 555
 				&& controller.getMousePosition().y > 10 && controller.getMousePosition().y < 135) {
 			controller.setSelectedButton(1);
 			if(controller.getMouseState()) {
-				//TODO : ouvrir la fenetre de selection de la musique
+				//TODO ouvrir la fenetre de selection de la musique
 			}
 		}
 		
@@ -95,6 +100,29 @@ public class SelectionScreen implements Screen, InputProcessor {
 		}
 	}
 	
+	//Ajoute le ficher au dossier et charge la musique
+	private void loadMusic(String fileName) {
+		saveMusic(fileName);
+		FileHandle musicFile = new FileHandle(path + "/res/audio/menu/" + fileName);
+		selectedMusic = Gdx.audio.newMusic(musicFile);
+	}
+	
+	//Charge la musique (elle a déjà étée sauvegardée)
+	private void reloadMusic(String name) {
+		//TODO modifer le dossier
+		FileHandle musicFile = new FileHandle(path + "/res/audio/menu/" + name);
+		selectedMusic = Gdx.audio.newMusic(musicFile);
+	}
+	
+	//Enregistre la musique dans le dossier (avec le fichier traité)
+	private void saveMusic(String fileName) {
+		//TODO copier le ficher dans le bon dossier
+		//savedMusic.put(fileName, );
+		//TODO traiter le fichier
+		String musicData = "à faire";
+		savedMusicData.put(fileName, musicData);
+	}
+	
 	
 	/*
 	 * Implements Screen
@@ -112,7 +140,8 @@ public class SelectionScreen implements Screen, InputProcessor {
 			//Si on modifie le switch case il faut aussi modifier la méthode mouseSelection!
 			switch(controller.getSelectedButton()) {
 				case (1) : 
-					//TODO:selection de la musique
+					//TODO selection de la musique
+					
 					break;
 				case (2) :
 					game.setScreen(new GameScreen(game, selectedMusic));
@@ -192,7 +221,6 @@ public class SelectionScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -210,7 +238,6 @@ public class SelectionScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -222,7 +249,6 @@ public class SelectionScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
