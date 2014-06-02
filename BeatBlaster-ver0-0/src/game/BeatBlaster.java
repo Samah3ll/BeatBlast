@@ -18,6 +18,7 @@ public class BeatBlaster extends Game {
 	
 	@Override
 	public void create() {
+		createSaveRepertory();
 		setScreen(new MenuScreen(this));
 		//setScreen(new GameScreen(this));
 	}
