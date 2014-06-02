@@ -18,10 +18,10 @@ public class RunnerController {
 		LEFT, RIGHT, JUMP, FIRE, DOWN, PAUSE
 	}
 	
-	private static final long LONG_JUMP_PRESS 	= 100l;
+	private static final long LONG_JUMP_PRESS 	= 300l;
 	private static final float ACCELERATION 	= 20f;
 	private static final float GRAVITY 			= -20f;
-	private static final float MAX_JUMP_SPEED	= 5f;
+	private static final float MAX_JUMP_SPEED	= 8f;
 	private static final float DAMP 			= 0.90f;
 	private static final float MAX_VEL 			= 4f;
 	
@@ -119,23 +119,22 @@ public class RunnerController {
 		runner.getAcceleration().x = ACCELERATION;
 		runner.setFacingLeft(false);
 		
-		//Key jump pressed
-		if (keys.get(Keys.JUMP)) {
-			if (!runner.getState().equals(State.JUMPING)) {
-				jumpingPressed = true;
-				grounded = false;
-				jumpPressedTime = System.currentTimeMillis();
-				runner.setState(State.JUMPING);
-				runner.getVelocity().y = MAX_JUMP_SPEED; 
-			} else {
-				if (jumpingPressed && ((System.currentTimeMillis() - jumpPressedTime) >= LONG_JUMP_PRESS)) {
-					jumpingPressed = false;
-				} else {
-					if (jumpingPressed) {
-						runner.getVelocity().y = MAX_JUMP_SPEED;
-					}
-				}
-			}
+		 //Key jump pressed
+		 if (keys.get(Keys.JUMP)) {
+			 if (!runner.getState().equals(State.JUMPING)) {
+				 jumpingPressed = true;
+				 grounded = false;
+				 jumpPressedTime = System.currentTimeMillis();
+				 runner.setState(State.JUMPING);
+				 runner.getVelocity().y = MAX_JUMP_SPEED;
+		  } else {
+			  if (jumpingPressed && ((System.currentTimeMillis() - jumpPressedTime) >= LONG_JUMP_PRESS)) {
+				  jumpingPressed = false;
+			  }
+			  if (jumpingPressed){
+				  runner.getVelocity().y = MAX_JUMP_SPEED; //la vitesse reste constante plutôt qu'elle diminue ==> saute + haut
+			  } 
+		   	}
 		}
 		
 		if(keys.get(Keys.LEFT)) {
@@ -230,9 +229,9 @@ public class RunnerController {
 		endX = (int) (runner.getBounds().x + runner.getBounds().width);
 		
 		if (runner.getVelocity().y < 0) {
-			startY = endY = (int) Math.floor(runner.getBounds().y + runner.getVelocity().y);
+			startY = endY = (int) Math.floor(runner.getBounds().y + runner.getVelocity().y * 2);
 		} else {
-			startY = endY = (int) Math.floor(runner.getBounds().y + runner.getBounds().height + runner.getVelocity().y);
+			startY = endY = (int) Math.floor(runner.getBounds().y + runner.getBounds().height + runner.getVelocity().y * 2);
 		}
 		
 		if(startY < 0) {
@@ -244,7 +243,7 @@ public class RunnerController {
 		
 		populateCollidableBlocks(startX, startY, endX, endY);
 		
-		runnerRect.y += runner.getVelocity().y;
+		runnerRect.y += runner.getVelocity().y * 2;
 		//runnerRect.y += 0.1;
 		
 		if(runnerRect.y < 0) {
