@@ -89,7 +89,11 @@ public class ChooseController {
 	
 	public boolean getMouseState() {
 		return mouseIsPressed;
-	}	
+	}
+	
+	public Vector2 getMousePosition() {
+		return mousePosition;
+	}
 	
 	
 	/*
@@ -208,6 +212,8 @@ public class ChooseController {
 		}
 		
 	}
+
+	
 
 	
 

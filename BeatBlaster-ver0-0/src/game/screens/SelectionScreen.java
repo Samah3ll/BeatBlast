@@ -55,8 +55,8 @@ public class SelectionScreen implements Screen, InputProcessor {
 	 * Méthodes
 	 */
 	
-	private void keyboardSelection() {
-		//Selection par le clavier
+	//Selection par le clavier
+	private void keyboardSelection() {		
 			if(controller.getSelectedButton() == 0) {		//If nothing is selected
 				if(controller.getKeys().get(SelectionKeys.DOWN)) {		
 					controller.setSelectedButton(1);		//Selection button selected

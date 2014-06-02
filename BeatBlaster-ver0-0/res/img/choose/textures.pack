@@ -17,6 +17,13 @@ backSelected
   orig: 307, 102
   offset: 0, 0
   index: -1
+highlight
+  rotate: false
+  xy: 724, 754
+  size: 120, 10
+  orig: 120, 10
+  offset: 0, 0
+  index: -1
 menu20
   rotate: false
   xy: 2, 314

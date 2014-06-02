@@ -42,6 +42,7 @@ public class ChooseScreen implements Screen, InputProcessor {
 	 * Méthodes
 	 */	
 	
+	//Selection par le clavier
 	private void keyboardSelection() {
 		if(controller.getSelectedButton() == 0) {		//If nothing is selected
 			if(controller.getKeys().get(SelectionKeys.RIGHT)) {
@@ -86,8 +87,18 @@ public class ChooseScreen implements Screen, InputProcessor {
 		}
 	}
 	
+	//Selection par la sourie
 	private void mouseSelection() {
-		
+		//La sourie est sur le boutton ok
+		if(controller.getMousePosition().x > 160 && controller.getMousePosition().x < 257
+				&& controller.getMousePosition().y > 260 && controller.getMousePosition().y < 310) {
+			controller.setSelectedButton(1);
+		}
+		//La sourie est sur le boutton back
+		if(controller.getMousePosition().x > 275 && controller.getMousePosition().x < 445
+				&& controller.getMousePosition().y > 335 && controller.getMousePosition().y < 385) {
+			controller.setSelectedButton(2);
+		}
 	}
 	
 	/*
@@ -100,6 +111,7 @@ public class ChooseScreen implements Screen, InputProcessor {
 		
 		keyboardSelection();
 		mouseSelection();
+		controller.checkSelection();
 		
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
 			switch(controller.getSelectedButton()) {

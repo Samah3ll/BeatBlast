@@ -32,6 +32,7 @@ public class ChooseRenderer {
 	private TextureRegion okButtonSelected;
 	private TextureRegion backButton;
 	private TextureRegion backButtonSelected;
+	private TextureRegion highlight;
 	
 	private int width;
     private int height;
@@ -71,6 +72,7 @@ public class ChooseRenderer {
 		okButtonSelected = atlas.findRegion("okSelected");
 		backButton = atlas.findRegion("back");
 		backButtonSelected = atlas.findRegion("backSelected");
+		highlight = atlas.findRegion("highlight");
 	}
 
 	public void render() {
@@ -86,8 +88,8 @@ public class ChooseRenderer {
 			} else {
 				drawOkButton();
 			}
-			drawOkButton();
 			drawTextButton();
+			highlightText(20, 80);
 		spriteBatch.end();
 		
 	}
@@ -113,6 +115,10 @@ public class ChooseRenderer {
 				break;
 			}
 		}
+	}
+	
+	private void highlightText(int x, int y) {
+		spriteBatch.draw(highlight, (x + 11) * ppuY, (y - 4) * ppuY, 20 * ppuX, 3 * ppuY);
 	}
 
 	private void drawBackground() {
