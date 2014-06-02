@@ -172,7 +172,12 @@ public class SelectionScreen implements Screen, InputProcessor {
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
 			switch(controller.getSelectedButton()) {
 				case (1) : 
-					new BeatRoot();
+					try{
+						new BeatRoot();
+					}catch(NullPointerException e){
+						System.err.println("Aucune musique sélectionnée : " + e);
+						game.setScreen(new SelectionScreen(game));
+					}
 					break;
 				case (2) :
 					game.setScreen(new ChooseScreen(game));
