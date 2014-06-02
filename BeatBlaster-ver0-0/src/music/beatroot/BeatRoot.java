@@ -284,7 +284,7 @@ public class BeatRoot {
 		}
 		
 		//avec visu
-		gui.setVisible(true);
+		gui.setVisible(false);
 		gui.loadAudioData();
 		gui.displayPanel.beatTrack();
 		gui.displayPanel.resizeSpectroForVisu(12);
