@@ -78,11 +78,13 @@ public class ChooseScreen implements Screen, InputProcessor {
 			if(controller.getKeys().get(SelectionKeys.RIGHT)) {
 				controller.setSelectedButton(1);		//Ok button is selected				
 			} else if(controller.getKeys().get(SelectionKeys.UP)) {
-				//TODO move selection in musicList
+				controller.selectPreviousSong();
+				operateSelection();
 			} else if(controller.getKeys().get(SelectionKeys.LEFT)) {
-				//TODO move selection in musicList
-			} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
 				controller.setSelectedButton(1);		//Ok button is selected
+			} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
+				controller.selectNextSong();
+				operateSelection();
 			}
 		}
 	}
@@ -101,6 +103,16 @@ public class ChooseScreen implements Screen, InputProcessor {
 		}
 	}
 	
+	private void operateSelection() {
+		int num = controller.getSelectedMusic();
+		if(num > 7) {
+			num = 7;
+		}
+		renderer.higlightButtonN(num);
+		
+	}
+	
+	
 	/*
 	 * Implements Screen
 	 */	
@@ -110,8 +122,9 @@ public class ChooseScreen implements Screen, InputProcessor {
 		renderer.render();
 		
 		keyboardSelection();
-		mouseSelection();
+		mouseSelection();		
 		controller.checkSelection();
+		operateSelection();
 		
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
 			switch(controller.getSelectedButton()) {
@@ -123,6 +136,7 @@ public class ChooseScreen implements Screen, InputProcessor {
 					break;
 				case (3) :
 					
+					//game.setScreen(new SelectionScreen(game));
 					break;				
 			}
 			

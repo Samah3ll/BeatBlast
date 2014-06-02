@@ -100,6 +100,19 @@ public class ChooseController {
 	 * Méthodes
 	 */	
 	
+	
+	public void selectNextSong() {
+		selectedMusic ++;
+	}
+	
+	public void selectPreviousSong() {
+		if(selectedMusic - 1 < 0) {
+			selectedMusic = 0;
+		} else {
+			selectedMusic --;
+		}	
+		
+	}
 
 	public void upPressed() {
 		Long start = System.currentTimeMillis();
@@ -141,7 +154,7 @@ public class ChooseController {
 	public void mouseMouved(int screenX, int screenY) {
 		mousePosition.x = screenX;
 		mousePosition.y = screenY;
-		System.out.println("mouse position : " + mousePosition);
+		//System.out.println("mouse position : " + mousePosition);
 	}
 	
 	
@@ -212,6 +225,8 @@ public class ChooseController {
 		}
 		
 	}
+
+	
 
 	
 

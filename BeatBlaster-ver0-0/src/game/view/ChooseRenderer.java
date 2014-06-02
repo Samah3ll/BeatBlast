@@ -89,7 +89,7 @@ public class ChooseRenderer {
 				drawOkButton();
 			}
 			drawTextButton();
-			highlightText(20, 80);
+			//highlightText(20, 80);
 		spriteBatch.end();
 		
 	}
@@ -120,6 +120,17 @@ public class ChooseRenderer {
 	private void highlightText(int x, int y) {
 		spriteBatch.draw(highlight, (x + 11) * ppuY, (y - 4) * ppuY, 20 * ppuX, 3 * ppuY);
 	}
+	
+	public void higlightButtonN(int num) {
+		//System.out.println("musique sélectionnée : " + num);		
+			
+		int x = 20;
+		int y = 80 - 5 * num;
+		
+		spriteBatch.begin();
+		spriteBatch.draw(highlight, (x + 11) * ppuY, (y - 4) * ppuY, 20 * ppuX, 3 * ppuY);
+		spriteBatch.end();
+	}
 
 	private void drawBackground() {
 		spriteBatch.draw(background, 0, 0, CAMERA_WIDTH * ppuX, CAMERA_HEIGHT * ppuY);
@@ -127,11 +138,11 @@ public class ChooseRenderer {
 	}
 	
 	private void drawOkButton() {
-		spriteBatch.draw(okButton, 0 * ppuX, 20 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
+		spriteBatch.draw(okButton, 0 * ppuX, 19 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
 	}
 	
 	private void drawOkButtonSelected() {
-		spriteBatch.draw(okButtonSelected, 0 * ppuX, 20 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
+		spriteBatch.draw(okButtonSelected, 0 * ppuX, 19 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
 	}
 	
 	private void drawBackButton() {
