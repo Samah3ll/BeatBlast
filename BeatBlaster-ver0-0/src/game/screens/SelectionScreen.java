@@ -1,5 +1,7 @@
 package game.screens;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 import game.controller.SelectionController;
@@ -24,6 +26,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 	
 	Music selectedMusic;
 	final String path = System.getProperty("user.dir");
+	String saveDirectory;
 	
 	HashMap<String, FileHandle> savedMusic = new HashMap<String, FileHandle>();
 	HashMap<String, String> savedMusicData = new HashMap<String, String>();
@@ -36,6 +39,9 @@ public class SelectionScreen implements Screen, InputProcessor {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		FileHandle musicFile = new FileHandle(path + "/res/audio/menu/Korobeinki.mp3");
 		selectedMusic = Gdx.audio.newMusic(musicFile);
+
+		createSaveRepertory();
+		saveMusic("music");
 	}
 	
 	private void keyboardSelection() {
@@ -117,10 +123,30 @@ public class SelectionScreen implements Screen, InputProcessor {
 	//Enregistre la musique dans le dossier (avec le fichier traité)
 	private void saveMusic(String fileName) {
 		//TODO copier le ficher dans le bon dossier
+		File save = new File(saveDirectory + "\\" + fileName + ".DAT");
+		try {
+			if(save.createNewFile()) {
+				System.out.println("save created");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		//savedMusic.put(fileName, );
 		//TODO traiter le fichier
 		String musicData = "à faire";
 		savedMusicData.put(fileName, musicData);
+	}
+	
+	//Crée le dossier de sauvegarde
+	private void createSaveRepertory() {
+		saveDirectory = path.substring(0, path.length() - 18);
+		//newPath += File.separator;
+		saveDirectory += "save";
+		System.out.println(saveDirectory);
+		File folder = new File(saveDirectory);
+		if(folder.mkdir()) {
+			System.out.println("new folder created");
+		}
 	}
 	
 	
