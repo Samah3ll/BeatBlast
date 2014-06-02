@@ -18,6 +18,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
+import music.beatroot.BeatRoot;
 
 public class SelectionScreen implements Screen, InputProcessor {
 	

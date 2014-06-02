@@ -147,7 +147,7 @@ public class BeatRoot {
 	 * <LI><I><B>-E</B> allowedRelativeError</I> allowed relative error (0-1) in beat position for evaluation</LI>
 	 * </BL>
 	 */
-	public void processArgs(String[] args) {
+	public void processArgs() {
 		audioIn = null;
 		beatsIn = null;
 		textOutputFile = null;
@@ -255,14 +255,14 @@ public class BeatRoot {
 	 *  @param args Optional command line arguments.
 	 *  @see #processArgs(String[])
 	 */
-	public BeatRoot(String[] args) {
+	public BeatRoot() {
 		batchMode = false;
 		playWithBeats = false;
 		argsFile = null;
 		reader = null;
 		fileChooser = null;
 		gui = null;
-		processArgs(args);
+		processArgs();
 		audioProcessor = new AudioProcessor();
 		
 		if (!batchMode)
@@ -282,76 +282,6 @@ public class BeatRoot {
 					audioPlayer.play();
 			}
 		}
-//		else {
-//			while (true) {					// loop for each line of args file
-//				if (argsFile != null) {
-//					args = getArgs();
-//					if (args != null)
-//						processArgs(args);
-//					else
-//						break;
-//				}
-//				if (featureFile != null) {	// for ICASSP'07 paper
-//					audioProcessor.processFeatures(featureFile, 512.0 / 44100.0);
-//				} else if (audioIn != null) {
-//					audioProcessor.setInputFile(audioIn);
-//					audioProcessor.processFile();
-//					if (onsetOnly && (textOutputFile != null)) {
-//						if (textOutputFile.endsWith(".obj"))
-//							audioProcessor.onsetList.writeBinary(textOutputFile);
-//						else try {
-//							audioProcessor.onsetList.writeBeatsAsText(textOutputFile);
-//						} catch (Exception e) {
-//							System.err.println("Can't write onset file\n" + e);
-//						}
-//						if (argsFile != null)
-//							continue;
-//						else
-//							break;
-//					}
-//				} else if (beatsIn == null) {
-//					System.exit(0);
-//				} else if (onsetOnly) {
-//					audioProcessor.onsetList = EventList.readBinary(beatsIn);
-//					beatsIn = null;
-//				}
-//				if (beatsIn == null) {
-//					EventList annotated = null;
-//					if (useAnnotation > 0) {
-//						try {
-//							annotated = EventList.readBeatsAsText(beatsFile);
-//							ListIterator<Event> li = annotated.listIterator();
-//							while (li.hasNext()) {
-//								li.next();
-//								if (useAnnotation-- <= 0)
-//									li.remove();
-//							}
-//						} catch (Exception e) {
-//							System.err.println(e);
-//						}
-//					}
-//					EventList beats = BeatTrackDisplay.beatTrack(audioProcessor.onsetList, annotated);
-//					if (beatsFile != null)
-//						BeatTrackDisplay.evaluate(beatsFile, beats);
-//					if (textOutputFile != null) {
-//						try {
-//							beats.writeBeatsAsText(textOutputFile);
-//						} catch (Exception e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				} else
-//					BeatTrackDisplay.evaluate(beatsFile, beatsIn);
-//				if (argsFile == null)
-//					break;
-//			}
-//			System.exit(0);
-//		}
-//		try {
-//			while (audioPlayer.playing)
-//				Thread.sleep(200);
-//		} catch (InterruptedException e) {
-//		}
 		
 		//avec visu
 		gui.setVisible(true);
@@ -468,13 +398,7 @@ public class BeatRoot {
 	 *  @param args Optional command line arguments (see constructor for details)
 	 */
 	public static void main(String[] args) {
-		new BeatRoot(args);
-	//	GUI gui = new GUI(audioPlayer, audioProcessor, fileChooser);
-	//	String Filename = "Delta Goodrem - You Will Only Break My Heart.mp3.WAV";
-	//	String AudioPath = System.getProperty("user.dir")+"\\music\\" +Filename;
-	//	System.out.println("Fichier de test : " +AudioPath);
-	//	br.gui.loadAudioData(AudioPath);
-	//	
+		new BeatRoot();
 	} // main()
 
 } // class BeatRoot
