@@ -30,11 +30,18 @@ public class SelectionRenderer {
 	private TextureRegion buttonSelectSelected;
 	private TextureRegion buttonBack;
 	private TextureRegion buttonBackSelected;
+	private TextureRegion buttonChoose;
+	private TextureRegion buttonChooseSelected;
 	
 	private int width;
     private int height;
     private float ppuX;
     private float ppuY;
+    
+    
+    /*
+     * Constructeur
+     */	
     
     public SelectionRenderer() {
     	this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
@@ -43,6 +50,10 @@ public class SelectionRenderer {
 		spriteBatch = new SpriteBatch();
         loadTextures();
     }
+    
+    /*
+     * Méthodes
+     */	
 
 	private void loadTextures() {
 		final String path = System.getProperty("user.dir");
@@ -54,7 +65,8 @@ public class SelectionRenderer {
 		buttonSelectSelected = atlas.findRegion("selectSelected");
 		buttonBack = atlas.findRegion("back");
 		buttonBackSelected = atlas.findRegion("backSelected");
-		
+		buttonChoose = atlas.findRegion("choose");
+		buttonChooseSelected = atlas.findRegion("chooseSelected");
 		
 	}
 
@@ -77,6 +89,11 @@ public class SelectionRenderer {
 			} else {
 				drawButtonSelect();
 			}
+			if(SelectionController.isChooseButtonSelected()) {
+				drawButtonChooseSelected();
+			} else {
+				drawButtonChoose();
+			}
 		spriteBatch.end();
 		
 	}
@@ -86,12 +103,12 @@ public class SelectionRenderer {
 		style.font = new BitmapFont();
 		style.fontColor = Color.RED;
 		TextButton b = new TextButton("Musique choisie : ", style);
-		b.translate(10 * ppuX, 50 * ppuY);
+		b.translate(30 * ppuX, 10 * ppuY);
 		b.draw(spriteBatch, 1);
 		
 		//String name = 
 		TextButton b1 = new TextButton("ma musique",style);
-		b1.translate(26 * ppuX, 50 * ppuY);
+		b1.translate(47 * ppuX, 10 * ppuY);
 		b1.draw(spriteBatch, 1);
 	}
 	
@@ -121,6 +138,14 @@ public class SelectionRenderer {
 	
 	private void drawButtonBackSelected() {
 		spriteBatch.draw(buttonBackSelected, 55 * ppuX, 1 * ppuY, 60f * ppuX, 30f * ppuY);
+	}
+	
+	private void drawButtonChoose() {
+		spriteBatch.draw(buttonChoose, 20 * ppuX, 40 * ppuY, 60f * ppuX, 30f * ppuY);
+	}
+	
+	private void drawButtonChooseSelected() {
+		spriteBatch.draw(buttonChooseSelected, 20 * ppuX, 40 * ppuY, 60f * ppuX, 30f * ppuY);
 	}
 
 	public void setSize(int width, int height) {

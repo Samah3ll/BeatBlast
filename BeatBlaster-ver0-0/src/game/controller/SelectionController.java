@@ -18,8 +18,9 @@ public class SelectionController {
 	static boolean playButtonSelected = false;
 	static boolean selectButtonSelected = false;
 	static boolean backButtonSelected = false;
+	static boolean chooseButtonSelected = false;
 	
-	//Désigne le boutton selectionné : 0 = pas de sélection; 1 = select; 2 = play; 3 = back.
+	//Désigne le boutton selectionné : 0 = pas de sélection; 1 = select; 2 = choose; 3 = play; 4 = back.
 	private int selectedButton = 0;
 
 	
@@ -71,12 +72,24 @@ public class SelectionController {
 		SelectionController.selectButtonSelected = b;
 	}
 	
+	static public boolean isChooseButtonSelected() {
+		return chooseButtonSelected;
+	}
+	
+	public void setChooseButtonSelected(boolean b) {
+		SelectionController.chooseButtonSelected = b;
+	}
+	
 	public int getSelectedButton() {
 		return selectedButton;
 	}
 	
 	public void setSelectedButton(int s) {
 		this.selectedButton = s;
+	}
+	
+	public Map<SelectionKeys, Boolean> getKeys() {
+		return keys;
 	}
 	
 	/*
@@ -118,14 +131,11 @@ public class SelectionController {
 		keys.get(keys.put(SelectionKeys.VALIDATE, false));
 		
 	}
-	
-	public Map<SelectionKeys, Boolean> getKeys() {
-		return keys;
-	}
 
 	public void mouseMouved(int screenX, int screenY) {
 		mousePosition.x = screenX;
 		mousePosition.y = screenY;
+		//System.out.println("mouse position : " + mousePosition);
 	}
 	
 	
@@ -145,21 +155,31 @@ public class SelectionController {
 		switch (selectedButton) {
 			case 1 :
 				selectButtonSelected = true;
+				chooseButtonSelected = false;
 				playButtonSelected = false;				
 				backButtonSelected = false;
 				break;
 			case 2 :
 				selectButtonSelected = false;
-				playButtonSelected = true;				
+				chooseButtonSelected = true;
+				playButtonSelected = false;				
 				backButtonSelected = false;
 				break;
 			case 3 :
 				selectButtonSelected = false;
+				chooseButtonSelected = false;
+				playButtonSelected = true;				
+				backButtonSelected = false;
+				break;
+			case 4 :
+				selectButtonSelected = false;
+				chooseButtonSelected = false;
 				playButtonSelected = false;				
 				backButtonSelected = true;
 				break;
 			default :
 				selectButtonSelected = false;
+				chooseButtonSelected = false;
 				playButtonSelected = false;				
 				backButtonSelected = false;
 				break;

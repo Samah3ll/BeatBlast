@@ -31,6 +31,10 @@ public class MenuScreen implements Screen, InputProcessor {
 	final String path = System.getProperty("user.dir");
 	
 	
+	/*
+	 * Constructeur
+	 */
+	
 	public MenuScreen(Game game) {
 		this.game = game;
 		renderer = new MenuRenderer();
@@ -44,36 +48,8 @@ public class MenuScreen implements Screen, InputProcessor {
 	}
 	
 	/*
-	 * implements Screen
+	 * Méthodes
 	 */
-	
-	@Override
-	public void render(float delta) {
-		
-		renderer.render();
-		 		
-		mouseSelection();
-		keyboardSelection();
-		controller.checkSelection();	
-		
-		if(controller.getKeys().get(MenuKeys.VALIDATE)) {
-			//Si on modifie le switch case il faut aussi modifier la méthode mouseSelection!
-			switch(controller.getSelectedButton()) {
-				case (1) : 
-					music.stop();
-					game.setScreen(new SelectionScreen(game));
-					break;
-				case (2) :
-					//TODO :game.setScreen(new OptionScreen());
-					break;
-				case (3) :
-					game.dispose();
-					break;
-			}
-		}
-		
-
-	}
 	
 	private void keyboardSelection() {
 	//Selection par le clavier
@@ -115,20 +91,47 @@ public class MenuScreen implements Screen, InputProcessor {
 		if(controller.getMousePosition().x > 255 && controller.getMousePosition().x < 465
 				&& controller.getMousePosition().y > 65 && controller.getMousePosition().y < 112) {
 			controller.setSelectedButton(1);
-			if(controller.getMouseState()) {
-				music.stop();
-				game.setScreen(new SelectionScreen(game));
-			}
 		}
 			
 		if(controller.getMousePosition().x > 276 && controller.getMousePosition().x < 440
 				&& controller.getMousePosition().y > 335 && controller.getMousePosition().y < 380) {
 			controller.setSelectedButton(3);
-			if(controller.getMouseState()) {
-				game.dispose();
-			}
 		}
 	}
+	
+	/*
+	 * implements Screen
+	 */
+	
+	@Override
+	public void render(float delta) {
+		
+		renderer.render();
+		 		
+		mouseSelection();
+		keyboardSelection();
+		controller.checkSelection();	
+		
+		if(controller.getKeys().get(MenuKeys.VALIDATE) || controller.getMouseState()) {
+			//Si on modifie le switch case il faut aussi modifier la méthode mouseSelection!
+			switch(controller.getSelectedButton()) {
+				case (1) : 
+					music.stop();
+					game.setScreen(new SelectionScreen(game));
+					break;
+				case (2) :
+					//TODO :game.setScreen(new OptionScreen());
+					break;
+				case (3) :
+					game.dispose();
+					break;
+			}
+		}
+		
+
+	}
+	
+
 
 	@Override
 	public void resize(int width, int height) {

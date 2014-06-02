@@ -31,6 +31,10 @@ public class SelectionScreen implements Screen, InputProcessor {
 	HashMap<String, FileHandle> savedMusic = new HashMap<String, FileHandle>();
 	HashMap<String, String> savedMusicData = new HashMap<String, String>();
 	
+	/*
+	 * Constructeur
+	 */
+	
 	public SelectionScreen(Game game) {
 		this.game = game;
 		renderer = new SelectionRenderer();
@@ -44,65 +48,75 @@ public class SelectionScreen implements Screen, InputProcessor {
 		saveMusic("music");
 	}
 	
+	/*
+	 * Méthodes
+	 */
+	
 	private void keyboardSelection() {
 		//Selection par le clavier
 			if(controller.getSelectedButton() == 0) {		//If nothing is selected
 				if(controller.getKeys().get(SelectionKeys.DOWN)) {		
 					controller.setSelectedButton(1);		//Selection button selected
 				} else if(controller.getKeys().get(SelectionKeys.UP)) {		
-					controller.setSelectedButton(3);		//Back button selected
+					controller.setSelectedButton(4);		//Back button selected
 				}
 			} else if(controller.getSelectedButton() == 1) {	//If Selection button is selected
 				if(controller.getKeys().get(SelectionKeys.DOWN)) {		
-					controller.setSelectedButton(2);		//Play button selected
+					controller.setSelectedButton(2);		//Choose button selected
 				} else if(controller.getKeys().get(SelectionKeys.UP)) {		
-					controller.setSelectedButton(3);		//Back button selected
+					controller.setSelectedButton(4);		//Back button selected
 				}
-			} else if(controller.getSelectedButton() == 2) {	//If Play button is selected
+			} else if(controller.getSelectedButton() == 2) {	//If Choose button is selected
 				if(controller.getKeys().get(SelectionKeys.DOWN)) {
-					//Back button selected
-					controller.setSelectedButton(3);
-				} else if(controller.getKeys().get(SelectionKeys.UP)) {
-					//Selection button selected
-					controller.setSelectedButton(1);
+					controller.setSelectedButton(3);		//PLay button selected
+				} else if(controller.getKeys().get(SelectionKeys.UP)) {					
+					controller.setSelectedButton(1);		//Selection button selected
 				}
-			} else if(controller.getSelectedButton() == 3) {	//If Back button is selected
+			} else if(controller.getSelectedButton() == 3) {	//If PLay button is selected
+					if(controller.getKeys().get(SelectionKeys.DOWN)) {					
+						controller.setSelectedButton(4);			//Back button selected
+					} else if(controller.getKeys().get(SelectionKeys.UP)) {						
+							controller.setSelectedButton(2);		//Choose button selected
+					}
+				}  else if(controller.getSelectedButton() == 4) {	//If Back button is selected
 					if(controller.getKeys().get(SelectionKeys.DOWN)) {					
 						controller.setSelectedButton(1);			//Selection button selected
 					} else if(controller.getKeys().get(SelectionKeys.UP)) {						
-							controller.setSelectedButton(2);		//Play button selected
-						}
+							controller.setSelectedButton(3);		//Play button selected
+					}
 				} else {
 					//Nothing is selected
 					controller.setSelectedButton(0);
 				}
+			
 	}
 	
+	//Selection par la sourie
 	private void mouseSelection() {
 		//TODO modifier les valeurs pour qu'elles collent à cet écran.
-		//Selection par la sourie
+		
+		//La sourie est sur le boutton select
 		if(controller.getMousePosition().x > 165 && controller.getMousePosition().x < 555
 				&& controller.getMousePosition().y > 10 && controller.getMousePosition().y < 135) {
 			controller.setSelectedButton(1);
-			if(controller.getMouseState()) {
-				//TODO ouvrir la fenetre de selection de la musique
-			}
 		}
 		
+		//La sourie est sur le boutton choose
+		if(controller.getMousePosition().x > 153 && controller.getMousePosition().x < 565
+				&& controller.getMousePosition().y > 175 && controller.getMousePosition().y < 215) {
+			controller.setSelectedButton(2);
+		}
+		
+		//La sourie est sur le boutton play
 		if(controller.getMousePosition().x > 257 && controller.getMousePosition().x < 460
 				&& controller.getMousePosition().y > 310 && controller.getMousePosition().y < 360) {
-			controller.setSelectedButton(2);
-			if(controller.getMouseState()) {
-				game.setScreen(new GameScreen(game, selectedMusic));
-			}
+			controller.setSelectedButton(3);
 		}
-			
+		
+		//La sourie est sur le boutton back
 		if(controller.getMousePosition().x > 525 && controller.getMousePosition().x < 700
 				&& controller.getMousePosition().y > 355 && controller.getMousePosition().y < 400) {
-			controller.setSelectedButton(3);
-			if(controller.getMouseState()) {
-				game.setScreen(new MenuScreen(game));
-			}
+			controller.setSelectedButton(4);
 		}
 	}
 	
@@ -162,17 +176,19 @@ public class SelectionScreen implements Screen, InputProcessor {
 		keyboardSelection();
 		controller.checkSelection();
 		
-		if(controller.getKeys().get(SelectionKeys.VALIDATE)) {
-			//Si on modifie le switch case il faut aussi modifier la méthode mouseSelection!
+		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
 			switch(controller.getSelectedButton()) {
 				case (1) : 
 					//TODO selection de la musique
 					
 					break;
 				case (2) :
-					game.setScreen(new GameScreen(game, selectedMusic));
+					game.setScreen(new ChooseScreen(game));
 					break;
 				case (3) :
+					game.setScreen(new GameScreen(game, selectedMusic));
+					break;
+				case (4) : 
 					game.setScreen(new MenuScreen(game));
 					break;
 			}
@@ -196,7 +212,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
+		Gdx.input.setInputProcessor(null);
 
 	}
 

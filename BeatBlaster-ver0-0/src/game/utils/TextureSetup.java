@@ -22,6 +22,10 @@ public class TextureSetup {
         TexturePacker2.process(path + "/res/img/selection",
 				    			path + "/res/img/selection",
 					"textures.pack");
+      //ChooseScreen textures
+        TexturePacker2.process(path + "/res/img/choose",
+				    			path + "/res/img/choose",
+					"textures.pack");
         System.out.println("Done");
     }
 
