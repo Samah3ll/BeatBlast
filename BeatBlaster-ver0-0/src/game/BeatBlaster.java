@@ -31,6 +31,7 @@ public class BeatBlaster extends Game {
 	
 	//Crée le dossier de sauvegarde
 	private void createSaveRepertory() {
+		//TODO trouver une meilleure méthode pour définir saveDirectory
 		saveDirectory = path.substring(0, path.length() - 18);
 		//newPath += File.separator;
 		saveDirectory += "save";
