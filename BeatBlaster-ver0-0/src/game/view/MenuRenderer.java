@@ -10,8 +10,8 @@ import game.controller.MenuController;
 public class MenuRenderer {
 	
 	//TODO:modifier les tailles de la caméra (penser aux autres écrans)
-	//private static final float CAMERA_WIDTH = 720f;
-	//private static final float CAMERA_HEIGHT = 450f;
+	private static final float BUTTON_WIDTH = 60f;
+	private static final float BUTTON_HEIGHT = 30f;
 	private static final float CAMERA_WIDTH = 100f;
 	private static final float CAMERA_HEIGHT = 100f;
 	//private static final float RUNNING_FRAME_DURATION = 0.06f;
@@ -85,19 +85,19 @@ public class MenuRenderer {
 	}
 	
 	private void drawButtonGame() {
-		spriteBatch.draw(buttonGame, 20f * ppuX, 65f * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonGame, 20f * ppuX, 65f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonGameSelected() {
-		spriteBatch.draw(buttonGameSelected, 20f * ppuX, 65f * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonGameSelected, 20f * ppuX, 65f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonQuit() {
-		spriteBatch.draw(buttonQuit, 20f * ppuX, 5f * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonQuit, 20f * ppuX, 5f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonQuitSelected() {
-		spriteBatch.draw(buttonQuitSelected, 20f * ppuX, 5f * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonQuitSelected, 20f * ppuX, 5f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 
 

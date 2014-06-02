@@ -15,6 +15,8 @@ public class SelectionRenderer {
 	
 	private static final float CAMERA_WIDTH = 100f;
 	private static final float CAMERA_HEIGHT = 100f;
+	private static final float BUTTON_WIDTH = 60f;
+	private static final float BUTTON_HEIGHT = 30f;
 	//private static final float RUNNING_FRAME_DURATION = 0.06f;
 	
 	private OrthographicCamera cam;
@@ -117,35 +119,35 @@ public class SelectionRenderer {
 	}
 	
 	private void drawButtonPlay() {
-		spriteBatch.draw(buttonPlay, 20 * ppuX, 10 * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonPlay, 20 * ppuX, 10 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonPlaySelected() {
-		spriteBatch.draw(buttonPlaySelected, 20 * ppuX, 10 * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonPlaySelected, 20 * ppuX, 10 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonSelect() {
-		spriteBatch.draw(buttonSelect, 20 * ppuX, 70 * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonSelect, 20 * ppuX, 70 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonSelectSelected() {
-		spriteBatch.draw(buttonSelectSelected, 20 * ppuX, 70 * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonSelectSelected, 20 * ppuX, 70 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonBack() {
-		spriteBatch.draw(buttonBack, 55 * ppuX, 1 * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonBack, 55 * ppuX, 1 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonBackSelected() {
-		spriteBatch.draw(buttonBackSelected, 55 * ppuX, 1 * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonBackSelected, 55 * ppuX, 1 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonChoose() {
-		spriteBatch.draw(buttonChoose, 20 * ppuX, 40 * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonChoose, 20 * ppuX, 40 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonChooseSelected() {
-		spriteBatch.draw(buttonChooseSelected, 20 * ppuX, 40 * ppuY, 60f * ppuX, 30f * ppuY);
+		spriteBatch.draw(buttonChooseSelected, 20 * ppuX, 40 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 
 	public void setSize(int width, int height) {

@@ -1,14 +1,20 @@
 package game.view;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 public class ChooseRenderer {
 	
 	private static final float CAMERA_WIDTH = 100f;
 	private static final float CAMERA_HEIGHT = 100f;
+	private static final float BUTTON_WIDTH = 60f;
+	private static final float BUTTON_HEIGHT = 30f;
 	
 	private OrthographicCamera cam;
 	
@@ -54,8 +60,18 @@ public class ChooseRenderer {
 		spriteBatch.begin();
 			drawBackground();
 			drawOkButton();
+			drawTextButton();
 		spriteBatch.end();
 		
+	}
+	
+	private void drawTextButton() {
+		TextButtonStyle style = new TextButtonStyle();
+		style.font = new BitmapFont();
+		style.fontColor = Color.RED;
+		TextButton b = new TextButton("Select your music : ", style);
+		b.translate(30f * ppuX, 60f * ppuY);
+		b.draw(spriteBatch, 1);
 	}
 
 	private void drawBackground() {
@@ -64,11 +80,11 @@ public class ChooseRenderer {
 	}
 	
 	private void drawOkButton() {
-		spriteBatch.draw(okButton, 40 * ppuX, 20 * ppuY, 60f * ppuX, 30f * ppuY);		
+		spriteBatch.draw(okButton, 40 * ppuX, 20 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
 	}
 	
 	private void drawOkButtonSelected() {
-		spriteBatch.draw(okButtonSelected, 40 * ppuX, 20 * ppuY, 60f * ppuX, 30f * ppuY);		
+		spriteBatch.draw(okButtonSelected, 40 * ppuX, 20 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
 	}
 
 	public void setSize(int width, int height) {
