@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import music.beatroot.BeatRoot;
+
 import game.controller.SelectionController;
 import game.controller.SelectionController.SelectionKeys;
 import game.view.SelectionRenderer;
@@ -17,6 +19,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
+import music.beatroot.BeatRoot;
 
 public class SelectionScreen implements Screen, InputProcessor {
 	
@@ -169,8 +172,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
 			switch(controller.getSelectedButton()) {
 				case (1) : 
-					//TODO selection de la musique
-					
+					new BeatRoot();
 					break;
 				case (2) :
 					game.setScreen(new ChooseScreen(game));
