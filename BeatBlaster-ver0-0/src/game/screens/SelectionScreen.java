@@ -19,7 +19,6 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
-import music.beatroot.BeatRoot;
 
 public class SelectionScreen implements Screen, InputProcessor {
 	
@@ -30,7 +29,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 	
 	Music selectedMusic;
 	final String path = System.getProperty("user.dir");
-	String saveDirectory =  ((BeatBlaster) game).getSaveDirectory();
+	String saveDirectory;
 	
 	HashMap<String, FileHandle> savedMusic = new HashMap<String, FileHandle>();
 	HashMap<String, String> savedMusicData = new HashMap<String, String>();
@@ -41,6 +40,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 	
 	public SelectionScreen(Game game) {
 		this.game = game;
+		this.saveDirectory =  ((BeatBlaster) game).getSaveDirectory();
 		renderer = new SelectionRenderer();
 		controller = new SelectionController();
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
