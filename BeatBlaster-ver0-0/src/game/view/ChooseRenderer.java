@@ -1,5 +1,11 @@
 package game.view;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import game.controller.ChooseController;
+import game.utils.Reader;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -24,21 +30,30 @@ public class ChooseRenderer {
 	private TextureRegion background;
 	private TextureRegion okButton;
 	private TextureRegion okButtonSelected;
+	private TextureRegion backButton;
+	private TextureRegion backButtonSelected;
 	
 	private int width;
     private int height;
     private float ppuX;
     private float ppuY;
     
+    private Reader reader = new Reader();
+    
+    private String saveDirectory;
+    private ArrayList<String> savedFiles;
+    
     /*
      * Constructeur
      */
     
     
-    public ChooseRenderer() {
+    public ChooseRenderer(String save) {
     	this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
 		this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
 		this.cam.update();
+		this.saveDirectory = save;
+		savedFiles = reader.getListFiles(save);
 		spriteBatch = new SpriteBatch();
         loadTextures();
     }
@@ -54,11 +69,23 @@ public class ChooseRenderer {
 		background = atlas.findRegion("menu20");
 		okButton = atlas.findRegion("ok");
 		okButtonSelected = atlas.findRegion("okSelected");
+		backButton = atlas.findRegion("back");
+		backButtonSelected = atlas.findRegion("backSelected");
 	}
 
 	public void render() {
 		spriteBatch.begin();
 			drawBackground();
+			if(ChooseController.isBackButtonSelected()) {
+				drawBackButtonSelected();
+			} else {
+				drawBackButton();
+			}
+			if(ChooseController.isOkButtonSelected()) {
+				drawOkButtonSelected();
+			} else {
+				drawOkButton();
+			}
 			drawOkButton();
 			drawTextButton();
 		spriteBatch.end();
@@ -70,8 +97,22 @@ public class ChooseRenderer {
 		style.font = new BitmapFont();
 		style.fontColor = Color.RED;
 		TextButton b = new TextButton("Select your music : ", style);
-		b.translate(30f * ppuX, 60f * ppuY);
+		b.translate(20f * ppuX, 80f * ppuY);
 		b.draw(spriteBatch, 1);
+		
+		float f = 0;
+		for(Iterator<String> it = savedFiles.iterator(); it.hasNext();) {			
+			f += 5f;
+			String fileName = it.next();
+			fileName = fileName.substring(0, fileName.length() - 4);
+			TextButton b1 = new TextButton(fileName, style);
+			b1.translate(20f * ppuX, (80f - f) * ppuY);
+			b1.draw(spriteBatch, 1);
+			
+			if(f == 50f) {
+				break;
+			}
+		}
 	}
 
 	private void drawBackground() {
@@ -80,11 +121,19 @@ public class ChooseRenderer {
 	}
 	
 	private void drawOkButton() {
-		spriteBatch.draw(okButton, 40 * ppuX, 20 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
+		spriteBatch.draw(okButton, 0 * ppuX, 20 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
 	}
 	
 	private void drawOkButtonSelected() {
-		spriteBatch.draw(okButtonSelected, 40 * ppuX, 20 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
+		spriteBatch.draw(okButtonSelected, 0 * ppuX, 20 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
+	}
+	
+	private void drawBackButton() {
+		spriteBatch.draw(backButton, 20 * ppuX, 5 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
+	}
+	
+	private void drawBackButtonSelected() {
+		spriteBatch.draw(backButtonSelected, 20 * ppuX, 5 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
 	}
 
 	public void setSize(int width, int height) {

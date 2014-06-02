@@ -1,6 +1,8 @@
 package game.screens;
 
+import game.BeatBlaster;
 import game.controller.ChooseController;
+import game.controller.SelectionController.SelectionKeys;
 import game.view.ChooseRenderer;
 
 import com.badlogic.gdx.Game;
@@ -16,6 +18,9 @@ public class ChooseScreen implements Screen, InputProcessor {
 	ChooseRenderer renderer;
 	
 	Game game;
+	
+	final String path = System.getProperty("user.dir");
+	String saveDirectory;
 
 	
 	/*
@@ -24,10 +29,12 @@ public class ChooseScreen implements Screen, InputProcessor {
 	
 	public ChooseScreen(Game game) {
 		this.game = game;
-		renderer = new ChooseRenderer();
+		saveDirectory = ((BeatBlaster) game).getSaveDirectory();
+		renderer = new ChooseRenderer(saveDirectory);
 		controller = new ChooseController();
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);	
+		
 	}
 	
 	
@@ -36,7 +43,47 @@ public class ChooseScreen implements Screen, InputProcessor {
 	 */	
 	
 	private void keyboardSelection() {
-		
+		if(controller.getSelectedButton() == 0) {		//If nothing is selected
+			if(controller.getKeys().get(SelectionKeys.RIGHT)) {
+				controller.setSelectedButton(1);		//Ok button is selected				
+			} else if(controller.getKeys().get(SelectionKeys.UP)) {
+				controller.setSelectedButton(2);		//Back button is selected
+			} else if(controller.getKeys().get(SelectionKeys.LEFT)) {
+				controller.setSelectedButton(3);		//MusicList is selected
+			} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
+				controller.setSelectedButton(1);		//Ok button is selected
+			}
+		} else if(controller.getSelectedButton() == 1) {		//If Ok is selected
+			if(controller.getKeys().get(SelectionKeys.RIGHT)) {
+				controller.setSelectedButton(3);		//MusicList is selected				
+			} else if(controller.getKeys().get(SelectionKeys.UP)) {
+				controller.setSelectedButton(2);		//Back button is selected
+			} else if(controller.getKeys().get(SelectionKeys.LEFT)) {
+				controller.setSelectedButton(3);		//MusicList is selected
+			} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
+				controller.setSelectedButton(2);		//Back button is selected
+			}
+		} else if(controller.getSelectedButton() == 2) {		//If Back is selected
+			if(controller.getKeys().get(SelectionKeys.RIGHT)) {
+				controller.setSelectedButton(3);		//MusicList is selected				
+			} else if(controller.getKeys().get(SelectionKeys.UP)) {
+				controller.setSelectedButton(1);		//Ok button is selected
+			} else if(controller.getKeys().get(SelectionKeys.LEFT)) {
+				controller.setSelectedButton(3);		//MusicList is selected
+			} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
+				controller.setSelectedButton(1);		//Ok button is selected
+			}
+		} else if(controller.getSelectedButton() == 3) {		//If MusicList is selected
+			if(controller.getKeys().get(SelectionKeys.RIGHT)) {
+				controller.setSelectedButton(1);		//Ok button is selected				
+			} else if(controller.getKeys().get(SelectionKeys.UP)) {
+				//TODO move selection in musicList
+			} else if(controller.getKeys().get(SelectionKeys.LEFT)) {
+				//TODO move selection in musicList
+			} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
+				controller.setSelectedButton(1);		//Ok button is selected
+			}
+		}
 	}
 	
 	private void mouseSelection() {
@@ -53,6 +100,21 @@ public class ChooseScreen implements Screen, InputProcessor {
 		
 		keyboardSelection();
 		mouseSelection();
+		
+		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
+			switch(controller.getSelectedButton()) {
+				case (1) : 
+					game.setScreen(new SelectionScreen(game));
+					break;
+				case (2) :
+					game.setScreen(new SelectionScreen(game));
+					break;
+				case (3) :
+					
+					break;				
+			}
+			
+		}
 
 	}
 
@@ -104,6 +166,10 @@ public class ChooseScreen implements Screen, InputProcessor {
 	        controller.upPressed();
         if (keycode == Keys.DOWN)
             controller.downPressed();
+        if (keycode == Keys.LEFT)
+            controller.leftPressed();
+        if (keycode == Keys.RIGHT)
+            controller.rightPressed();
         if (keycode == Keys.ENTER)
             controller.enterPressed();
         return true;
@@ -115,6 +181,10 @@ public class ChooseScreen implements Screen, InputProcessor {
 			controller.upReleased();
 		if(keycode == Keys.DOWN)
 			controller.downReleased();
+		if(keycode == Keys.LEFT)
+			controller.leftReleased();
+		if(keycode == Keys.RIGHT)
+			controller.rightReleased();
 		if(keycode == Keys.ENTER)
 			controller.enterReleased();
 		return true;

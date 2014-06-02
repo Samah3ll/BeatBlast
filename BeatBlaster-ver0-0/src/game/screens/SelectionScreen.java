@@ -7,6 +7,7 @@ import java.util.HashMap;
 import game.controller.SelectionController;
 import game.controller.SelectionController.SelectionKeys;
 import game.view.SelectionRenderer;
+import game.BeatBlaster;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -26,7 +27,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 	
 	Music selectedMusic;
 	final String path = System.getProperty("user.dir");
-	String saveDirectory;
+	String saveDirectory =  ((BeatBlaster) game).getSaveDirectory();
 	
 	HashMap<String, FileHandle> savedMusic = new HashMap<String, FileHandle>();
 	HashMap<String, String> savedMusicData = new HashMap<String, String>();
@@ -43,8 +44,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		FileHandle musicFile = new FileHandle(path + "/res/audio/menu/Korobeinki.mp3");
 		selectedMusic = Gdx.audio.newMusic(musicFile);
-
-		createSaveRepertory();
+		
 		saveMusic("music");
 	}
 	
@@ -151,17 +151,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 		savedMusicData.put(fileName, musicData);
 	}
 	
-	//Crée le dossier de sauvegarde
-	private void createSaveRepertory() {
-		saveDirectory = path.substring(0, path.length() - 18);
-		//newPath += File.separator;
-		saveDirectory += "save";
-		System.out.println(saveDirectory);
-		File folder = new File(saveDirectory);
-		if(folder.mkdir()) {
-			System.out.println("new folder created");
-		}
-	}
+	
 	
 	
 	/*

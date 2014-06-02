@@ -15,6 +15,16 @@ public class ChooseController {
 	
 	private final long WAITTIME = 300;
 	
+	//Désigne le numéro dans la liste de la musique sélectionnée.
+	private int selectedMusic = 0;
+	
+	//Désigne le boutton selectionné : 0 = pas de sélection; 1 = ok; 2 = back; 3 = la liste des musiques.
+	private int selectedButton = 0;
+	
+	static private boolean okButtonSelected = false;
+	static private boolean backButtonSelected = false;
+	static private boolean musicListSelected = false;
+	
 	static boolean mouseIsPressed = false;
 	
 	static Vector2 mousePosition = new Vector2(0, 0);
@@ -33,11 +43,53 @@ public class ChooseController {
 	 */
 	
 
+	public int getSelectedButton() {
+		return selectedButton;
+	}
+	
+	public void setSelectedButton(int s) {
+		this.selectedButton = s;
+	}
+	
+	public int getSelectedMusic() {
+		return selectedMusic;
+	}
+	
+	public void setSelectedMusic(int s) {
+		this.selectedMusic = s;
+	}
+	
+	static public boolean isOkButtonSelected() {
+		return okButtonSelected;
+	}
+	
+	public void setOkButtonSelected(boolean b) {
+		ChooseController.okButtonSelected = b;
+	}
+	
+	static public boolean isBackButtonSelected() {
+		return backButtonSelected;
+	}
+	
+	public void setBackButtonSelected(boolean b) {
+		ChooseController.backButtonSelected = b;
+	}
+	
+	static public boolean isMusicListButtonSelected() {
+		return musicListSelected;
+	}
+	
+	public void setMusicListButtonSelected(boolean b) {
+		ChooseController.musicListSelected = b;
+	}
 	
 	public Map<SelectionKeys, Boolean> getKeys() {
 		return keys;
 	}
 	
+	public boolean getMouseState() {
+		return mouseIsPressed;
+	}	
 	
 	
 	/*
@@ -99,10 +151,64 @@ public class ChooseController {
 		mouseIsPressed = false;
 		
 	}
+	
+	public void leftPressed() {
+		Long start = System.currentTimeMillis();
+		while(System.currentTimeMillis() - start < WAITTIME) {
+		}
+		keys.get(keys.put(SelectionKeys.LEFT, true));
+		
+	}
+
+	public void rightPressed() {
+		Long start = System.currentTimeMillis();
+		while(System.currentTimeMillis() - start < WAITTIME) {
+		}
+		keys.get(keys.put(SelectionKeys.RIGHT, true));
+		
+	}
+
+	public void leftReleased() {
+		keys.get(keys.put(SelectionKeys.LEFT, false));
+		
+	}
+
+	public void rightReleased() {
+		keys.get(keys.put(SelectionKeys.RIGHT, false));
+		
+	}
 
 	public void scrolled(int amount) {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void checkSelection() {
+		switch (selectedButton) {
+			case 1 :
+				okButtonSelected = true;
+				backButtonSelected = false;
+				musicListSelected = false;
+				break;
+			case 2 :
+				okButtonSelected = false;
+				backButtonSelected = true;
+				musicListSelected = false;
+				break;
+			case 3 :
+				okButtonSelected = false;
+				backButtonSelected = false;
+				musicListSelected = true;
+				break;
+			default :
+				okButtonSelected = false;
+				backButtonSelected = false;
+				musicListSelected = false;
+				break;
+		}
+		
+	}
+
+	
 
 }
