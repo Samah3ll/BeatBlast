@@ -1711,12 +1711,12 @@ public class BeatTrackDisplay
 			}					
 		}
 		
-		/**vérification */
+		/**vérification */	/*
 		for(int k =0;k<tinySpectro.length;k++){
 			for(int j =0;j<tinySpectro[0].length;j++)
 				System.out.print(Math.floor(tinySpectro[k][j]*100)/100 + " ");
 			System.out.print("\n");
-		}
+		}*/
 		return tinySpectro;
 	}//fin
 		

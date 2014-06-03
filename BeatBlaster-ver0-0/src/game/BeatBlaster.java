@@ -13,7 +13,7 @@ import game.screens.MenuScreen;
 public class BeatBlaster extends Game {	
 		
 	final String path = System.getProperty("user.dir");
-	String saveDirectory;		//Dossier ou seront stockées les sauvegardes
+	private String saveDirectory="";		//Dossier ou seront stockées les sauvegardes
 
 	@Override
 	public void create() {
@@ -31,8 +31,11 @@ public class BeatBlaster extends Game {
 	//Crée le dossier de sauvegarde
 	private void createSaveRepertory() {
 		//TODO trouver une meilleure méthode pour définir saveDirectory
-		saveDirectory = path.substring(0, path.length() - 18);
-		//newPath += File.separator;
+		 String[] tmp = path.split("\\\\");
+		 for(int i =0; i< tmp.length-1;i++){
+			 saveDirectory+=tmp[i];
+			 saveDirectory+="\\";
+		 }
 		saveDirectory += "save";
 		System.out.println(saveDirectory);
 		File folder = new File(saveDirectory);

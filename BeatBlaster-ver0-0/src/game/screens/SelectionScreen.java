@@ -46,7 +46,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		FileHandle musicFile = new FileHandle(path + "/res/audio/menu/Korobeinki.mp3");
 		selectedMusic = Gdx.audio.newMusic(musicFile);
-		
+		saveDirectory = ((BeatBlaster)game).getSaveDirectory();
 		//saveMusic("music");
 	}
 	
@@ -172,7 +172,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 			switch(controller.getSelectedButton()) {
 				case (1) : 
 					try{
-						new BeatRoot();
+						new BeatRoot(saveDirectory);
 					}catch(NullPointerException e){
 						System.err.println("Aucune musique sélectionnée : " + e);
 						game.setScreen(new SelectionScreen(game));

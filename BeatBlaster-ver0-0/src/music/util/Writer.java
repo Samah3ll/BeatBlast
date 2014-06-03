@@ -6,16 +6,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ListIterator;
 
+import de.matthiasmann.twlthemeeditor.gui.SaveFileSelector;
+
 public class Writer {
 	
 	/*TODO Changer la façon de déterminer le saveDirectory, actuellement c'est dégueulasse (en dur) */
 	/** Dossier où seront stockées les sauvegardes */
-	final String path = System.getProperty("user.dir");
-	final String saveDirectory = path.substring(0, path.length() - 18) + "save";
+	//final String path = System.getProperty("user.dir");
+	//final String saveDirectory = path.substring(0, path.length() - 18) + "save";
 	
 	public Writer()	{}
 	 
-	 public boolean write(String pathFile, double songTime, ListIterator<Event> beatPtr, double[][] spectro){
+	 public boolean write(String saveDirectory, String pathFile, double songTime, ListIterator<Event> beatPtr, double[][] spectro){
 		try
 		{
 			/**
@@ -24,12 +26,12 @@ public class Writer {
 			 * true signifie qu on ajoute dans le fichier (append), on ne marque pas par dessus 
 			 */
 			
-			String newFileName = pathFile + ".dat";
+			String dataFilePath = saveDirectory + "\\" +getFileName(pathFile) + ".dat";
 			
 			//methode pour tester l'existence
-			File f = new File(newFileName);
+			File f = new File(dataFilePath);
 			if ( f.exists() ) {
-				System.out.println("This file already exists : " + newFileName);
+				System.out.println("This file already exists : " + dataFilePath);
 				return false;
 			}
 			// sauter une ligne \n
@@ -39,7 +41,7 @@ public class Writer {
 			 *  - false signifie qu'on écrase le contenu du fichier et qu'on ne fait pas d'append
 			 */
 			
-			FileWriter fileWriter = new FileWriter(newFileName, true);
+			FileWriter fileWriter = new FileWriter(dataFilePath, true);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			
 			//on écrit dans le BufferedWriter qui sert de tampon(stream)
@@ -72,7 +74,7 @@ public class Writer {
 			//On ferme le BufferedWriter
 			bufferedWriter.close();
 			
-			System.out.println("File " + newFileName + " made");
+			System.out.println("File " + dataFilePath + " made");
 		}
 		
 		catch(IOException ioe){
@@ -104,17 +106,11 @@ public class Writer {
 					return false;
 				}
 	 }
-		//Crée le dossier de sauvegarde
-		public void createSaveRepertory() {
-			File folder = new File(saveDirectory);
-			if(folder.mkdir()) {
-				System.out.println("new folder created");
-			}
-		}
-		
-		public String getSaveDirectory() {
-			return saveDirectory;
-		}
+	 
+	 public String getFileName(String pathFile){
+		 String[] tmp = pathFile.split("\\\\");
+		 return tmp[tmp.length-1];
+	 }
 	 
 }
 

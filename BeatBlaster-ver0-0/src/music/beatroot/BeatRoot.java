@@ -161,7 +161,7 @@ public class BeatRoot {
 	 *  @param args Optional command line arguments.
 	 *  @see #processArgs(String[])
 	 */
-	public BeatRoot() {
+	public BeatRoot(String saveDirectory) {
 		batchMode = false;
 		playWithBeats = false;
 		argsFile = null;
@@ -171,44 +171,33 @@ public class BeatRoot {
 		processArgs();
 		audioProcessor = new AudioProcessor();
 		
-		if (!batchMode)
+//		if (!batchMode)
 			fileChooser = new Chooser();
 		audioPlayer = new AudioPlayer(null, fileChooser);
-		if (!batchMode) {
+		//if (!batchMode) {
 			gui = new GUI(audioPlayer, audioProcessor, fileChooser);
-			//gui.setVisible(true);
-			if (audioIn != null) {
-				System.out.println("audioIn ==> " +audioIn);
-				gui.loadAudioData(audioIn);
-				if (beatsIn != null)
-					gui.loadBeatData(beatsIn);
-				else
-					gui.displayPanel.beatTrack();
-				if (playWithBeats)
-					audioPlayer.play();
-			}
-		}
-		
-		/**avec visu*/
-		/*
-		gui.setVisible(true);
-		gui.loadAudioData();
-		gui.displayPanel.beatTrack();
-		gui.displayPanel.resizeSpectroForVisu(12);
-		gui.displayPanel.repaintImage();
-		*/
+//			if (audioIn != null) {
+//				System.out.println("audioIn ==> " +audioIn);
+//				gui.loadAudioData(audioIn);
+//				if (beatsIn != null)
+//					gui.loadBeatData(beatsIn);
+//				else
+//					gui.displayPanel.beatTrack();
+//				if (playWithBeats)
+//					audioPlayer.play();
+//			}
+//		}
 		
 		/** pour le projet (pas de visu, création de fichiers */
-		gui.setVisible(true);
+		//gui.setVisible(true);
 		gui.loadAudioData();
 		gui.displayPanel.beatTrack();
-		gui.displayPanel.resizeSpectroForVisu(12);
-		gui.displayPanel.repaintImage();
-		double[][] spectroMatricelol = gui.displayPanel.spectro;
+		//gui.displayPanel.resizeSpectroForVisu(12);
+		//gui.displayPanel.repaintImage();
+		//double[][] spectroMatricelol = gui.displayPanel.spectro;
 		double[][] spectroMatrice = gui.displayPanel.resizeSpectroForFile(12);
-		writer.createSaveRepertory();
-		writer.write( audioProcessor.audioFileName, gui.displayPanel.maximumTime, gui.displayPanel.beatPtr, spectroMatrice);
-		
+		System.out.println(saveDirectory);
+		writer.write( saveDirectory, audioProcessor.audioFileName, gui.displayPanel.maximumTime, gui.displayPanel.beatPtr, spectroMatrice);
 	}  // constructor
 
 	/** Reads a line from the arguments file <code>argsFile</code>, and converts
@@ -311,7 +300,8 @@ public class BeatRoot {
 	 *  @param args Optional command line arguments (see constructor for details)
 	 */
 	public static void main(String[] args) {
-		new BeatRoot();
+		String path = System.getProperty("user.dir");
+		new BeatRoot(path);
 	} // main()
 
 } // class BeatRoot
