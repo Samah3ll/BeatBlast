@@ -9,16 +9,16 @@ import game.model.Level;
 public class LevelGenerator {
 	
 	private Level level;
-	private ArrayList<Integer> inputData = new ArrayList<Integer>();
+	private ArrayList<Double> inputData = new ArrayList<Double>();
 	
 	public LevelGenerator(int x) {
 		this.level = new Level(x, 16);
 		for(int i = 0; i < 40; i++) {
-			inputData.add(600*i);
+			inputData.add(600.0*i);
 		}
 	}
 	
-	public Level generateLevel(/*inputData*/) {
+	public Level generateLevel(/*ArrayList<Double> inputData*/) {
 		for(int i = 0; i < level.getWidth(); i++) {
 			BasicBlock b = new BasicBlock(i, 0);
 			level.addBlock(b);
@@ -26,7 +26,7 @@ public class LevelGenerator {
 			level.addBlock(b1);
 		}
 		/*
-		for(Iterator<Integer> it = inputData.iterator(); it.hasNext();) {
+		for(Iterator<Double> it = inputData.iterator(); it.hasNext();) {
 			float x = it.next()*0.001f*12;
 			BasicBlock b2 = new BasicBlock(x, 1);
 			level.addBlock(b2);

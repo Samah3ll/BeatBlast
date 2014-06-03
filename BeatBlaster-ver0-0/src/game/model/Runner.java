@@ -9,10 +9,6 @@ public class Runner {
 		IDLE, WALKING, JUMPING, DYING
 	}
 	
-	public enum Skin {
-		METAL, REGGEA, CLASSICAL, ROCK, BASIC
-	}
-	
 	static final float SPEED = 4f;
 	static final float JUMP_VELOCITY = 1f;
 	static final float SIZE = 1f;
