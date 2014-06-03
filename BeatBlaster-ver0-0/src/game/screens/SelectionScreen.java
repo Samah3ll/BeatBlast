@@ -1,9 +1,10 @@
 package game.screens;
 
 import music.beatroot.BeatRoot;
-
 import game.controller.SelectionController;
 import game.controller.SelectionController.SelectionKeys;
+import game.utils.DataSong;
+import game.utils.Reader;
 import game.view.SelectionRenderer;
 import game.BeatBlaster;
 
@@ -22,6 +23,8 @@ public class SelectionScreen implements Screen, InputProcessor {
 	SelectionRenderer renderer;
 	
 	Game game;
+	
+	Reader reader = new Reader();
 	
 	Music selectedMusic;
 	final String path = System.getProperty("user.dir");
@@ -143,7 +146,8 @@ public class SelectionScreen implements Screen, InputProcessor {
 					game.setScreen(new ChooseScreen(game));
 					break;
 				case (3) :
-					game.setScreen(new GameScreen(game, selectedMusic));
+					DataSong ds = reader.read(saveDirectory, path + "/res/audio/menu/Korobeinki.mp3");
+					game.setScreen(new GameScreen(game, ds));
 					break;
 				case (4) : 
 					game.setScreen(new MenuScreen(game));

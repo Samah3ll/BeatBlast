@@ -14,7 +14,7 @@ public class LevelGenerator {
 	
 	public LevelGenerator(DataSong ds) {
 		this.dataSong = ds;
-		this.level = new Level((int)ds.getMaxTimeSong() +20 , 16);
+		this.level = new Level(((int)ds.getMaxTimeSong() ) * 6, 16);
 	}
 	
 	/**Création des blocks de contour */
@@ -37,8 +37,8 @@ public class LevelGenerator {
 	}
 	
 	public void generateBeatBlocks(DataSong ds) {
-		for(int i=0;i<ds.getBeats().size(); i++){
-			BasicBlock b = new BasicBlock(i, 1);
+		for(int i = 0; i < ds.getBeats().size(); i++){
+			BasicBlock b = new BasicBlock(((float) ds.getBeats().get(i)) * 6, 1f);
 			level.addBlock(b);
 		}
 	}

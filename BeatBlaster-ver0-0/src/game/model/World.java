@@ -13,18 +13,12 @@ import com.badlogic.gdx.math.Vector2;
 public class World {
 	
 	private Runner runner;
-	//private Runner02 runner02;
 	private Level level;
 	private LevelGenerator lg;
 	
 	public Runner getRunner() {
 		return runner;
 	}
-	/*
-	public Runner02 getRunner02() {
-		return runner02;
-	}
-	*/
 	public Level getLevel() {
 		return level;
 	}
@@ -35,7 +29,6 @@ public class World {
 	
 	public World(DataSong ds) {
 		runner = new Runner(new Vector2(7, 2));
-		//runner02 = new Runner02(new Vector2(7,1));
 		lg = new LevelGenerator(ds);
 		level = lg.generateLevel();
 		//createDemoWorld();

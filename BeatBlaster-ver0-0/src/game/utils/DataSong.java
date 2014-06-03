@@ -6,10 +6,10 @@ public class DataSong {
 	
 	private String pathSong;
 	private double maxTimeSong;
-	private ArrayList<Double> beats = new ArrayList<Double>();
+	private ArrayList<Float> beats = new ArrayList<Float>();
 	private double[][] spectro;
 	
-	public DataSong(String pathSong, double maxTimeSong, ArrayList<Double> beats, double[][] spectro){
+	public DataSong(String pathSong, double maxTimeSong, ArrayList<Float> beats, double[][] spectro){
 		this.pathSong = pathSong;
 		this.maxTimeSong = maxTimeSong;
 		this.beats=beats;
@@ -24,7 +24,7 @@ public class DataSong {
 		return maxTimeSong;
 	}
 
-	public ArrayList<Double> getBeats() {
+	public ArrayList<Float> getBeats() {
 		return beats;
 	}
 

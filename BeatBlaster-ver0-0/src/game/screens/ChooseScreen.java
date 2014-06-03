@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import game.BeatBlaster;
 import game.controller.ChooseController;
 import game.controller.SelectionController.SelectionKeys;
+import game.utils.DataSong;
 import game.utils.Reader;
 import game.view.ChooseRenderer;
 
@@ -169,14 +170,8 @@ public class ChooseScreen implements Screen, InputProcessor {
 					game.setScreen(new SelectionScreen(game));
 					break;
 				case (3) :
-					String songName = saveDirectory + "\\" + savedFiles.get(selectedSong + scrolled);
-					songName = songName.substring(0, songName.length() - 4);
-					//songName += ".WAV";
-					System.out.println("music path : " + songName);
-					Music music;
-					FileHandle musicFile = new FileHandle(songName);
-					music = Gdx.audio.newMusic(musicFile);
-					game.setScreen(new GameScreen(game, music));
+					DataSong ds = reader.read(saveDirectory, savedFiles.get(selectedSong + scrolled));
+					game.setScreen(new GameScreen(game, ds));
 					break;				
 			}
 			

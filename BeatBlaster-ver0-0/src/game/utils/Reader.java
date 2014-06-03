@@ -15,7 +15,7 @@ public class Reader {
 			/**Initialisation des variables nécessaires à la création du DataSong*/
 			String pathSong = "";
 			double maxTimeSong = 0;
-			ArrayList<Double> beats = new ArrayList<Double>();
+			ArrayList<Float> beats = new ArrayList<Float>();
 			double[][] spectro = null;
 			
 			/** Lecture */
@@ -40,7 +40,7 @@ public class Reader {
 							line = scanner.nextLine();
 							String[] beatTab = line.split(" ");
 							for(int i =0; i<beatTab.length;i++){
-								beats.add(Double.parseDouble(beatTab[i]));
+								beats.add(Float.parseFloat(beatTab[i]));
 							}
 						}
 						else if(line.contains("---spectro---")){
