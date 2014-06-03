@@ -1,9 +1,5 @@
 package game.screens;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-
 import music.beatroot.BeatRoot;
 
 import game.controller.SelectionController;
@@ -30,9 +26,6 @@ public class SelectionScreen implements Screen, InputProcessor {
 	Music selectedMusic;
 	final String path = System.getProperty("user.dir");
 	String saveDirectory;
-	
-	HashMap<String, FileHandle> savedMusic = new HashMap<String, FileHandle>();
-	HashMap<String, String> savedMusicData = new HashMap<String, String>();
 	
 	/*
 	 * Constructeur
@@ -121,38 +114,6 @@ public class SelectionScreen implements Screen, InputProcessor {
 			controller.setSelectedButton(4);
 		}
 	}
-	
-	//Ajoute le fichier au dossier et charge la musique
-	private void loadMusic(String fileName) {
-		saveMusic(fileName);
-		FileHandle musicFile = new FileHandle(path + "/res/audio/menu/" + fileName);
-		selectedMusic = Gdx.audio.newMusic(musicFile);
-	}
-	
-	//Charge la musique (elle a déjà étée sauvegardée)
-	private void reloadMusic(String name) {
-		//TODO modifer le dossier
-		FileHandle musicFile = new FileHandle(path + "/res/audio/menu/" + name);
-		selectedMusic = Gdx.audio.newMusic(musicFile);
-	}
-	
-	//Enregistre la musique dans le dossier (avec le fichier traité)
-	private void saveMusic(String fileName) {
-		//TODO copier le ficher dans le bon dossier
-		File save = new File(saveDirectory + "\\" + fileName + ".DAT");
-		try {
-			if(save.createNewFile()) {
-				System.out.println("save created");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		//savedMusic.put(fileName, );
-		//TODO traiter le fichier
-		String musicData = "à faire";
-		savedMusicData.put(fileName, musicData);
-	}
-	
 	
 	
 	

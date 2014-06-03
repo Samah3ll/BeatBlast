@@ -171,7 +171,7 @@ public class ChooseScreen implements Screen, InputProcessor {
 				case (3) :
 					String songName = saveDirectory + "\\" + savedFiles.get(selectedSong + scrolled);
 					songName = songName.substring(0, songName.length() - 4);
-					songName += ".WAV";
+					//songName += ".WAV";
 					System.out.println("music path : " + songName);
 					Music music;
 					FileHandle musicFile = new FileHandle(songName);

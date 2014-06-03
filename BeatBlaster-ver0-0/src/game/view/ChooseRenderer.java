@@ -1,6 +1,7 @@
 package game.view;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import game.controller.ChooseController;
 
@@ -66,7 +67,14 @@ public class ChooseRenderer {
         } else {
         	lastEnd = 7;
         }
+        for(Iterator<String> it = savedFiles.iterator(); it.hasNext();) {
+        	String current = it.next();
+        	if(!current.contains(".dat")) {
+        		it.remove();;
+        	}
+        }
         for(int i = 0; i < 8; i++) {
+        	
         	printable.add(i, savedFiles.get(i));
         }
         
