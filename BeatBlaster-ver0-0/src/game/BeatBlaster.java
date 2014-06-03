@@ -21,9 +21,6 @@ public class BeatBlaster extends Game {
 	public void create() {
 		createSaveRepertory();
 		setScreen(new MenuScreen(this));
-		Reader reader = new Reader();
-		DataSong ds = reader.read(saveDirectory, "Delta Goodrem - You Will Only Break My Heart.mp3.WAV.dat");
-		System.out.println("blob");
 		//setScreen(new GameScreen(this));
 	}
 	
