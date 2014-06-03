@@ -1659,7 +1659,7 @@ public class BeatTrackDisplay
 		double newSpec = 0;
 		int a=0, b=0,c=0;
 		double[][] pseudoTinySpectro = new double[sizeT][nbLignes]; //matrice intermédiaire
-		double[][] tinySpectro = new double[beats.size()][nbLignes];
+		double[][] tinySpectro = new double[beats.size()+1][nbLignes];
 		
 		//création de tranches verticales
 		for (int i =0  ; i < sizeT; i++) {
@@ -1679,7 +1679,6 @@ public class BeatTrackDisplay
 		//fin
 		
 		//création de tranches horizontales
-		
 		for (int i =0  ; i < nbLignes; i++) {
 			
 			a=0; b=0;
@@ -1689,7 +1688,7 @@ public class BeatTrackDisplay
 			double myPreviousBeat = 0;
 			double myBeat = 0;
 			
-			while(a < beats.size()){
+			while(a < sizeT){
 				
 				myPreviousBeat = myBeat;
 				if(beatPtr.hasNext()){
@@ -1698,7 +1697,7 @@ public class BeatTrackDisplay
 					myBeat = selectedBeat.keyDown*100;
 				}
 				else
-					myBeat = beats.size();
+					myBeat = sizeT;
 				
 				newSpec = 0;
 				
@@ -1710,6 +1709,13 @@ public class BeatTrackDisplay
 				tinySpectro[b][i] = newSpec;
 				b++;
 			}					
+		}
+		
+		/**vérification */
+		for(int k =0;k<tinySpectro.length;k++){
+			for(int j =0;j<tinySpectro[0].length;j++)
+				System.out.print(Math.floor(tinySpectro[k][j]*100)/100 + " ");
+			System.out.print("\n");
 		}
 		return tinySpectro;
 	}//fin

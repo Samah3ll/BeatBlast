@@ -45,9 +45,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.ListIterator;
-
 import javax.swing.JOptionPane;
-
+import music.util.Writer;
 import music.util.Event;
 import music.util.EventList;
 
@@ -118,6 +117,8 @@ public class BeatRoot {
 
 	/** Flag indicating whether warning messages should be ignored or displayed */
 	protected static boolean ignoreWarnings = false;
+	
+	private Writer writer = new Writer();
 
 	/** Process command line arguments.
 	 * Arguments are: <I>[option]* [audioFile]</I>, where
@@ -153,101 +154,6 @@ public class BeatRoot {
 		textOutputFile = null;
 		beatsFile = null;
 		featureFile = null;
-//		for (int i=0; i < args.length; i++) {
-//			if ((args[i].length() == 2) && (args[i].charAt(0) == '-')) {
-//				switch (args[i].charAt(1)) {
-//				case 'A':
-//					useAnnotation = Integer.parseInt(args[++i]);
-//					System.out.println("case A : " + i);
-//					break;
-//				case 'a':
-//					beatsFile = args[++i];
-//					System.out.println("case a : " + i);
-//					break;
-//				case 'i':
-//					beatsIn = args[++i];
-//					System.out.println("case i : " + i);
-//					break;
-//				case 'b': batchMode = true;System.out.println("case b "); break;
-//				case 'q': silentFlag = true;System.out.println("case q "); break;
-//				case 'f':
-//					featureFile = args[++i];
-//					System.out.println("case f : " + i);
-//					break;
-//				case 'e':
-//					BeatTrackDisplay.allowedError = Double.parseDouble(args[++i]);
-//					BeatTrackDisplay.useRelativeError = false;
-//					System.out.println("case e : " + i);
-//					break;
-//				case 'E':
-//					BeatTrackDisplay.allowedError = Double.parseDouble(args[++i]);
-//					BeatTrackDisplay.useRelativeError = true;
-//					System.out.println("case E : " + i);
-//					break;
-//				case 'P':
-//					BeatTrackDisplay.usePScore = true;
-//					System.out.println("case P : " + i);
-//					break;
-//				case 'h':
-//					GUI.DEFAULT_HIGH_THRESHOLD = Double.parseDouble(args[++i]);
-//					System.out.println("case h : " + i);
-//					break;
-//				case 'l':
-//					GUI.DEFAULT_LOW_THRESHOLD = Double.parseDouble(args[++i]);
-//					System.out.println("case l : " + i);
-//					break;
-//				case 's':
-//					GUI.DEFAULT_SCALE_FACTOR = Double.parseDouble(args[++i]);
-//					System.out.println("case s : " + i);
-//					break;
-//				case 'p':
-//					playWithBeats = true;
-//					System.out.println("case p");
-//					break;
-//				case 'o':
-//					textOutputFile = args[++i];
-//					batchMode = true;
-//					System.out.println("case o : " + i);
-//					break;
-//				case 'O':
-//					onsetOnly = true;
-//					batchMode = true;
-//					System.out.println("case O");
-//					break;
-//				case 'm':
-//					argsFile = args[++i];
-//					batchMode = true;
-//					reader = null;
-//					System.out.println("case m : " + i);
-//					break;
-//				case 't':
-//					audioProcessor.hopTime = Double.parseDouble(args[++i]);
-//					System.out.println("case t : " + i);
-//					break;
-//				case 'T':
-//					audioProcessor.fftTime = Double.parseDouble(args[++i]);
-//					System.out.println("case T : " + i);
-//					break;
-//				case 'w':
-//					// audioProcessor.setLiveInput();
-//					System.out.println("case w : lol");
-//					break;
-//				case 'c':
-//					BeatTrackDisplay.centred = true;
-//					System.out.println("case c");
-//					break;
-//				default:
-//					warning("Illegal command line argument");
-//				}
-//			} else {
-//				if (audioIn != null)
-//					warning("Extra audio files ignored: " + args[i]);
-//				else if (new File(args[i]).exists())
-//					audioIn = args[i];
-//				else
-//					warning("Audio file not found: " + args[i]);
-//			}
-//		}
 	} // processArgs()
 
 	/** Constructor. Initialises the BeatRoot application,
@@ -283,19 +189,26 @@ public class BeatRoot {
 			}
 		}
 		
-		//avec visu
-		gui.setVisible(false);
+		/**avec visu*/
+		/*
+		gui.setVisible(true);
 		gui.loadAudioData();
 		gui.displayPanel.beatTrack();
 		gui.displayPanel.resizeSpectroForVisu(12);
 		gui.displayPanel.repaintImage();
-		System.out.println("Durée de la musique (en s) : " + gui.displayPanel.maximumTime);
-		/*
-		//pour le projet (pas de visu, création de fichiers
+		*/
+		
+		/** pour le projet (pas de visu, création de fichiers */
+		gui.setVisible(true);
 		gui.loadAudioData();
 		gui.displayPanel.beatTrack();
-		double spectroMatrice = gui.displayPanel.resizeSpectroForFile();
-		*/
+		gui.displayPanel.resizeSpectroForVisu(12);
+		gui.displayPanel.repaintImage();
+		double[][] spectroMatricelol = gui.displayPanel.spectro;
+		double[][] spectroMatrice = gui.displayPanel.resizeSpectroForFile(12);
+		writer.createSaveRepertory();
+		writer.write( audioProcessor.audioFileName, gui.displayPanel.maximumTime, gui.displayPanel.beatPtr, spectroMatrice);
+		
 	}  // constructor
 
 	/** Reads a line from the arguments file <code>argsFile</code>, and converts
