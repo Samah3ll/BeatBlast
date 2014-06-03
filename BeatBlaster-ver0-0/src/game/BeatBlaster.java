@@ -9,8 +9,6 @@ import com.badlogic.gdx.Game;
 import game.screens.ChooseScreen;
 import game.screens.GameScreen;
 import game.screens.MenuScreen;
-import game.utils.DataSong;
-import game.utils.Reader;
 
 public class BeatBlaster extends Game {	
 		

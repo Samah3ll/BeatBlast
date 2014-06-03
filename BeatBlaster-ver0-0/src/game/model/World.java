@@ -1,5 +1,6 @@
 package game.model;
 
+import game.utils.DataSong;
 import game.utils.LevelGenerator;
 
 import com.badlogic.gdx.math.Vector2;
@@ -32,11 +33,11 @@ public class World {
 		this.level = l;
 	}
 	
-	public World(/*inputData*/) {
+	public World(DataSong ds) {
 		runner = new Runner(new Vector2(7, 2));
 		//runner02 = new Runner02(new Vector2(7,1));
-		lg = new LevelGenerator(300);
-		level = lg.generateLevel(/*inputData*/);
+		lg = new LevelGenerator(ds);
+		level = lg.generateLevel();
 		//createDemoWorld();
 	}
 	

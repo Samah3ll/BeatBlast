@@ -32,7 +32,7 @@ public class GameScreen implements Screen, InputProcessor {
 	public GameScreen(Game game, Music selectedMusic) {
 		this.game = game;
 		this.selectedMusic = selectedMusic;
-		this.world = new World(/*inputData*/);
+		this.world = new World();
 		this.renderer = new WorldRenderer(world);
 		//controller = new RunnerController02(world);
 		this.controller = new RunnerController(world);
