@@ -75,7 +75,6 @@ public class SelectionRenderer {
 	public void render() {
 		spriteBatch.begin();
 			drawBackground();
-			drawMusicName();
 			if(SelectionController.isPlayButtonSelected()) {
 				drawButtonPlaySelected();
 			} else {
@@ -100,20 +99,7 @@ public class SelectionRenderer {
 		
 	}
 	
-	private void drawMusicName() {
-		TextButtonStyle style = new TextButtonStyle();
-		style.font = new BitmapFont();
-		style.fontColor = Color.RED;
-		TextButton b = new TextButton("Musique choisie : ", style);
-		b.translate(30 * ppuX, 10 * ppuY);
-		b.draw(spriteBatch, 1);
 		
-		//String name = 
-		TextButton b1 = new TextButton("ma musique",style);
-		b1.translate(47 * ppuX, 10 * ppuY);
-		b1.draw(spriteBatch, 1);
-	}
-	
 	private void drawBackground() {
 		spriteBatch.draw(background, 0, 0, CAMERA_WIDTH * ppuX, CAMERA_HEIGHT * ppuY);
 	}

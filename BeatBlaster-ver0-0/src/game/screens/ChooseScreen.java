@@ -1,8 +1,11 @@
 package game.screens;
 
+import java.util.ArrayList;
+
 import game.BeatBlaster;
 import game.controller.ChooseController;
 import game.controller.SelectionController.SelectionKeys;
+import game.utils.Reader;
 import game.view.ChooseRenderer;
 
 import com.badlogic.gdx.Game;
@@ -10,6 +13,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 
 public class ChooseScreen implements Screen, InputProcessor {
@@ -19,12 +24,17 @@ public class ChooseScreen implements Screen, InputProcessor {
 	
 	Game game;
 	
+	Reader reader = new Reader();
+	
 	final String path = System.getProperty("user.dir");
 	String saveDirectory;
+	ArrayList<String> savedFiles;
 	
 
     //La musique sélectionnée
     private int selectedSong = 0;
+    
+    private int scrolled = 0;
 
 	
 	/*
@@ -34,7 +44,8 @@ public class ChooseScreen implements Screen, InputProcessor {
 	public ChooseScreen(Game game) {
 		this.game = game;
 		saveDirectory = ((BeatBlaster) game).getSaveDirectory();
-		renderer = new ChooseRenderer(saveDirectory);
+		savedFiles = reader.getListFiles(saveDirectory);
+		renderer = new ChooseRenderer(savedFiles);
 		controller = new ChooseController();
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);	
@@ -158,8 +169,14 @@ public class ChooseScreen implements Screen, InputProcessor {
 					game.setScreen(new SelectionScreen(game));
 					break;
 				case (3) :
-					
-					//game.setScreen(new SelectionScreen(game));
+					String songName = saveDirectory + "\\" + savedFiles.get(selectedSong + scrolled);
+					songName = songName.substring(0, songName.length() - 4);
+					//songName += ".WAV";
+					System.out.println("music path : " + songName);
+					Music music;
+					FileHandle musicFile = new FileHandle(songName);
+					music = Gdx.audio.newMusic(musicFile);
+					game.setScreen(new GameScreen(game, music));
 					break;				
 			}
 			
@@ -274,11 +291,13 @@ public class ChooseScreen implements Screen, InputProcessor {
 		if(selectedSong + amount < 0) {
 			selectedSong = 0;
 			renderer.scrollSelection(-1);
+			scrolled--;
 			return true;
 		}
 		if(selectedSong + amount > 7) {
 			selectedSong = 7;
 			renderer.scrollSelection(1);
+			scrolled++;
 			return true;
 		}
 		if(selectedSong >= 0 || selectedSong < 7) {
