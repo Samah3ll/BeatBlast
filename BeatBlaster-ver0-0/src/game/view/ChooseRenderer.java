@@ -1,10 +1,8 @@
 package game.view;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import game.controller.ChooseController;
-import game.utils.Reader;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -38,11 +36,8 @@ public class ChooseRenderer {
     private int height;
     private float ppuX;
     private float ppuY;
-    
-    private Reader reader = new Reader();
-    
+        
     //Musiques sauvegardées
-    private String saveDirectory;
     private ArrayList<String> savedFiles;
     
     //Index de début et de fin des musiques à afficher dans la liste des musiques sauvegardées
@@ -58,12 +53,11 @@ public class ChooseRenderer {
      */
     
     
-    public ChooseRenderer(String save) {
+    public ChooseRenderer(ArrayList<String> savedFiles) {
     	this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
 		this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
 		this.cam.update();
-		this.saveDirectory = save;
-		savedFiles = reader.getListFiles(save);
+		this.savedFiles = savedFiles;
 		spriteBatch = new SpriteBatch();
         loadTextures();
         lastStart = 0;
