@@ -136,22 +136,22 @@ public class SelectionScreen implements Screen, InputProcessor {
 		selectedMusic = Gdx.audio.newMusic(musicFile);
 	}
 	
-//	//Enregistre la musique dans le dossier (avec le fichier traité)
-//	private void saveMusic(String fileName) {
-//		//TODO copier le ficher dans le bon dossier
-//		File save = new File(saveDirectory + "\\" + fileName + ".DAT");
-//		try {
-//			if(save.createNewFile()) {
-//				System.out.println("save created");
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		//savedMusic.put(fileName, );
-//		//TODO traiter le fichier
-//		String musicData = "à faire";
-//		savedMusicData.put(fileName, musicData);
-//	}
+	//Enregistre la musique dans le dossier (avec le fichier traité)
+	private void saveMusic(String fileName) {
+		//TODO copier le ficher dans le bon dossier
+		File save = new File(saveDirectory + "\\" + fileName + ".DAT");
+		try {
+			if(save.createNewFile()) {
+				System.out.println("save created");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//savedMusic.put(fileName, );
+		//TODO traiter le fichier
+		String musicData = "à faire";
+		savedMusicData.put(fileName, musicData);
+	}
 	
 	
 	
