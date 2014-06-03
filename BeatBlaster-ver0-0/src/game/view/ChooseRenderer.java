@@ -41,8 +41,17 @@ public class ChooseRenderer {
     
     private Reader reader = new Reader();
     
+    //Musiques sauvegardées
     private String saveDirectory;
     private ArrayList<String> savedFiles;
+    
+    //Index de début et de fin des musiques à afficher dans la liste des musiques sauvegardées
+    private int lastStart;
+    private int lastEnd;
+    
+    //Liste des musiques à afficher
+    private ArrayList<String> printable = new ArrayList<String>(8);
+    
     
     /*
      * Constructeur
@@ -57,6 +66,36 @@ public class ChooseRenderer {
 		savedFiles = reader.getListFiles(save);
 		spriteBatch = new SpriteBatch();
         loadTextures();
+        lastStart = 0;
+        if(savedFiles.size() <= 7) {
+        	lastEnd = savedFiles.size();
+        } else {
+        	lastEnd = 7;
+        }
+        for(int i = 0; i < 8; i++) {
+        	printable.add(i, savedFiles.get(i));
+        }
+        
+    }
+    
+    /*
+     * Accesseur
+     */	
+    
+    public boolean isLastSong(int num) {
+    	if(num > savedFiles.size() - 1) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
+    public boolean isFirstSong(int num) {
+    	if(num == lastStart) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 		
     /*
@@ -89,7 +128,7 @@ public class ChooseRenderer {
 				drawOkButton();
 			}
 			drawTextButton();
-			//highlightText(20, 80);
+			printPrintable();
 		spriteBatch.end();
 		
 	}
@@ -101,37 +140,68 @@ public class ChooseRenderer {
 		TextButton b = new TextButton("Select your music : ", style);
 		b.translate(20f * ppuX, 80f * ppuY);
 		b.draw(spriteBatch, 1);
-		
+		/*
 		float f = 0;
-		for(Iterator<String> it = savedFiles.iterator(); it.hasNext();) {			
+		for(int i = 0; i < 8; i++) {			
 			f += 5f;
-			String fileName = it.next();
+			String fileName = savedFiles.get(i);
 			fileName = fileName.substring(0, fileName.length() - 4);
 			TextButton b1 = new TextButton(fileName, style);
 			b1.translate(20f * ppuX, (80f - f) * ppuY);
 			b1.draw(spriteBatch, 1);
 			
-			if(f == 50f) {
-				break;
-			}
 		}
-	}
-	
-	private void highlightText(int x, int y) {
-		spriteBatch.draw(highlight, (x + 11) * ppuY, (y - 4) * ppuY, 20 * ppuX, 3 * ppuY);
+		*/
 	}
 	
 	public void higlightButtonN(int num) {
-		//System.out.println("musique sélectionnée : " + num);		
+		//System.out.println("musique sélectionnée : " + num);	
+		
+		if(num > savedFiles.size() - 1) {
+			num = savedFiles.size() - 1;
+		}
 			
 		int x = 20;
 		int y = 80 - 5 * num;
 		
 		spriteBatch.begin();
-		spriteBatch.draw(highlight, (x + 11) * ppuY, (y - 4) * ppuY, 20 * ppuX, 3 * ppuY);
+		spriteBatch.draw(highlight, (x + 11) * ppuY, (y - 4.5f) * ppuY, 20 * ppuX, 3 * ppuY);
 		spriteBatch.end();
 	}
-
+	
+	public void printPrintable() {
+		TextButtonStyle style = new TextButtonStyle();
+		style.font = new BitmapFont();
+		style.fontColor = Color.RED;
+		
+		float f = 0;
+		for(int i = 0; i < 8; i++) {			
+			f += 5f;
+			String fileName = printable.get(i);
+			fileName = fileName.substring(0, fileName.length() - 4);
+			TextButton b1 = new TextButton(fileName, style);
+			b1.translate(20f * ppuX, (80f - f) * ppuY);
+			b1.draw(spriteBatch, 1);
+			
+		}
+	}
+	
+	public void scrollSelection(int dx) {
+		if(lastStart + dx < 0 && dx < 0) {
+			return;
+		}
+		if(lastEnd > savedFiles.size() - 2 && dx > 0) {
+			return;
+		}
+		int pos = 0;
+		for(int i = lastStart + dx; i <= lastEnd + dx; i++) {
+			printable.set(pos, savedFiles.get(i));
+			pos++;
+		}
+		lastStart += dx;
+		lastEnd += dx;
+	}
+	
 	private void drawBackground() {
 		spriteBatch.draw(background, 0, 0, CAMERA_WIDTH * ppuX, CAMERA_HEIGHT * ppuY);
 		

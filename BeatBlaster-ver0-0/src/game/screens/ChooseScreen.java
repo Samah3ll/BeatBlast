@@ -21,6 +21,10 @@ public class ChooseScreen implements Screen, InputProcessor {
 	
 	final String path = System.getProperty("user.dir");
 	String saveDirectory;
+	
+
+    //La musique sélectionnée
+    private int selectedSong = 0;
 
 	
 	/*
@@ -37,10 +41,26 @@ public class ChooseScreen implements Screen, InputProcessor {
 		
 	}
 	
+	/*
+	 * Accesseurs
+	 */	
+	
+	public int getSelectedSong() {
+		return selectedSong;
+	}
+	
 	
 	/*
 	 * Méthodes
 	 */	
+	
+	public void nextSong() {
+		selectedSong++;
+	}
+	
+	public void previousSong() {
+		selectedSong--;
+	}
 	
 	//Selection par le clavier
 	private void keyboardSelection() {
@@ -78,13 +98,24 @@ public class ChooseScreen implements Screen, InputProcessor {
 			if(controller.getKeys().get(SelectionKeys.RIGHT)) {
 				controller.setSelectedButton(1);		//Ok button is selected				
 			} else if(controller.getKeys().get(SelectionKeys.UP)) {
-				controller.selectPreviousSong();
-				operateSelection();
+				if(selectedSong >= 0) {
+					previousSong();
+					if(renderer.isFirstSong(selectedSong)) {
+						renderer.scrollSelection(-1);
+					}
+				}
+				
 			} else if(controller.getKeys().get(SelectionKeys.LEFT)) {
 				controller.setSelectedButton(1);		//Ok button is selected
 			} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
-				controller.selectNextSong();
-				operateSelection();
+				if(!renderer.isLastSong(selectedSong)) {
+					nextSong();
+					if(selectedSong > 7) {
+						previousSong();
+						renderer.scrollSelection(1);
+					}
+				}				
+				
 			}
 		}
 	}
@@ -103,15 +134,7 @@ public class ChooseScreen implements Screen, InputProcessor {
 		}
 	}
 	
-	private void operateSelection() {
-		int num = controller.getSelectedMusic();
-		if(num > 7) {
-			num = 7;
-		}
-		renderer.higlightButtonN(num);
 		
-	}
-	
 	
 	/*
 	 * Implements Screen
@@ -120,11 +143,11 @@ public class ChooseScreen implements Screen, InputProcessor {
 	@Override
 	public void render(float delta) {
 		renderer.render();
+		renderer.higlightButtonN(selectedSong);
 		
 		keyboardSelection();
 		mouseSelection();		
 		controller.checkSelection();
-		operateSelection();
 		
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
 			switch(controller.getSelectedButton()) {
@@ -248,8 +271,22 @@ public class ChooseScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean scrolled(int amount) {
-		controller.scrolled(amount);
-		return false;
+		if(selectedSong + amount < 0) {
+			selectedSong = 0;
+			renderer.scrollSelection(-1);
+			return true;
+		}
+		if(selectedSong + amount > 7) {
+			selectedSong = 7;
+			renderer.scrollSelection(1);
+			return true;
+		}
+		if(selectedSong >= 0 || selectedSong < 7) {
+			selectedSong += amount;
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	

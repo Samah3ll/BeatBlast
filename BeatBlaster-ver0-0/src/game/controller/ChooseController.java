@@ -15,9 +15,6 @@ public class ChooseController {
 	
 	private final long WAITTIME = 300;
 	
-	//Désigne le numéro dans la liste de la musique sélectionnée.
-	private int selectedMusic = 0;
-	
 	//Désigne le boutton selectionné : 0 = pas de sélection; 1 = ok; 2 = back; 3 = la liste des musiques.
 	private int selectedButton = 0;
 	
@@ -50,15 +47,7 @@ public class ChooseController {
 	public void setSelectedButton(int s) {
 		this.selectedButton = s;
 	}
-	
-	public int getSelectedMusic() {
-		return selectedMusic;
-	}
-	
-	public void setSelectedMusic(int s) {
-		this.selectedMusic = s;
-	}
-	
+		
 	static public boolean isOkButtonSelected() {
 		return okButtonSelected;
 	}
@@ -101,18 +90,6 @@ public class ChooseController {
 	 */	
 	
 	
-	public void selectNextSong() {
-		selectedMusic ++;
-	}
-	
-	public void selectPreviousSong() {
-		if(selectedMusic - 1 < 0) {
-			selectedMusic = 0;
-		} else {
-			selectedMusic --;
-		}	
-		
-	}
 
 	public void upPressed() {
 		Long start = System.currentTimeMillis();
