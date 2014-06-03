@@ -10,7 +10,6 @@ import game.model.Level;
 public class LevelGenerator {
 	
 	private Level level;
-	private ArrayList<Integer> inputData = new ArrayList<Integer>();
 	DataSong dataSong;
 	
 	public LevelGenerator(DataSong ds) {
@@ -27,6 +26,7 @@ public class LevelGenerator {
 			BasicBlock b1 = new BasicBlock(i, level.getHeight() - 1);
 			level.addBlock(b1);
 		}
+
 		//cotés
 		for(int i = 0; i < level.getHeight(); i++) {
 			BasicBlock b = new BasicBlock(0, i);
@@ -36,19 +36,17 @@ public class LevelGenerator {
 		}
 	}
 	
-	public void generateSpectroBlocks(DataSong ds) {
+	public void generateBeatBlocks(DataSong ds) {
 		for(int i=0;i<ds.getBeats().size(); i++){
 			BasicBlock b = new BasicBlock(i, 1);
 			level.addBlock(b);
 		}
-		
 	}
-
-	public void generateBeatBlocks(DataSong ds) {
-		// TODO Auto-generated method stub
-		
+	
+	public void generateSpectroBlocks(DataSong ds) {
+		//TODO
 	}
-
+	
 	public Level generateLevel() {
 		generateBounds();
 		generateBeatBlocks(dataSong);
