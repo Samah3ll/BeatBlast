@@ -41,11 +41,15 @@ public class WorldRenderer {
     //Runner textures
     private TextureRegion runnerIdleLeft;
     private TextureRegion runnerIdleRight;
-    private TextureRegion runnerFrame;
+    private TextureRegion runnerLeft01;
+    private TextureRegion runnerLeft02;
+    private TextureRegion runnerLeft03;
+    private TextureRegion runnerRight01;
+    private TextureRegion runnerRight02;
+    private TextureRegion runnerRight03;
     private TextureRegion runnerJumpLeft;
-    private TextureRegion runnerFallLeft;
     private TextureRegion runnerJumpRight;
-    private TextureRegion runnerFallRight;
+    private TextureRegion runnerFrame;
     
     //Runner Animations
     private Animation walkLeftAnimation;
@@ -53,7 +57,6 @@ public class WorldRenderer {
     
 	public WorldRenderer(World w) {
 		this.world = w;
-		//this.runner =  world.getRunner();
 		this.runner = world.getRunner();
 		this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
 		this.cam.zoom = 72;
@@ -93,30 +96,25 @@ public class WorldRenderer {
 	private void loadTextures() {
 		final String path = System.getProperty("user.dir");
 		TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(path + "/res/img/game/textures.pack"));
-		runnerIdleLeft = atlas.findRegion("Runner01");
-		runnerIdleRight = new TextureRegion(runnerIdleLeft);
-		runnerIdleRight.flip(true, false);
 		blockTexture = atlas.findRegion("Block");
+		runnerIdleLeft = atlas.findRegion("runningRight01");
+		runnerIdleRight = atlas.findRegion("runningLeft01");
 		TextureRegion[] walkLeftFrames = new TextureRegion[5];
+		TextureRegion[] walkRightFrames = new TextureRegion[5];
 		for (int i = 0; i < 5; i++) {
-			walkLeftFrames[i] = atlas.findRegion("Runner0" + (i + 2));
+			if(i < 3) {
+				walkLeftFrames[i] = atlas.findRegion("runningLeft0" + (i + 1));
+				walkRightFrames[i] = atlas.findRegion("runningRight0" + (i + 1));
+			} else {
+				walkLeftFrames[i] = atlas.findRegion("runningLeft0" + (i - 2));
+				walkRightFrames[i] = atlas.findRegion("runningRight0" + (i - 2));
+			}
 		}
 		walkLeftAnimation = new Animation(RUNNING_FRAME_DURATION, walkLeftFrames);
-
-		TextureRegion[] walkRightFrames = new TextureRegion[5];
-
-		for (int i = 0; i < 5; i++) {
-			walkRightFrames[i] = new TextureRegion(walkLeftFrames[i]);
-			walkRightFrames[i].flip(true, false);
-		}
 		walkRightAnimation = new Animation(RUNNING_FRAME_DURATION, walkRightFrames);
 		
-		runnerJumpLeft = atlas.findRegion("Runner01");
-		runnerJumpRight = new TextureRegion(runnerJumpLeft);
-		runnerJumpRight.flip(true, false);
-		runnerFallLeft = atlas.findRegion("Runner04");
-		runnerFallRight = new TextureRegion(runnerFallLeft);
-		runnerFallRight.flip(true, false);
+		runnerJumpLeft = atlas.findRegion("runningLeft01");
+		runnerJumpRight = atlas.findRegion("runningRight01");
 	}
 
 	
@@ -138,16 +136,17 @@ public class WorldRenderer {
 	}
 	
 	 private void drawRunner() {
-			runnerFrame = runner.isFacingLeft() ? runnerIdleLeft : runnerIdleRight;
-			//TODO:changer le State02.RUNNING en State.WALKING si on passe au runner
+			runnerFrame = runner.isFacingLeft() ? runnerIdleLeft : runnerIdleLeft ;
 			if(runner.getState().equals(State.WALKING)) {
 				runnerFrame = runner.isFacingLeft() ? walkLeftAnimation.getKeyFrame(runner.getStateTime(), true) : walkRightAnimation.getKeyFrame(runner.getStateTime(), true);
 			} else if (runner.getState().equals(State.JUMPING)) {
 				if (runner.getVelocity().y > 0) {
 					runnerFrame = runner.isFacingLeft() ? runnerJumpLeft : runnerJumpRight;
-				} else {
-					runnerFrame = runner.isFacingLeft() ? runnerFallLeft : runnerFallRight;
 				}
+			}
+			if(runnerFrame == null) {
+				System.err.println("pas de frame : " + runner.getState());
+				return;
 			}
 			spriteBatch.draw(runnerFrame, runner.getPosition().x * ppuX, runner.getPosition().y * ppuY, Runner.getSize() * ppuX, Runner.getSize() * ppuY);
 		}
@@ -209,10 +208,6 @@ public class WorldRenderer {
 	
 	public void dispose() {
 		//spriteBatch.dispose();
-		runnerIdleLeft.getTexture().dispose();
-		runnerIdleRight.getTexture().dispose();
-		runnerFallLeft.getTexture().dispose();
-		runnerFallRight.getTexture().dispose();
 		runnerFrame.getTexture().dispose();
 		runnerJumpLeft.getTexture().dispose();
 		runnerJumpRight.getTexture().dispose();

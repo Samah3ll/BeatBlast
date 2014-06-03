@@ -5,50 +5,106 @@ filter: Nearest,Nearest
 repeat: none
 Block
   rotate: false
-  xy: 2, 4
+  xy: 522, 10
   size: 49, 50
   orig: 49, 50
   offset: 0, 0
   index: -1
 Runner01
   rotate: false
-  xy: 53, 29
+  xy: 573, 35
   size: 20, 25
   orig: 20, 25
   offset: 0, 0
   index: -1
 Runner02
   rotate: false
-  xy: 75, 29
+  xy: 595, 35
   size: 20, 25
   orig: 20, 25
   offset: 0, 0
   index: -1
 Runner03
   rotate: false
-  xy: 97, 29
+  xy: 617, 35
   size: 20, 25
   orig: 20, 25
   offset: 0, 0
   index: -1
 Runner04
   rotate: false
-  xy: 53, 2
+  xy: 639, 35
   size: 20, 25
   orig: 20, 25
   offset: 0, 0
   index: -1
 Runner05
   rotate: false
-  xy: 75, 2
+  xy: 661, 35
   size: 20, 25
   orig: 20, 25
   offset: 0, 0
   index: -1
 Runner06
   rotate: false
-  xy: 97, 2
+  xy: 683, 35
   size: 20, 25
   orig: 20, 25
+  offset: 0, 0
+  index: -1
+idleLeft
+  rotate: false
+  xy: 2, 2
+  size: 63, 58
+  orig: 63, 58
+  offset: 0, 0
+  index: -1
+idleRight
+  rotate: false
+  xy: 67, 2
+  size: 63, 58
+  orig: 63, 58
+  offset: 0, 0
+  index: -1
+runningLeft01
+  rotate: false
+  xy: 132, 2
+  size: 63, 58
+  orig: 63, 58
+  offset: 0, 0
+  index: -1
+runningLeft02
+  rotate: false
+  xy: 197, 2
+  size: 63, 58
+  orig: 63, 58
+  offset: 0, 0
+  index: -1
+runningLeft03
+  rotate: false
+  xy: 262, 2
+  size: 63, 58
+  orig: 63, 58
+  offset: 0, 0
+  index: -1
+runningRight01
+  rotate: false
+  xy: 327, 2
+  size: 63, 58
+  orig: 63, 58
+  offset: 0, 0
+  index: -1
+runningRight02
+  rotate: false
+  xy: 392, 2
+  size: 63, 58
+  orig: 63, 58
+  offset: 0, 0
+  index: -1
+runningRight03
+  rotate: false
+  xy: 457, 2
+  size: 63, 58
+  orig: 63, 58
   offset: 0, 0
   index: -1

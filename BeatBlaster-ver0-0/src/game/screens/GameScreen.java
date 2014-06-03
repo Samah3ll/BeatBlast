@@ -22,7 +22,6 @@ public class GameScreen implements Screen, InputProcessor {
 	private World world;
 	private WorldRenderer renderer;
 	private RunnerController controller;
-	//private RunnerController02 controller;
 	
 	Game game;
 	
@@ -34,7 +33,6 @@ public class GameScreen implements Screen, InputProcessor {
 		this.selectedMusic = selectedMusic;
 		this.world = new World();
 		this.renderer = new WorldRenderer(world);
-		//controller = new RunnerController02(world);
 		this.controller = new RunnerController(world);
 		this.selectedMusic.play();
 	}
@@ -64,12 +62,7 @@ public class GameScreen implements Screen, InputProcessor {
 	public void show() {
 		
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
-		//world = new World(/*inputData*/);
-		//renderer = new WorldRenderer(world);
-		//controller = new RunnerController(world);
-		
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);		
 		Gdx.input.setInputProcessor(this);
 
 	}
@@ -88,13 +81,6 @@ public class GameScreen implements Screen, InputProcessor {
 		world.getRunner().getAcceleration().y = 0;
 		world.getRunner().getVelocity().x = 0;
 		world.getRunner().getVelocity().y = 0;
-		
-		/*
-		world.getRunner02().getAcceleration().x = 0;
-		world.getRunner02().getAcceleration().y = 0;
-		world.getRunner02().getVelocity().x = 0;
-		world.getRunner02().getVelocity().y = 0;
-		*/
 
 	}
 
