@@ -9,6 +9,8 @@ import com.badlogic.gdx.Game;
 import game.screens.ChooseScreen;
 import game.screens.GameScreen;
 import game.screens.MenuScreen;
+import game.utils.DataSong;
+import game.utils.Reader;
 
 public class BeatBlaster extends Game {	
 		
@@ -19,6 +21,9 @@ public class BeatBlaster extends Game {
 	public void create() {
 		createSaveRepertory();
 		setScreen(new MenuScreen(this));
+		Reader reader = new Reader();
+		DataSong ds = reader.read(saveDirectory, "Delta Goodrem - You Will Only Break My Heart.mp3.WAV.dat");
+		System.out.println("blob");
 		//setScreen(new GameScreen(this));
 	}
 	

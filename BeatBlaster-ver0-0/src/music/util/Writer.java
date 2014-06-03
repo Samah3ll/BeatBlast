@@ -45,9 +45,9 @@ public class Writer {
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			
 			//on écrit dans le BufferedWriter qui sert de tampon(stream)
-			bufferedWriter.write(pathFile);
+			bufferedWriter.write("pathSong " + pathFile);
 			bufferedWriter.write("\n");
-			bufferedWriter.write("maxTimeSong " + songTime);
+			bufferedWriter.write("maxTimeSong " + Math.floor(songTime*100)/100);
 			
 			bufferedWriter.write("\n ---beats--- \n");
 			/**on va au début de l'eventlist*/
@@ -60,7 +60,7 @@ public class Writer {
 			}
 			
 			bufferedWriter.write("\n ---spectro--- \n");
-			//System.out.println(spectro.length + " " + spectro[0].length);
+			bufferedWriter.write(spectro.length + " " + spectro[0].length +"\n");
 			for(int i =0;i<spectro.length;i++){
 				for(int j =0;j<spectro[0].length;j++)
 					bufferedWriter.write(Math.floor(spectro[i][j]*100)/100 + " ");
