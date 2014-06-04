@@ -49,6 +49,11 @@ public abstract class Plateform {
 		}*/
 	}
 	
+	public Plateform(float x, float y, int size) {
+		this.position = new Vector2(x,y);
+		this.size = size;
+	}
+	
 	/**
 	 * 
 	 * @return la position de la plateforme (position du block en bas à gauche) en un Vector2.

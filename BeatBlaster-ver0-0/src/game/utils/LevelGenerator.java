@@ -1,6 +1,7 @@
 package game.utils;
 
 import game.model.BasicBlock;
+import game.model.BasicPlateform;
 import game.model.Level;
 
 public class LevelGenerator {
@@ -40,12 +41,17 @@ public class LevelGenerator {
 	}
 	
 	public void generateSpectroBlocks(DataSong ds) {
-		//TODO
+		for(int i = 0; i < ds.getBeats().size(); i++){
+			for(int j =0; j<ds.getSpectro().length;j++){
+				BasicPlateform p = new BasicPlateform(ds.getBeats().get(i),ds.bestSpectro(j), (int)(ds.getBeats().get(i+1)-ds.getBeats().get(i))+1);
+				level.addPlateform(p);
+			}
+		}
 	}
 	
 	public Level generateLevel() {
 		generateBounds();
-		generateBeatBlocks(dataSong);
+		//generateBeatBlocks(dataSong);
 		generateSpectroBlocks(dataSong);
 		return level;
 	}

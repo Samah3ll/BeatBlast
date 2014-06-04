@@ -19,6 +19,10 @@ public class BasicPlateform extends Plateform {
 		super(pos, size);
 		
 	}
+
+	public BasicPlateform(float f, float g, int size) {
+		super(f, g, size);
+	}
 	
 	
 
