@@ -20,7 +20,7 @@ public class SelectionController {
 	static boolean backButtonSelected = false;
 	static boolean chooseButtonSelected = false;
 	
-	//Désigne le boutton selectionné : 0 = pas de sélection; 1 = select; 2 = choose; 3 = play; 4 = back.
+	//Désigne le boutton selectionné : 0 = pas de sélection; 1 = select; 2 = choose; 3 = back.
 	private int selectedButton = 0;
 
 	

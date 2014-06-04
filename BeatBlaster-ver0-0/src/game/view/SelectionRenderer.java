@@ -2,14 +2,10 @@ package game.view;
 
 import game.controller.SelectionController;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 public class SelectionRenderer {
 	
@@ -75,11 +71,13 @@ public class SelectionRenderer {
 	public void render() {
 		spriteBatch.begin();
 			drawBackground();
+			/*
 			if(SelectionController.isPlayButtonSelected()) {
 				drawButtonPlaySelected();
 			} else {
 				drawButtonPlay();
 			}
+			*/
 			if(SelectionController.isBackButtonSelected()) {
 				drawButtonBackSelected();
 			} else {
@@ -103,7 +101,7 @@ public class SelectionRenderer {
 	private void drawBackground() {
 		spriteBatch.draw(background, 0, 0, CAMERA_WIDTH * ppuX, CAMERA_HEIGHT * ppuY);
 	}
-	
+	/*
 	private void drawButtonPlay() {
 		spriteBatch.draw(buttonPlay, 20 * ppuX, 10 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
@@ -111,7 +109,7 @@ public class SelectionRenderer {
 	private void drawButtonPlaySelected() {
 		spriteBatch.draw(buttonPlaySelected, 20 * ppuX, 10 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
-	
+	*/
 	private void drawButtonSelect() {
 		spriteBatch.draw(buttonSelect, 20 * ppuX, 70 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
@@ -148,8 +146,8 @@ public class SelectionRenderer {
 		background.getTexture().dispose();
 		buttonSelectSelected.getTexture().dispose();
 		buttonSelect.getTexture().dispose();
-		buttonPlaySelected.getTexture().dispose();
-		buttonPlay.getTexture().dispose();
+		//buttonPlaySelected.getTexture().dispose();
+		//buttonPlay.getTexture().dispose();
 		buttonBackSelected.getTexture().dispose();
 		buttonBack.getTexture().dispose();
 		

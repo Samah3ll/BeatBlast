@@ -41,12 +41,6 @@ public class WorldRenderer {
     //Runner textures
     private TextureRegion runnerIdleLeft;
     private TextureRegion runnerIdleRight;
-    private TextureRegion runnerLeft01;
-    private TextureRegion runnerLeft02;
-    private TextureRegion runnerLeft03;
-    private TextureRegion runnerRight01;
-    private TextureRegion runnerRight02;
-    private TextureRegion runnerRight03;
     private TextureRegion runnerJumpLeft;
     private TextureRegion runnerJumpRight;
     private TextureRegion runnerFrame;
@@ -74,7 +68,7 @@ public class WorldRenderer {
 		 cam.update();
 		 cam.apply(gl);
 	    spriteBatch.setProjectionMatrix(cam.combined);
-		spriteBatch.begin();		 
+		spriteBatch.begin();
         	drawBlocks();
         	drawplateforms();
         	drawRunner();
@@ -97,26 +91,24 @@ public class WorldRenderer {
 		final String path = System.getProperty("user.dir");
 		TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(path + "/res/img/game/textures.pack"));
 		blockTexture = atlas.findRegion("Block");
-		runnerIdleLeft = atlas.findRegion("runningRight01");
-		runnerIdleRight = atlas.findRegion("runningLeft01");
+		runnerIdleLeft = atlas.findRegion("Runner04");
+		runnerIdleRight = runnerIdleLeft;
+		runnerIdleRight.flip(true, false);
 		TextureRegion[] walkLeftFrames = new TextureRegion[5];
 		TextureRegion[] walkRightFrames = new TextureRegion[5];
-		for (int i = 0; i < 5; i++) {
-			if(i < 3) {
-				walkLeftFrames[i] = atlas.findRegion("runningLeft0" + (i + 1));
-				walkRightFrames[i] = atlas.findRegion("runningRight0" + (i + 1));
-			} else {
-				walkLeftFrames[i] = atlas.findRegion("runningLeft0" + (i - 2));
-				walkRightFrames[i] = atlas.findRegion("runningRight0" + (i - 2));
-			}
+		for (int i = 0; i < 5; i++) {			
+			walkLeftFrames[i] = atlas.findRegion("Runnert0" + (i + 1));
+			walkRightFrames[i] = atlas.findRegion("Runner0" + (i + 1));
+			walkRightFrames[i].flip(true, false);
+			
 		}
 		walkLeftAnimation = new Animation(RUNNING_FRAME_DURATION, walkLeftFrames);
 		walkRightAnimation = new Animation(RUNNING_FRAME_DURATION, walkRightFrames);
 		
-		runnerJumpLeft = atlas.findRegion("runningLeft01");
-		runnerJumpRight = atlas.findRegion("runningRight01");
+		runnerJumpLeft = atlas.findRegion("Runner04");
+		runnerJumpRight = runnerJumpLeft;
+		runnerJumpRight.flip(true, false);
 	}
-
 	
 	private void drawBlocks() {
 		for (Block block : world.getLevel().getBlocks()) {
@@ -141,7 +133,7 @@ public class WorldRenderer {
 				runnerFrame = runner.isFacingLeft() ? walkLeftAnimation.getKeyFrame(runner.getStateTime(), true) : walkRightAnimation.getKeyFrame(runner.getStateTime(), true);
 			} else if (runner.getState().equals(State.JUMPING)) {
 				if (runner.getVelocity().y > 0) {
-					runnerFrame = runner.isFacingLeft() ? runnerJumpLeft : runnerJumpRight;
+					runnerFrame = runnerJumpRight;
 				}
 			}
 			if(runnerFrame == null) {
