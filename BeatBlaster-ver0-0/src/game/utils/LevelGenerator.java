@@ -1,9 +1,5 @@
 package game.utils;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
-
 import game.model.BasicBlock;
 import game.model.Level;
 

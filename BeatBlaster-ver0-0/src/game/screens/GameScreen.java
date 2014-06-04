@@ -9,6 +9,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 
+import game.BeatBlaster;
 import game.controller.RunnerController;
 import game.model.World;
 import game.utils.DataSong;
@@ -29,13 +30,15 @@ public class GameScreen implements Screen, InputProcessor {
 	
 	Music selectedMusic;
 	
+	//String saveDirectory;
 	
-	public GameScreen(Game game, DataSong ds ) {
+	
+	public GameScreen(Game game, DataSong ds, Music selectedMusic) {
 		this.game = game;
-		//FileHandle musicFile = new FileHandle(ds.getPathSong());
-		FileHandle musicFile = new FileHandle("C:\\Users\\SamaHell\\Documents\\GitHub\\BeatBlast\\save\\03 Trojans.m4a.WAV");
-		Music music = Gdx.audio.newMusic(musicFile);
-		this.selectedMusic = music;
+		//saveDirectory = ((BeatBlaster) game).getSaveDirectory();
+		//FileHandle musicFile = new FileHandle("C:\\Users\\SamaHell\\Documents\\GitHub\\BeatBlast\\save\\03 Trojans.m4a.WAV");
+		//Music music = Gdx.audio.newMusic(musicFile);
+		this.selectedMusic = selectedMusic;
 		this.world = new World(ds);
 		this.renderer = new WorldRenderer(world);
 		this.controller = new RunnerController(world);

@@ -146,8 +146,11 @@ public class SelectionScreen implements Screen, InputProcessor {
 					game.setScreen(new ChooseScreen(game));
 					break;
 				case (3) :
-					DataSong ds = reader.read(saveDirectory, path + "/res/audio/menu/Korobeinki.mp3");
-					game.setScreen(new GameScreen(game, ds));
+					DataSong ds = reader.read(saveDirectory,"/res/audio/menu/Korobeinki.mp3");
+					String musicName = path + "/res/audio/menu/Korobeinki.mp3";
+					FileHandle musicFile = new FileHandle(musicName);
+					Music music = Gdx.audio.newMusic(musicFile);
+					game.setScreen(new GameScreen(game, ds, music));
 					break;
 				case (4) : 
 					game.setScreen(new MenuScreen(game));
