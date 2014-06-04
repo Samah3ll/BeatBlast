@@ -15,7 +15,6 @@ public class SelectionController {
 	
 	static boolean mouseIsPressed = false;
 	
-	static boolean playButtonSelected = false;
 	static boolean selectButtonSelected = false;
 	static boolean backButtonSelected = false;
 	static boolean chooseButtonSelected = false;
@@ -46,14 +45,6 @@ public class SelectionController {
 	
 	public boolean getMouseState() {
 		return mouseIsPressed;
-	}
-	
-	static public boolean isPlayButtonSelected() {
-		return playButtonSelected;
-	}
-	
-	public void setPlayButtonSelected(boolean b) {
-		SelectionController.playButtonSelected = b;
 	}
 	
 	static public boolean isBackButtonSelected() {
@@ -155,32 +146,22 @@ public class SelectionController {
 		switch (selectedButton) {
 			case 1 :
 				selectButtonSelected = true;
-				chooseButtonSelected = false;
-				playButtonSelected = false;				
+				chooseButtonSelected = false;			
 				backButtonSelected = false;
 				break;
 			case 2 :
 				selectButtonSelected = false;
-				chooseButtonSelected = true;
-				playButtonSelected = false;				
+				chooseButtonSelected = true;			
 				backButtonSelected = false;
 				break;
 			case 3 :
 				selectButtonSelected = false;
-				chooseButtonSelected = false;
-				playButtonSelected = true;				
-				backButtonSelected = false;
-				break;
-			case 4 :
-				selectButtonSelected = false;
-				chooseButtonSelected = false;
-				playButtonSelected = false;				
+				chooseButtonSelected = false;				
 				backButtonSelected = true;
 				break;
 			default :
 				selectButtonSelected = false;
-				chooseButtonSelected = false;
-				playButtonSelected = false;				
+				chooseButtonSelected = false;			
 				backButtonSelected = false;
 				break;
 		}

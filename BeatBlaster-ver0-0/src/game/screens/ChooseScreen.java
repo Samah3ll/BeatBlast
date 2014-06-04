@@ -76,74 +76,30 @@ public class ChooseScreen implements Screen, InputProcessor {
 	
 	//Selection par le clavier
 	private void keyboardSelection() {
-		if(controller.getSelectedButton() == 0) {		//If nothing is selected
-			if(controller.getKeys().get(SelectionKeys.RIGHT)) {
-				controller.setSelectedButton(1);		//Ok button is selected				
-			} else if(controller.getKeys().get(SelectionKeys.UP)) {
-				controller.setSelectedButton(2);		//Back button is selected
-			} else if(controller.getKeys().get(SelectionKeys.LEFT)) {
-				controller.setSelectedButton(3);		//MusicList is selected
-			} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
-				controller.setSelectedButton(1);		//Ok button is selected
-			}
-		} else if(controller.getSelectedButton() == 1) {		//If Ok is selected
-			if(controller.getKeys().get(SelectionKeys.RIGHT)) {
-				controller.setSelectedButton(3);		//MusicList is selected				
-			} else if(controller.getKeys().get(SelectionKeys.UP)) {
-				controller.setSelectedButton(2);		//Back button is selected
-			} else if(controller.getKeys().get(SelectionKeys.LEFT)) {
-				controller.setSelectedButton(3);		//MusicList is selected
-			} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
-				controller.setSelectedButton(2);		//Back button is selected
-			}
-		} else if(controller.getSelectedButton() == 2) {		//If Back is selected
-			if(controller.getKeys().get(SelectionKeys.RIGHT)) {
-				controller.setSelectedButton(3);		//MusicList is selected				
-			} else if(controller.getKeys().get(SelectionKeys.UP)) {
-				controller.setSelectedButton(1);		//Ok button is selected
-			} else if(controller.getKeys().get(SelectionKeys.LEFT)) {
-				controller.setSelectedButton(3);		//MusicList is selected
-			} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
-				controller.setSelectedButton(1);		//Ok button is selected
-			}
-		} else if(controller.getSelectedButton() == 3) {		//If MusicList is selected
-			if(controller.getKeys().get(SelectionKeys.RIGHT)) {
-				controller.setSelectedButton(1);		//Ok button is selected				
-			} else if(controller.getKeys().get(SelectionKeys.UP)) {
-				if(selectedSong >= 0) {
-					previousSong();
-					if(renderer.isFirstSong(selectedSong)) {
-						renderer.scrollSelection(-1);
-					}
+		
+		if(controller.getKeys().get(SelectionKeys.UP)) {
+			if(selectedSong >= 0) {
+				previousSong();
+				if(renderer.isFirstSong(selectedSong)) {
+					renderer.scrollSelection(-1);
 				}
-				
-			} else if(controller.getKeys().get(SelectionKeys.LEFT)) {
-				controller.setSelectedButton(1);		//Ok button is selected
-			} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
-				if(!renderer.isLastSong(selectedSong)) {
-					nextSong();
-					if(selectedSong > 7) {
-						previousSong();
-						renderer.scrollSelection(1);
-					}
-				}				
-				
 			}
+		} else if(controller.getKeys().get(SelectionKeys.DOWN)) {
+			if(!renderer.isLastSong(selectedSong)) {
+				nextSong();
+				if(selectedSong > 7) {
+					previousSong();
+					renderer.scrollSelection(1);
+				}
+			}				
+			
 		}
+		
 	}
 	
 	//Selection par la sourie
 	private void mouseSelection() {
-		//La sourie est sur le boutton ok
-		if(controller.getMousePosition().x > 160 && controller.getMousePosition().x < 257
-				&& controller.getMousePosition().y > 260 && controller.getMousePosition().y < 310) {
-			controller.setSelectedButton(1);
-		}
-		//La sourie est sur le boutton back
-		if(controller.getMousePosition().x > 275 && controller.getMousePosition().x < 445
-				&& controller.getMousePosition().y > 335 && controller.getMousePosition().y < 385) {
-			controller.setSelectedButton(2);
-		}
+		
 	}
 	
 		
@@ -158,28 +114,18 @@ public class ChooseScreen implements Screen, InputProcessor {
 		renderer.higlightButtonN(selectedSong);
 		
 		keyboardSelection();
-		mouseSelection();		
-		controller.checkSelection();
+		mouseSelection();
 		
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
-			switch(controller.getSelectedButton()) {
-				case (1) : 
-					game.setScreen(new SelectionScreen(game));
-					break;
-				case (2) :
-					game.setScreen(new SelectionScreen(game));
-					break;
-				case (3) :
-					DataSong ds = reader.read(saveDirectory, savedFiles.get(selectedSong + scrolled));
-					String musicName = "\\" + savedFiles.get(selectedSong + scrolled);
-					musicName = (String) musicName.subSequence(0, musicName.length() - 4);
-					//musicName += ".WAV";
-					System.out.println(musicName);
-					FileHandle musicFile = new FileHandle(saveDirectory + musicName);
-					Music music = Gdx.audio.newMusic(musicFile);
-					game.setScreen(new GameScreen(game, ds, music));
-					break;				
-			}
+			
+			DataSong ds = reader.read(saveDirectory, savedFiles.get(selectedSong + scrolled));
+			String musicName = "\\" + savedFiles.get(selectedSong + scrolled);
+			musicName = (String) musicName.subSequence(0, musicName.length() - 4);
+			//musicName += ".WAV";
+			System.out.println(musicName);
+			FileHandle musicFile = new FileHandle(saveDirectory + musicName);
+			Music music = Gdx.audio.newMusic(musicFile);
+			game.setScreen(new GameScreen(game, ds, music));
 			
 		}
 

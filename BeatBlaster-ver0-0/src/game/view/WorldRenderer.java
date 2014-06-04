@@ -1,9 +1,11 @@
 package game.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -31,12 +33,16 @@ public class WorldRenderer {
     private float ppuX;
     private float ppuY;
     
+    final String path = System.getProperty("user.dir");
+    
     //Pour la pause
     private Vector2 positionWhenPaused;
     
     //Block texture
     private TextureRegion blockTexture;
     
+    //Particles
+    //private ParticleEffect particleEffect;
     
     //Runner textures
     private TextureRegion runnerIdleLeft;
@@ -57,7 +63,12 @@ public class WorldRenderer {
 		this.cam.update();
 		spriteBatch = new SpriteBatch();
 		loadTextures();
-		
+		/*
+		//initialize particles
+		particleEffect = new ParticleEffect();
+		FileHandle effectFile = new FileHandle(path + "/res/particules/test.p");
+		particleEffect.loadEmitters(effectFile);
+		*/
 	}
 
 
@@ -73,6 +84,9 @@ public class WorldRenderer {
         	drawplateforms();
         	drawRunner();
         spriteBatch.end();
+        
+        //particleEffect.setPosition(5, 5);
+        //particleEffect.draw(spriteBatch);
 		
 	}
 	

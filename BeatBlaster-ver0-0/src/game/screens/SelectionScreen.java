@@ -3,7 +3,6 @@ package game.screens;
 import music.beatroot.BeatRoot;
 import game.controller.SelectionController;
 import game.controller.SelectionController.SelectionKeys;
-import game.utils.DataSong;
 import game.utils.Reader;
 import game.view.SelectionRenderer;
 import game.BeatBlaster;
@@ -40,10 +39,9 @@ public class SelectionScreen implements Screen, InputProcessor {
 		controller = new SelectionController();
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		FileHandle musicFile = new FileHandle(path + "/res/audio/menu/Korobeinki.mp3");
+		FileHandle musicFile = new FileHandle( path + "/res/audio/menu/Korobeinki.mp3");
 		selectedMusic = Gdx.audio.newMusic(musicFile);
 		saveDirectory = ((BeatBlaster)game).getSaveDirectory();
-		//saveMusic("music");
 	}
 	
 	/*
@@ -56,13 +54,13 @@ public class SelectionScreen implements Screen, InputProcessor {
 				if(controller.getKeys().get(SelectionKeys.DOWN)) {		
 					controller.setSelectedButton(1);		//Selection button selected
 				} else if(controller.getKeys().get(SelectionKeys.UP)) {		
-					controller.setSelectedButton(4);		//Back button selected
+					controller.setSelectedButton(3);		//Back button selected
 				}
 			} else if(controller.getSelectedButton() == 1) {	//If Selection button is selected
 				if(controller.getKeys().get(SelectionKeys.DOWN)) {		
 					controller.setSelectedButton(2);		//Choose button selected
 				} else if(controller.getKeys().get(SelectionKeys.UP)) {		
-					controller.setSelectedButton(4);		//Back button selected
+					controller.setSelectedButton(3);		//Back button selected
 				}
 			} else if(controller.getSelectedButton() == 2) {	//If Choose button is selected
 				if(controller.getKeys().get(SelectionKeys.DOWN)) {
@@ -72,15 +70,9 @@ public class SelectionScreen implements Screen, InputProcessor {
 				}
 			} else if(controller.getSelectedButton() == 3) {	//If PLay button is selected
 					if(controller.getKeys().get(SelectionKeys.DOWN)) {					
-						controller.setSelectedButton(4);			//Back button selected
+						controller.setSelectedButton(1);			//Back button selected
 					} else if(controller.getKeys().get(SelectionKeys.UP)) {						
 							controller.setSelectedButton(2);		//Choose button selected
-					}
-				}  else if(controller.getSelectedButton() == 4) {	//If Back button is selected
-					if(controller.getKeys().get(SelectionKeys.DOWN)) {					
-						controller.setSelectedButton(1);			//Selection button selected
-					} else if(controller.getKeys().get(SelectionKeys.UP)) {						
-							controller.setSelectedButton(3);		//Play button selected
 					}
 				} else {
 					//Nothing is selected
@@ -105,16 +97,10 @@ public class SelectionScreen implements Screen, InputProcessor {
 			controller.setSelectedButton(2);
 		}
 		
-		//La sourie est sur le boutton play
-		if(controller.getMousePosition().x > 257 && controller.getMousePosition().x < 460
-				&& controller.getMousePosition().y > 310 && controller.getMousePosition().y < 360) {
-			controller.setSelectedButton(3);
-		}
-		
 		//La sourie est sur le boutton back
 		if(controller.getMousePosition().x > 525 && controller.getMousePosition().x < 700
 				&& controller.getMousePosition().y > 355 && controller.getMousePosition().y < 400) {
-			controller.setSelectedButton(4);
+			controller.setSelectedButton(3);
 		}
 	}
 	
@@ -146,15 +132,9 @@ public class SelectionScreen implements Screen, InputProcessor {
 					game.setScreen(new ChooseScreen(game));
 					break;
 				case (3) :
-					DataSong ds = reader.read(saveDirectory,"/res/audio/menu/Korobeinki.mp3");
-					String musicName = path + "/res/audio/menu/Korobeinki.mp3";
-					FileHandle musicFile = new FileHandle(musicName);
-					Music music = Gdx.audio.newMusic(musicFile);
-					game.setScreen(new GameScreen(game, ds, music));
-					break;
-				case (4) : 
 					game.setScreen(new MenuScreen(game));
-					break;
+				break;
+									
 			}
 			
 		}		

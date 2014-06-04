@@ -22,8 +22,6 @@ public class SelectionRenderer {
 	
 	//Textures
 	private TextureRegion background;
-	private TextureRegion buttonPlay;
-	private TextureRegion buttonPlaySelected;
 	private TextureRegion buttonSelect;
 	private TextureRegion buttonSelectSelected;
 	private TextureRegion buttonBack;
@@ -57,8 +55,6 @@ public class SelectionRenderer {
 		final String path = System.getProperty("user.dir");
 		TextureAtlas atlas = new TextureAtlas(path + "/res/img/selection/textures.pack");
 		background = atlas.findRegion("menu20");
-		buttonPlay = atlas.findRegion("jouer");
-		buttonPlaySelected = atlas.findRegion("jouerSelected");
 		buttonSelect = atlas.findRegion("select");
 		buttonSelectSelected = atlas.findRegion("selectSelected");
 		buttonBack = atlas.findRegion("back");
@@ -71,13 +67,6 @@ public class SelectionRenderer {
 	public void render() {
 		spriteBatch.begin();
 			drawBackground();
-			/*
-			if(SelectionController.isPlayButtonSelected()) {
-				drawButtonPlaySelected();
-			} else {
-				drawButtonPlay();
-			}
-			*/
 			if(SelectionController.isBackButtonSelected()) {
 				drawButtonBackSelected();
 			} else {
@@ -101,15 +90,7 @@ public class SelectionRenderer {
 	private void drawBackground() {
 		spriteBatch.draw(background, 0, 0, CAMERA_WIDTH * ppuX, CAMERA_HEIGHT * ppuY);
 	}
-	/*
-	private void drawButtonPlay() {
-		spriteBatch.draw(buttonPlay, 20 * ppuX, 10 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
-	}
 	
-	private void drawButtonPlaySelected() {
-		spriteBatch.draw(buttonPlaySelected, 20 * ppuX, 10 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
-	}
-	*/
 	private void drawButtonSelect() {
 		spriteBatch.draw(buttonSelect, 20 * ppuX, 70 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
@@ -146,8 +127,6 @@ public class SelectionRenderer {
 		background.getTexture().dispose();
 		buttonSelectSelected.getTexture().dispose();
 		buttonSelect.getTexture().dispose();
-		//buttonPlaySelected.getTexture().dispose();
-		//buttonPlay.getTexture().dispose();
 		buttonBackSelected.getTexture().dispose();
 		buttonBack.getTexture().dispose();
 		

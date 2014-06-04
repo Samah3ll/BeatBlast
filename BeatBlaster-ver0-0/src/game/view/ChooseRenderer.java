@@ -3,8 +3,6 @@ package game.view;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import game.controller.ChooseController;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -18,8 +16,6 @@ public class ChooseRenderer {
 	
 	private static final float CAMERA_WIDTH = 100f;
 	private static final float CAMERA_HEIGHT = 100f;
-	private static final float BUTTON_WIDTH = 60f;
-	private static final float BUTTON_HEIGHT = 30f;
 	
 	private OrthographicCamera cam;
 	
@@ -27,10 +23,6 @@ public class ChooseRenderer {
 	
 	//Textures
 	private TextureRegion background;
-	private TextureRegion okButton;
-	private TextureRegion okButtonSelected;
-	private TextureRegion backButton;
-	private TextureRegion backButtonSelected;
 	private TextureRegion highlight;
 	
 	private int width;
@@ -109,26 +101,12 @@ public class ChooseRenderer {
 		final String path = System.getProperty("user.dir");
 		TextureAtlas atlas = new TextureAtlas(path + "/res/img/choose/textures.pack");
 		background = atlas.findRegion("menu20");
-		okButton = atlas.findRegion("ok");
-		okButtonSelected = atlas.findRegion("okSelected");
-		backButton = atlas.findRegion("back");
-		backButtonSelected = atlas.findRegion("backSelected");
 		highlight = atlas.findRegion("highlight");
 	}
 
 	public void render() {
 		spriteBatch.begin();
 			drawBackground();
-			if(ChooseController.isBackButtonSelected()) {
-				drawBackButtonSelected();
-			} else {
-				drawBackButton();
-			}
-			if(ChooseController.isOkButtonSelected()) {
-				drawOkButtonSelected();
-			} else {
-				drawOkButton();
-			}
 			drawTextButton();
 			printPrintable();
 		spriteBatch.end();
@@ -142,18 +120,6 @@ public class ChooseRenderer {
 		TextButton b = new TextButton("Select your music : ", style);
 		b.translate(20f * ppuX, 80f * ppuY);
 		b.draw(spriteBatch, 1);
-		/*
-		float f = 0;
-		for(int i = 0; i < 8; i++) {			
-			f += 5f;
-			String fileName = savedFiles.get(i);
-			fileName = fileName.substring(0, fileName.length() - 4);
-			TextButton b1 = new TextButton(fileName, style);
-			b1.translate(20f * ppuX, (80f - f) * ppuY);
-			b1.draw(spriteBatch, 1);
-			
-		}
-		*/
 	}
 	
 	public void higlightButtonN(int num) {
@@ -209,22 +175,6 @@ public class ChooseRenderer {
 		
 	}
 	
-	private void drawOkButton() {
-		spriteBatch.draw(okButton, 0 * ppuX, 19 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
-	}
-	
-	private void drawOkButtonSelected() {
-		spriteBatch.draw(okButtonSelected, 0 * ppuX, 19 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
-	}
-	
-	private void drawBackButton() {
-		spriteBatch.draw(backButton, 20 * ppuX, 5 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
-	}
-	
-	private void drawBackButtonSelected() {
-		spriteBatch.draw(backButtonSelected, 20 * ppuX, 5 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);		
-	}
-
 	public void setSize(int width, int height) {
 		this.width = width;
         this.height = height;

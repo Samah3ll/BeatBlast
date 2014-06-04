@@ -15,11 +15,6 @@ public class ChooseController {
 	
 	private final long WAITTIME = 300;
 	
-	//Désigne le boutton selectionné : 0 = pas de sélection; 1 = ok; 2 = back; 3 = la liste des musiques.
-	private int selectedButton = 0;
-	
-	static private boolean okButtonSelected = false;
-	static private boolean backButtonSelected = false;
 	static private boolean musicListSelected = false;
 	
 	static boolean mouseIsPressed = false;
@@ -39,30 +34,6 @@ public class ChooseController {
 	 * Accesseurs
 	 */
 	
-
-	public int getSelectedButton() {
-		return selectedButton;
-	}
-	
-	public void setSelectedButton(int s) {
-		this.selectedButton = s;
-	}
-		
-	static public boolean isOkButtonSelected() {
-		return okButtonSelected;
-	}
-	
-	public void setOkButtonSelected(boolean b) {
-		ChooseController.okButtonSelected = b;
-	}
-	
-	static public boolean isBackButtonSelected() {
-		return backButtonSelected;
-	}
-	
-	public void setBackButtonSelected(boolean b) {
-		ChooseController.backButtonSelected = b;
-	}
 	
 	static public boolean isMusicListButtonSelected() {
 		return musicListSelected;
@@ -176,37 +147,8 @@ public class ChooseController {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public void checkSelection() {
-		switch (selectedButton) {
-			case 1 :
-				okButtonSelected = true;
-				backButtonSelected = false;
-				musicListSelected = false;
-				break;
-			case 2 :
-				okButtonSelected = false;
-				backButtonSelected = true;
-				musicListSelected = false;
-				break;
-			case 3 :
-				okButtonSelected = false;
-				backButtonSelected = false;
-				musicListSelected = true;
-				break;
-			default :
-				okButtonSelected = false;
-				backButtonSelected = false;
-				musicListSelected = false;
-				break;
-		}
+
 		
-	}
-
-	
-
-	
-
 	
 
 }
