@@ -26,13 +26,13 @@ public class Reader {
 				while (scanner.hasNextLine()) {
 					line = scanner.nextLine();
 					if(line!=null){
-						if(line.contains("pathSong")){
-							String[] song = line.split(" ");
-							for(int a =1;a<song.length;a++){
-								pathSong+=song[a];
-							}
-						}
-						else if(line.contains("maxTimeSong")){
+//						if(line.contains("pathSong")){
+//							String[] song = line.split(" ");
+//							for(int a =1;a<song.length;a++){
+//								pathSong+=song[a];
+//							}
+//						}
+						if(line.contains("maxTimeSong")){
 							String[] time = line.split(" ");
 							maxTimeSong = Double.parseDouble(time[1]);
 						}

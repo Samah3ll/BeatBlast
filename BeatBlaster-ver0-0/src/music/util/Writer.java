@@ -35,7 +35,7 @@ public class Writer {
 				return false;
 			}
 			// sauter une ligne \n
-			/* 
+			/** 
 			 * FileWriter possède 2 arguments :
 			 * 	- adresse du fichier (String)
 			 *  - false signifie qu'on écrase le contenu du fichier et qu'on ne fait pas d'append
@@ -45,8 +45,8 @@ public class Writer {
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			
 			//on écrit dans le BufferedWriter qui sert de tampon(stream)
-			bufferedWriter.write("pathSong " + pathFile);
-			bufferedWriter.write("\n");
+//			bufferedWriter.write("pathSong " + pathFile);
+//			bufferedWriter.write("\n");
 			bufferedWriter.write("maxTimeSong " + Math.floor(songTime*100)/100);
 			
 			bufferedWriter.write("\n ---beats--- \n");
