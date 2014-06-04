@@ -15,8 +15,7 @@ public class Level {
 	private int width;
 	private int height;
 	private Block[][] blocks;
-	private Plateform[] plateforms;
-	private int nbPlateform = 0;
+	private ArrayList<Plateform> plateforms;
 	
 	/**
 	 * Constructeur par valué de level, intialise les données membres du level.
@@ -27,7 +26,7 @@ public class Level {
 		this.width = w;
 		this.height = h;
 		blocks = new Block[w][h];
-		plateforms = new Plateform[10];
+		plateforms = new ArrayList<Plateform>();
 	}
 	
 	public int getWidth() {
@@ -50,12 +49,8 @@ public class Level {
 	 * 
 	 * @return la liste des plateforms (ArrayList<Plateform>)
 	 */
-	public List<Plateform> getPlateforms() {
-		ArrayList<Plateform> pl = new ArrayList<Plateform>();
-		for(int i =0; i < nbPlateform; i++) {
-			pl.add(plateforms[i]);
-		}
-		return pl;
+	public ArrayList<Plateform> getPlateforms() {
+		return plateforms;
 	}
 	
 	/**
@@ -63,10 +58,9 @@ public class Level {
 	 * @param p : Plateform, la plateforme que l'on souhaite ajouter.
 	 */
 	public void addPlateform(Plateform p) {
-		plateforms[nbPlateform] = p;
-		nbPlateform++;
+		plateforms.add(p);
 		for(int i = 0; i < p.getSize(); i++) {
-			BasicBlock b = new BasicBlock((int) p.getPosition().x + i, (int) (p.getPosition().y));
+			BasicBlock b = new BasicBlock( p.getPosition().x + i,  p.getPosition().y);
 			addBlock(b);
 		}
 	}
@@ -131,20 +125,4 @@ public class Level {
 		
 		return tmp.toString();
 	}
-
-	public void moveLevel(boolean goingLeft) {
-		for(int i = 0; i < width-1; i++ ) {
-			for(int j = 0; j < height; j++) {
-				if(blocks[i][j] != null) {
-					blocks[i][j].moveBlock(goingLeft);	
-				}							
-			}
-		}
-		
-		for(int k = 0; k < nbPlateform; k++) {
-			plateforms[k].movePlateform(goingLeft);
-		}
-		
-	}//end of moveLevel
-
 }
