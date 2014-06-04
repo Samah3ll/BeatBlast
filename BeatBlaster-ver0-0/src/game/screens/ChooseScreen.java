@@ -113,7 +113,7 @@ public class ChooseScreen implements Screen, InputProcessor {
 		renderer.render();
 		renderer.higlightButtonN(selectedSong);
 		
-		//keyboardSelection();
+		keyboardSelection();
 		mouseSelection();
 		
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {

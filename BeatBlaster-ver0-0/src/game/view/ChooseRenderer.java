@@ -107,7 +107,7 @@ public class ChooseRenderer {
 	public void render() {
 		spriteBatch.begin();
 			drawBackground();
-			drawTextButton();
+			//drawTextButton();
 			printPrintable();
 		spriteBatch.end();
 		
@@ -116,7 +116,7 @@ public class ChooseRenderer {
 	private void drawTextButton() {
 		TextButtonStyle style = new TextButtonStyle();
 		style.font = new BitmapFont();
-		style.fontColor = Color.RED;
+		style.fontColor = Color.GREEN;
 		TextButton b = new TextButton("Select your music : ", style);
 		b.translate(20f * ppuX, 80f * ppuY);
 		b.draw(spriteBatch, 1);
@@ -133,14 +133,14 @@ public class ChooseRenderer {
 		int y = 80 - 5 * num;
 		
 		spriteBatch.begin();
-		spriteBatch.draw(highlight, (x + 11) * ppuY, (y - 4.5f) * ppuY, 20 * ppuX, 3 * ppuY);
+		spriteBatch.draw(highlight, (x + 11) * ppuY, (y - 4.5f) * ppuY, 60 * ppuX, 3 * ppuY);
 		spriteBatch.end();
 	}
 	
 	public void printPrintable() {
 		TextButtonStyle style = new TextButtonStyle();
 		style.font = new BitmapFont();
-		style.fontColor = Color.RED;
+		style.fontColor = Color.GREEN;
 		
 		float f = 0;
 		for(int i = 0; i < 8; i++) {			

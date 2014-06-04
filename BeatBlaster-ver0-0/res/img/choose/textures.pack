@@ -5,42 +5,42 @@ filter: Nearest,Nearest
 repeat: none
 back
   rotate: false
-  xy: 2, 14
+  xy: 2, 2
   size: 307, 102
   orig: 307, 102
   offset: 0, 0
   index: -1
 backSelected
   rotate: false
-  xy: 311, 14
+  xy: 311, 2
   size: 307, 102
   orig: 307, 102
   offset: 0, 0
   index: -1
 highlight
   rotate: false
-  xy: 2, 2
-  size: 120, 10
-  orig: 120, 10
+  xy: 724, 998
+  size: 240, 10
+  orig: 240, 10
   offset: 0, 0
   index: -1
 menu20
   rotate: false
-  xy: 2, 570
+  xy: 2, 558
   size: 720, 450
   orig: 720, 450
   offset: 0, 0
   index: -1
 menu20bis
   rotate: false
-  xy: 2, 118
+  xy: 2, 106
   size: 720, 450
   orig: 720, 450
   offset: 0, 0
   index: -1
 ok
   rotate: false
-  xy: 620, 14
+  xy: 620, 2
   size: 307, 102
   orig: 307, 102
   offset: 0, 0
