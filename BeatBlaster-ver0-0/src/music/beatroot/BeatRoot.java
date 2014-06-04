@@ -189,12 +189,12 @@ public class BeatRoot {
 //		}
 		
 		/** pour le projet (pas de visu, création de fichiers */
-		//gui.setVisible(true);
+		gui.setVisible(true);
 		gui.loadAudioData();
 		gui.displayPanel.beatTrack();
-		//gui.displayPanel.resizeSpectroForVisu(12);
-		//gui.displayPanel.repaintImage();
-		//double[][] spectroMatricelol = gui.displayPanel.spectro;
+		gui.displayPanel.resizeSpectroForVisu(12);
+		gui.displayPanel.repaintImage();
+		double[][] spectroMatricelol = gui.displayPanel.spectro;
 		double[][] spectroMatrice = gui.displayPanel.resizeSpectroForFile(12);
 		System.out.println(saveDirectory);
 		writer.write( saveDirectory, audioProcessor.audioFileName, gui.displayPanel.maximumTime, gui.displayPanel.beatPtr, spectroMatrice);

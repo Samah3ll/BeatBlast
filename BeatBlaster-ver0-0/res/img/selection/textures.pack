@@ -5,42 +5,42 @@ filter: Nearest,Nearest
 repeat: none
 back
   rotate: false
-  xy: 354, 446
+  xy: 609, 210
   size: 307, 102
   orig: 307, 102
   offset: 0, 0
   index: -1
 backSelected
   rotate: false
-  xy: 2, 210
+  xy: 609, 106
   size: 307, 102
   orig: 307, 102
   offset: 0, 0
   index: -1
 choose
   rotate: false
-  xy: 2, 432
-  size: 350, 116
-  orig: 350, 116
+  xy: 2, 196
+  size: 605, 116
+  orig: 605, 116
   offset: 0, 0
   index: -1
 chooseSelected
   rotate: false
-  xy: 2, 314
-  size: 350, 116
-  orig: 350, 116
+  xy: 2, 78
+  size: 605, 116
+  orig: 605, 116
   offset: 0, 0
   index: -1
 jouer
   rotate: false
-  xy: 354, 342
+  xy: 609, 2
   size: 307, 102
   orig: 307, 102
   offset: 0, 0
   index: -1
 jouerSelected
   rotate: false
-  xy: 2, 106
+  xy: 704, 446
   size: 307, 102
   orig: 307, 102
   offset: 0, 0
@@ -54,15 +54,15 @@ menu20
   index: -1
 select
   rotate: false
-  xy: 2, 2
-  size: 307, 102
-  orig: 307, 102
+  xy: 2, 432
+  size: 700, 116
+  orig: 700, 116
   offset: 0, 0
   index: -1
 selectSelected
   rotate: false
-  xy: 354, 238
-  size: 307, 102
-  orig: 307, 102
+  xy: 2, 314
+  size: 700, 116
+  orig: 700, 116
   offset: 0, 0
   index: -1

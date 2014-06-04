@@ -5,37 +5,56 @@ filter: Nearest,Nearest
 repeat: none
 back
   rotate: false
-  xy: 2, 210
+  xy: 2, 14
   size: 307, 102
   orig: 307, 102
   offset: 0, 0
   index: -1
 backSelected
   rotate: false
-  xy: 2, 106
+  xy: 311, 14
   size: 307, 102
   orig: 307, 102
   offset: 0, 0
   index: -1
 highlight
   rotate: false
-  xy: 724, 754
+  xy: 2, 2
   size: 120, 10
   orig: 120, 10
   offset: 0, 0
   index: -1
 menu20
   rotate: false
-  xy: 2, 314
+  xy: 2, 570
+  size: 720, 450
+  orig: 720, 450
+  offset: 0, 0
+  index: -1
+menu20bis
+  rotate: false
+  xy: 2, 118
   size: 720, 450
   orig: 720, 450
   offset: 0, 0
   index: -1
 ok
   rotate: false
-  xy: 311, 210
+  xy: 620, 14
   size: 307, 102
   orig: 307, 102
+  offset: 0, 0
+  index: -1
+
+textures2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+menu21
+  rotate: false
+  xy: 2, 106
+  size: 720, 450
+  orig: 720, 450
   offset: 0, 0
   index: -1
 okSelected
