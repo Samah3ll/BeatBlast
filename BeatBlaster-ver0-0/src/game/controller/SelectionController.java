@@ -126,7 +126,7 @@ public class SelectionController {
 	public void mouseMouved(int screenX, int screenY) {
 		mousePosition.x = screenX;
 		mousePosition.y = screenY;
-		//System.out.println("mouse position : " + mousePosition);
+		System.out.println("mouse position : " + mousePosition);
 	}
 	
 	

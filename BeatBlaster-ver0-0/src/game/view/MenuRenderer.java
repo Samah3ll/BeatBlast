@@ -85,19 +85,19 @@ public class MenuRenderer {
 	}
 	
 	private void drawButtonGame() {
-		spriteBatch.draw(buttonGame, 20f * ppuX, 65f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonGame, 20f * ppuX, 20f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonGameSelected() {
-		spriteBatch.draw(buttonGameSelected, 20f * ppuX, 65f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonGameSelected, 20f * ppuX, 20f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonQuit() {
-		spriteBatch.draw(buttonQuit, 20f * ppuX, 5f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonQuit, 20f * ppuX, 1f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonQuitSelected() {
-		spriteBatch.draw(buttonQuitSelected, 20f * ppuX, 5f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonQuitSelected, 20f * ppuX, 1f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 
 

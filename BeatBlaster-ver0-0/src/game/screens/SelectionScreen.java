@@ -87,21 +87,18 @@ public class SelectionScreen implements Screen, InputProcessor {
 		
 		//La sourie est sur le boutton select
 		if(controller.getMousePosition().x > 165 && controller.getMousePosition().x < 555
-				&& controller.getMousePosition().y > 10 && controller.getMousePosition().y < 135) {
+				&& controller.getMousePosition().y > 56 && controller.getMousePosition().y < 108) {
 			controller.setSelectedButton(1);
-		}
-		
-		//La sourie est sur le boutton choose
-		if(controller.getMousePosition().x > 153 && controller.getMousePosition().x < 565
-				&& controller.getMousePosition().y > 175 && controller.getMousePosition().y < 215) {
+		} else if(controller.getMousePosition().x > 153 && controller.getMousePosition().x < 565	//La sourie est sur le boutton choose
+				&& controller.getMousePosition().y > 181 && controller.getMousePosition().y < 235) {
 			controller.setSelectedButton(2);
+		} else if(controller.getMousePosition().x > 233 && controller.getMousePosition().x < 515 //La sourie est sur le boutton back
+				&& controller.getMousePosition().y > 351 && controller.getMousePosition().y < 414) {
+			controller.setSelectedButton(3);
+		} else {
+			controller.setSelectedButton(0);
 		}
 		
-		//La sourie est sur le boutton back
-		if(controller.getMousePosition().x > 525 && controller.getMousePosition().x < 700
-				&& controller.getMousePosition().y > 355 && controller.getMousePosition().y < 400) {
-			controller.setSelectedButton(3);
-		}
 	}
 	
 	
@@ -115,7 +112,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 		renderer.render();
 		
 		mouseSelection();
-		keyboardSelection();
+		//keyboardSelection();
 		controller.checkSelection();
 		
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {

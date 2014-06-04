@@ -88,14 +88,14 @@ public class MenuScreen implements Screen, InputProcessor {
 	
 	private void mouseSelection() {
 		//Selection par la sourie
-		if(controller.getMousePosition().x > 255 && controller.getMousePosition().x < 465
-				&& controller.getMousePosition().y > 65 && controller.getMousePosition().y < 112) {
+		if(controller.getMousePosition().x > 244 && controller.getMousePosition().x < 467
+				&& controller.getMousePosition().y > 263 && controller.getMousePosition().y < 322) {
 			controller.setSelectedButton(1);
-		}
-			
-		if(controller.getMousePosition().x > 276 && controller.getMousePosition().x < 440
-				&& controller.getMousePosition().y > 335 && controller.getMousePosition().y < 380) {
+		} else if(controller.getMousePosition().x > 213 && controller.getMousePosition().x < 515
+				&& controller.getMousePosition().y > 353 && controller.getMousePosition().y < 414) {
 			controller.setSelectedButton(3);
+		} else {
+			controller.setSelectedButton(0);
 		}
 	}
 	
@@ -109,7 +109,7 @@ public class MenuScreen implements Screen, InputProcessor {
 		renderer.render();
 		 		
 		mouseSelection();
-		keyboardSelection();
+		//keyboardSelection();
 		controller.checkSelection();	
 		
 		if(controller.getKeys().get(MenuKeys.VALIDATE) || controller.getMouseState()) {
