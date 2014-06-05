@@ -164,7 +164,7 @@ public class WorldRenderer {
 		 
 		 
 		 //Correction pour que la caméra ne dépasse pas le runner ou l'inverse, peut être à modifier
-		 float correction = 0.65f;
+		 float correction = 0.75f;
 		 
 		 if(runner.getVelocity().x == 0) {
 			 dx = 0;
