@@ -24,14 +24,19 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.ListIterator;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -375,8 +380,8 @@ public class BeatTrackDisplay
 			metrics = getFontMetrics(font);
 			yTop = 3 + metrics.getAscent();
 			yMid = yTop + 352;
-			yBottom = yMid + 150;
-			ySize = yBottom + 20;
+			yBottom = yMid +100; //+150 (la place qui servait à afficher la waveforme (courbe des amplitudes)
+			ySize = yBottom + 120; //place nécessaire pour afficher les légendes
 			if (xSize == -1)
 				xSize = defaultXSize;
 			setPreferredSize(new Dimension(xSize, ySize));
@@ -532,6 +537,7 @@ public class BeatTrackDisplay
 		g.setFont(font);
 		paintAxes(g);
 		paintBeats(g);
+		paintLegend(g);
 	} // paint()
 
 	/** Clears the background image to white */
@@ -654,7 +660,18 @@ public class BeatTrackDisplay
 			g.drawString(label, xSize-metrics.stringWidth(label)-2, this.ySize-5);
 		}
 	} // paintAxes()
-
+	
+	/** Paints the time axis and labels 
+	 *  @param g The Graphics object to paint to
+	 */
+	synchronized protected void paintLegend(Graphics g) {
+		BufferedImage legend = null;
+		try {
+		    legend = ImageIO.read(new File(System.getProperty("user.dir")+ "/res/img/beatRoot/legend.png"));
+		} catch (IOException e) {
+		}
+		g.drawImage(legend, 20, yBottom+30, null);
+	}
 	/** Paints the beats and inter-beat intervals
 	 *  @param g The Graphics object to paint to
 	 */

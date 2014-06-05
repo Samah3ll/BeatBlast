@@ -175,14 +175,7 @@ public class GUI extends JFrame {
 				BeatRoot.quit();
 			}
 		});
-/*
-		menuBar = new JMenuBar();
-		menuBar.add(makeFileMenu());
-		menuBar.add(makeEditMenu());
-		menuBar.add(makeViewMenu());
-		menuBar.add(makePlayMenu());
-		menuBar.add(makeBeatTrackMenu());
-		*/
+		
 		preferences = new Parameters(this, "Preferences");
 		setPreferences();
 		metricalLevels = new Parameters(this, "Mark Metrical Levels");
@@ -231,91 +224,6 @@ public class GUI extends JFrame {
 		pack();
 	} // constructor
 
-	/** Creates a menu item with the given text and key codes.
-	 *  @param text The text that appears on the menu
-	 *  @param menuKey The key to access the menu item when the menu is open
-	 *  @param altKey The shortcut key to access the menu item using the ALT key
-	 *  @param isCheckBox Flag indicating whether the menu item is a binary flag
-	 *  @return The menu item
-	 */
-	protected JMenuItem makeMenuItem(String text, int menuKey,
-									int altKey, boolean isCheckBox) {
-		JMenuItem menuItem;
-		if (isCheckBox) {
-			menuItem = new JCheckBoxMenuItem(text);
-			menuItem.setMnemonic(menuKey);
-			menuItem.setSelected(true);
-		} else
-			menuItem = new JMenuItem(text, menuKey);
-		if (altKey != 0)
-			menuItem.setAccelerator(KeyStroke.getKeyStroke(
-									altKey, ActionEvent.ALT_MASK));
-		menuItem.addActionListener(listener);
-		return menuItem;
-	} // makeMenuItem()
-	
-//	/** Creates the file menu */
-//	protected JMenu makeFileMenu() {
-//		JMenu menu = new JMenu("File");
-//		menu.setMnemonic(KeyEvent.VK_F);
-//		menu.getAccessibleContext().setAccessibleDescription("File menu");
-//		menu.add(makeMenuItem(LOAD_AUDIO, KeyEvent.VK_L, KeyEvent.VK_L, false));
-//		menu.add(makeMenuItem(LOAD_BEATS, KeyEvent.VK_B, KeyEvent.VK_B, false));
-//		menu.add(new JSeparator());
-//		menu.add(makeMenuItem(SAVE_AUDIO, KeyEvent.VK_A, KeyEvent.VK_A, false));
-//		menu.add(makeMenuItem(SAVE_BEATS, KeyEvent.VK_S, KeyEvent.VK_S, false));
-//		menu.add(new JSeparator());
-//		menu.add(makeMenuItem(EXIT, KeyEvent.VK_X, KeyEvent.VK_X, false));
-//		return menu;
-//	} // makeFileMenu()
-//	
-//	/** Creates the edit menu */
-//	protected JMenu makeEditMenu() {
-//		JMenu menu = new JMenu("Edit");
-//		menu.setMnemonic(KeyEvent.VK_E);
-//		menu.add(makeMenuItem(UNDO, KeyEvent.VK_U, 0, false));
-//		menu.add(makeMenuItem(REDO, KeyEvent.VK_R, 0, false));
-//		menu.add(new JSeparator());
-//		menu.add(makeMenuItem(EDIT_PERCUSSION, KeyEvent.VK_S, 0, false));
-//		menu.add(new JSeparator());
-//		menu.add(makeMenuItem(EDIT_PREFERENCES, KeyEvent.VK_P, 0, false));
-//		return menu;
-//	} // makeEditMenu()
-//
-//	/** Creates the view menu */
-//	protected JMenu makeViewMenu() {
-//		JMenu menu = new JMenu("View");
-//		menu.setMnemonic(KeyEvent.VK_V);
-//		menu.add(makeMenuItem(SHOW_WAVE, KeyEvent.VK_W, 0, true));
-//		menu.add(makeMenuItem(SHOW_SPECTRO, KeyEvent.VK_S, 0, true));
-//		menu.add(makeMenuItem(SHOW_IBIS, KeyEvent.VK_I, 0, true));
-//		menu.add(makeMenuItem(SHOW_BEATS, KeyEvent.VK_B, 0, true));
-//		return menu;
-//	} // makeViewMenu()
-//
-//	/** Creates the play menu */
-//	protected JMenu makePlayMenu() {
-//		JMenu menu = new JMenu("Play");
-//		menu.setMnemonic(KeyEvent.VK_L);
-//		menu.add(makeMenuItem(PLAY, KeyEvent.VK_P, 0, false));
-//		menu.add(makeMenuItem(PLAY_AUDIO, KeyEvent.VK_A, 0, false));
-//		menu.add(makeMenuItem(PLAY_BEATS, KeyEvent.VK_B, 0, false));
-//		menu.add(new JSeparator());
-//		menu.add(makeMenuItem(STOP, KeyEvent.VK_S, 0, false));
-//		return menu;
-//	} // makePlayMenu()
-//
-//	/** Creates the beat tracking menu */
-//	protected JMenu makeBeatTrackMenu() {
-//		JMenu menu = new JMenu("BeatTrack");
-//		menu.setMnemonic(KeyEvent.VK_T);
-//		menu.add(makeMenuItem(BEAT_TRACK, KeyEvent.VK_B, KeyEvent.VK_B, false));
-//		menu.add(makeMenuItem(CLEAR_BEATS, KeyEvent.VK_Z, KeyEvent.VK_Z, false));
-//		menu.add(makeMenuItem(MARK_METRICAL_LEVEL, KeyEvent.VK_M, KeyEvent.VK_M, false));
-//		menu.add(makeMenuItem(CLEAR_METRICAL_LEVELS, KeyEvent.VK_L, 0, false));
-//		return menu;
-//	} // makeBeatTrackMenu()
-
 	/** Loads and processes an audio file chosen with a file open dialog. */
 	public void loadAudioData() {
 		loadAudioData(chooser.getAudioInName());
@@ -333,39 +241,39 @@ public class GUI extends JFrame {
 		updateDisplay(true);
 	} // loadAudioData()
 
-	/** Loads beat data from a file chosen by a file open dialog. */
-	public void loadBeatData() {
-		loadBeatData(chooser.getBeatInName());
-	} // loadBeatData()
+//	/** Loads beat data from a file chosen by a file open dialog. */
+//	public void loadBeatData() {
+//		loadBeatData(chooser.getBeatInName());
+//	} // loadBeatData()
 	
 	/** Loads beat data from a given file.
 	 *  @param fileName The name of the file to open
 	 */
-	public void loadBeatData(String fileName) {
-		if (fileName != null) {
-			try {
-				if (fileName.endsWith(".tmf"))
-					beats = EventList.readBeatTrackFile(fileName);
-				else if (fileName.endsWith(".lbl"))
-					beats = EventList.readLabelFile(fileName);
-				else // if (fileName.endsWith(".txt"))
-					beats = EventList.readBeatsAsText(fileName);
-				setBeatData(beats);
-			} catch (Exception e) {
-				System.err.println("Error loading beat data: " + e);
-			}
-		}
-	} // loadBeatData()
+//	public void loadBeatData(String fileName) {
+//		if (fileName != null) {
+//			try {
+//				if (fileName.endsWith(".tmf"))
+//					beats = EventList.readBeatTrackFile(fileName);
+//				else if (fileName.endsWith(".lbl"))
+//					beats = EventList.readLabelFile(fileName);
+//				else // if (fileName.endsWith(".txt"))
+//					beats = EventList.readBeatsAsText(fileName);
+//				setBeatData(beats);
+//			} catch (Exception e) {
+//				System.err.println("Error loading beat data: " + e);
+//			}
+//		}
+//	} // loadBeatData()
 
 	/** Saves beat data to a file chosen by a file save dialog. */
 	// TODO Check for the correct extension of exported file names
-	public void saveBeatData() {
-		try {
-			beats.writeBeatTrackFile(chooser.getBeatOutName());
-		} catch (Exception ex) {
-			System.err.println("Error writing beat file: " + ex);
-		}
-	} // saveBeatData()
+//	public void saveBeatData() {
+//		try {
+//			beats.writeBeatTrackFile(chooser.getBeatOutName());
+//		} catch (Exception ex) {
+//			System.err.println("Error writing beat file: " + ex);
+//		}
+//	} // saveBeatData()
 	
 	/** Returns the list of beats */
 	public EventList getBeatData() {
