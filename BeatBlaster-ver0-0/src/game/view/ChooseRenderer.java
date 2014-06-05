@@ -191,6 +191,10 @@ public class ChooseRenderer {
         ppuY = (float)height / CAMERA_HEIGHT;
 		
 	}
+	
+	public void hide() {
+		spriteBatch.setColor(Color.BLACK);
+	}
 
 	public void dispose() {
 		background.getTexture().dispose();

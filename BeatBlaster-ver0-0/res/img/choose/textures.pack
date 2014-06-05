@@ -3,39 +3,6 @@ textures.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-highlight
-  rotate: false
-  xy: 724, 938
-  size: 240, 10
-  orig: 240, 10
-  offset: 0, 0
-  index: -1
-highlight02
-  rotate: false
-  xy: 2, 2
-  size: 1000, 42
-  orig: 1000, 42
-  offset: 0, 0
-  index: -1
-menu20
-  rotate: false
-  xy: 2, 498
-  size: 720, 450
-  orig: 720, 450
-  offset: 0, 0
-  index: -1
-menu20bis
-  rotate: false
-  xy: 2, 46
-  size: 720, 450
-  orig: 720, 450
-  offset: 0, 0
-  index: -1
-
-textures2.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 back
   rotate: false
   xy: 2, 106
@@ -50,9 +17,16 @@ backSelected
   orig: 307, 102
   offset: 0, 0
   index: -1
-menu21
+highlight
   rotate: false
   xy: 2, 210
+  size: 1000, 42
+  orig: 1000, 42
+  offset: 0, 0
+  index: -1
+menu20
+  rotate: false
+  xy: 2, 254
   size: 720, 450
   orig: 720, 450
   offset: 0, 0

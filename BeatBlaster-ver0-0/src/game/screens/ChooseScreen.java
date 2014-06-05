@@ -134,6 +134,7 @@ public class ChooseScreen implements Screen, InputProcessor {
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
 			if(ChooseController.isBackButtonSelected()) {
 				game.setScreen(new SelectionScreen(game));
+				//this.hide();
 			} else {
 				DataSong ds = reader.read(saveDirectory, savedFiles.get(selectedSong + scrolled));
 				String musicName = "\\" + savedFiles.get(selectedSong + scrolled);
@@ -169,6 +170,7 @@ public class ChooseScreen implements Screen, InputProcessor {
 	@Override
 	public void hide() {
 		Gdx.input.setInputProcessor(null);
+		renderer.hide();
 
 	}
 
