@@ -10,8 +10,8 @@ import game.controller.MenuController;
 public class MenuRenderer {
 	
 	//TODO:modifier les tailles de la caméra (penser aux autres écrans)
-	private static final float BUTTON_WIDTH = 60f;
-	private static final float BUTTON_HEIGHT = 30f;
+	private static final float BUTTON_WIDTH = 40f;
+	private static final float BUTTON_HEIGHT = 20f;
 	private static final float CAMERA_WIDTH = 100f;
 	private static final float CAMERA_HEIGHT = 100f;
 	//private static final float RUNNING_FRAME_DURATION = 0.06f;
@@ -49,7 +49,6 @@ public class MenuRenderer {
     }
 	
 	private void loadTextures() {
-		//System.out.println(Gdx.files.internal("/res/img/menu/textures.pack"));
 		final String path = System.getProperty("user.dir");
 		TextureAtlas atlas = new TextureAtlas(path + "/res/img/menu/textures.pack");
 		background = atlas.findRegion("menu20");
@@ -85,24 +84,23 @@ public class MenuRenderer {
 	}
 	
 	private void drawButtonGame() {
-		spriteBatch.draw(buttonGame, 20f * ppuX, 20f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonGame, 30f * ppuX, 25f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonGameSelected() {
-		spriteBatch.draw(buttonGameSelected, 20f * ppuX, 20f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonGameSelected, 30f * ppuX, 25f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonQuit() {
-		spriteBatch.draw(buttonQuit, 20f * ppuX, 1f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonQuit, 30f * ppuX, 5f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 	
 	private void drawButtonQuitSelected() {
-		spriteBatch.draw(buttonQuitSelected, 20f * ppuX, 1f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonQuitSelected, 30f * ppuX, 5f * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
 	}
 
 
 	public void dispose() {
-		//spriteBatch.dispose();
 		background.getTexture().dispose();
 		buttonGame.getTexture().dispose();
 		buttonGameSelected.getTexture().dispose();
