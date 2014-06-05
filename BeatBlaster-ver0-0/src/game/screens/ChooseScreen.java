@@ -239,20 +239,22 @@ public class ChooseScreen implements Screen, InputProcessor {
 			selectedSong = 0;
 			renderer.scrollSelection(-1);
 			scrolled--;
-			return true;
-		}
-		if(selectedSong + amount > 7) {
+		} else if(selectedSong + amount > 7) {
 			selectedSong = 7;
 			renderer.scrollSelection(1);
 			scrolled++;
-			return true;
-		}
-		if(selectedSong >= 0 || selectedSong < 7) {
+		}else if(selectedSong >= 0 || selectedSong < 7) {
 			selectedSong += amount;
-			return true;
 		} else {
 			return false;
 		}
+		
+		if(scrolled < 0) {
+			scrolled = 0;
+			return true;
+		}
+		return true;
+		
 	}
 	
 	
