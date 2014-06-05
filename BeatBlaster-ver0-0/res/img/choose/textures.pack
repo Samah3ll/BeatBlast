@@ -38,13 +38,6 @@ menu20bis
   orig: 720, 450
   offset: 0, 0
   index: -1
-ok
-  rotate: false
-  xy: 620, 2
-  size: 307, 102
-  orig: 307, 102
-  offset: 0, 0
-  index: -1
 
 textures2.png
 format: RGBA8888
@@ -52,15 +45,8 @@ filter: Nearest,Nearest
 repeat: none
 menu21
   rotate: false
-  xy: 2, 106
+  xy: 2, 2
   size: 720, 450
   orig: 720, 450
-  offset: 0, 0
-  index: -1
-okSelected
-  rotate: false
-  xy: 2, 2
-  size: 307, 102
-  orig: 307, 102
   offset: 0, 0
   index: -1
