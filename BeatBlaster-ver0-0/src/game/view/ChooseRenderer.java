@@ -1,5 +1,7 @@
 package game.view;
 
+import game.controller.ChooseController;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -24,6 +26,8 @@ public class ChooseRenderer {
 	//Textures
 	private TextureRegion background;
 	private TextureRegion highlight;
+	private TextureRegion buttonBack;
+	private TextureRegion buttonBackSelected;
 	
 	private int width;
     private int height;
@@ -102,24 +106,21 @@ public class ChooseRenderer {
 		TextureAtlas atlas = new TextureAtlas(path + "/res/img/choose/textures.pack");
 		background = atlas.findRegion("menu20");
 		highlight = atlas.findRegion("highlight");
+		buttonBack = atlas.findRegion("back");
+		buttonBackSelected = atlas.findRegion("backSelected");
 	}
 
 	public void render() {
 		spriteBatch.begin();
-			drawBackground();
-			//drawTextButton();
-			printPrintable();
+			drawBackground();			
+			printPrintable();			
+			if(ChooseController.isBackButtonSelected()) {				
+				drawButtonBackSelected();
+			} else {
+				drawButtonBack();
+			}
 		spriteBatch.end();
 		
-	}
-	
-	private void drawTextButton() {
-		TextButtonStyle style = new TextButtonStyle();
-		style.font = new BitmapFont();
-		style.fontColor = Color.GREEN;
-		TextButton b = new TextButton("Select your music : ", style);
-		b.translate(20f * ppuX, 80f * ppuY);
-		b.draw(spriteBatch, 1);
 	}
 	
 	public void higlightButtonN(int num) {
@@ -173,6 +174,14 @@ public class ChooseRenderer {
 	private void drawBackground() {
 		spriteBatch.draw(background, 0, 0, CAMERA_WIDTH * ppuX, CAMERA_HEIGHT * ppuY);
 		
+	}
+	
+	private void drawButtonBack() {
+		spriteBatch.draw(buttonBack, 30 * ppuX, 5 * ppuY, 40f * ppuX, 20f * ppuY);
+	}
+	
+	private void drawButtonBackSelected() {
+		spriteBatch.draw(buttonBackSelected, 30 * ppuX, 5 * ppuY, 40f * ppuX, 20f * ppuY);
 	}
 	
 	public void setSize(int width, int height) {

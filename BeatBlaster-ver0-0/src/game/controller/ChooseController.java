@@ -18,6 +18,7 @@ public class ChooseController {
 	static private boolean musicListSelected = false;
 	
 	static boolean mouseIsPressed = false;
+	static boolean isBackButtonSelected = false;
 	
 	static Vector2 mousePosition = new Vector2(0, 0);
 	
@@ -53,6 +54,14 @@ public class ChooseController {
 	
 	public Vector2 getMousePosition() {
 		return mousePosition;
+	}
+	
+	static public boolean isBackButtonSelected() {
+		return isBackButtonSelected;
+	}
+	
+	public void setBackButtonSelected(boolean b) {
+		ChooseController.isBackButtonSelected = b;
 	}
 	
 	

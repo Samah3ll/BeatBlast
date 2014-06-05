@@ -20,6 +20,16 @@ import com.badlogic.gdx.graphics.GL10;
 
 public class ChooseScreen implements Screen, InputProcessor {
 	
+	private static final float BUTTON_WIDTH = 60f;
+	private static final float BUTTON_HEIGHT = 30f;
+	private static final float CAMERA_WIDTH = 100f;
+	private static final float CAMERA_HEIGHT = 100f;
+	
+	private int width;
+    private int height;
+    private float ppuX;
+    private float ppuY;
+	
 	ChooseController controller;
 	ChooseRenderer renderer;
 	
@@ -99,7 +109,12 @@ public class ChooseScreen implements Screen, InputProcessor {
 	
 	//Selection par la sourie
 	private void mouseSelection() {
-		
+		if(controller.getMousePosition().x > 37f*ppuX && controller.getMousePosition().x < 5f * ppuX + BUTTON_WIDTH * ppuX
+				&& controller.getMousePosition().y > 80f * ppuY && controller.getMousePosition().y < 60f * ppuY + BUTTON_HEIGHT * ppuY) {
+			controller.setBackButtonSelected(true);
+		} else {
+			controller.setBackButtonSelected(false);
+		}
 	}
 	
 		
@@ -117,15 +132,19 @@ public class ChooseScreen implements Screen, InputProcessor {
 		mouseSelection();
 		
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
+			if(ChooseController.isBackButtonSelected()) {
+				game.setScreen(new SelectionScreen(game));
+			} else {
+				DataSong ds = reader.read(saveDirectory, savedFiles.get(selectedSong + scrolled));
+				String musicName = "\\" + savedFiles.get(selectedSong + scrolled);
+				musicName = (String) musicName.subSequence(0, musicName.length() - 4);
+				System.out.println(musicName);
+				FileHandle musicFile = new FileHandle(saveDirectory + musicName);
+				Music music = Gdx.audio.newMusic(musicFile);
+				game.setScreen(new GameScreen(game, ds, music));
+			}
 			
-			DataSong ds = reader.read(saveDirectory, savedFiles.get(selectedSong + scrolled));
-			String musicName = "\\" + savedFiles.get(selectedSong + scrolled);
-			musicName = (String) musicName.subSequence(0, musicName.length() - 4);
-			//musicName += ".WAV";
-			System.out.println(musicName);
-			FileHandle musicFile = new FileHandle(saveDirectory + musicName);
-			Music music = Gdx.audio.newMusic(musicFile);
-			game.setScreen(new GameScreen(game, ds, music));
+			
 			
 		}
 
@@ -134,6 +153,10 @@ public class ChooseScreen implements Screen, InputProcessor {
 	@Override
 	public void resize(int width, int height) {
 		renderer.setSize(width, height);
+		this.width = width;
+        this.height = height;
+        ppuX = (float)width / CAMERA_WIDTH;
+        ppuY = (float)height / CAMERA_HEIGHT;
 
 	}
 

@@ -100,11 +100,11 @@ public class SelectionRenderer {
 	}
 	
 	private void drawButtonBack() {
-		spriteBatch.draw(buttonBack, 20 * ppuX, 1 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonBack, 30 * ppuX, 5 * ppuY, (BUTTON_WIDTH - 20f) * ppuX, (BUTTON_HEIGHT - 10f) * ppuY);
 	}
 	
 	private void drawButtonBackSelected() {
-		spriteBatch.draw(buttonBackSelected, 20 * ppuX, 1 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonBackSelected, 30 * ppuX, 5 * ppuY, (BUTTON_WIDTH - 20f) * ppuX, (BUTTON_HEIGHT - 10f) * ppuY);
 	}
 	
 	private void drawButtonChoose() {
