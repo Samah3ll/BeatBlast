@@ -160,7 +160,7 @@ public class WorldRenderer {
 	
 	 public void moveCamera(){
 		 	 
-		 cam.position.x = runner.getPosition().x * ppuX;
+		 cam.position.x = runner.getPosition().x * ppuX - 9 * ppuX;
 		
 		 
 		 //Pour que la caméra ne sorte pas du niveau
