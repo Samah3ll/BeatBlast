@@ -275,7 +275,7 @@ public class ChooseScreen implements Screen, InputProcessor {
 		if(scrolled < 0) {
 			scrolled = 0;
 		} else if(selectedSong + scrolled > savedFiles.size()) {
-			scrolled = savedFiles.size() - selectedSong - 1;
+			scrolled = savedFiles.size() - selectedSong - 2;
 		}
 		
 		return true;

@@ -134,7 +134,7 @@ public class ChooseRenderer {
 		int y = 80 - 5 * num;
 		
 		spriteBatch.begin();
-		spriteBatch.draw(highlight, (x + 11) * ppuY, (y - 4.5f) * ppuY, 60 * ppuX, 3 * ppuY);
+		spriteBatch.draw(highlight, (x + 11) * ppuY, (y - 4.7f) * ppuY, 60 * ppuX, 4 * ppuY);
 		spriteBatch.end();
 	}
 	
