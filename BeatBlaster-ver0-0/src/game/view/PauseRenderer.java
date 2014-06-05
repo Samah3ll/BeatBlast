@@ -49,7 +49,7 @@ public class PauseRenderer {
 	}
 	private void drawButtonResume() {
 		spriteBatch.draw(buttonResume, 100, 100, 307, 102);
-		System.out.println("draw button resume");
+		//System.out.println("draw button resume");
 		
 	}
 	
