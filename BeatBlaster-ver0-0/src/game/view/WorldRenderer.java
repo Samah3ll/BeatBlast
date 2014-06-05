@@ -159,40 +159,9 @@ public class WorldRenderer {
 	 
 	
 	 public void moveCamera(){
-		 float dx = runner.getVelocity().x;
-		 //float dy = runner.getVelocity().y;
-		 
-		 
-		 //Correction pour que la caméra ne dépasse pas le runner ou l'inverse, peut être à modifier
-		 float correction = 0.75f;
-		 
-		 if(runner.getVelocity().x == 0) {
-			 dx = 0;
-		 }
-		 
-		 if(runner.getAcceleration().x == 0) {
-			 dx = 0;
-		 }
-		 
-		 //Déplacement de la caméra pour suivre le runner
-		 if(dx < 0) {
-			 cam.translate(dx, 0);
-			 if(dx != 0) {
-				 cam.translate(-correction, 0);
-			 }			 
-		 }
-		 /*if(up){
-			 cam.translate(0, 0);
-		 }*/
-		 if(dx > 0){
-			 cam.translate(dx, 0);
-			 if(dx != 0) {
-				 cam.translate(correction, 0);
-			 }
-		 }
-		 /*if(down){
-			 cam.translate(0, 0);
-		 }*/
+		 	 
+		 cam.position.x = runner.getPosition().x * ppuX;
+		
 		 
 		 //Pour que la caméra ne sorte pas du niveau
 		 if(cam.position.x < 0) {
