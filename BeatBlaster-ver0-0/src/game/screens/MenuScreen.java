@@ -21,6 +21,16 @@ import game.view.MenuRenderer;
 public class MenuScreen implements Screen, InputProcessor {
 	
 	
+	private static final float BUTTON_WIDTH = 60f;
+	private static final float BUTTON_HEIGHT = 30f;
+	private static final float CAMERA_WIDTH = 100f;
+	private static final float CAMERA_HEIGHT = 100f;
+	
+	private int width;
+    private int height;
+    private float ppuX;
+    private float ppuY;
+	
 	private MenuController controller;
 	private MenuRenderer renderer;
 	
@@ -88,11 +98,11 @@ public class MenuScreen implements Screen, InputProcessor {
 	
 	private void mouseSelection() {
 		//Selection par la sourie
-		if(controller.getMousePosition().x > 244 && controller.getMousePosition().x < 467
-				&& controller.getMousePosition().y > 263 && controller.getMousePosition().y < 322) {
+		if(controller.getMousePosition().x > 30f*ppuX && controller.getMousePosition().x < 8f*ppuX + BUTTON_WIDTH * ppuX
+				&& controller.getMousePosition().y > 50f*ppuY && controller.getMousePosition().y < 45f*ppuY + BUTTON_HEIGHT * ppuY) {
 			controller.setSelectedButton(1);
-		} else if(controller.getMousePosition().x > 213 && controller.getMousePosition().x < 515
-				&& controller.getMousePosition().y > 353 && controller.getMousePosition().y < 414) {
+		} else if(controller.getMousePosition().x > 25f*ppuX && controller.getMousePosition().x < 15f * ppuX + BUTTON_WIDTH * ppuX
+				&& controller.getMousePosition().y > 60f * ppuY && controller.getMousePosition().y < 62f * ppuY + BUTTON_HEIGHT * ppuY) {
 			controller.setSelectedButton(3);
 		} else {
 			controller.setSelectedButton(0);
@@ -136,6 +146,10 @@ public class MenuScreen implements Screen, InputProcessor {
 	@Override
 	public void resize(int width, int height) {
 		renderer.setSize(width, height);
+		this.width = width;
+        this.height = height;
+        ppuX = (float)width / CAMERA_WIDTH;
+        ppuY = (float)height / CAMERA_HEIGHT;
 
 	}
 
