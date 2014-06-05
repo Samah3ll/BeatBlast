@@ -92,11 +92,11 @@ public class SelectionRenderer {
 	}
 	
 	private void drawButtonSelect() {
-		spriteBatch.draw(buttonSelect, 20 * ppuX, 70 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonSelect, 20 * ppuX, 60 * ppuY, BUTTON_WIDTH * ppuX, (BUTTON_HEIGHT - 5) * ppuY);
 	}
 	
 	private void drawButtonSelectSelected() {
-		spriteBatch.draw(buttonSelectSelected, 20 * ppuX, 70 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonSelectSelected, 20 * ppuX, 60 * ppuY, BUTTON_WIDTH * ppuX, (BUTTON_HEIGHT - 5) * ppuY);
 	}
 	
 	private void drawButtonBack() {
@@ -108,11 +108,11 @@ public class SelectionRenderer {
 	}
 	
 	private void drawButtonChoose() {
-		spriteBatch.draw(buttonChoose, 20 * ppuX, 40 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonChoose, 20 * ppuX, 40 * ppuY, BUTTON_WIDTH * ppuX, (BUTTON_HEIGHT - 5) * ppuY);
 	}
 	
 	private void drawButtonChooseSelected() {
-		spriteBatch.draw(buttonChooseSelected, 20 * ppuX, 40 * ppuY, BUTTON_WIDTH * ppuX, BUTTON_HEIGHT * ppuY);
+		spriteBatch.draw(buttonChooseSelected, 20 * ppuX, 40 * ppuY, BUTTON_WIDTH * ppuX, (BUTTON_HEIGHT - 5) * ppuY);
 	}
 
 	public void setSize(int width, int height) {

@@ -18,6 +18,16 @@ import com.badlogic.gdx.graphics.GL10;
 
 public class SelectionScreen implements Screen, InputProcessor {
 	
+	private static final float BUTTON_WIDTH = 60f;
+	private static final float BUTTON_HEIGHT = 30f;
+	private static final float CAMERA_WIDTH = 100f;
+	private static final float CAMERA_HEIGHT = 100f;
+	
+	private int width;
+    private int height;
+    private float ppuX;
+    private float ppuY;
+	
 	SelectionController controller;
 	SelectionRenderer renderer;
 	
@@ -86,14 +96,14 @@ public class SelectionScreen implements Screen, InputProcessor {
 		//TODO modifier les valeurs pour qu'elles collent à cet écran.
 		
 		//La sourie est sur le boutton select
-		if(controller.getMousePosition().x > 165 && controller.getMousePosition().x < 555
-				&& controller.getMousePosition().y > 56 && controller.getMousePosition().y < 108) {
+		if(controller.getMousePosition().x > 20 * ppuX && controller.getMousePosition().x < 20 * ppuX + BUTTON_WIDTH * ppuX
+				&& controller.getMousePosition().y > 20 * ppuY && controller.getMousePosition().y < 5 * ppuY + BUTTON_HEIGHT * ppuY) {
 			controller.setSelectedButton(1);
-		} else if(controller.getMousePosition().x > 153 && controller.getMousePosition().x < 565	//La sourie est sur le boutton choose
-				&& controller.getMousePosition().y > 181 && controller.getMousePosition().y < 235) {
+		} else if(controller.getMousePosition().x > 25 * ppuX && controller.getMousePosition().x < 15 * ppuX + BUTTON_WIDTH * ppuX	//La sourie est sur le boutton choose
+				&& controller.getMousePosition().y > 40 * ppuY && controller.getMousePosition().y < 25 * ppuY + BUTTON_HEIGHT * ppuY) {
 			controller.setSelectedButton(2);
-		} else if(controller.getMousePosition().x > 233 && controller.getMousePosition().x < 515 //La sourie est sur le boutton back
-				&& controller.getMousePosition().y > 351 && controller.getMousePosition().y < 414) {
+		} else if(controller.getMousePosition().x > 36 * ppuX && controller.getMousePosition().x < 5 * ppuX + BUTTON_WIDTH * ppuX //La sourie est sur le boutton back
+				&& controller.getMousePosition().y > 79 * ppuY && controller.getMousePosition().y < 60 * ppuY + BUTTON_HEIGHT * ppuY) {
 			controller.setSelectedButton(3);
 		} else {
 			controller.setSelectedButton(0);
@@ -141,6 +151,10 @@ public class SelectionScreen implements Screen, InputProcessor {
 	@Override
 	public void resize(int width, int height) {
 		renderer.setSize(width, height);
+		this.width = width;
+        this.height = height;
+        ppuX = (float)width / CAMERA_WIDTH;
+        ppuY = (float)height / CAMERA_HEIGHT;
 
 	}
 
