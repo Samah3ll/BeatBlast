@@ -28,7 +28,7 @@ public class World {
 	}
 	
 	public World(DataSong ds) {
-		runner = new Runner(new Vector2(7, 2));
+		runner = new Runner(new Vector2(1, 2));
 		lg = new LevelGenerator(ds);
 		level = lg.generateLevel();
 		//createDemoWorld();
