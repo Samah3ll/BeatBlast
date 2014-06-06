@@ -129,6 +129,8 @@ public class SelectionRenderer {
 		buttonSelect.getTexture().dispose();
 		buttonBackSelected.getTexture().dispose();
 		buttonBack.getTexture().dispose();
+		buttonChoose.getTexture().dispose();
+		buttonChooseSelected.getTexture().dispose();
 		
 	}
 

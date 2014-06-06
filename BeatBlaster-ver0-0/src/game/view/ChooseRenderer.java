@@ -29,6 +29,9 @@ public class ChooseRenderer {
 	private TextureRegion buttonBack;
 	private TextureRegion buttonBackSelected;
 	
+	//Hightlight
+	TextButtonStyle style;
+	
 	private int width;
     private int height;
     private float ppuX;
@@ -43,7 +46,7 @@ public class ChooseRenderer {
     
     //Liste des musiques à afficher
     private ArrayList<String> printable = new ArrayList<String>(8);
-    
+        
     
     /*
      * Constructeur
@@ -108,18 +111,23 @@ public class ChooseRenderer {
 		highlight = atlas.findRegion("highlight");
 		buttonBack = atlas.findRegion("back");
 		buttonBackSelected = atlas.findRegion("backSelected");
+		
+		style = new TextButtonStyle();
+		style.font = new BitmapFont();
+		style.fontColor = Color.GREEN;
 	}
 
 	public void render() {
 		spriteBatch.begin();
-			drawBackground();			
-			printPrintable();			
+			drawBackground();
+			printPrintable();									
 			if(ChooseController.isBackButtonSelected()) {				
 				drawButtonBackSelected();
 			} else {
 				drawButtonBack();
 			}
 		spriteBatch.end();
+		
 		
 	}
 	
@@ -141,10 +149,7 @@ public class ChooseRenderer {
 		spriteBatch.end();
 	}
 	
-	public void printPrintable() {
-		TextButtonStyle style = new TextButtonStyle();
-		style.font = new BitmapFont();
-		style.fontColor = Color.GREEN;
+	public void printPrintable() {		
 		
 		float f = 0;
 		for(int i = 0; i < 8; i++) {			
@@ -201,7 +206,9 @@ public class ChooseRenderer {
 
 	public void dispose() {
 		background.getTexture().dispose();
-		
+		highlight.getTexture().dispose();
+		buttonBack.getTexture().dispose();
+		buttonBackSelected.getTexture().dispose();
 	}
 
 }

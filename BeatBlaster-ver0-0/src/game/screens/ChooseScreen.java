@@ -116,7 +116,6 @@ public class ChooseScreen implements Screen, InputProcessor {
 			controller.setBackButtonSelected(false);
 		}
 	}
-	
 		
 	
 	/*
