@@ -19,7 +19,7 @@ public class RunnerController {
 	}
 	
 	private static final long LONG_JUMP_PRESS 	= 300l;
-	private static final float ACCELERATION 	= 20f;
+	private static final float ACCELERATION 	= 23f;
 	private static final float GRAVITY 			= -20f;
 	private static final float MAX_JUMP_SPEED	= 8f;
 	private static final float DAMP 			= 0.90f;

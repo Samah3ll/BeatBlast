@@ -129,6 +129,9 @@ public class ChooseRenderer {
 		if(num > savedFiles.size() - 1) {
 			num = savedFiles.size() - 1;
 		}
+		if(num < 0) {
+			num = 0;
+		}
 			
 		int x = 20;
 		int y = 80 - 5 * num;

@@ -16,7 +16,6 @@ public class PauseRenderer {
 	
 	private SpriteBatch spriteBatch;
 	
-	private TextureRegion buttonResume;
 	
 	private int width;
     private int height;
@@ -36,20 +35,12 @@ public class PauseRenderer {
     
 	private void loadTextures() {
 		final String path = System.getProperty("user.dir");
-		TextureAtlas atlas = new TextureAtlas(path + "/res/img/pause/textures.pack");
-		buttonResume = atlas.findRegion("resume02");
 		
 	}
      
 	public void render() {
 		spriteBatch.begin();
-		  drawButtonResume();
 		spriteBatch.end();
-		
-	}
-	private void drawButtonResume() {
-		spriteBatch.draw(buttonResume, 100, 100, 307, 102);
-		//System.out.println("draw button resume");
 		
 	}
 	
@@ -62,7 +53,6 @@ public class PauseRenderer {
     }
 	
 	public void dispose() {
-		buttonResume.getTexture().dispose();
 	}
 
 }

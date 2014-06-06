@@ -44,7 +44,7 @@ public class LevelGenerator {
 	public void generateSpectroBlocks(DataSong ds) {
 		for(int i = 0; i < ds.getBeats().size()-1; i++){
 			if( i<ds.getSpectro().length){
-				BasicPlateform p = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.bestSpectro(i), ((int)(ds.getBeats().get(i+1)-ds.getBeats().get(i))+1)+1);
+				BasicPlateform p = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.bestSpectro(i), ((int)(ds.getBeats().get(i+1)-ds.getBeats().get(i))+1)+2);
 				level.addPlateform(p);
 			}
 		}
