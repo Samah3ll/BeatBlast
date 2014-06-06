@@ -1,6 +1,7 @@
 package game.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -107,6 +108,56 @@ public class Level {
 	 */
 	public Block get(int x, int y) {	
 		return blocks[x][y];
+	}
+	
+	/**
+	 * Supprime le block à la position (x,y).
+	 * @param x abscisse du block à supprimer.
+	 * @param y ordonnée du block à supprimer.
+	 */
+	public void removeBlock(int x, int y) {
+		if(blocks[x][y] != null) {
+			blocks[x][y].remove();
+			blocks[x][y] = null;
+		}
+		
+	}
+	
+	/**
+	 * Retourne la plateform à la position spécifiée. Si il n'y a pas de plateforme à la position spécifiée retourne null.
+	 * @param x l'abscisse
+	 * @param y l'ordonnée
+	 * @return la plateforme à la position spécifiée
+	 */
+	public Plateform getPlateform(int x, int y) {
+		Plateform p;
+		for(Iterator<Plateform> it = plateforms.iterator(); it.hasNext();) {
+			if((p = it.next()) != null) {
+				if(p.getPosition().y == y && p.getPosition().x == x) {						
+					return p;					
+				}
+			}
+			
+		}
+		return null;
+	}
+	
+	/**
+	 * Supprime la plateforme à la position spécifiée.
+	 * @param x l'abscisse de la plateforme à supprimer.
+	 * @param y l'ordonnée de la plateforme à supprimer.
+	 */
+	public void removePlateform(int x, int y) {
+		//TODO : les plateformes ne se suppriment pas
+		Plateform p;
+		if((p = getPlateform(x, y)) != null) {
+			for(int i = 0; i < p.getSize(); i++) {
+				removeBlock(x, y + i);
+			}
+			plateforms.remove(p);				
+			p.remove();
+			p = null;
+		}
 	}
 	
 	public String toString() {

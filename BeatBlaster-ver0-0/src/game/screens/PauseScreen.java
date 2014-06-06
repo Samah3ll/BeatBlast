@@ -37,7 +37,7 @@ public class PauseScreen implements Screen, InputProcessor {
 		} else if(controller.isUnpaused()) {
 			System.out.println("resume");
 			controller.getKeys().put(PauseKeys.UNPAUSE, false);
-			oldScreen.resume(delta);
+			oldScreen.resume();
 			//game.setScreen(new GameScreen(game));
 		}
 		

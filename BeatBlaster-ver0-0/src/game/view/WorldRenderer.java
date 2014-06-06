@@ -55,6 +55,8 @@ public class WorldRenderer {
     private Animation walkLeftAnimation;
     private Animation walkRightAnimation;
     
+    
+    
 	public WorldRenderer(World w) {
 		this.world = w;
 		this.runner = world.getRunner();
@@ -92,7 +94,8 @@ public class WorldRenderer {
 	
 	public void pause() {
 		//spriteBatch.setProjectionMatrix(usualMatrix);
-		positionWhenPaused = runner.getPosition();	
+		positionWhenPaused = runner.getPosition();
+		
 	}
 	
 	public void resume() {

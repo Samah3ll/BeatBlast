@@ -92,6 +92,7 @@ public class RunnerController {
 				
 		if (runner.getPosition().y < 0) {
 			runner.getPosition().y = 0f;
+			runner.setState(State.DYING);
 			grounded = true;
 			runner.setPosition(runner.getPosition());
 			if (runner.getState().equals(State.JUMPING)) {
@@ -115,25 +116,29 @@ public class RunnerController {
 		}
 	}//end of update
 	
-	private boolean processInput() {
+	private void processInput() {
 		runner.getAcceleration().x = ACCELERATION;
 		runner.setFacingLeft(false);
 		
-		 //Key jump pressed
-		 if (keys.get(Keys.JUMP)) {
-			 if (!runner.getState().equals(State.JUMPING)) {
-				 jumpingPressed = true;
-				 grounded = false;
-				 jumpPressedTime = System.currentTimeMillis();
-				 runner.setState(State.JUMPING);
-				 runner.getVelocity().y = MAX_JUMP_SPEED;
-		  } else {
-			  if (jumpingPressed && ((System.currentTimeMillis() - jumpPressedTime) >= LONG_JUMP_PRESS)) {
-				  jumpingPressed = false;
-			  }
-			  if (jumpingPressed){
-				  runner.getVelocity().y = MAX_JUMP_SPEED; //la vitesse reste constante plutôt qu'elle diminue ==> saute + haut
-			  } 
+		if(runner.getState().equals(State.DYING)) {
+			System.out.println("You lose!");
+		}
+		
+		//Key jump pressed
+		if (keys.get(Keys.JUMP)) {
+			if (!runner.getState().equals(State.JUMPING)) {
+				jumpingPressed = true;
+				grounded = false;
+				jumpPressedTime = System.currentTimeMillis();
+				runner.setState(State.JUMPING);
+				runner.getVelocity().y = MAX_JUMP_SPEED;
+		} else {
+			if (jumpingPressed && ((System.currentTimeMillis() - jumpPressedTime) >= LONG_JUMP_PRESS)) {
+				jumpingPressed = false;
+			}
+			if (jumpingPressed){
+				runner.getVelocity().y = MAX_JUMP_SPEED; //la vitesse reste constante plutôt qu'elle diminue ==> saute + haut
+				} 
 		   	}
 		}
 		
@@ -150,33 +155,10 @@ public class RunnerController {
 				runner.setState(State.WALKING);
 				grounded = true;
 			}
-			runner.getAcceleration().x = ACCELERATION * (3/2);
+			runner.getAcceleration().x += ACCELERATION/2;
 		} else if(!runner.getState().equals(State.JUMPING)) {
 			runner.setState(State.WALKING);
 		}
-		/*
-		if (keys.get(Keys.LEFT)) {						// left is pressed
-			runner.setFacingLeft(true);
-			if (!runner.getState().equals(State.JUMPING)) {
-				runner.setState(State.WALKING);
-				grounded = true;
-			}
-			runner.getAcceleration().x = -ACCELERATION;
-		} else if (keys.get(Keys.RIGHT)) {				// right is pressed
-			runner.setFacingLeft(false);
-			if (!runner.getState().equals(State.JUMPING)) {
-				runner.setState(State.WALKING);
-				grounded = true;
-			}
-			runner.getAcceleration().x = ACCELERATION;
-		} else {
-			if (!runner.getState().equals(State.JUMPING)) {
-				runner.setState(State.IDLE);
-			}
-			runner.getAcceleration().x = 0;
-			
-		}	*/
-		return false;
 	}//end of processInput
 	
 	
@@ -305,14 +287,6 @@ public class RunnerController {
 	
 	public boolean isPaused() {
 		return keys.get(Keys.PAUSE);
-	}
-	
-	private void fixPosition() {
-		int y;
-		y = (int) Math.rint(runner.getPosition().y);
-		if(runner.getPosition().y < y) {
-			runner.getPosition().y = y;
-		}
 	}
 	
 	public void setSize(float ppuX, float ppuY) {

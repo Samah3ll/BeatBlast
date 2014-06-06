@@ -70,5 +70,13 @@ public abstract class Block {
 		bounds.setX(position.x);
 		bounds.setY(position.y);
 	}//end of moveBlock
+	
+	/**
+	 * Supprime le block.
+	 */
+	public void remove() {
+		this.position = null;
+		this.bounds = null;
+	}
 
 }

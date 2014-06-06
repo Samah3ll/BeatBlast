@@ -14,8 +14,6 @@ public abstract class Plateform {
 	
 	private Vector2 position;
 	private int size;
-
-	//private Block[][] blocks;
 	
 	
 	/**
@@ -27,10 +25,6 @@ public abstract class Plateform {
 	public Plateform(Vector2 pos, int size) {
 		this.position = pos;
 		this.size = size;
-		/*blocks = new Block[size][1];
-		for(int i = 0; i < size; i++) {
-			blocks[i][0] = new BasicBlock( (int) (position.x + i), (int) position.y);
-		}*/
 	}
 	
 	/**
@@ -43,10 +37,6 @@ public abstract class Plateform {
 	public Plateform(int x, int y, int size) {
 		this.position = new Vector2(x, y);
 		this.size = size;
-		/*blocks = new Block[size][1];
-		for(int i = 0; i < size; i++) {
-			blocks[i][0] = new BasicBlock( (int) (position.x + i), (int) position.y);
-		}*/
 	}
 	
 	public Plateform(float x, float y, int size) {
@@ -103,6 +93,10 @@ public abstract class Plateform {
 			this.position.x -= 1;
 		}
 		
+	}
+	
+	public void remove() {
+		this.position = null;
 	}
 
 }

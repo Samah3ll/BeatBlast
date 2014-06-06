@@ -6,10 +6,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.utils.Timer;
 
-import game.BeatBlaster;
 import game.controller.RunnerController;
 import game.model.World;
 import game.utils.DataSong;
@@ -30,24 +30,31 @@ public class GameScreen implements Screen, InputProcessor {
 	
 	Music selectedMusic;
 	
+	//Timer
+    private TimeUtils timeUtils;
+    private Timer timer;
+    private long currentTime;
+	
 	//String saveDirectory;
 	
 	
 	public GameScreen(Game game, DataSong ds, Music selectedMusic) {
 		this.game = game;
-		//saveDirectory = ((BeatBlaster) game).getSaveDirectory();
-		//FileHandle musicFile = new FileHandle("C:\\Users\\SamaHell\\Documents\\GitHub\\BeatBlast\\save\\03 Trojans.m4a.WAV");
-		//Music music = Gdx.audio.newMusic(musicFile);
+		this.timeUtils = new TimeUtils();
+		this.timer = new Timer();
 		this.selectedMusic = selectedMusic;
 		this.world = new World(ds);
 		this.renderer = new WorldRenderer(world);
 		this.controller = new RunnerController(world);
+		this.selectedMusic.setVolume(0.6f);
 		this.selectedMusic.play();
+		this.currentTime = System.currentTimeMillis();
 	}
 
 	@Override
 	public void render(float delta) {
-		
+		world.deleteBlocks((selectedMusic.getPosition() * 7) - 5);
+		world.deletPlateforms((selectedMusic.getPosition() * 7) - 5);
 		if(controller.isPaused()) {					
 			game.pause();
 			this.hide();
@@ -84,7 +91,7 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void pause() {
 		renderer.pause();
-		
+		selectedMusic.pause();
 		world.getRunner().getAcceleration().x = 0;
 		world.getRunner().getAcceleration().y = 0;
 		world.getRunner().getVelocity().x = 0;
@@ -98,22 +105,10 @@ public class GameScreen implements Screen, InputProcessor {
 		game.setScreen(this);
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
+		selectedMusic.play();
 		controller.getKeys().put(RunnerController.Keys.PAUSE, false);
 		Gdx.input.setInputProcessor(this);
 		//renderer.resume();
-	}
-	
-	public void resume(float delta) {
-		game.setScreen(this);
-		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
-		controller.getKeys().put(RunnerController.Keys.PAUSE, false);
-		Gdx.input.setInputProcessor(this);
-		//renderer.resume();
-		//render(delta);
-
 	}
 
 	@Override
