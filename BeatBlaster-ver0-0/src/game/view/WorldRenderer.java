@@ -37,6 +37,7 @@ public class WorldRenderer {
     
     //Pour la pause
     private Vector2 positionWhenPaused;
+    private boolean paused = false;
     
     //Block texture
     private TextureRegion blockTexture;
@@ -80,12 +81,15 @@ public class WorldRenderer {
 		 gl.glViewport(-width, -height, width*2, height*2);
 		 cam.update();
 		 cam.apply(gl);
-	    spriteBatch.setProjectionMatrix(cam.combined);
-		spriteBatch.begin();
-        	drawBlocks();
-        	drawplateforms();
-        	drawRunner();
-        spriteBatch.end();
+		 if(!paused) {
+			 spriteBatch.setProjectionMatrix(cam.combined);
+				spriteBatch.begin();
+		        	drawBlocks();
+		        	drawplateforms();
+		        	drawRunner();
+		        spriteBatch.end();
+		 }
+	    
         
         //particleEffect.setPosition(5, 5);
         //particleEffect.draw(spriteBatch);
@@ -95,12 +99,14 @@ public class WorldRenderer {
 	public void pause() {
 		//spriteBatch.setProjectionMatrix(usualMatrix);
 		positionWhenPaused = runner.getPosition();
+		paused = true;
 		
 	}
 	
 	public void resume() {
-		System.out.println("runner repositionned at " + positionWhenPaused);
+		//System.out.println("runner repositionned at " + positionWhenPaused);
 		runner.setPosition(positionWhenPaused);
+		paused = false;
 		//render();
 	}
 	
@@ -189,6 +195,8 @@ public class WorldRenderer {
 		runnerFrame.getTexture().dispose();
 		runnerJumpLeft.getTexture().dispose();
 		runnerJumpRight.getTexture().dispose();
+		runnerIdleLeft.getTexture().dispose();
+		runnerIdleRight.getTexture().dispose();
 	}
 
 	

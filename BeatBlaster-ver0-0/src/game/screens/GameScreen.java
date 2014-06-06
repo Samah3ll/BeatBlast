@@ -53,8 +53,12 @@ public class GameScreen implements Screen, InputProcessor {
 
 	@Override
 	public void render(float delta) {
-		world.deleteBlocks((selectedMusic.getPosition() * 7) - 5);
-		world.deletPlateforms((selectedMusic.getPosition() * 7) - 5);
+		world.deleteBlocks((selectedMusic.getPosition() * 7.15f) - 5);
+		world.deletPlateforms((selectedMusic.getPosition() * 7.15f) - 5);
+		if(controller.isDead()) {
+			this.pause();
+			game.setScreen(new LooseScreen(game));
+		}
 		if(controller.isPaused()) {					
 			game.pause();
 			this.hide();
@@ -101,6 +105,7 @@ public class GameScreen implements Screen, InputProcessor {
 
 	@Override
 	public void resume() {
+		renderer.resume();
 		game.resume();
 		game.setScreen(this);
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);

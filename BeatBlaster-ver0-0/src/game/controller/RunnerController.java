@@ -33,6 +33,8 @@ public class RunnerController {
 	private World 	world;
 	private Runner 	runner;
 	
+	private boolean isDead = false;
+	
 	private boolean jumpingPressed;
 	private long	jumpPressedTime = 0;
 	private boolean grounded = true;
@@ -63,6 +65,10 @@ public class RunnerController {
 		this.height = w.getLevel().getHeight();
 	}
 
+	public boolean isDead() {
+		return isDead;
+	}
+	
 	public void update(float delta) {
 		processInput();				
 		if (grounded && runner.getState().equals(State.JUMPING)) {
@@ -83,6 +89,10 @@ public class RunnerController {
 		}
 		if (runner.getVelocity().x < -MAX_VEL) {
 			runner.getVelocity().x = -MAX_VEL;
+		}
+		if(runner.getAcceleration().x > ACCELERATION + ACCELERATION/2) {
+			runner.getAcceleration().x = ACCELERATION;
+			//TODO
 		}
 		
 		runner.update(delta);
@@ -122,6 +132,7 @@ public class RunnerController {
 		
 		if(runner.getState().equals(State.DYING)) {
 			System.out.println("You lose!");
+			isDead = true;
 		}
 		
 		//Key jump pressed
@@ -148,7 +159,7 @@ public class RunnerController {
 				runner.setState(State.WALKING);
 				grounded = true;
 			}
-			runner.getAcceleration().x = ACCELERATION/2;
+			runner.getAcceleration().x -= ACCELERATION/2;
 		} else if(keys.get(Keys.RIGHT)) {
 			runner.setFacingLeft(false);
 			if (!runner.getState().equals(State.JUMPING)) {
@@ -331,7 +342,7 @@ public class RunnerController {
 		}
 
 		public void downPressed() {
-			keys.get(keys.put(Keys.DOWN, false));
+			keys.get(keys.put(Keys.DOWN, true));
 			
 		}
 
