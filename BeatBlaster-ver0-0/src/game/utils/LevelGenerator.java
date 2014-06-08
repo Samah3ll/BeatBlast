@@ -12,7 +12,7 @@ public class LevelGenerator {
 	
 	public LevelGenerator(DataSong ds) {
 		this.dataSong = ds;
-		this.level = new Level(((int)ds.getMaxTimeSong() ) * coeff + 200, 16);
+		this.level = new Level(((int)ds.getMaxTimeSong() ) * coeff + 100, 16);
 	}
 	
 	/**Création des blocks de contour */

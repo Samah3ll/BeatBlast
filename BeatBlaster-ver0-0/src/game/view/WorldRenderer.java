@@ -56,6 +56,9 @@ public class WorldRenderer {
     private Animation walkLeftAnimation;
     private Animation walkRightAnimation;
     
+  //Position dans le niveau jusqu'a laquelle les blocks disparraissent
+  	private float x = 0;
+    
     
     
 	public WorldRenderer(World w) {
@@ -72,6 +75,11 @@ public class WorldRenderer {
 		FileHandle effectFile = new FileHandle(path + "/res/particules/test.p");
 		particleEffect.loadEmitters(effectFile);
 		*/
+	}
+	
+	
+	public void setX(float x){
+		this.x = x;
 	}
 
 
@@ -143,7 +151,10 @@ public class WorldRenderer {
 	private void drawplateforms() {
 		for(Plateform plateform : world.getLevel().getPlateforms()) {
 			for (int i = 0; i < plateform.getSize(); i++) {
-				spriteBatch.draw(blockTexture, (plateform.getPosition().x + i) * ppuX, plateform.getPosition().y* ppuY, Block.getSize() * ppuX, Block.getSize() * ppuY);
+				if(plateform.getPosition().x > x) {
+					spriteBatch.draw(blockTexture, (plateform.getPosition().x + i) * ppuX, plateform.getPosition().y* ppuY, Block.getSize() * ppuX, Block.getSize() * ppuY);
+				}
+				
 	        }
 		}
 		

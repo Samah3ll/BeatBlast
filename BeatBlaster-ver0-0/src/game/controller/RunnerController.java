@@ -90,10 +90,7 @@ public class RunnerController {
 		if (runner.getVelocity().x < -MAX_VEL) {
 			runner.getVelocity().x = -MAX_VEL;
 		}
-		if(runner.getAcceleration().x > ACCELERATION + ACCELERATION/2) {
-			runner.getAcceleration().x = ACCELERATION;
-			//TODO
-		}
+		
 		
 		runner.update(delta);
 		//Ajouté depuis les coms du tuto
@@ -263,7 +260,7 @@ public class RunnerController {
 				runner.getAcceleration().y = 0;
 				//Paramètres à adapter en fonction de la vitesse du runner
 				runner.getPosition().y += 0.05f;
-				runner.getPosition().x += 0.1f;
+				//runner.getPosition().x += 0.1f;
 				//fixPosition();
 				break;
 			}
