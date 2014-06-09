@@ -94,7 +94,6 @@ public class RunnerController {
 		}
 		if(runner.getAcceleration().x > newAcceleration + newAcceleration/2) {
 			runner.getAcceleration().x = newAcceleration;
-			//TODO
 		}
 		runner.update(delta);
 		//Ajouté depuis les coms du tuto
