@@ -12,9 +12,12 @@ public class LevelGenerator {
 	
 	public LevelGenerator(DataSong ds) {
 		this.dataSong = ds;
-		this.level = new Level(((int)ds.getMaxTimeSong() ) * coeff + 200, 16);
+		this.level = new Level(((int)ds.getMaxTimeSong() + 2 ) * coeff, 16); //+2 pour le blocks de début et celui de fin
 	}
 	
+	public DataSong getDataSong(){
+		return dataSong;
+	}
 	/**Création des blocks de contour */
 	private void generateBounds() {
 		//bas et haut
@@ -53,9 +56,12 @@ public class LevelGenerator {
 	public Level generateLevel() {
 		generateBounds();
 		//generateBeatBlocks(dataSong);
-		generateSpectroBlocks(dataSong);
+		//generateSpectroBlocks(dataSong);
 		return level;
 	}
 	
+	public int getCoeff(){
+		return coeff;
+	}
 	
 }

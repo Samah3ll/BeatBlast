@@ -549,7 +549,7 @@ public class BeatTrackDisplay
    } // clearImage()
 	
 	/** Updates the background image, after creating it if necessary */
-	synchronized protected void repaintImage() {
+	public synchronized void repaintImage() {
 		if ((img == null) || (xSize != getWidth()) || (ySize != getHeight())) {
 			xSize = getWidth();
 			ySize = getHeight();

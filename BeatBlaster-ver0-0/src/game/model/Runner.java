@@ -78,5 +78,4 @@ public class Runner {
 		this.position = position2;
 		
 	}
-
 }

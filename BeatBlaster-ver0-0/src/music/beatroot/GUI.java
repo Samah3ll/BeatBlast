@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -227,6 +229,18 @@ public class GUI extends JFrame {
 	/** Loads and processes an audio file chosen with a file open dialog. */
 	public void loadAudioData() {
 		loadAudioData(chooser.getAudioInName());
+		displayPanel.beatTrack();
+		double[][] spectroMatrice = displayPanel.resizeSpectroForFile(12);
+		BeatRoot.writer.write( audioProcessor.audioFileName, displayPanel.maximumTime, displayPanel.beatPtr, spectroMatrice);
+		try {
+			BeatRoot.writer.copyFileBuffered(audioProcessor.audioFileName, 500);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	} // loadAudioData()
 	
 	/** Loads and processes a given audio file.
@@ -452,5 +466,9 @@ public class GUI extends JFrame {
 			updateDisplay(false);
 		}
 	} // setOnsetDetectionParameter()
+
+	public BeatTrackDisplay getDisplayPanel() {
+		return displayPanel;
+	}
 	
 } // class GUI
