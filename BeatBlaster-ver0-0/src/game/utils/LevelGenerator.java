@@ -1,4 +1,4 @@
-package game.utils;
+ package game.utils;
 
 import game.model.BasicBlock;
 import game.model.BasicPlateform;
