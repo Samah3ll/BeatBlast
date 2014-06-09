@@ -56,6 +56,12 @@ public class World {
 			}
 		}
 	}
+	public void dispose() {
+		runner.dispose();
+		level.dispose();
+		lg.dispose();
+		
+	}
 	
 
 }

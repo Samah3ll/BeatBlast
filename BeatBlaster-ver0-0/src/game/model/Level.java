@@ -176,4 +176,10 @@ public class Level {
 		
 		return tmp.toString();
 	}
+
+	public void dispose() {
+		blocks = null;
+		plateforms = null;
+		
+	}
 }

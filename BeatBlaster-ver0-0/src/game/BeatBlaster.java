@@ -37,7 +37,7 @@ public class BeatBlaster extends Game {
 			 saveDirectory+="\\";
 		 }
 		saveDirectory += "save";
-		System.out.println(saveDirectory);
+		//System.out.println(saveDirectory);
 		File folder = new File(saveDirectory);
 		if(folder.mkdir()) {
 			System.out.println("new folder created");

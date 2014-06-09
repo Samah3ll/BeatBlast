@@ -138,7 +138,6 @@ public class ChooseScreen implements Screen, InputProcessor {
 				DataSong ds = reader.read(saveDirectory, savedFiles.get(selectedSong + scrolled));
 				String musicName = "\\" + savedFiles.get(selectedSong + scrolled);
 				musicName = (String) musicName.subSequence(0, musicName.length() - 4);
-				System.out.println(musicName);
 				FileHandle musicFile = new FileHandle(saveDirectory + musicName);
 				Music music = Gdx.audio.newMusic(musicFile);
 				game.setScreen(new GameScreen(game, ds, music));

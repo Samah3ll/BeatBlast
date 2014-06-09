@@ -26,6 +26,10 @@ public class TextureSetup {
         TexturePacker2.process(path + "/res/img/choose",
 				    			path + "/res/img/choose",
 					"textures.pack");
+      //LooseScreen textures
+        TexturePacker2.process(path + "/res/img/loose",
+				    			path + "/res/img/loose",
+					"textures.pack");
         System.out.println("Done");
     }
 

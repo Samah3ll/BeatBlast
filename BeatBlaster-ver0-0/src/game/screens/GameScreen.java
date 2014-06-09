@@ -56,18 +56,21 @@ public class GameScreen implements Screen, InputProcessor {
 
 	@Override
 	public void render(float delta) {
+		//Correspond à la position de la musique
 		x = (selectedMusic.getPosition() * 7.15f) - 5;
+		//Permet au renderer de savoir jusqu'où effacer les blocks
 		renderer.setX(x);
 		renderer.setMusicPosition(selectedMusic.getPosition());
+		//Supprime les blocks du monde
 		world.deleteBlocks(x);
 		world.deletPlateforms(x);
+		
 		if(controller.isDead()) {
 			this.pause();
 			game.setScreen(new LooseScreen(game));
 		}
 		if(controller.isPaused()) {					
-			game.pause();
-			this.hide();
+			this.pause();
 			game.setScreen(new PauseScreen(game, this));
 		}else if(!controller.isPaused()) {
 			renderer.moveCamera();		
@@ -119,7 +122,6 @@ public class GameScreen implements Screen, InputProcessor {
 		selectedMusic.play();
 		controller.getKeys().put(RunnerController.Keys.PAUSE, false);
 		Gdx.input.setInputProcessor(this);
-		//renderer.resume();
 	}
 
 	@Override

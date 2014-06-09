@@ -29,7 +29,10 @@ public class LooseScreen implements Screen, InputProcessor {
 
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
+		renderer.render();
+		if(controller.isKeyTyped()) {
+			game.setScreen(new MenuScreen(game));
+		}
 
 	}
 
@@ -89,7 +92,7 @@ public class LooseScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean keyTyped(char character) {
-		//game.setScreen(new SelectionScreen(game));
+		controller.keyTyped(character);
 		return false;
 	}
 

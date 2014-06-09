@@ -79,4 +79,12 @@ public class Runner {
 		
 	}
 
+	public void dispose() {
+		velocity = null;
+		acceleration = null;
+		position = null;
+		bounds = null;
+		state = null;
+	}
+
 }

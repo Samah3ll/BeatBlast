@@ -80,8 +80,8 @@ public class Reader {
 				System.out.println("Le chemin '"+directoryPath+"' correspond à un fichier et non à un répertoire");
 			}else{
 				File[] subfiles = directory.listFiles();
-				String message = "Le répertoire '"+directoryPath+"' contient "+ subfiles.length+" fichier"+(subfiles.length>1?"s":"");
-				System.out.println(message);
+				//String message = "Le répertoire '"+directoryPath+"' contient "+ subfiles.length+" fichier"+(subfiles.length>1?"s":"");
+				//System.out.println(message);
 				for(int i=0 ; i<subfiles.length; i++){
 					listFiles.add(subfiles[i].getName());
 				}

@@ -56,6 +56,11 @@ public class LevelGenerator {
 		generateSpectroBlocks(dataSong);
 		return level;
 	}
+
+	public void dispose() {
+		dataSong = null;
+		
+	}
 	
 	
 }

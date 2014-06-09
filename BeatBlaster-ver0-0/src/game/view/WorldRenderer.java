@@ -1,14 +1,11 @@
 package game.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -31,6 +28,8 @@ public class WorldRenderer {
 	private World world;
 	private Runner runner;
 	private OrthographicCamera cam;
+	
+	GL10 gl = Gdx.graphics.getGL10();
 	
 	private SpriteBatch spriteBatch;
     private int width;
@@ -61,7 +60,6 @@ public class WorldRenderer {
     private TextButtonStyle style;
     private String position;
     private String velocity;
-    private String musicP;		//Pas sur d'utiliser celui la
     
     //Runner Animations
     private Animation walkLeftAnimation;
@@ -70,8 +68,7 @@ public class WorldRenderer {
   //Position dans le niveau jusqu'a laquelle les blocks disparraissent
   	private float x = 0;
   	private float musicPosition = 0;
-    
-    
+  	    
     
 	public WorldRenderer(World w) {
 		this.world = w;
@@ -100,7 +97,7 @@ public class WorldRenderer {
 
 
 	public void render() {
-		GL10 gl = Gdx.graphics.getGL10();
+		
 		 gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		 gl.glViewport(-width, -height, width*2, height*2);
 		 cam.update();
@@ -113,8 +110,7 @@ public class WorldRenderer {
 		        	drawRunner();
 		        	drawHUD();
 		        spriteBatch.end();
-		 }
-	    
+		 }    
         
         //particleEffect.setPosition(5, 5);
         //particleEffect.draw(spriteBatch);
@@ -122,21 +118,18 @@ public class WorldRenderer {
 	}
 	
 	public void pause() {
-		//spriteBatch.setProjectionMatrix(usualMatrix);
 		positionWhenPaused = runner.getPosition();
-		paused = true;
-		
+		paused = true;	
+		gl.glViewport(0, 0, 720, 450);
+		cam.apply(gl);
 	}
 	
 	public void resume() {
-		//System.out.println("runner repositionned at " + positionWhenPaused);
 		runner.setPosition(positionWhenPaused);
 		paused = false;
-		//render();
 	}
 	
-	private void loadTextures() {
-		final String path = System.getProperty("user.dir");
+	private void loadTextures() {		
 		TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(path + "/res/img/game/textures.pack"));
 		blockTexture = atlas.findRegion("Block");
 		runnerIdleLeft = atlas.findRegion("Runner04");
@@ -165,8 +158,7 @@ public class WorldRenderer {
 	private void drawBlocks() {
 		for (Block block : world.getLevel().getBlocks()) {
             spriteBatch.draw(blockTexture, block.getPosition().x * ppuX, block.getPosition().y * ppuY, Block.getSize() * ppuX, Block.getSize() * ppuY);
-        }
-		
+        }		
 	}
 	
 	private void drawplateforms() {
@@ -174,12 +166,9 @@ public class WorldRenderer {
 			for (int i = 0; i < plateform.getSize(); i++) {
 				if(plateform.getPosition().x > x) {
 					spriteBatch.draw(blockTexture, (plateform.getPosition().x + i) * ppuX, plateform.getPosition().y* ppuY, Block.getSize() * ppuX, Block.getSize() * ppuY);
-				}
-				
+				}				
 	        }
-		}
-		
-		
+		}		
 	}
 	
 	 private void drawRunner() {
@@ -224,8 +213,7 @@ public class WorldRenderer {
 	
 	 public void moveCamera(){
 		 	 
-		 cam.position.x = runner.getPosition().x * ppuX - 9 * ppuX;
-		
+		 cam.position.x = runner.getPosition().x * ppuX - 9 * ppuX;		
 		 
 		 //Pour que la caméra ne sorte pas du niveau
 		 if(cam.position.x < 0) {
@@ -246,12 +234,14 @@ public class WorldRenderer {
     }
 	
 	public void dispose() {
-		//spriteBatch.dispose();
 		runnerFrame.getTexture().dispose();
 		runnerJumpLeft.getTexture().dispose();
 		runnerJumpRight.getTexture().dispose();
 		runnerIdleLeft.getTexture().dispose();
 		runnerIdleRight.getTexture().dispose();
+		this.cam = null;
+		world.dispose();
+		world = null;
 	}
 
 	

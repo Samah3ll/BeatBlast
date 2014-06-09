@@ -132,8 +132,7 @@ public class RunnerController {
 		
 		runner.getVelocity().x = STD_VEL;
 		
-		if(runner.getState().equals(State.DYING)) {
-			System.out.println("You lose!");
+		if(runner.getState().equals(State.DYING)) {			
 			isDead = true;
 		}
 		
