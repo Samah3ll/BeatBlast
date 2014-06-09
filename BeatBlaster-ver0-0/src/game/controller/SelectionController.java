@@ -13,14 +13,14 @@ public class SelectionController {
 
 	private final long WAITTIME = 300;
 	
-	static boolean mouseIsPressed = false;
+	static boolean mouseIsPressed;
 	
-	static boolean selectButtonSelected = false;
-	static boolean backButtonSelected = false;
-	static boolean chooseButtonSelected = false;
+	static boolean selectButtonSelected;
+	static boolean backButtonSelected;
+	static boolean chooseButtonSelected;
 	
 	//Désigne le boutton selectionné : 0 = pas de sélection; 1 = select; 2 = choose; 3 = back.
-	private int selectedButton = 0;
+	private int selectedButton;
 
 	
 	static Vector2 mousePosition = new Vector2(0, 0);
@@ -33,6 +33,19 @@ public class SelectionController {
 		keys.put(SelectionKeys.DOWN, false);
 		keys.put(SelectionKeys.UP, false);
 	};
+	
+	/*
+	 * Constructeur
+	 */
+	
+	public SelectionController() {
+		mouseIsPressed = false;
+		selectButtonSelected = false;
+		backButtonSelected = false;
+		chooseButtonSelected = false;
+		selectedButton = 0;
+		mousePosition.set(0, 0);
+	}
 	
 	
 	/*

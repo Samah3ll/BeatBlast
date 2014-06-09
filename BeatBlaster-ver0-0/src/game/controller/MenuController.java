@@ -13,14 +13,14 @@ public class MenuController {
 	
 	private final long WAITTIME = 300;
 	
-	static boolean mouseIsPressed = false;
+	static boolean mouseIsPressed;
 	
-	static boolean playButtonSelected = false;
-	static boolean optionButtonSelected = false;
-	static boolean quitButtonSelected = false;
+	static boolean playButtonSelected;
+	static boolean optionButtonSelected;
+	static boolean quitButtonSelected;
 	
 	//Désigne le boutton selectionné : 0 = pas de sélection; 1 = play; 2 = option; 3 = quit.
-	private int selectedButton = 0;	
+	private int selectedButton;
 	
 	static Vector2 mousePosition = new Vector2(0, 0);
 	
@@ -32,6 +32,19 @@ public class MenuController {
 		keys.put(MenuKeys.DOWN, false);
 		keys.put(MenuKeys.UP, false);
 	};
+	
+	/*
+	 * Constructeur
+	 */
+	
+	public MenuController() {
+		playButtonSelected = false;
+		optionButtonSelected = false;
+		quitButtonSelected = false;
+		mouseIsPressed = false;
+		selectedButton = 0;
+		mousePosition.set(0, 0);
+	}
 	
 	/*
 	 * Accesseurs

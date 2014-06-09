@@ -42,9 +42,6 @@ public class LooseRenderer {
     private void loadTextures() {
     	TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(path + "/res/img/loose/textures.pack"));
     	background = atlas.findRegion("background");
-    	if(background == null) {
-    		System.err.println("pas de background!");
-    	}
     }
     
     private void drawBackground() {

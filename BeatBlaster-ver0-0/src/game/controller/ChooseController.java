@@ -15,10 +15,10 @@ public class ChooseController {
 	
 	private final long WAITTIME = 300;
 	
-	static private boolean musicListSelected = false;
+	static private boolean musicListSelected;
 	
-	static boolean mouseIsPressed = false;
-	static boolean isBackButtonSelected = false;
+	static boolean mouseIsPressed;
+	static boolean isBackButtonSelected;
 	
 	static Vector2 mousePosition = new Vector2(0, 0);
 	
@@ -30,6 +30,17 @@ public class ChooseController {
 		keys.put(SelectionKeys.DOWN, false);
 		keys.put(SelectionKeys.UP, false);
 	};
+	
+	/*
+	 * Constructeur
+	 */
+	
+	public ChooseController() {
+		musicListSelected = false;
+		mouseIsPressed = false;
+		isBackButtonSelected = false;
+		mousePosition.set(0, 0);
+	}
 	
 	/*
 	 * Accesseurs
