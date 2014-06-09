@@ -44,7 +44,7 @@ public class World {
 	public void deleteBlocks(float x) {
 		for(int i = 0; i < x; i++) {
 			for(int y = 0; y < level.getHeight(); y++) {
-				//level.removeBlock(i, y);
+				level.removeBlock(i, y);
 			}
 		}
 	}
