@@ -19,11 +19,12 @@ public class RunnerController {
 	}
 	
 	private static final long LONG_JUMP_PRESS 	= 300l;
-	private static final float ACCELERATION 	= 23f;
+	private static final float ACCELERATION 	= 20f;
 	private static final float GRAVITY 			= -20f;
 	private static final float MAX_JUMP_SPEED	= 8f;
 	private static final float DAMP 			= 0.90f;
-	private static final float MAX_VEL 			= 4f;
+	private static final float MAX_VEL 			= 4.3f;
+	private static final float STD_VEL 			= 3.75f;
 	
 	private float width;
 	private float height;
@@ -70,10 +71,14 @@ public class RunnerController {
 	}
 	
 	public void update(float delta) {
-		processInput();				
+		processInput();			
+		
 		if (grounded && runner.getState().equals(State.JUMPING)) {
 			runner.setState(State.IDLE);
 		}
+		
+		//runner.getVelocity().x = STD_VEL;
+		runner.setFacingLeft(false);
 		
 		runner.getAcceleration().y = GRAVITY;
 		runner.getAcceleration().mul(delta);
@@ -124,8 +129,8 @@ public class RunnerController {
 	}//end of update
 	
 	private void processInput() {
-		runner.getAcceleration().x = ACCELERATION;
-		runner.setFacingLeft(false);
+		
+		runner.getVelocity().x = STD_VEL;
 		
 		if(runner.getState().equals(State.DYING)) {
 			System.out.println("You lose!");
@@ -156,14 +161,14 @@ public class RunnerController {
 				runner.setState(State.WALKING);
 				grounded = true;
 			}
-			runner.getAcceleration().x -= ACCELERATION/2;
+			runner.getVelocity().x = 3f;
 		} else if(keys.get(Keys.RIGHT)) {
 			runner.setFacingLeft(false);
 			if (!runner.getState().equals(State.JUMPING)) {
 				runner.setState(State.WALKING);
 				grounded = true;
 			}
-			runner.getAcceleration().x += ACCELERATION/2;
+			runner.getVelocity().x = MAX_VEL;
 		} else if(!runner.getState().equals(State.JUMPING)) {
 			runner.setState(State.WALKING);
 		}

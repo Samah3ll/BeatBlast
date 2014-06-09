@@ -58,6 +58,7 @@ public class GameScreen implements Screen, InputProcessor {
 	public void render(float delta) {
 		x = (selectedMusic.getPosition() * 7.15f) - 5;
 		renderer.setX(x);
+		renderer.setMusicPosition(selectedMusic.getPosition());
 		world.deleteBlocks(x);
 		world.deletPlateforms(x);
 		if(controller.isDead()) {
