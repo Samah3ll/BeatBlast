@@ -66,7 +66,7 @@ import music.util.EventList;
 public class BeatRoot {
 
 	/** The graphical user interface (frame) object */
-	protected GUI gui;
+	public GUI gui;
 	
 	/** The object that deals with audio output */
 	protected AudioPlayer audioPlayer;
@@ -118,7 +118,10 @@ public class BeatRoot {
 	/** Flag indicating whether warning messages should be ignored or displayed */
 	protected static boolean ignoreWarnings = false;
 	
-	private Writer writer = new Writer();
+	/** Avec ou sans visuel ?*/
+	private Boolean visu = false;
+	
+	public static Writer writer;
 
 	/** Process command line arguments.
 	 * Arguments are: <I>[option]* [audioFile]</I>, where
@@ -170,34 +173,21 @@ public class BeatRoot {
 		gui = null;
 		processArgs();
 		audioProcessor = new AudioProcessor();
-		
-//		if (!batchMode)
-			fileChooser = new Chooser();
+		fileChooser = new Chooser();
+		writer = new Writer(saveDirectory);
 		audioPlayer = new AudioPlayer(null, fileChooser);
-		//if (!batchMode) {
-			gui = new GUI(audioPlayer, audioProcessor, fileChooser);
-//			if (audioIn != null) {
-//				System.out.println("audioIn ==> " +audioIn);
-//				gui.loadAudioData(audioIn);
-//				if (beatsIn != null)
-//					gui.loadBeatData(beatsIn);
-//				else
-//					gui.displayPanel.beatTrack();
-//				if (playWithBeats)
-//					audioPlayer.play();
-//			}
-//		}
-		
+		gui = new GUI(audioPlayer, audioProcessor, fileChooser);
 		/** pour le projet (pas de visu, création de fichiers */
-		gui.setVisible(true);
+		/*
+		//gui.setVisible(false);
 		gui.loadAudioData();
 		gui.displayPanel.beatTrack();
 		gui.displayPanel.resizeSpectroForVisu(12);
 		gui.displayPanel.repaintImage();
-		double[][] spectroMatricelol = gui.displayPanel.spectro;
 		double[][] spectroMatrice = gui.displayPanel.resizeSpectroForFile(12);
 		System.out.println(saveDirectory);
 		writer.write( saveDirectory, audioProcessor.audioFileName, gui.displayPanel.maximumTime, gui.displayPanel.beatPtr, spectroMatrice);
+		*/
 	}  // constructor
 
 	/** Reads a line from the arguments file <code>argsFile</code>, and converts
@@ -296,6 +286,18 @@ public class BeatRoot {
 			System.exit(0);
 	} // error()
 	
+	public Boolean getVisu(){
+		return visu;
+	}
+	
+	public GUI getGui() {
+		return gui;
+	}
+
+	public AudioProcessor getAudioProcessor() {
+		return audioProcessor;
+	}
+
 	/** Entry point for BeatRoot application.
 	 *  @param args Optional command line arguments (see constructor for details)
 	 */
@@ -303,5 +305,5 @@ public class BeatRoot {
 		String path = System.getProperty("user.dir");
 		new BeatRoot(path);
 	} // main()
-
+	
 } // class BeatRoot

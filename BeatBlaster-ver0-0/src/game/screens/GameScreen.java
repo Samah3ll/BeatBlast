@@ -73,7 +73,7 @@ public class GameScreen implements Screen, InputProcessor {
 			this.pause();
 			game.setScreen(new PauseScreen(game, this));
 		}else if(!controller.isPaused()) {
-			renderer.moveCamera();		
+			renderer.moveCamera();
 			controller.update(delta);
 			renderer.render();
 		}

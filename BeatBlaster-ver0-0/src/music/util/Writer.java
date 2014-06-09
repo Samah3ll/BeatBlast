@@ -1,7 +1,10 @@
 package music.util;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ListIterator;
@@ -14,10 +17,13 @@ public class Writer {
 	/** Dossier où seront stockées les sauvegardes */
 	//final String path = System.getProperty("user.dir");
 	//final String saveDirectory = path.substring(0, path.length() - 18) + "save";
+	private String saveDirectory=null;
 	
-	public Writer()	{}
+	public Writer(String saveDirectory)	{
+		this.saveDirectory = saveDirectory;
+	}
 	 
-	 public boolean write(String saveDirectory, String pathFile, double songTime, ListIterator<Event> beatPtr, double[][] spectro){
+	 public boolean write(String pathFile, double songTime, ListIterator<Event> beatPtr, double[][] spectro){
 		try
 		{
 			/**
@@ -41,7 +47,7 @@ public class Writer {
 			 *  - false signifie qu'on écrase le contenu du fichier et qu'on ne fait pas d'append
 			 */
 			
-			FileWriter fileWriter = new FileWriter(dataFilePath, true);
+			FileWriter fileWriter = new FileWriter(dataFilePath, false);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			
 			//on écrit dans le BufferedWriter qui sert de tampon(stream)
@@ -112,5 +118,26 @@ public class Writer {
 		 return tmp[tmp.length-1];
 	 }
 	 
+	 public void copyFileBuffered(final String currentFile, final int bufferSize) throws FileNotFoundException, IOException {
+		 final BufferedReader in = new BufferedReader(new FileReader(currentFile), bufferSize * 1024);
+		    
+	    String newDataFilePath = saveDirectory + "\\" +getFileName(currentFile);
+	    
+	    try {
+	    	final BufferedWriter out = new BufferedWriter(new FileWriter(newDataFilePath), bufferSize * 1024);
+	    	try {
+	    		int s = in.read();
+	    		while(s != -1) {
+	    			out.write(s);
+	    			s = in.read();
+	        }//end while
+	    		out.flush();
+	    	} finally {
+	    		out.close();
+	    	}//end try
+	    } finally {
+	    	in.close();
+	    }//end try
+	 }//end copyFileBuffered
 }
 

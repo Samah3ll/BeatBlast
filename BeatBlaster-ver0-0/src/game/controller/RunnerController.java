@@ -19,12 +19,12 @@ public class RunnerController {
 	}
 	
 	private static final long LONG_JUMP_PRESS 	= 300l;
-	private static final float ACCELERATION 	= 20f;
+	//private static float ACCELERATION 	= 30f;//getvelocity.x = 3.5 environ
 	private static final float GRAVITY 			= -20f;
 	private static final float MAX_JUMP_SPEED	= 8f;
 	private static final float DAMP 			= 0.90f;
-	private static final float MAX_VEL 			= 4.3f;
-	private static final float STD_VEL 			= 3.75f;
+	private static final float MAX_VEL 			= 10f;
+	private float newAcceleration = 0;
 	
 	private float width;
 	private float height;
@@ -66,25 +66,28 @@ public class RunnerController {
 		this.height = w.getLevel().getHeight();
 	}
 
+	private void newAcceleration(double d, double t, float delta) {
+		newAcceleration = (float) (d/(t*DAMP*delta*20)); //pk 20 ? 20=10*2, 2 c'est pour d qui est deux fois gros et 10 c'est pour DAMP il me semble..
+	}
+
 	public boolean isDead() {
 		return isDead;
 	}
 	
 	public void update(float delta) {
-		processInput();			
-		
+		System.out.println("---test---");
+		System.out.println("test 1 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
+		processInput(delta);
 		if (grounded && runner.getState().equals(State.JUMPING)) {
 			runner.setState(State.IDLE);
 		}
-		
-		//runner.getVelocity().x = STD_VEL;
-		runner.setFacingLeft(false);
-		
+		System.out.println("test 1.5 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
+		System.out.println(delta);
 		runner.getAcceleration().y = GRAVITY;
 		runner.getAcceleration().mul(delta);
-		
+		System.out.println("test 2 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
 		runner.getVelocity().add(runner.getAcceleration().x, runner.getAcceleration().y);
-		
+		System.out.println("test 3 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
 		checkCollisionWithBlocks(delta);
 		
 		runner.getVelocity().x *= DAMP;
@@ -95,13 +98,16 @@ public class RunnerController {
 		if (runner.getVelocity().x < -MAX_VEL) {
 			runner.getVelocity().x = -MAX_VEL;
 		}
-		
-		
+		if(runner.getAcceleration().x > newAcceleration + newAcceleration/2) {
+			runner.getAcceleration().x = newAcceleration;
+			//TODO
+		}
+		System.out.println("test 4 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
 		runner.update(delta);
 		//Ajouté depuis les coms du tuto
 		runner.getBounds().x = runner.getPosition().x;
 		runner.getBounds().y = runner.getPosition().y;
-				
+		System.out.println("test 5 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);	
 		if (runner.getPosition().y < 0) {
 			runner.getPosition().y = 0f;
 			runner.setState(State.DYING);
@@ -111,7 +117,7 @@ public class RunnerController {
 				runner.setState(State.IDLE);
 			}
 		}
-		
+		System.out.println("test 6 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
 		if (runner.getPosition().x < 0) {
 			runner.getPosition().x = 0;
 			runner.setPosition(runner.getPosition());
@@ -126,11 +132,13 @@ public class RunnerController {
 				runner.setState(State.IDLE);
 			}
 		}
+		System.out.println("test 7 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
 	}//end of update
 	
-	private void processInput() {
-		
-		runner.getVelocity().x = STD_VEL;
+	private void processInput(float delta) {
+		newAcceleration(world.getLevelGenerator().getDataSong().getMaxTimeSong()*world.getLevelGenerator().getCoeff(), world.getLevelGenerator().getDataSong().getMaxTimeSong(),delta);
+		runner.getAcceleration().x = newAcceleration;
+		runner.setFacingLeft(false);
 		
 		if(runner.getState().equals(State.DYING)) {			
 			isDead = true;
@@ -160,14 +168,14 @@ public class RunnerController {
 				runner.setState(State.WALKING);
 				grounded = true;
 			}
-			runner.getVelocity().x = 3f;
+			runner.getAcceleration().x -= newAcceleration/2;
 		} else if(keys.get(Keys.RIGHT)) {
 			runner.setFacingLeft(false);
 			if (!runner.getState().equals(State.JUMPING)) {
 				runner.setState(State.WALKING);
 				grounded = true;
 			}
-			runner.getVelocity().x = MAX_VEL;
+			runner.getAcceleration().x += newAcceleration/2;
 		} else if(!runner.getState().equals(State.JUMPING)) {
 			runner.setState(State.WALKING);
 		}
@@ -264,7 +272,7 @@ public class RunnerController {
 				runner.getAcceleration().y = 0;
 				//Paramètres à adapter en fonction de la vitesse du runner
 				runner.getPosition().y += 0.05f;
-				//runner.getPosition().x += 0.1f;
+				runner.getPosition().x += 0.1f;
 				//fixPosition();
 				break;
 			}
@@ -362,6 +370,5 @@ public class RunnerController {
 			
 		}
 
-		
 
 }
