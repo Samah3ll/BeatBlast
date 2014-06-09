@@ -30,6 +30,9 @@ public class GameScreen implements Screen, InputProcessor {
 	
 	Music selectedMusic;
 	
+	//Position dans le niveau jusqu'a laquelle les blocks disparraissent
+	private float x = 0;
+	
 	//Timer
     private TimeUtils timeUtils;
     private Timer timer;
@@ -53,8 +56,11 @@ public class GameScreen implements Screen, InputProcessor {
 
 	@Override
 	public void render(float delta) {
-		world.deleteBlocks((selectedMusic.getPosition() * 7.15f) - 5);
-		world.deletPlateforms((selectedMusic.getPosition() * 7.15f) - 5);
+		x = (selectedMusic.getPosition() * 7.15f) - 5;
+		renderer.setX(x);
+		renderer.setMusicPosition(selectedMusic.getPosition());
+		world.deleteBlocks(x);
+		world.deletPlateforms(x);
 		if(controller.isDead()) {
 			this.pause();
 			game.setScreen(new LooseScreen(game));
@@ -120,6 +126,7 @@ public class GameScreen implements Screen, InputProcessor {
 	public void dispose() {
 		Gdx.input.setInputProcessor(null);
 		renderer.dispose();
+		selectedMusic.dispose();
 
 	}
 

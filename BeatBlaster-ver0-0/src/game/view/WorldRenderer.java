@@ -2,14 +2,19 @@ package game.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 import game.model.Block;
 import game.model.Plateform;
@@ -52,9 +57,19 @@ public class WorldRenderer {
     private TextureRegion runnerJumpRight;
     private TextureRegion runnerFrame;
     
+    //pour le HUD
+    private TextButtonStyle style;
+    private String position;
+    private String velocity;
+    private String musicP;		//Pas sur d'utiliser celui la
+    
     //Runner Animations
     private Animation walkLeftAnimation;
     private Animation walkRightAnimation;
+    
+  //Position dans le niveau jusqu'a laquelle les blocks disparraissent
+  	private float x = 0;
+  	private float musicPosition = 0;
     
     
     
@@ -73,6 +88,15 @@ public class WorldRenderer {
 		particleEffect.loadEmitters(effectFile);
 		*/
 	}
+	
+	
+	public void setX(float x){
+		this.x = x;
+	}
+	
+	public void setMusicPosition(float musicPosition) {
+		this.musicPosition = musicPosition;
+	}
 
 
 	public void render() {
@@ -87,6 +111,7 @@ public class WorldRenderer {
 		        	drawBlocks();
 		        	drawplateforms();
 		        	drawRunner();
+		        	drawHUD();
 		        spriteBatch.end();
 		 }
 	    
@@ -131,6 +156,10 @@ public class WorldRenderer {
 		runnerJumpLeft = atlas.findRegion("Runner04");
 		runnerJumpRight = runnerJumpLeft;
 		runnerJumpRight.flip(true, false);
+		
+		style = new TextButtonStyle();
+		style.font = new BitmapFont();
+		style.fontColor = Color.WHITE;
 	}
 	
 	private void drawBlocks() {
@@ -143,7 +172,10 @@ public class WorldRenderer {
 	private void drawplateforms() {
 		for(Plateform plateform : world.getLevel().getPlateforms()) {
 			for (int i = 0; i < plateform.getSize(); i++) {
-				spriteBatch.draw(blockTexture, (plateform.getPosition().x + i) * ppuX, plateform.getPosition().y* ppuY, Block.getSize() * ppuX, Block.getSize() * ppuY);
+				if(plateform.getPosition().x > x) {
+					spriteBatch.draw(blockTexture, (plateform.getPosition().x + i) * ppuX, plateform.getPosition().y* ppuY, Block.getSize() * ppuX, Block.getSize() * ppuY);
+				}
+				
 	        }
 		}
 		
@@ -165,6 +197,29 @@ public class WorldRenderer {
 			}
 			spriteBatch.draw(runnerFrame, runner.getPosition().x * ppuX, runner.getPosition().y * ppuY, Runner.getSize() * ppuX, Runner.getSize() * ppuY);
 		}
+	 
+	 private void drawHUD() {
+		 position = runner.getPosition().toString();
+		 velocity = runner.getVelocity().toString();
+		 
+		 TextButton buttonP = new TextButton("Position : " + position, style);
+		 TextButton buttonV = new TextButton("Velocity : " + velocity, style);
+		 TextButton musicP = new TextButton("Music position : " + musicPosition , style);
+		 
+		 if(runner.getPosition().x - 9 < 0) {
+			 buttonP.translate(0 * ppuX, 14 * ppuY);
+			 buttonV.translate(0 * ppuX, 14.5f * ppuY);
+			 musicP.translate(0 * ppuX, 15 * ppuY);
+		 } else {
+			 buttonP.translate((runner.getPosition().x - 9) * ppuX, 14 * ppuY);
+			 buttonV.translate((runner.getPosition().x - 9) * ppuX, 14.5f * ppuY);
+			 musicP.translate((runner.getPosition().x - 9) * ppuX, 15 * ppuY);
+		 }
+		 
+		 buttonP.draw(spriteBatch, 1);		 
+		 buttonV.draw(spriteBatch, 1);		 
+		 musicP.draw(spriteBatch, 1);
+	 }
 	 
 	
 	 public void moveCamera(){
