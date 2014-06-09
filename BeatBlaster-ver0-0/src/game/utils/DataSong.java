@@ -34,7 +34,7 @@ public class DataSong {
 
 	public int bestSpectro(int abs) {
 		int bestIndex=0;
-		for(int i =1; i<spectro[0].length;i++){
+		for(int i =1; i<spectro[0].length/2;i++){
 			if(spectro[abs][i]>spectro[abs][bestIndex])
 				bestIndex=i;
 		}

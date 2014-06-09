@@ -8,7 +8,7 @@ public class LevelGenerator {
 	
 	private Level level;
 	private DataSong dataSong;
-	private final int coeff = 7;
+	private final int coeff =10;
 	
 	public LevelGenerator(DataSong ds) {
 		this.dataSong = ds;
@@ -47,9 +47,22 @@ public class LevelGenerator {
 	public void generateSpectroBlocks(DataSong ds) {
 		for(int i = 0; i < ds.getBeats().size()-1; i++){
 			if( i<ds.getSpectro().length){
-				BasicPlateform p = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.bestSpectro(i), ((int)(ds.getBeats().get(i+1)-ds.getBeats().get(i))+1)+2);
+				BasicPlateform p = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.bestSpectro(i), (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff)-1);
 				level.addPlateform(p);
 			}
+		}
+	}
+	
+	public void generateHelpBlocks(DataSong ds) {
+		int a = 0;
+		for(int i = 0; i < ds.getBeats().size()-1; i++){
+			if(a <9){
+				BasicPlateform p = new BasicPlateform(ds.getBeats().get(i)*coeff,a+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
+				level.addPlateform(p);
+			}
+			if(a>60)
+				a=0;
+			a += 2;
 		}
 	}
 	
@@ -57,6 +70,7 @@ public class LevelGenerator {
 		generateBounds();
 		//generateBeatBlocks(dataSong);
 		generateSpectroBlocks(dataSong);
+		//generateHelpBlocks(dataSong);
 		return level;
 	}
 

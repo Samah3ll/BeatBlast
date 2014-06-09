@@ -18,10 +18,10 @@ public class RunnerController {
 		LEFT, RIGHT, JUMP, FIRE, DOWN, PAUSE
 	}
 	
-	private static final long LONG_JUMP_PRESS 	= 300l;
+	private static final long LONG_JUMP_PRESS 	= 200l;
 	//private static float ACCELERATION 	= 30f;//getvelocity.x = 3.5 environ
-	private static final float GRAVITY 			= -40f;
-	private static final float MAX_JUMP_SPEED	= 7f;
+	private static final float GRAVITY 			= -90f;
+	private static final float MAX_JUMP_SPEED	= 12f;
 	private static final float DAMP 			= 0.90f;
 	private static final float MAX_VEL 			= 10f;
 	private float newAcceleration = 0;
