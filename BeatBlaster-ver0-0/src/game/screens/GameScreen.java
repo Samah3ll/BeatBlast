@@ -7,8 +7,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.utils.TimeUtils;
-import com.badlogic.gdx.utils.Timer;
 
 import game.controller.RunnerController;
 import game.model.World;
@@ -32,26 +30,17 @@ public class GameScreen implements Screen, InputProcessor {
 	
 	//Position dans le niveau jusqu'a laquelle les blocks disparraissent
 	private float x = 0;
-	
-	//Timer
-    private TimeUtils timeUtils;
-    private Timer timer;
-    private long currentTime;
-	
-	//String saveDirectory;
+		
 	
 	
 	public GameScreen(Game game, DataSong ds, Music selectedMusic) {
 		this.game = game;
-		this.timeUtils = new TimeUtils();
-		this.timer = new Timer();
 		this.selectedMusic = selectedMusic;
 		this.world = new World(ds);
 		this.renderer = new WorldRenderer(world);
 		this.controller = new RunnerController(world);
 		this.selectedMusic.setVolume(0.6f);
 		this.selectedMusic.play();
-		this.currentTime = System.currentTimeMillis();
 	}
 
 	@Override
@@ -64,12 +53,12 @@ public class GameScreen implements Screen, InputProcessor {
 		//Supprime les blocks du monde
 		world.deleteBlocks(x);
 		world.deletPlateforms(x);
-		
+			
 		if(controller.isDead()) {
 			this.pause();
+			renderer.hide();
 			game.setScreen(new LooseScreen(game));
-		}
-		if(controller.isPaused()) {					
+		} else if(controller.isPaused()) {					
 			this.pause();
 			game.setScreen(new PauseScreen(game, this));
 		}else if(!controller.isPaused()) {
@@ -77,7 +66,7 @@ public class GameScreen implements Screen, InputProcessor {
 			controller.update(delta);
 			renderer.render();
 		}
-
+		
 	}
 
 	@Override
@@ -126,7 +115,7 @@ public class GameScreen implements Screen, InputProcessor {
 	public void dispose() {
 		Gdx.input.setInputProcessor(null);
 		renderer.dispose();
-		selectedMusic.dispose();
+		//selectedMusic.dispose();
 
 	}
 

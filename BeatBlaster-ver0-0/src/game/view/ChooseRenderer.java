@@ -192,9 +192,9 @@ public class ChooseRenderer {
 		spriteBatch.draw(buttonBackSelected, 30 * ppuX, 5 * ppuY, 40f * ppuX, 20f * ppuY);
 	}
 	
-	public void setSize(int width, int height) {
-		this.width = width;
-        this.height = height;
+	public void setSize(int w, int h) {
+		this.width = w;
+        this.height = h;
         ppuX = (float)width / CAMERA_WIDTH;
         ppuY = (float)height / CAMERA_HEIGHT;
 		

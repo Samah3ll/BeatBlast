@@ -132,6 +132,10 @@ public class WorldRenderer {
 		paused = false;
 	}
 	
+	public void hide() {
+		cam = null;
+	}
+	
 	private void loadTextures() {		
 		TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(path + "/res/img/game/textures.pack"));
 		blockTexture = atlas.findRegion("Block");

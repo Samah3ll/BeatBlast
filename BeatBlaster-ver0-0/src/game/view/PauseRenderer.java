@@ -25,9 +25,9 @@ public class PauseRenderer {
     //TODO:beaucoup de choses à enlever des commentaires ou a supprimer (penser aux imports).
     
     public PauseRenderer() {
-    	//this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
-		//this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
-		//this.cam.update();
+    	this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
+		this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
+		this.cam.update();
 		spriteBatch = new SpriteBatch();
         loadTextures();
     }

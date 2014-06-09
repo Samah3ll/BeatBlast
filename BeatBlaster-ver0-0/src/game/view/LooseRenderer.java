@@ -48,9 +48,9 @@ public class LooseRenderer {
     	spriteBatch.draw(background, 0, 0, CAMERA_WIDTH * ppuX, CAMERA_HEIGHT * ppuY);
     }
 
-	public void setSize(int width, int height) {
-		this.width = width;
-        this.height = height;
+	public void setSize(int w, int h) {
+		this.width = w;
+        this.height = h;
         ppuX = (float)width / CAMERA_WIDTH;
         ppuY = (float)height / CAMERA_HEIGHT;
 		

@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL10;
 
 public class PauseScreen implements Screen, InputProcessor {
 	
@@ -30,15 +29,11 @@ public class PauseScreen implements Screen, InputProcessor {
 	@Override
 	public void render(float delta) {
 		if(!controller.isUnpaused()) {
-			//Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
-			//Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 			
 			renderer.render();
 		} else if(controller.isUnpaused()) {
-			System.out.println("resume");
 			controller.getKeys().put(PauseKeys.UNPAUSE, false);
 			oldScreen.resume();
-			//game.setScreen(new GameScreen(game));
 		}
 		
 
