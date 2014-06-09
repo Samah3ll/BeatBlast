@@ -1,5 +1,7 @@
 package game.model;
 
+import java.util.ArrayList;
+
 import game.utils.DataSong;
 import game.utils.LevelGenerator;
 
@@ -65,6 +67,10 @@ public class World {
 		level.dispose();
 		lg.dispose();
 		
+	}
+	public ArrayList<Coin> getCoins() {
+		ArrayList<Coin> coins = level.getCoins();
+		return coins;
 	}
 	
 

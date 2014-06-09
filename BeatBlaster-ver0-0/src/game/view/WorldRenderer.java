@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 import game.model.Block;
+import game.model.Coin;
 import game.model.Plateform;
 import game.model.Runner;
 import game.model.Runner.State;
@@ -55,6 +56,7 @@ public class WorldRenderer {
     private TextureRegion runnerJumpLeft;
     private TextureRegion runnerJumpRight;
     private TextureRegion runnerFrame;
+    private TextureRegion coinTexture;
     
     //pour le HUD
     private TextButtonStyle style;
@@ -109,6 +111,7 @@ public class WorldRenderer {
 		        	drawplateforms();
 		        	drawRunner();
 		        	drawHUD();
+		        	//drawCoin();
 		        spriteBatch.end();
 		 }    
         
@@ -150,9 +153,17 @@ public class WorldRenderer {
 		runnerJumpRight = runnerJumpLeft;
 		runnerJumpRight.flip(true, false);
 		
+		//coinTexture = atlas.findRegion("coin");
+		
 		style = new TextButtonStyle();
 		style.font = new BitmapFont();
 		style.fontColor = Color.WHITE;
+	}
+	
+	private void drawCoin() {
+		for(Coin coin : world.getCoins()) {
+			spriteBatch.draw(coinTexture, coin.getPosition().x * ppuX, coin.getPosition().y * ppuY, Coin.getSize() * ppuX, Coin.getSize() * ppuY);
+		}
 	}
 	
 	private void drawBlocks() {

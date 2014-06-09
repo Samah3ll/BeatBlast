@@ -16,6 +16,7 @@ public class Level {
 	private int width;
 	private int height;
 	private Block[][] blocks;
+	private Coin[][] coins;
 	private ArrayList<Plateform> plateforms;
 	
 	/**
@@ -27,6 +28,7 @@ public class Level {
 		this.width = w;
 		this.height = h;
 		blocks = new Block[w][h];
+		coins = new Coin[w][h];
 		plateforms = new ArrayList<Plateform>();
 	}
 	
@@ -181,5 +183,32 @@ public class Level {
 		blocks = null;
 		plateforms = null;
 		
+	}
+	
+	/**
+	 * ajoute une piece à la position x, y (en int)
+	 * @param x
+	 * @param y
+	 */
+	public void addCoin(int x, int y) {
+		coins[x][y] = new Coin(x, y);
+	}
+
+	/**
+	 * 
+	 * @return un ArrayList<Coin> contenant la liste des pieces du niveau.
+	 */
+	public ArrayList<Coin> getCoins() {
+		ArrayList<Coin> coinsList = new ArrayList<Coin>();
+		Coin c;
+		for(int col = 0; col < width; col++) {
+			for(int row = 0 ; row < height ; row++) {
+				c = coins[col][row];
+				if(c != null) {
+					coinsList.add(c);
+				}
+			}
+		}
+		return coinsList;
 	}
 }
