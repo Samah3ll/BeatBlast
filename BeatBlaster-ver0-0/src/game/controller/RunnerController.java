@@ -75,19 +75,13 @@ public class RunnerController {
 	}
 	
 	public void update(float delta) {
-		System.out.println("---test---");
-		System.out.println("test 1 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
 		processInput(delta);
 		if (grounded && runner.getState().equals(State.JUMPING)) {
 			runner.setState(State.IDLE);
 		}
-		System.out.println("test 1.5 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
-		System.out.println(delta);
 		runner.getAcceleration().y = GRAVITY;
 		runner.getAcceleration().mul(delta);
-		System.out.println("test 2 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
 		runner.getVelocity().add(runner.getAcceleration().x, runner.getAcceleration().y);
-		System.out.println("test 3 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
 		checkCollisionWithBlocks(delta);
 		
 		runner.getVelocity().x *= DAMP;
@@ -102,12 +96,10 @@ public class RunnerController {
 			runner.getAcceleration().x = newAcceleration;
 			//TODO
 		}
-		System.out.println("test 4 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
 		runner.update(delta);
 		//Ajouté depuis les coms du tuto
 		runner.getBounds().x = runner.getPosition().x;
 		runner.getBounds().y = runner.getPosition().y;
-		System.out.println("test 5 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);	
 		if (runner.getPosition().y < 0) {
 			runner.getPosition().y = 0f;
 			runner.setState(State.DYING);
@@ -117,7 +109,6 @@ public class RunnerController {
 				runner.setState(State.IDLE);
 			}
 		}
-		System.out.println("test 6 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
 		if (runner.getPosition().x < 0) {
 			runner.getPosition().x = 0;
 			runner.setPosition(runner.getPosition());
@@ -132,7 +123,6 @@ public class RunnerController {
 				runner.setState(State.IDLE);
 			}
 		}
-		System.out.println("test 7 :" + runner.getVelocity().x + " " +runner.getAcceleration().x);
 	}//end of update
 	
 	private void processInput(float delta) {

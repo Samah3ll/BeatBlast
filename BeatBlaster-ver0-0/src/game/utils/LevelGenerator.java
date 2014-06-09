@@ -56,7 +56,7 @@ public class LevelGenerator {
 	public Level generateLevel() {
 		generateBounds();
 		//generateBeatBlocks(dataSong);
-		//generateSpectroBlocks(dataSong);
+		generateSpectroBlocks(dataSong);
 		return level;
 	}
 
