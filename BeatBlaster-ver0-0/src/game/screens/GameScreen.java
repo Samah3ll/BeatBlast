@@ -57,7 +57,7 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void render(float delta) {
 		//Correspond à la position de la musique
-		x = (selectedMusic.getPosition() * 7.15f) - 5;
+		x = (selectedMusic.getPosition() * 7f) - 5;
 		//Permet au renderer de savoir jusqu'où effacer les blocks
 		renderer.setX(x);
 		renderer.setMusicPosition(selectedMusic.getPosition());
@@ -114,7 +114,6 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void resume() {
 		renderer.resume();
-		game.resume();
 		game.setScreen(this);
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
