@@ -3,10 +3,13 @@ package music.util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ListIterator;
 
 import de.matthiasmann.twlthemeeditor.gui.SaveFileSelector;
@@ -14,7 +17,7 @@ import de.matthiasmann.twlthemeeditor.gui.SaveFileSelector;
 public class Writer {
 	
 	/*TODO Changer la façon de déterminer le saveDirectory, actuellement c'est dégueulasse (en dur) */
-	/** Dossier où seront stockées les sauvegardes */
+	/* Dossier où seront stockées les sauvegardes */
 	//final String path = System.getProperty("user.dir");
 	//final String saveDirectory = path.substring(0, path.length() - 18) + "save";
 	private String saveDirectory=null;
@@ -26,7 +29,7 @@ public class Writer {
 	 public boolean write(String pathFile, double songTime, ListIterator<Event> beatPtr, double[][] spectro){
 		try
 		{
-			/**
+			/*
 			 * BufferedWriter a besoin d un FileWriter, 
 			 * les 2 vont ensemble, on donne comme argument le nom du fichier
 			 * true signifie qu on ajoute dans le fichier (append), on ne marque pas par dessus 
@@ -41,7 +44,7 @@ public class Writer {
 				return false;
 			}
 			// sauter une ligne \n
-			/** 
+			/*
 			 * FileWriter possède 2 arguments :
 			 * 	- adresse du fichier (String)
 			 *  - false signifie qu'on écrase le contenu du fichier et qu'on ne fait pas d'append
@@ -56,10 +59,10 @@ public class Writer {
 			bufferedWriter.write("maxTimeSong " + Math.floor(songTime*100)/100);
 			
 			bufferedWriter.write("\n ---beats--- \n");
-			/**on va au début de l'eventlist*/
+			/*on va au début de l'eventlist*/
 			while(beatPtr.hasPrevious())
 				beatPtr.previous();
-			/**on écrit les beats sur une ligne, arrondis au centième*/
+			/*on écrit les beats sur une ligne, arrondis au centième*/
 			while(beatPtr.hasNext()){
 				//System.out.println(Math.floor(beatPtr.next().keyDown*100)/100);
 				bufferedWriter.write(Math.floor(beatPtr.next().keyDown*100)/100 + " ");
@@ -119,6 +122,34 @@ public class Writer {
 	 }
 	 
 	 public void copyFileBuffered(final String currentFile, final int bufferSize) throws FileNotFoundException, IOException {
+		 
+
+		 FileChannel in = null; // canal d'entrée
+		 FileChannel out = null; // canal de sortie
+ 
+		 try {
+			 // Init
+			 in = new FileInputStream(currentFile).getChannel();
+			 out = new FileOutputStream(saveDirectory + "\\" + getFileName(currentFile)).getChannel();
+ 
+			 // Copie depuis le in vers le out
+			 in.transferTo(0, in.size(), out);
+		 } catch (Exception e) {
+			 e.printStackTrace(); // n'importe quelle exception
+		 } finally { // finalement on ferme
+			 if(in != null) {
+				 try {
+					 in.close();
+				 } catch (IOException e) {}
+			 }
+			 if(out != null) {
+				 try {
+					 out.close();
+				 } catch (IOException e) {}
+			 }
+		 }
+
+		 /*
 		 final BufferedReader in = new BufferedReader(new FileReader(currentFile), bufferSize * 1024);
 		    
 	    String newDataFilePath = saveDirectory + "\\" +getFileName(currentFile);
@@ -138,6 +169,7 @@ public class Writer {
 	    } finally {
 	    	in.close();
 	    }//end try
+	    */
 	 }//end copyFileBuffered
 }
 

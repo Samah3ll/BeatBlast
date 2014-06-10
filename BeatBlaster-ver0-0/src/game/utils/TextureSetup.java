@@ -2,6 +2,11 @@ package game.utils;
 
 import com.badlogic.gdx.tools.imagepacker.TexturePacker2;
 
+/**
+ * 
+ * @author SamaHell
+ *
+ */
 public class TextureSetup {
 	
 	public static void main(String[] args) {
