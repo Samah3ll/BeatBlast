@@ -62,6 +62,7 @@ public class WorldRenderer {
     private TextButtonStyle style;
     private String position;
     private String velocity;
+    private long points;
     
     //Runner Animations
     private Animation walkLeftAnimation;
@@ -83,6 +84,7 @@ public class WorldRenderer {
 		this.cam.update();
 		spriteBatch = new SpriteBatch();
 		loadTextures();
+		points = 0;
 		/*
 		//initialize particles
 		particleEffect = new ParticleEffect();
@@ -216,21 +218,26 @@ public class WorldRenderer {
 	 private void drawHUD() {
 		 position = runner.getPosition().toString();
 		 velocity = runner.getVelocity().toString();
+		 points = world.getPoint();
 		 
 		 TextButton buttonP = new TextButton("Position : " + position, style);
 		 TextButton buttonV = new TextButton("Velocity : " + velocity, style);
 		 TextButton musicP = new TextButton("Music position : " + musicPosition , style);
+		 TextButton buttonS = new TextButton("Score : " + points, style);
 		 
 		 if(runner.getPosition().x - 9 < 0) {
+			 buttonS.translate(0 * ppuX, 13.5f * ppuY);
 			 buttonP.translate(0 * ppuX, 14 * ppuY);
 			 buttonV.translate(0 * ppuX, 14.5f * ppuY);
 			 musicP.translate(0 * ppuX, 15 * ppuY);
 		 } else {
+			 buttonS.translate((runner.getPosition().x - 9) * ppuX, 13.5f * ppuY);
 			 buttonP.translate((runner.getPosition().x - 9) * ppuX, 14 * ppuY);
 			 buttonV.translate((runner.getPosition().x - 9) * ppuX, 14.5f * ppuY);
 			 musicP.translate((runner.getPosition().x - 9) * ppuX, 15 * ppuY);
 		 }
 		 
+		 buttonS.draw(spriteBatch, 1);
 		 buttonP.draw(spriteBatch, 1);		 
 		 buttonV.draw(spriteBatch, 1);		 
 		 musicP.draw(spriteBatch, 1);

@@ -15,11 +15,14 @@ public class LooseScreen implements Screen, InputProcessor {
 	LooseController controller;
 	LooseRenderer renderer;
 	
+	long score;
 	
-	public LooseScreen(Game game) {
+	
+	public LooseScreen(Game game, long score) {
+		this.score = score;
 		this.game = game;
 		this.controller = new LooseController();
-		this.renderer = new LooseRenderer();
+		this.renderer = new LooseRenderer(score);
 	}
 	
 	

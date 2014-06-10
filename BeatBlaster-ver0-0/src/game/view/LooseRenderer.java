@@ -1,10 +1,14 @@
 package game.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 public class LooseRenderer {
 	
@@ -22,19 +26,25 @@ public class LooseRenderer {
     
     final String path = System.getProperty("user.dir");
     
+    //Textures
     private TextureRegion background;
+    
+    private TextButtonStyle style;
+    
+    private long score;
     
     
     /*
      * Constructeur
      */
     
-    public LooseRenderer() {
+    public LooseRenderer(long score) {
     	this.cam = new OrthographicCamera(CAMERA_WIDTH * 2, CAMERA_HEIGHT * 2);
 		this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
 		this.cam.update();
     	spriteBatch = new SpriteBatch();
     	loadTextures();
+    	this.score = score;
     }
     
     /*
@@ -44,16 +54,27 @@ public class LooseRenderer {
     public void render() {
     	spriteBatch.begin();
     		drawBackground();
+    		drawScore();
     	spriteBatch.end();
     }
     
     private void loadTextures() {
     	TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(path + "/res/img/loose/textures.pack"));
     	background = atlas.findRegion("background");
+    	
+    	style = new TextButtonStyle();
+		style.font = new BitmapFont();
+		style.fontColor = Color.GREEN;
     }
     
     private void drawBackground() {
     	spriteBatch.draw(background, 0, 0, CAMERA_WIDTH * ppuX, CAMERA_HEIGHT * ppuY);
+    }
+    
+    private void drawScore() {
+    	TextButton buttonS = new TextButton("Score : " + score, style);
+    	buttonS.translate(9f * ppuX, 1f * ppuY);
+    	buttonS.draw(spriteBatch, 1);
     }
 
 	public void setSize(int w, int h) {

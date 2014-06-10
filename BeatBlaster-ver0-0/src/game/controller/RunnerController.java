@@ -313,6 +313,7 @@ public class RunnerController {
 		for(Coin coin : world.getCoins()) {
 			if(runnerRect.overlaps(coin.getBounds())) {
 				world.deleteCoin(x, y);
+				world.addPoint(1);
 			}
 		}
 	}

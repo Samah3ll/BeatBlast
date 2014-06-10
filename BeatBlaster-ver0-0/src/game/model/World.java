@@ -18,11 +18,15 @@ public class World {
 	private Level level;
 	private LevelGenerator lg;
 	
+	//Compte les points du joueur.
+	private long points;
+	
 	
 	public World(DataSong ds) {
 		runner = new Runner(new Vector2(1, 2));
 		lg = new LevelGenerator(ds);
 		level = lg.generateLevel();
+		this.points = 0;
 	}
 	
 	
@@ -83,6 +87,22 @@ public class World {
 	 */
 	public void deleteCoin(int x, int y) {
 		level.deleteCoin(x, y);
+	}
+	
+	/**
+	 * Ajoute le nombre de point spécifiée au compteur.
+	 * @param point : le nombre de points à ajouter au compteur.
+	 */
+	public void addPoint(int point) {
+		this.points += point;
+	}
+	
+	/**
+	 * 
+	 * @return les points du joueur.
+	 */
+	public long getPoint() {
+		return points;
 	}
 	
 	

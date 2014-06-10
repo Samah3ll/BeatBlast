@@ -33,8 +33,7 @@ public class GameScreen implements Screen, InputProcessor {
 	//Position dans le niveau jusqu'a laquelle les blocks disparraissent
 	private float x = 0;
 	
-	//Compte les points du joueur.
-	private long points;
+	
 		
 	
 	
@@ -47,7 +46,6 @@ public class GameScreen implements Screen, InputProcessor {
 		//this.cursor = new Cursor(world.getLevelGenerator().getDataSong().getMaxTimeSong()*world.getLevelGenerator().getCoeff(), world.getLevelGenerator().getDataSong().getMaxTimeSong(),world.getLevelGenerator().getnbBlocksBefore());
 		this.selectedMusic.setVolume(0.6f);
 		this.selectedMusic.play();
-		this.points = 0;
 	}
 
 	@Override
@@ -65,7 +63,7 @@ public class GameScreen implements Screen, InputProcessor {
 		if(controller.isDead()) {
 			this.pause();
 			renderer.hide();
-			game.setScreen(new LooseScreen(game));
+			game.setScreen(new LooseScreen(game, world.getPoint()));
 		} else if(controller.isPaused()) {					
 			this.pause();
 			game.setScreen(new PauseScreen(game, this));
