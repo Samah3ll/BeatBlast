@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 
 import game.model.Block;
+import game.model.Coin;
 import game.model.Runner;
 import game.model.Runner.State;
 import game.model.World;
@@ -90,6 +91,7 @@ public class RunnerController {
 		runner.getAcceleration().mul(delta);
 		runner.getVelocity().add(runner.getAcceleration().x, runner.getAcceleration().y);
 		checkCollisionWithBlocks(delta);
+		checkCollisionWithCoin();
 		
 		runner.getVelocity().x *= DAMP;
 		
@@ -296,6 +298,25 @@ public class RunnerController {
 		}
 		
 	}//End of populateCollisionBlock
+	
+	/**
+	 * Vérifie si le runner touche une pièce.
+	 */
+	private void checkCollisionWithCoin() {
+		
+		int x = (int) runner.getPosition().x;
+		int y = (int) runner.getPosition().y;
+		
+		Rectangle runnerRect = rectPool.obtain();
+		runnerRect.set(x, y, runner.getBounds().width, runner.getBounds().height);
+		
+		for(Coin coin : world.getCoins()) {
+			if(runnerRect.overlaps(coin.getBounds())) {
+				world.deleteCoin(x, y);
+				world.addPoint(1);
+			}
+		}
+	}
 		
 	public Map<Keys, Boolean> getKeys() {
 		return keys;

@@ -161,35 +161,14 @@ public class Level {
 		}
 	}
 	
-	public String toString() {
-		StringBuffer tmp = new StringBuffer("Level : \n");
-		for(int i = 0; i < width; i++) {
-			for(int j = 0; j < height; j++) {
-				if(blocks[i][j] != null) {
-					tmp.append("block at : ");
-					tmp.append(i);
-					tmp.append("; ");
-					tmp.append(j);
-					tmp.append("\n");
-				}
-			}
-		}
-		return tmp.toString();
-	}
-
-	public void dispose() {
-		blocks = null;
-		plateforms = null;
-		
-	}
-	
 	/**
-	 * ajoute une piece à la position x, y (en int)
-	 * @param x
-	 * @param y
+	 * Ajoute la piece c au niveau.
+	 * @param c : la pièce à ajouter.
 	 */
-	public void addCoin(int x, int y) {
-		coins[x][y] = new Coin(x, y);
+	public void addCoin(Coin c) {
+		int x = (int) c.getPosition().x;
+		int y = (int) c.getPosition().y;
+		coins[x][y] = c;
 	}
 
 	/**
@@ -209,4 +188,43 @@ public class Level {
 		}
 		return coinsList;
 	}
+	
+	/**
+	 * Supprime la pièce à la position spécifiée.
+	 * @param x abscisse de la pièce à supprimer.
+	 * @param y ordonnée de la pièce à supprimer.
+	 */
+	public void deleteCoin(int x, int y) {
+		if(coins[x][y] != null) {
+			coins[x][y] = null;
+		}
+		
+	}
+	
+	public String toString() {
+		StringBuffer tmp = new StringBuffer("Level : \n");
+		for(int i = 0; i < width; i++) {
+			for(int j = 0; j < height; j++) {
+				if(blocks[i][j] != null) {
+					tmp.append("block at : ");
+					tmp.append(i);
+					tmp.append("; ");
+					tmp.append(j);
+					tmp.append("\n");
+				}
+			}
+		}
+		return tmp.toString();
+	}
+
+	public void dispose() {
+		blocks = null;
+		plateforms = null;
+		coins = null;
+		
+	}
+
+	
+	
+	
 }

@@ -50,6 +50,10 @@ public class Coin {
 		return SIZE;
 	}
 	
+	public Rectangle getBounds() {
+		return bounds;
+	}
+	
 	/**
 	 * Supprime la piece.
 	 */

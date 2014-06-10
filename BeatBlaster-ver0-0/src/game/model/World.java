@@ -18,11 +18,15 @@ public class World {
 	private Level level;
 	private LevelGenerator lg;
 	
+	//Compte les points du joueur.
+	private long points;
+	
 	
 	public World(DataSong ds) {
 		runner = new Runner(new Vector2(1, 2));
 		lg = new LevelGenerator(ds);
 		level = lg.generateLevel();
+		this.points = 0;
 	}
 	
 	
@@ -66,16 +70,49 @@ public class World {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @return une ArrayList qui contient les pièces du niveau.
+	 */
+	public ArrayList<Coin> getCoins() {
+		ArrayList<Coin> coins = level.getCoins();
+		return coins;
+	}
+	
+	/**
+	 * Supprime la pièce à la position spécifiée, appel la méthode du même nom de la classe Level.
+	 * @param x abscisse de la pièce à supprimer.
+	 * @param y ordonnée de la pièce à supprimer.
+	 */
+	public void deleteCoin(int x, int y) {
+		level.deleteCoin(x, y);
+	}
+	
+	/**
+	 * Ajoute le nombre de point spécifiée au compteur.
+	 * @param point : le nombre de points à ajouter au compteur.
+	 */
+	public void addPoint(int point) {
+		this.points += point;
+	}
+	
+	/**
+	 * 
+	 * @return les points du joueur.
+	 */
+	public long getPoint() {
+		return points;
+	}
+	
+	
 	public void dispose() {
 		runner.dispose();
 		level.dispose();
 		lg.dispose();
 		
 	}
-	public ArrayList<Coin> getCoins() {
-		ArrayList<Coin> coins = level.getCoins();
-		return coins;
-	}
+	
 	
 
 }
