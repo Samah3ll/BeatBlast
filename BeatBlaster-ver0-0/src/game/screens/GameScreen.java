@@ -24,8 +24,8 @@ public class GameScreen implements Screen, InputProcessor {
 	private World world;
 	private WorldRenderer renderer;
 	private RunnerController controller;
-	//private Cursor cursor;
-	
+	private double currentTime;
+	private boolean isMusicPlaid = false;
 	Game game;
 	
 	Music selectedMusic;
@@ -43,20 +43,30 @@ public class GameScreen implements Screen, InputProcessor {
 		this.controller = new RunnerController(world);
 		//this.cursor = new Cursor(world.getLevelGenerator().getDataSong().getMaxTimeSong()*world.getLevelGenerator().getCoeff(), world.getLevelGenerator().getDataSong().getMaxTimeSong(),world.getLevelGenerator().getnbBlocksBefore());
 		this.selectedMusic.setVolume(0.6f);
-		this.selectedMusic.play();
+		currentTime = System.currentTimeMillis();
+		//this.selectedMusic.play();
 	}
 
 	@Override
 	public void render(float delta) {
+		//Décide de quand la musique démarre
+		if(System.currentTimeMillis() - currentTime > world.getLevelGenerator().getTimeBeforeMusicBegin() && !isMusicPlaid){
+			selectedMusic.play();
+			isMusicPlaid=true;
+		}
+			
 		//Correspond à la position de la musique
-		//x = (selectedMusic.getPosition() * 10.5f) - 5; //TODO explique mwaaa !!
-		float MusicPosition = (selectedMusic.getPosition() * world.getLevelGenerator().getCoeff());
-		//Permet au renderer de savoir jusqu'où effacer les blocks
-		renderer.setX(MusicPosition-5);
-		renderer.setMusicPosition(selectedMusic.getPosition());
-		//Supprime les blocks du monde
-		world.deleteBlocks(MusicPosition-5);
-		world.deletPlateforms(MusicPosition-5);
+		float whereShoudBeRunnerPosition = (float) ((System.currentTimeMillis() - currentTime)*world.getLevelGenerator().getCoeff()/1000);
+		float deletePosition = whereShoudBeRunnerPosition -5; //5 blocks avant l'endroit où le runner devrait être
+		if(deletePosition>0){
+			//Permet au renderer de savoir jusqu'où effacer les blocks
+			renderer.setX(deletePosition);
+			renderer.setMusicPosition(selectedMusic.getPosition());
+			//Supprime les blocks du monde
+			world.deleteBlocks(deletePosition);
+			world.deletPlateforms(deletePosition);
+		}
+
 			
 		if(controller.isDead()) {
 			this.pause();

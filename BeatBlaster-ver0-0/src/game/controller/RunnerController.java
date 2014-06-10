@@ -74,7 +74,7 @@ public class RunnerController {
 	}
 
 	private void newAcceleration(double d, double t, float delta) {
-		newAcceleration = (float) (d/(t*DAMP*delta*20)); //pk 20 ? 20=10*2, 2 c'est pour d qui est deux fois gros et 10 c'est pour DAMP il me semble..
+		newAcceleration = (float) (d/(t*DAMP*delta*20)); //pk 20 ? 20=10*2, 2 c'est pour d qui est deux fois tros gros et 10 c'est pour DAMP il me semble..
 	}
 
 	public boolean isDead() {
