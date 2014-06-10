@@ -31,6 +31,10 @@ public class MenuRenderer {
     private float ppuX;
     private float ppuY;
     
+    /*
+     * Constructeur
+     */
+    
     public MenuRenderer() {
     	this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
 		this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
@@ -39,6 +43,10 @@ public class MenuRenderer {
         loadTextures();
     }
 	
+    
+    /*
+     * Accesseurs
+     */
 	
 	public void setSize (int w, int h) {
         this.width = w;
@@ -48,18 +56,10 @@ public class MenuRenderer {
         
     }
 	
-	private void loadTextures() {
-		final String path = System.getProperty("user.dir");
-		TextureAtlas atlas = new TextureAtlas(path + "/res/img/menu/textures.pack");
-		background = atlas.findRegion("menu20");
-		buttonGame = atlas.findRegion("jouer");
-		buttonGameSelected = atlas.findRegion("jouerSelected");
-		buttonQuit = atlas.findRegion("Quit");
-		buttonQuitSelected = atlas.findRegion("QuitSelected");
-		if(background == null) {
-			System.err.println("no background");
-		}
-	}
+	 /*
+     * Méthodes
+     */	
+	
 	
 	public void render() {
 		spriteBatch.begin();
@@ -77,6 +77,19 @@ public class MenuRenderer {
             	
         spriteBatch.end();
     }
+	
+	private void loadTextures() {
+		final String path = System.getProperty("user.dir");
+		TextureAtlas atlas = new TextureAtlas(path + "/res/img/menu/textures.pack");
+		background = atlas.findRegion("menu20");
+		buttonGame = atlas.findRegion("jouer");
+		buttonGameSelected = atlas.findRegion("jouerSelected");
+		buttonQuit = atlas.findRegion("Quit");
+		buttonQuitSelected = atlas.findRegion("QuitSelected");
+		if(background == null) {
+			System.err.println("no background");
+		}
+	}
 
 
 	private void drawBackground() {

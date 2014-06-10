@@ -1,7 +1,7 @@
 package game.screens;
 
-import game.controller.LooseController;
-import game.view.LooseRenderer;
+import game.controller.WinController;
+import game.view.WinRenderer;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -9,24 +9,24 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 
-public class LooseScreen implements Screen, InputProcessor {
+public class WinScreen implements InputProcessor, Screen {
 	
 	Game game;
-	LooseController controller;
-	LooseRenderer renderer;
+	WinController controller;
+	WinRenderer renderer;
 	
 	
-	public LooseScreen(Game game) {
+	
+	public WinScreen(Game game) {
 		this.game = game;
-		this.controller = new LooseController();
-		this.renderer = new LooseRenderer();
+		this.controller = new WinController();
+		this.renderer = new WinRenderer();
 	}
-	
-	
+
 	/*
 	 * Implements Screen
 	 */
-
+	
 	@Override
 	public void render(float delta) {
 		renderer.render();
@@ -75,11 +75,11 @@ public class LooseScreen implements Screen, InputProcessor {
 		renderer = null;
 
 	}
-	
+
 	/*
 	 * Implements InputProcessor
 	 */
-
+	
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
@@ -100,14 +100,14 @@ public class LooseScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		controller.mouseButtonPressed(screenX, screenY);
+		controller.keyPressed(screenX, screenY);
 		return true;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		controller.mouseButtonReleased(screenX, screenY);
-		return false;
+		controller.keyReleased(screenX, screenY);
+		return true;
 	}
 
 	@Override

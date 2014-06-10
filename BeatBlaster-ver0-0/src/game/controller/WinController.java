@@ -1,21 +1,16 @@
 package game.controller;
 
-
-public class LooseController {	
+public class WinController {
 	
-	/*
-	 * Données membres
-	 */
-		
 	private boolean keyTyped;
-	private boolean mousePressed;	
+	private boolean mousePressed;
 	
 	
 	/*
 	 * Constructeur
 	 */
 	
-	public LooseController() {
+	public WinController() {
 		keyTyped = false;
 		mousePressed = false;
 	}
@@ -31,7 +26,7 @@ public class LooseController {
 	public boolean isMousePressed() {
 		return mousePressed;
 	}
-	
+
 	/*
 	 * Méthodes
 	 */
@@ -41,14 +36,15 @@ public class LooseController {
 		
 	}
 
-	public void mouseButtonPressed(int screenX, int screenY) {
+	public void keyPressed(int screenX, int screenY) {
 		mousePressed = true;
 		
 	}
 
-	public void mouseButtonReleased(int screenX, int screenY) {
+	public void keyReleased(int screenX, int screenY) {
 		mousePressed = false;
 		
 	}
+	
 
 }

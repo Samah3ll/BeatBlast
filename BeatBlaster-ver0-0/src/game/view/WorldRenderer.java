@@ -71,7 +71,10 @@ public class WorldRenderer {
   	private float x = 0;
   	private float musicPosition = 0;
   	    
-    
+    /*
+     * Constructeur
+     */
+  	
 	public WorldRenderer(World w) {
 		this.world = w;
 		this.runner = world.getRunner();
@@ -88,6 +91,10 @@ public class WorldRenderer {
 		*/
 	}
 	
+	/*
+	 * Accesseurs
+	 */
+	
 	
 	public void setX(float x){
 		this.x = x;
@@ -96,6 +103,10 @@ public class WorldRenderer {
 	public void setMusicPosition(float musicPosition) {
 		this.musicPosition = musicPosition;
 	}
+	
+	/*
+	 * Méthodes
+	 */
 
 
 	public void render() {

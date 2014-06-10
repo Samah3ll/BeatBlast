@@ -18,6 +18,14 @@ public class World {
 	private Level level;
 	private LevelGenerator lg;
 	
+	
+	public World(DataSong ds) {
+		runner = new Runner(new Vector2(1, 2));
+		lg = new LevelGenerator(ds);
+		level = lg.generateLevel();
+	}
+	
+	
 	public Runner getRunner() {
 		return runner;
 	}
@@ -33,11 +41,7 @@ public class World {
 		this.level = l;
 	}
 	
-	public World(DataSong ds) {
-		runner = new Runner(new Vector2(1, 2));
-		lg = new LevelGenerator(ds);
-		level = lg.generateLevel();
-	}
+	
 	
 	/**
 	 * Supprime tous les blocks qui sont avant la position x.

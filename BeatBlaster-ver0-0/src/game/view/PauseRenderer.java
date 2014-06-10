@@ -22,7 +22,12 @@ public class PauseRenderer {
     private float ppuX;
     private float ppuY;
     
-    //TODO:beaucoup de choses à enlever des commentaires ou a supprimer (penser aux imports).
+    final String path = System.getProperty("user.dir");
+    
+    
+    /*
+     * Constructeur
+     */
     
     public PauseRenderer() {
     	this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
@@ -31,16 +36,20 @@ public class PauseRenderer {
 		spriteBatch = new SpriteBatch();
         loadTextures();
     }
-
     
-	private void loadTextures() {
-		final String path = System.getProperty("user.dir");
-		
-	}
+    /*
+     * Méthodes
+     */    
+	
      
 	public void render() {
 		spriteBatch.begin();
 		spriteBatch.end();
+		
+	}
+	
+	private void loadTextures() {
+		
 		
 	}
 	
