@@ -24,14 +24,16 @@ public class GameScreen implements Screen, InputProcessor {
 	private World world;
 	private WorldRenderer renderer;
 	private RunnerController controller;
-	private double currentTime;
-	private boolean isMusicPlaid = false;
+	//private Cursor cursor;
+	
 	Game game;
 	
 	Music selectedMusic;
 	
 	//Position dans le niveau jusqu'a laquelle les blocks disparraissent
 	private float x = 0;
+	
+	
 		
 	
 	
@@ -43,19 +45,13 @@ public class GameScreen implements Screen, InputProcessor {
 		this.controller = new RunnerController(world);
 		//this.cursor = new Cursor(world.getLevelGenerator().getDataSong().getMaxTimeSong()*world.getLevelGenerator().getCoeff(), world.getLevelGenerator().getDataSong().getMaxTimeSong(),world.getLevelGenerator().getnbBlocksBefore());
 		this.selectedMusic.setVolume(0.6f);
-		currentTime = System.currentTimeMillis();
-		//this.selectedMusic.play();
+		this.selectedMusic.play();
 	}
 
 	@Override
 	public void render(float delta) {
-		//Décide de quand la musique démarre
-		if(System.currentTimeMillis() - currentTime > world.getLevelGenerator().getTimeBeforeMusicBegin() && !isMusicPlaid){
-			selectedMusic.play();
-			isMusicPlaid=true;
-		}
-			
 		//Correspond à la position de la musique
+
 		float whereShouldBeRunnerWithMusic = selectedMusic.getPosition()*world.getLevelGenerator().getCoeff()+world.getLevelGenerator().getnbBlocksBefore();
 		float nbBlocksBeforeRunner =5; //5 blocks avant l'endroit où le runner devrait être
 		
@@ -69,12 +65,11 @@ public class GameScreen implements Screen, InputProcessor {
 			world.deleteBlocks(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
 			world.deletPlateforms(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
 		}
-
 			
 		if(controller.isDead()) {
 			this.pause();
 			renderer.hide();
-			game.setScreen(new LooseScreen(game));
+			game.setScreen(new LooseScreen(game, world.getPoint()));
 		} else if(controller.isPaused()) {					
 			this.pause();
 			game.setScreen(new PauseScreen(game, this));
@@ -132,7 +127,8 @@ public class GameScreen implements Screen, InputProcessor {
 	public void dispose() {
 		Gdx.input.setInputProcessor(null);
 		renderer.dispose();
-		//selectedMusic.dispose();
+		selectedMusic.stop();
+		selectedMusic.dispose();
 
 	}
 
