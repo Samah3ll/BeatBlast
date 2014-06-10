@@ -175,7 +175,6 @@ public class Level {
 				}
 			}
 		}
-		
 		return tmp.toString();
 	}
 
