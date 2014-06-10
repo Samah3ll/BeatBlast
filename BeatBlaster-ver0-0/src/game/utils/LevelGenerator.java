@@ -8,7 +8,7 @@ public class LevelGenerator {
 	
 	private Level level;
 	private DataSong dataSong;
-	private final int coeff =10;
+	private final int coeff =12;
 	
 	public LevelGenerator(DataSong ds) {
 		this.dataSong = ds;
@@ -45,10 +45,20 @@ public class LevelGenerator {
 	}
 	
 	public void generateSpectroBlocks(DataSong ds) {
+		int tmp=11; //on initialise haut pour ne pas avoir de pb
 		for(int i = 0; i < ds.getBeats().size()-1; i++){
 			if( i<ds.getSpectro().length){
-				BasicPlateform p = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.bestSpectro(i), (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff)-1);
-				level.addPlateform(p);
+				BasicPlateform p0 = new BasicPlateform((int)(ds.getBeats().get(i)*coeff),ds.bestSpectro(i)+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
+				level.addPlateform(p0);
+				if((ds.bestSpectro(i)>5 || Math.abs(ds.bestSpectro(i)- tmp)> 4) && Math.abs(ds.bestSpectro(i)- ds.bestLowSpectro(i))>4){
+					BasicPlateform p1 = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.bestLowSpectro(i)+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
+					level.addPlateform(p1);
+				}
+				tmp = ds.bestSpectro(i);
+//				BasicPlateform p1 = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.threeBestSpectro(i)[1]+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff)-1);
+//				level.addPlateform(p1);
+//				BasicPlateform p2 = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.threeBestSpectro(i)[2]+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff)-1);
+//				level.addPlateform(p2);
 			}
 		}
 	}

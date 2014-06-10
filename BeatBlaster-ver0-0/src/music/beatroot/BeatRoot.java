@@ -179,7 +179,7 @@ public class BeatRoot {
 		gui = new GUI(audioPlayer, audioProcessor, fileChooser);
 		/** pour le projet (pas de visu, création de fichiers */
 		/*
-		//gui.setVisible(false);
+		gui.setVisible(true);
 		gui.loadAudioData();
 		gui.displayPanel.beatTrack();
 		gui.displayPanel.resizeSpectroForVisu(12);
