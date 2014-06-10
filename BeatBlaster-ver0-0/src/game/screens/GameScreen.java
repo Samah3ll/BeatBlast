@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.GL10;
 
 import game.controller.RunnerController;
 import game.model.World;
+import game.utils.Cursor;
 import game.utils.DataSong;
 import game.view.WorldRenderer;
 
@@ -23,6 +24,7 @@ public class GameScreen implements Screen, InputProcessor {
 	private World world;
 	private WorldRenderer renderer;
 	private RunnerController controller;
+	//private Cursor cursor;
 	
 	Game game;
 	
@@ -39,6 +41,7 @@ public class GameScreen implements Screen, InputProcessor {
 		this.world = new World(ds);
 		this.renderer = new WorldRenderer(world);
 		this.controller = new RunnerController(world);
+		//this.cursor = new Cursor(world.getLevelGenerator().getDataSong().getMaxTimeSong()*world.getLevelGenerator().getCoeff(), world.getLevelGenerator().getDataSong().getMaxTimeSong(),world.getLevelGenerator().getnbBlocksBefore());
 		this.selectedMusic.setVolume(0.6f);
 		this.selectedMusic.play();
 	}
@@ -46,13 +49,14 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void render(float delta) {
 		//Correspond à la position de la musique
-		x = (selectedMusic.getPosition() * 12.5f) - 5;
+		//x = (selectedMusic.getPosition() * 10.5f) - 5; //TODO explique mwaaa !!
+		float MusicPosition = (selectedMusic.getPosition() * world.getLevelGenerator().getCoeff());
 		//Permet au renderer de savoir jusqu'où effacer les blocks
-		renderer.setX(x);
+		renderer.setX(MusicPosition-5);
 		renderer.setMusicPosition(selectedMusic.getPosition());
 		//Supprime les blocks du monde
-		world.deleteBlocks(x);
-		world.deletPlateforms(x);
+		world.deleteBlocks(MusicPosition-5);
+		world.deletPlateforms(MusicPosition-5);
 			
 		if(controller.isDead()) {
 			this.pause();

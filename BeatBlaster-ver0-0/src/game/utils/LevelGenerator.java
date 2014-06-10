@@ -9,10 +9,11 @@ public class LevelGenerator {
 	private Level level;
 	private DataSong dataSong;
 	private final int coeff =12;
+	private final int nbBlocksBefore = 10; //nombre de blocks avant le début de la musique
 	
 	public LevelGenerator(DataSong ds) {
 		this.dataSong = ds;
-		this.level = new Level(((int)ds.getMaxTimeSong() + 2 ) * coeff, 16); //+2 pour le blocks de début et celui de fin
+		this.level = new Level(((int)ds.getMaxTimeSong() + 2 + nbBlocksBefore*2 ) * coeff, 16); //+2 pour le blocks de début et celui de fin
 	}
 	
 	public DataSong getDataSong(){
@@ -48,7 +49,9 @@ public class LevelGenerator {
 		int tmp=11; //on initialise haut pour ne pas avoir de pb
 		for(int i = 0; i < ds.getBeats().size()-1; i++){
 			if( i<ds.getSpectro().length){
-				BasicPlateform p0 = new BasicPlateform((int)(ds.getBeats().get(i)*coeff),ds.bestSpectro(i)+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
+				BasicPlateform p0 = new BasicPlateform(ds.getBeats().get(i)*coeff+1+nbBlocksBefore, //abcisses, +1 pour les bounds
+														ds.bestSpectro(i)+1, // ordonnées, +1 pour les bounds
+														(int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
 				level.addPlateform(p0);
 				if((ds.bestSpectro(i)>5 || Math.abs(ds.bestSpectro(i)- tmp)> 4) && Math.abs(ds.bestSpectro(i)- ds.bestLowSpectro(i))>4){
 					BasicPlateform p1 = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.bestLowSpectro(i)+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
@@ -93,4 +96,7 @@ public class LevelGenerator {
 		return coeff;
 	}
 	
+	public int getnbBlocksBefore(){
+		return nbBlocksBefore;
+	}
 }
