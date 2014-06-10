@@ -30,6 +30,10 @@ public class TextureSetup {
         TexturePacker2.process(path + "/res/img/loose",
 				    			path + "/res/img/loose",
 					"textures.pack");
+      //WinScreen textures
+        TexturePacker2.process(path + "/res/img/win",
+				    			path + "/res/img/win",
+					"textures.pack");
         System.out.println("Done");
     }
 

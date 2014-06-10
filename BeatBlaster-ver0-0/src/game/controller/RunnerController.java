@@ -70,6 +70,7 @@ public class RunnerController {
 		keys.put(Keys.LEFT, false);
 		keys.put(Keys.RIGHT, false);
 		keys.put(Keys.JUMP, false);
+		keys.put(Keys.PAUSE, false);
 	}
 
 	private void newAcceleration(double d, double t, float delta) {

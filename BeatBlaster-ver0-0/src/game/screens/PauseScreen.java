@@ -28,12 +28,15 @@ public class PauseScreen implements Screen, InputProcessor {
 
 	@Override
 	public void render(float delta) {
-		if(!controller.isUnpaused()) {
-			
-			renderer.render();
-		} else if(controller.isUnpaused()) {
+		 if(controller.isUnpaused()) {
 			controller.getKeys().put(PauseKeys.UNPAUSE, false);
 			oldScreen.resume();
+		} else if(controller.goToMenu()) {
+			controller.getKeys().put(PauseKeys.MENU, false);
+			//oldScreen.hide();
+			game.setScreen(new MenuScreen(game));
+		} else {
+			renderer.render();
 		}
 		
 
@@ -55,8 +58,7 @@ public class PauseScreen implements Screen, InputProcessor {
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		//Gdx.input.setInputProcessor(null);
+		Gdx.input.setInputProcessor(null);
 
 	}
 
@@ -74,7 +76,6 @@ public class PauseScreen implements Screen, InputProcessor {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		Gdx.input.setInputProcessor(null);
 		renderer.dispose();
 
@@ -89,6 +90,9 @@ public class PauseScreen implements Screen, InputProcessor {
 		if(keycode == Keys.P) {
 			controller.pPressed();
 		}
+		if(keycode == Keys.M) {
+			controller.mPressed();
+		}
 		return true;
 	}
 
@@ -96,6 +100,9 @@ public class PauseScreen implements Screen, InputProcessor {
 	public boolean keyUp(int keycode) {
 		if(keycode == Keys.P) {
 			controller.pReleased();
+		}
+		if(keycode == Keys.M) {
+			controller.mReleased();
 		}
 		return true;
 	}
