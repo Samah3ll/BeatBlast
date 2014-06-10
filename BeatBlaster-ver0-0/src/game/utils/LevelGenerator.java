@@ -54,11 +54,13 @@ public class LevelGenerator {
 														ds.bestSpectro(i)+1, // ordonnées, +1 pour les bounds
 														(int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
 				level.addPlateform(p0);
+				Coin c = new Coin(ds.getBeats().get(i)*coeff, ds.bestLowSpectro(i)+2);
+				level.addCoin(c);
 				if((ds.bestSpectro(i)>5 || Math.abs(ds.bestSpectro(i)- tmp)> 4) && Math.abs(ds.bestSpectro(i)- ds.bestLowSpectro(i))>4){
 					BasicPlateform p1 = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.bestLowSpectro(i)+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
 					level.addPlateform(p1);
-					Coin c = new Coin(ds.getBeats().get(i)*coeff, ds.bestLowSpectro(i)+1);
-					level.addCoin(c);
+					Coin c1 = new Coin(ds.getBeats().get(i)*coeff, ds.bestLowSpectro(i)+2);
+					level.addCoin(c1);
 				}
 				tmp = ds.bestSpectro(i);
 //				BasicPlateform p1 = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.threeBestSpectro(i)[1]+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff)-1);

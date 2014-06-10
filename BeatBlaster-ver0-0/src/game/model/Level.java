@@ -189,6 +189,18 @@ public class Level {
 		return coinsList;
 	}
 	
+	/**
+	 * Supprime la pièce à la position spécifiée.
+	 * @param x abscisse de la pièce à supprimer.
+	 * @param y ordonnée de la pièce à supprimer.
+	 */
+	public void deleteCoin(int x, int y) {
+		if(coins[x][y] != null) {
+			coins[x][y] = null;
+		}
+		
+	}
+	
 	public String toString() {
 		StringBuffer tmp = new StringBuffer("Level : \n");
 		for(int i = 0; i < width; i++) {
@@ -211,6 +223,8 @@ public class Level {
 		coins = null;
 		
 	}
+
+	
 	
 	
 }

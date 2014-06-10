@@ -76,6 +76,15 @@ public class World {
 		return coins;
 	}
 	
+	/**
+	 * Supprime la pièce à la position spécifiée, appel la méthode du même nom de la classe Level.
+	 * @param x abscisse de la pièce à supprimer.
+	 * @param y ordonnée de la pièce à supprimer.
+	 */
+	public void deleteCoin(int x, int y) {
+		level.deleteCoin(x, y);
+	}
+	
 	
 	public void dispose() {
 		runner.dispose();
