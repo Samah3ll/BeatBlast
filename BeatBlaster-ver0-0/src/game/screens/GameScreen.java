@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.GL10;
 
 import game.controller.RunnerController;
 import game.model.World;
-import game.utils.Cursor;
 import game.utils.DataSong;
 import game.view.WorldRenderer;
 
@@ -24,7 +23,8 @@ public class GameScreen implements Screen, InputProcessor {
 	private World world;
 	private WorldRenderer renderer;
 	private RunnerController controller;
-	//private Cursor cursor;
+	private double currentTime;
+	private boolean isMusicPlaid = false;
 	
 	Game game;
 	
@@ -43,22 +43,27 @@ public class GameScreen implements Screen, InputProcessor {
 		this.world = new World(ds);
 		this.renderer = new WorldRenderer(world);
 		this.controller = new RunnerController(world);
-		//this.cursor = new Cursor(world.getLevelGenerator().getDataSong().getMaxTimeSong()*world.getLevelGenerator().getCoeff(), world.getLevelGenerator().getDataSong().getMaxTimeSong(),world.getLevelGenerator().getnbBlocksBefore());
 		this.selectedMusic.setVolume(0.6f);
-		this.selectedMusic.play();
+		currentTime = System.currentTimeMillis();
 	}
 
 	@Override
 	public void render(float delta) {
+		
+		//Décide de quand la musique démarre
+		if(System.currentTimeMillis() - currentTime > world.getLevelGenerator().getTimeBeforeMusicBegin() && !isMusicPlaid){
+			selectedMusic.play();
+			isMusicPlaid=true;
+		}
+		
 		//Correspond à la position de la musique
-
 		float whereShouldBeRunnerWithMusic = selectedMusic.getPosition()*world.getLevelGenerator().getCoeff()+world.getLevelGenerator().getnbBlocksBefore();
-		float nbBlocksBeforeRunner =5; //5 blocks avant l'endroit où le runner devrait être
+		float nbBlocksBeforeRunner = 5; //5 blocks avant l'endroit où le runner devrait être
 		
 		//Permet au renderer de savoir jusqu'où effacer les blocks
 		renderer.setMusicPosition(selectedMusic.getPosition());
-
-		if(whereShouldBeRunnerWithMusic>world.getLevelGenerator().getnbBlocksBefore()){
+		System.out.println(whereShouldBeRunnerWithMusic + " " +world.getLevelGenerator().getnbBlocksBefore());
+		if(whereShouldBeRunnerWithMusic > world.getLevelGenerator().getnbBlocksBefore()){
 			renderer.setX(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
 			
 			//Supprime les blocks du monde
