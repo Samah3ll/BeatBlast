@@ -66,16 +66,24 @@ public class World {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @return une ArrayList qui contient les pièces du niveau.
+	 */
+	public ArrayList<Coin> getCoins() {
+		ArrayList<Coin> coins = level.getCoins();
+		return coins;
+	}
+	
+	
 	public void dispose() {
 		runner.dispose();
 		level.dispose();
 		lg.dispose();
 		
 	}
-	public ArrayList<Coin> getCoins() {
-		ArrayList<Coin> coins = level.getCoins();
-		return coins;
-	}
+	
 	
 
 }

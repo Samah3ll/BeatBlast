@@ -11,7 +11,7 @@ public class Runner {
 	
 	static final float SPEED = 4f;
 	static final float JUMP_VELOCITY = 1f;
-	static final float SIZE = 1f;
+	static final float SIZE = 0.9f;
 	
 	Vector2 	position = new Vector2();
 	Vector2 	acceleration = new Vector2();

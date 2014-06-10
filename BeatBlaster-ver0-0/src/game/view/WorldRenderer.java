@@ -122,7 +122,7 @@ public class WorldRenderer {
 		        	drawplateforms();
 		        	drawRunner();
 		        	drawHUD();
-		        	//drawCoin();
+		        	drawCoin();
 		        spriteBatch.end();
 		 }    
         
@@ -168,7 +168,7 @@ public class WorldRenderer {
 		runnerJumpRight = runnerJumpLeft;
 		runnerJumpRight.flip(true, false);
 		
-		//coinTexture = atlas.findRegion("coin");
+		coinTexture = atlas.findRegion("coin");
 		
 		style = new TextButtonStyle();
 		style.font = new BitmapFont();
@@ -177,7 +177,7 @@ public class WorldRenderer {
 	
 	private void drawCoin() {
 		for(Coin coin : world.getCoins()) {
-			spriteBatch.draw(coinTexture, coin.getPosition().x * ppuX, coin.getPosition().y * ppuY, Coin.getSize() * ppuX, Coin.getSize() * ppuY);
+			spriteBatch.draw(coinTexture, coin.getPosition().x * ppuX, coin.getPosition().y * ppuY, Coin.getSize() * ppuX, Coin.getSize() * ppuY);		
 		}
 	}
 	

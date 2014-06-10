@@ -2,6 +2,7 @@
 
 import game.model.BasicBlock;
 import game.model.BasicPlateform;
+import game.model.Coin;
 import game.model.Level;
 
 public class LevelGenerator {
@@ -56,6 +57,8 @@ public class LevelGenerator {
 				if((ds.bestSpectro(i)>5 || Math.abs(ds.bestSpectro(i)- tmp)> 4) && Math.abs(ds.bestSpectro(i)- ds.bestLowSpectro(i))>4){
 					BasicPlateform p1 = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.bestLowSpectro(i)+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
 					level.addPlateform(p1);
+					Coin c = new Coin(ds.getBeats().get(i)*coeff, ds.bestLowSpectro(i)+1);
+					level.addCoin(c);
 				}
 				tmp = ds.bestSpectro(i);
 //				BasicPlateform p1 = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.threeBestSpectro(i)[1]+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff)-1);

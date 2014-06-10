@@ -119,7 +119,8 @@ public class GameScreen implements Screen, InputProcessor {
 	public void dispose() {
 		Gdx.input.setInputProcessor(null);
 		renderer.dispose();
-		//selectedMusic.dispose();
+		selectedMusic.stop();
+		selectedMusic.dispose();
 
 	}
 
