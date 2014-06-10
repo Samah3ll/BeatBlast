@@ -64,6 +64,13 @@ public class RunnerController {
 		this.runner = world.getRunner();
 		this.width = w.getLevel().getWidth();
 		this.height = w.getLevel().getHeight();
+		grounded = true;
+		jumpPressedTime = 0;
+		jumpingPressed = false;
+		isDead = false;
+		keys.put(Keys.LEFT, false);
+		keys.put(Keys.RIGHT, false);
+		keys.put(Keys.JUMP, false);
 	}
 
 	private void newAcceleration(double d, double t, float delta) {
