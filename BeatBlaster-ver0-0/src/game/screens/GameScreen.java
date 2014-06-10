@@ -46,7 +46,7 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void render(float delta) {
 		//Correspond à la position de la musique
-		x = (selectedMusic.getPosition() * 10.5f) - 5;
+		x = (selectedMusic.getPosition() * 12.5f) - 5;
 		//Permet au renderer de savoir jusqu'où effacer les blocks
 		renderer.setX(x);
 		renderer.setMusicPosition(selectedMusic.getPosition());

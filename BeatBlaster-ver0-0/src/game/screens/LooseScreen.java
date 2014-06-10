@@ -30,7 +30,7 @@ public class LooseScreen implements Screen, InputProcessor {
 	@Override
 	public void render(float delta) {
 		renderer.render();
-		if(controller.isKeyTyped()) {
+		if(controller.isKeyTyped() || controller.isMousePressed()) {
 			game.setScreen(new MenuScreen(game));
 		}
 
@@ -98,13 +98,13 @@ public class LooseScreen implements Screen, InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
+		controller.mouseButtonPressed(screenX, screenY);
+		return true;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
+		controller.mouseButtonReleased(screenX, screenY);
 		return false;
 	}
 
