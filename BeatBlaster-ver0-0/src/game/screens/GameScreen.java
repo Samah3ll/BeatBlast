@@ -62,7 +62,6 @@ public class GameScreen implements Screen, InputProcessor {
 		
 		//Permet au renderer de savoir jusqu'où effacer les blocks
 		renderer.setMusicPosition(selectedMusic.getPosition());
-		System.out.println(whereShouldBeRunnerWithMusic + " " +world.getLevelGenerator().getnbBlocksBefore());
 		if(whereShouldBeRunnerWithMusic > world.getLevelGenerator().getnbBlocksBefore()){
 			renderer.setX(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
 			
