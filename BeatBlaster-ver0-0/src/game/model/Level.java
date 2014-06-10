@@ -150,11 +150,10 @@ public class Level {
 	 * @param y l'ordonnée de la plateforme à supprimer.
 	 */
 	public void removePlateform(int x, int y) {
-		//TODO : les plateformes ne se suppriment pas
 		Plateform p;
 		if((p = getPlateform(x, y)) != null) {
 			for(int i = 0; i < p.getSize(); i++) {
-				removeBlock(x, y + i);
+				removeBlock(x + i, y);
 			}
 			plateforms.remove(p);				
 			p.remove();
