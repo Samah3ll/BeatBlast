@@ -56,15 +56,18 @@ public class GameScreen implements Screen, InputProcessor {
 		}
 			
 		//Correspond à la position de la musique
-		float whereShoudBeRunnerPosition = (float) ((System.currentTimeMillis() - currentTime)*world.getLevelGenerator().getCoeff()/1000);
-		float deletePosition = whereShoudBeRunnerPosition -5; //5 blocks avant l'endroit où le runner devrait être
-		if(deletePosition>0){
-			//Permet au renderer de savoir jusqu'où effacer les blocks
-			renderer.setX(deletePosition);
-			renderer.setMusicPosition(selectedMusic.getPosition());
+		float whereShouldBeRunnerWithMusic = selectedMusic.getPosition()*world.getLevelGenerator().getCoeff()+world.getLevelGenerator().getnbBlocksBefore();
+		float nbBlocksBeforeRunner =5; //5 blocks avant l'endroit où le runner devrait être
+		
+		//Permet au renderer de savoir jusqu'où effacer les blocks
+		renderer.setMusicPosition(selectedMusic.getPosition());
+
+		if(whereShouldBeRunnerWithMusic>world.getLevelGenerator().getnbBlocksBefore()){
+			renderer.setX(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
+			
 			//Supprime les blocks du monde
-			world.deleteBlocks(deletePosition);
-			world.deletPlateforms(deletePosition);
+			world.deleteBlocks(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
+			world.deletPlateforms(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
 		}
 
 			
