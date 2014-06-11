@@ -22,7 +22,6 @@ public class BeatBlaster extends Game {
 			beatroot = new BeatRoot(saveDirectory);
 			beatroot.getGui().setVisible(beatroot.getVisu());
 		setScreen(new MenuScreen(this));
-		//setScreen(new GameScreen(this));
 	}
 	
 	public void dispose () {
@@ -33,17 +32,17 @@ public class BeatBlaster extends Game {
 	
 	//Crée le dossier de sauvegarde
 	private void createSaveRepertory() {
-		//TODO trouver une meilleure méthode pour définir saveDirectory
+		/*
 		 String[] tmp = path.split("\\\\");
 		 for(int i =0; i< tmp.length-1;i++){
 			 saveDirectory+=tmp[i];
 			 saveDirectory+="\\";
-		 }
-		saveDirectory += "save";
-		//System.out.println(saveDirectory);
+		 }*/
+		//saveDirectory += "\\save";
+		saveDirectory = path + "\\save";
 		File folder = new File(saveDirectory);
 		if(folder.mkdir()) {
-			System.out.println("new folder created");
+			//System.out.println("new folder created");
 		}
 	}
 	
