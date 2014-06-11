@@ -57,7 +57,7 @@ public class LevelGenerator {
 														(int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
 				level.addPlateform(p0);
 				
-				Coin c = new Coin(ds.getBeats().get(i)*coeff+1+nbBlocksBefore, ds.bestSpectro(i)+2);
+				Coin c = new Coin(ds.getBeats().get(i)*coeff+2+nbBlocksBefore, ds.bestSpectro(i)+2);
 				level.addCoin(c);
 				
 				if((ds.bestSpectro(i)>5 || Math.abs(ds.bestSpectro(i)- tmp)> 4) && Math.abs(ds.bestSpectro(i)- ds.bestLowSpectro(i))>4){

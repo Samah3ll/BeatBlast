@@ -35,7 +35,7 @@ public class ChooseScreen implements Screen, InputProcessor {
 	
 	Game game;
 	
-	Reader reader = new Reader();
+	static Reader reader = new Reader();
 	
 	final String path = System.getProperty("user.dir");
 	String saveDirectory;

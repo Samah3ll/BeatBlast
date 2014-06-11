@@ -3,7 +3,6 @@ package game.screens;
 import music.beatroot.BeatRoot;
 import game.controller.SelectionController;
 import game.controller.SelectionController.SelectionKeys;
-import game.utils.Reader;
 import game.view.SelectionRenderer;
 import game.BeatBlaster;
 
@@ -33,7 +32,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 	
 	Game game;
 	
-	Reader reader = new Reader();
+	//Reader reader = new Reader();
 	
 	Music selectedMusic;
 	final String path = System.getProperty("user.dir");
