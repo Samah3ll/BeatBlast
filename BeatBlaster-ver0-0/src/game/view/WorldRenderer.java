@@ -73,7 +73,7 @@ public class WorldRenderer {
     
   //Position dans le niveau jusqu'a laquelle les blocks disparraissent
   	private float x = 0;
-  	private float musicPosition = 0;
+  	private int musicPosition = 0;
   	private float musicLength = 0;
   	    
     /*
@@ -107,7 +107,7 @@ public class WorldRenderer {
 	}
 	
 	public void setMusicPosition(float musicPosition, float musicLength) {
-		this.musicPosition = musicPosition;
+		this.musicPosition = (int) musicPosition;
 		this.musicLength = musicLength;
 	}
 	
@@ -224,8 +224,7 @@ public class WorldRenderer {
 	 
 	 private void drawHUD() {
 		 
-		 musicPosition = (musicPosition / musicLength) * 100;
-		 musicPosition = (int) musicPosition;
+		 musicPosition = (int) Math.floor((musicPosition / musicLength) * 100);
 		 
 		 //position = runner.getPosition().toString();
 		 //velocity = runner.getVelocity().toString();
