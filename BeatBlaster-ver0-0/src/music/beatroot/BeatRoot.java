@@ -123,33 +123,9 @@ public class BeatRoot {
 	
 	public static Writer writer;
 
-	/** Process command line arguments.
-	 * Arguments are: <I>[option]* [audioFile]</I>, where
-	 * <I>audioFile</I> is the file name of the audio input file
-	 * containing WAV format data.
-	 * The <I>option</I> arguments can be any of the following (in any order):<BL>
-	 * <LI><I><B>-m</B> argsFile</I> File name of text file containing lines of arguments for batch processing</LI>
-	 * <LI><I><B>-a</B> beatFile</I> File name of text file containing annotated beat times for evaluation</LI>
-	 * <LI><I><B>-i</B> beatFile</I> File name of TMF file containing beat times for editing</LI>
-	 * <LI><I><B>-b</B></I> Process in batch mode (save results and exit immediately after processing)</LI>
-	 * <LI><I><B>-f</B> featureFile</I> Feature file on which to perform beat tracking (for ICASSP'07 paper)</LI>
-	 * <LI><I><B>-h</B> highThreshold</I> Spectrogram energy threshold corresponding
-	 *  to maximum value in colour map</LI>
-	 * <LI><I><B>-l</B> lowThreshold</I> Spectrogram energy threshold corresponding
-	 *  to minimum value in colour map</LI>
-	 * <LI><I><B>-o</B> outputFile</I> Save output to this file (implies <I><B>-b</B></I>)</LI>
-	 * <LI><I><B>-O</B> Output the times of onsets, not beats, and exit (use -o
-	 * flag to specify the output file; implies batch mode)</LI>
-	 * <LI><I><B>-p</B></I> Play audio with beats as soon as processing is completed</LI>
-	 * <LI><I><B>-q</B></I> Suppress output of warnings (TODO) </LI>
-	 * <LI><I><B>-s</B> audioScaleFactor</I> Constant for scaling amplitude envelope display</LI>
-	 * <LI><I><B>-t</B> hopTime</I> spacing of audio frames (in seconds, default 0.01)</LI>
-	 * <LI><I><B>-T</B> frameTime</I> size of FFT (in seconds, default 0.01161)</LI>
-	 * <LI><I><B>-w</B></I> live input (not used)</LI>
-	 * <LI><I><B>-c</B></I> cursor is always at centre; data scrolls past it</LI>
-	 * <LI><I><B>-e</B> allowedError</I> allowed error in beat position for evaluation</LI>
-	 * <LI><I><B>-E</B> allowedRelativeError</I> allowed relative error (0-1) in beat position for evaluation</LI>
-	 * </BL>
+	/**
+	 *  Process command line arguments.
+	 *  no command line
 	 */
 	public void processArgs() {
 		audioIn = null;
@@ -177,17 +153,7 @@ public class BeatRoot {
 		writer = new Writer(saveDirectory);
 		audioPlayer = new AudioPlayer(null, fileChooser);
 		gui = new GUI(audioPlayer, audioProcessor, fileChooser);
-		/** pour le projet (pas de visu, création de fichiers */
-		/*
-		gui.setVisible(true);
-		gui.loadAudioData();
-		gui.displayPanel.beatTrack();
-		gui.displayPanel.resizeSpectroForVisu(12);
-		gui.displayPanel.repaintImage();
-		double[][] spectroMatrice = gui.displayPanel.resizeSpectroForFile(12);
-		System.out.println(saveDirectory);
-		writer.write( saveDirectory, audioProcessor.audioFileName, gui.displayPanel.maximumTime, gui.displayPanel.beatPtr, spectroMatrice);
-		*/
+		gui.setVisible(visu);
 	}  // constructor
 
 	/** Reads a line from the arguments file <code>argsFile</code>, and converts
