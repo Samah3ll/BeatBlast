@@ -320,7 +320,7 @@ public class RunnerController {
 		runnerRect.set(x, y, runner.getBounds().width, runner.getBounds().height);
 		
 		for(Coin coin : world.getCoins()) {
-			if(x < posx + 20 && runnerRect.overlaps(coin.getBounds())) {
+			if(x < posx + 15 && runnerRect.overlaps(coin.getBounds())) {
 				world.deleteCoin(x, y);
 				world.addPoint(1);
 			}
