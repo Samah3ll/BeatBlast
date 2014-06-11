@@ -6,8 +6,6 @@ import java.io.File;
 
 import com.badlogic.gdx.Game;
 
-import game.screens.ChooseScreen;
-import game.screens.GameScreen;
 import game.screens.MenuScreen;
 
 public class BeatBlaster extends Game {	

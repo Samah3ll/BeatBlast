@@ -1,12 +1,13 @@
 package game.view;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Renderer du PauseScreen.
+ * @author SamaHell
+ *
+ */
 public class PauseRenderer {
 	
 	private static final float CAMERA_WIDTH = 100f;

@@ -7,14 +7,18 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import game.controller.MenuController;
 
+
+/**
+ * Renderer du MenuScreen.
+ * @author SamaHell
+ *
+ */
 public class MenuRenderer {
 	
-	//TODO:modifier les tailles de la caméra (penser aux autres écrans)
 	private static final float BUTTON_WIDTH = 40f;
 	private static final float BUTTON_HEIGHT = 20f;
 	private static final float CAMERA_WIDTH = 100f;
 	private static final float CAMERA_HEIGHT = 100f;
-	//private static final float RUNNING_FRAME_DURATION = 0.06f;
 	
 	private OrthographicCamera cam;
 	

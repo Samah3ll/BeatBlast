@@ -20,6 +20,11 @@ import game.model.Runner;
 import game.model.Runner.State;
 import game.model.World;
 
+/**
+ * Renderer du GameScreen.
+ * @author SamaHell
+ *
+ */
 public class WorldRenderer {
 	
 	private static final float CAMERA_WIDTH = 20f;

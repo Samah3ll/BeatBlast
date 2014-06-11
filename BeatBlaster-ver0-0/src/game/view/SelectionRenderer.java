@@ -7,6 +7,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Renderer du SelectionScreen.
+ * @author SamaHell
+ *
+ */
 public class SelectionRenderer {
 	
 	private static final float CAMERA_WIDTH = 100f;

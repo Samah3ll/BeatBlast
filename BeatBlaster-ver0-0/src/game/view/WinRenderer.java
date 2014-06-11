@@ -6,6 +6,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Renderer du WinScreen.
+ * @author SamaHell
+ *
+ */
 public class WinRenderer {
 	
 	private static final float CAMERA_WIDTH = 20f;

@@ -14,6 +14,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
+/**
+ * Renderer de l'écran où on choisit une chanson (ChooseScreen). S'occupe de l'affichage (partie vue du patern MVC).
+ * @author SamaHell
+ *
+ */
 public class ChooseRenderer {
 	
 	private static final float CAMERA_WIDTH = 100f;

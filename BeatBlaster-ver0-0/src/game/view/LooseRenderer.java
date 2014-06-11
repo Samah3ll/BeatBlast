@@ -10,6 +10,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
+/**
+ * Renderer du LooseScreen.
+ * @author SamaHell
+ *
+ */
 public class LooseRenderer {
 	
 	private static final float CAMERA_WIDTH = 20f;

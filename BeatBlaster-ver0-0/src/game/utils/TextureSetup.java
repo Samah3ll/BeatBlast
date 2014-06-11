@@ -3,7 +3,7 @@ package game.utils;
 import com.badlogic.gdx.tools.imagepacker.TexturePacker2;
 
 /**
- * 
+ * Crée un pack des images, il n'y a plus qu'une image a charge plutot que plusieurs.
  * @author SamaHell
  *
  */
