@@ -63,6 +63,7 @@ public class GameScreen implements Screen, InputProcessor {
 		renderer.setMusicPosition(selectedMusic.getPosition());
 		if(whereShouldBeRunnerWithMusic > world.getLevelGenerator().getnbBlocksBefore()){
 			renderer.setX(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
+			controller.setX(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
 			
 			//Supprime les blocks du monde
 			world.deleteBlocks(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);

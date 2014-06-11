@@ -184,7 +184,9 @@ public class WorldRenderer {
 	
 	private void drawCoin() {
 		for(Coin coin : world.getCoins()) {
-			spriteBatch.draw(coinTexture, coin.getPosition().x * ppuX, coin.getPosition().y * ppuY, Coin.getSize() * ppuX, Coin.getSize() * ppuY);		
+			if(coin.getPosition().x > x && coin.getPosition().x < x + 20) {
+				spriteBatch.draw(coinTexture, coin.getPosition().x * ppuX, coin.getPosition().y * ppuY, Coin.getSize() * ppuX, Coin.getSize() * ppuY);
+			}					
 		}
 	}
 	

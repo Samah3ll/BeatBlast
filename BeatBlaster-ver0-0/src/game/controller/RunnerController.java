@@ -43,6 +43,9 @@ public class RunnerController {
 	private long	jumpPressedTime = 0;
 	private boolean grounded = true;
 	
+	//Position dans le niveau jusqu'a laquelle les blocks disparraissent
+  	private float posx = 0;
+	
 	private Array<Block> collidable = new Array<Block>();
 	
 	private Pool<Rectangle> rectPool = new Pool<Rectangle>() {
@@ -82,6 +85,10 @@ public class RunnerController {
 
 	public boolean isDead() {
 		return isDead;
+	}
+	
+	public void setX(float x) {
+		this.posx = x;
 	}
 	
 	public void update(float delta) {
@@ -313,7 +320,7 @@ public class RunnerController {
 		runnerRect.set(x, y, runner.getBounds().width, runner.getBounds().height);
 		
 		for(Coin coin : world.getCoins()) {
-			if(runnerRect.overlaps(coin.getBounds())) {
+			if(x < posx + 20 && runnerRect.overlaps(coin.getBounds())) {
 				world.deleteCoin(x, y);
 				world.addPoint(1);
 			}
