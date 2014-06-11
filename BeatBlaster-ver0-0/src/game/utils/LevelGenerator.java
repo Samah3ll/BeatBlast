@@ -12,6 +12,7 @@ public class LevelGenerator {
 	private final int coeff = 12;
 	private final double timeBeforeMusicBegin = 1000; //in Millis
 	private float nbBlocksBefore; //est calculé dans le constructeur
+	private float x, lastX, y, lastY, l, lastL, coinPos;
 	
 	public LevelGenerator(DataSong ds) {
 		this.dataSong = ds;
@@ -48,32 +49,54 @@ public class LevelGenerator {
 		}
 	}
 	
+	/**
+	 * Ajoute les plateformes au level en fonction de la musique passée en DataSong.
+	 * 
+	 * Principe de l'algo : à chaque étape on regarde si la plateforme est au même niveau que la précedente,
+	 * 		si oui on allonge la plateforme,
+	 * 		si non on ajoute la plateforme précédente.
+	 * A chaque étape on ajoute non pas la plateforme actuelle mais la précédente.
+	 * 
+	 * @param ds le DataSong de la musique.
+	 */
 	public void generateSpectroBlocks(DataSong ds) {
-		int tmp=11; //on initialise haut pour ne pas avoir de pb
+		BasicPlateform p;
+		Coin c;
+		lastY = 0;
+		lastL = 0;
 		for(int i = 0; i < ds.getBeats().size()-1; i++){
-			if( i<ds.getSpectro().length){
-				BasicPlateform p0 = new BasicPlateform((float)(ds.getBeats().get(i)*coeff+1+nbBlocksBefore), //abcisses, +1 pour les bounds
-														ds.bestSpectro(i)+1, // ordonnées, +1 pour les bounds
-														(int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
-				level.addPlateform(p0);
+			if( i<ds.getSpectro().length) {
+				//abcisses, +1 pour les bounds
+				x = (float) (ds.getBeats().get(i)*coeff+1+nbBlocksBefore);
+				// ordonnées, +1 pour les bounds
+				y = ds.bestSpectro(i)+1;
+				//Longueur de la plateforme
+				l = ((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff);
+				//Position de la pièce sur la plateforme (au milieu de la plateforme).
+				coinPos = (float) Math.floor((1 + l) / 2);				
 				
-				Coin c = new Coin(ds.getBeats().get(i)*coeff+2+nbBlocksBefore, ds.bestSpectro(i)+2);
+				//Si la plateforme suivante est trop haute.
+				if(y - lastY > 4) {
+					//alors on la descend.
+					y = lastY + 4;
+				}
+				
+				c = new Coin(x + coinPos, y + 1);
 				level.addCoin(c);
 				
-				if((ds.bestSpectro(i)>5 || Math.abs(ds.bestSpectro(i)- tmp)> 4) && Math.abs(ds.bestSpectro(i)- ds.bestLowSpectro(i))>4){
-					BasicPlateform p1 = new BasicPlateform(ds.getBeats().get(i)*coeff+1+nbBlocksBefore,
-															ds.bestLowSpectro(i)+1,
-															(int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff));
-					level.addPlateform(p1);
+				//Si la plateforme suivante est à la même hauteur que la précédente.
+				if(lastY == y) {
+					//On rallonge la plateforme.
+					x = lastX;
+					l += lastL;
+				} else {
+					p = new BasicPlateform(lastX, lastY, (int) lastL);
 					
-//					Coin c1 = new Coin(ds.getBeats().get(i)*coeff+1+nbBlocksBefore, ds.bestLowSpectro(i)+2);
-//					level.addCoin(c1);
+					level.addPlateform(p);
 				}
-				tmp = ds.bestSpectro(i);
-//				BasicPlateform p1 = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.threeBestSpectro(i)[1]+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff)-1);
-//				level.addPlateform(p1);
-//				BasicPlateform p2 = new BasicPlateform(ds.getBeats().get(i)*coeff,ds.threeBestSpectro(i)[2]+1, (int)((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff)-1);
-//				level.addPlateform(p2);
+				lastX = x;
+				lastY = y;
+				lastL = l;
 			}
 		}
 	}

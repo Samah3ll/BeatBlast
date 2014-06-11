@@ -59,8 +59,8 @@ public class GameScreen implements Screen, InputProcessor {
 		float whereShouldBeRunnerWithMusic = selectedMusic.getPosition()*world.getLevelGenerator().getCoeff()+world.getLevelGenerator().getnbBlocksBefore();
 		float nbBlocksBeforeRunner = 5; //5 blocks avant l'endroit où le runner devrait être
 		
+		renderer.setMusicPosition(selectedMusic.getPosition(), musicLength);
 		//Permet au renderer de savoir jusqu'où effacer les blocks
-		renderer.setMusicPosition(selectedMusic.getPosition());
 		if(whereShouldBeRunnerWithMusic > world.getLevelGenerator().getnbBlocksBefore()){
 			renderer.setX(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
 			controller.setX(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
