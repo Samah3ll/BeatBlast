@@ -550,7 +550,6 @@ public class BeatTrackDisplay
 	
 	/** Updates the background image, after creating it if necessary */
 	public synchronized void repaintImage() {
-		System.out.println("lol");
 		if ((img == null) || (xSize != getWidth()) || (ySize != getHeight())) {
 			xSize = getWidth();
 			ySize = getHeight();
