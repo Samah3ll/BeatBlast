@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * La classe qui définit un monde. Un monde possède un niveau (Level) et un Runner.
+ * Utilise un LevelGenerator pour créer le niveau (en fonction de la musique).
  * @author SamaHell
  *
  */

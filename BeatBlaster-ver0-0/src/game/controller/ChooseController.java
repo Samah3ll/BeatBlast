@@ -7,6 +7,11 @@ import java.util.Map;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Controlleur de l'écran où l'on choisit une musique.
+ * @author SamaHell
+ *
+ */
 public class ChooseController {
 	
 	public enum chooseKeys {

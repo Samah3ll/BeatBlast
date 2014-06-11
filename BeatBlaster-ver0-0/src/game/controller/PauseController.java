@@ -3,6 +3,11 @@ package game.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controlleur de l'écran de pause.
+ * @author SamaHell
+ *
+ */
 public class PauseController {
 	
 	public enum PauseKeys {

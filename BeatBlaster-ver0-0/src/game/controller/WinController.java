@@ -1,5 +1,10 @@
 package game.controller;
 
+/**
+ * Controlleur de l'écran de victoire. Comme l'écran de défaite il suffit d'appuyer sur une touche pour revenir au menu principal.
+ * @author SamaHell
+ *
+ */
 public class WinController {
 	
 	private boolean keyTyped;

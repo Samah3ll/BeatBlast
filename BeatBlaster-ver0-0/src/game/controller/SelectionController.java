@@ -5,6 +5,11 @@ import java.util.Map;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Controlleur de l'écran où on choisit d'importer une nouvelle musique ou d'aller jouer en choissant une musique déjà ajoutée.
+ * @author SamaHell
+ *
+ */
 public class SelectionController {
 	
 	public enum SelectionKeys {

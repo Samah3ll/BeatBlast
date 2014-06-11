@@ -18,6 +18,15 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 
+/**
+ * Ecran de selection des chansons.
+ * La selection se fait soit au clavier avec les flèches haut et bas puis en appuiant sur entrée soit
+ * avec la molette de la souris puis en cliquant (n'importe où) pour valider.
+ * Une fois la chanson choisie le jeu se lance (GameScreen).
+ * On peut retourner au menu précédent en cliquant sur le bouton "retour".
+ * @author SamaHell
+ *
+ */
 public class ChooseScreen implements Screen, InputProcessor {
 	
 	private static final float BUTTON_WIDTH = 60f;
@@ -25,8 +34,6 @@ public class ChooseScreen implements Screen, InputProcessor {
 	private static final float CAMERA_WIDTH = 100f;
 	private static final float CAMERA_HEIGHT = 100f;
 	
-	private int width;
-    private int height;
     private float ppuX;
     private float ppuY;
 	
@@ -152,8 +159,6 @@ public class ChooseScreen implements Screen, InputProcessor {
 	@Override
 	public void resize(int width, int height) {
 		renderer.setSize(width, height);
-		this.width = width;
-        this.height = height;
         ppuX = (float)width / CAMERA_WIDTH;
         ppuY = (float)height / CAMERA_HEIGHT;
 
@@ -226,12 +231,14 @@ public class ChooseScreen implements Screen, InputProcessor {
 		return true;
 	}
 
+	
+	
 	@Override
 	public boolean keyTyped(char character) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		controller.mouseButtonPressed(screenX, screenY);

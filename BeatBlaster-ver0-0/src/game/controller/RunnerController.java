@@ -13,6 +13,12 @@ import game.model.Runner;
 import game.model.Runner.State;
 import game.model.World;
 
+/**
+ * Controlleur du jeu, principalement des mouvements du Runner.
+ * Les touches FIRE et DOWN ne sont pas utilisées.
+ * @author SamaHell
+ *
+ */
 public class RunnerController {
 	
 	public enum Keys {
@@ -27,9 +33,6 @@ public class RunnerController {
 	private float newAcceleration = 0;
 	
 	private float width;
-	private float height;
-	private float ppuX;
-	private float ppuY;
 	
 	private World 	world;
 	private Runner 	runner;
@@ -63,7 +66,6 @@ public class RunnerController {
 		this.world = w;
 		this.runner = world.getRunner();
 		this.width = w.getLevel().getWidth();
-		this.height = w.getLevel().getHeight();
 		grounded = true;
 		jumpPressedTime = 0;
 		jumpingPressed = false;
@@ -324,12 +326,6 @@ public class RunnerController {
 	
 	public boolean isPaused() {
 		return keys.get(Keys.PAUSE);
-	}
-	
-	public void setSize(float ppuX, float ppuY) {
-		this.ppuX = ppuX;
-		this.ppuY = ppuY;
-		
 	}
 	
 	// ** Key presses and touches **************** //

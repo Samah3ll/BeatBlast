@@ -1,6 +1,10 @@
 package game.controller;
 
-
+/**
+ * Controlleur de l'écran de défaite.
+ * @author SamaHell
+ *
+ */
 public class LooseController {	
 	
 	/*

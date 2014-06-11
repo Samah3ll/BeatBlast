@@ -5,6 +5,11 @@ import java.util.Map;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Controlleur du menu principal.
+ * @author SamaHell
+ *
+ */
 public class MenuController {
 	
 	public enum MenuKeys {

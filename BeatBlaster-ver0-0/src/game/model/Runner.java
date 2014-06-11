@@ -3,6 +3,13 @@ package game.model;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Le personnage qui court sur l'écran.
+ * Il possède une position (Vector2), une vitesse et une accéleration (Vector2) une limite (bounds) pour détecter les collisions et un état.
+ * 
+ * @author SamaHell
+ *
+ */
 public class Runner {
 	
 	public enum State {

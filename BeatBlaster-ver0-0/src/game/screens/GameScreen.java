@@ -15,6 +15,7 @@ import game.view.WorldRenderer;
 
 /**
  * Ecran de jeux avec un monde. C'est l'écran ou on joue (déplacer le runner).
+ * On utilise les flèches pour déplacer le Runner. L'objectif est de récuperer un maximum de pièces en passant dessus.
  * @author SamaHell
  *
  */
@@ -29,12 +30,7 @@ public class GameScreen implements Screen, InputProcessor {
 	Game game;
 	
 	Music selectedMusic;
-	
-	//Position dans le niveau jusqu'a laquelle les blocks disparraissent
-	private float x = 0;
-	
-	
-		
+			
 	
 	
 	public GameScreen(Game game, DataSong ds, Music selectedMusic) {
@@ -51,7 +47,7 @@ public class GameScreen implements Screen, InputProcessor {
 	public void render(float delta) {
 		
 		//Décide de quand la musique démarre
-		if(System.currentTimeMillis() - currentTime > world.getLevelGenerator().getTimeBeforeMusicBegin() && !isMusicPlaid){
+		if(!isMusicPlaid && System.currentTimeMillis() - currentTime > world.getLevelGenerator().getTimeBeforeMusicBegin()){
 			selectedMusic.play();
 			isMusicPlaid=true;
 		}
@@ -77,6 +73,8 @@ public class GameScreen implements Screen, InputProcessor {
 		} else if(controller.isPaused()) {					
 			this.pause();
 			game.setScreen(new PauseScreen(game, this));
+		} else if(whereShouldBeRunnerWithMusic == world.getLevel().getWidth() - 20)  {
+			game.setScreen(new WinScreen(game));
 		} else {
 			renderer.moveCamera();
 			controller.update(delta);
@@ -169,7 +167,7 @@ public class GameScreen implements Screen, InputProcessor {
 		        controller.pReleased();
 	        return true;
 	}
-
+	
 	@Override
 	public boolean keyTyped(char character) {
 		// TODO Auto-generated method stub

@@ -14,20 +14,16 @@ import game.controller.MenuController.MenuKeys;
 import game.view.MenuRenderer;
 
 /**
- * Ecran du menu avec les bouttons play et quit.
+ * Ecran du menu avec les bouttons play et quit pour passer à l'écran suivant ou quitter le jeu.
  * @author SamaHell
  *
  */
 public class MenuScreen implements Screen, InputProcessor {
 	
 	
-	private static final float BUTTON_WIDTH = 40f;
-	private static final float BUTTON_HEIGHT = 20f;
 	private static final float CAMERA_WIDTH = 100f;
 	private static final float CAMERA_HEIGHT = 100f;
 	
-	private int width;
-    private int height;
     private float ppuX;
     private float ppuY;
 	
@@ -61,40 +57,6 @@ public class MenuScreen implements Screen, InputProcessor {
 	 * Méthodes
 	 */
 	
-	private void keyboardSelection() {
-	//Selection par le clavier
-	//TODO : modififer les valeur une fois le bouton option ajouté
-		if(controller.getSelectedButton() == 0) {		//If nothing is selected
-			if(controller.getKeys().get(MenuKeys.DOWN)) {		
-				controller.setSelectedButton(1);		//Play button selected
-			} else if(controller.getKeys().get(MenuKeys.UP)) {		
-				controller.setSelectedButton(3);		//Quit button selected
-			}
-		} else if(controller.getSelectedButton() == 1) {	//If Play button is selected
-			if(controller.getKeys().get(MenuKeys.DOWN)) {		
-				controller.setSelectedButton(3);		//Option button selected
-			} else if(controller.getKeys().get(MenuKeys.UP)) {		
-				controller.setSelectedButton(3);		//Quit button selected
-			}
-		}/* else if(controller.getSelectedButton() == 2) {	//If Option button is selected
-			if(controller.getKeys().get(MenuKeys.DOWN)) {
-				//Quit button selected
-				controller.setSelectedButton(3);
-			} else if(controller.getKeys().get(MenuKeys.UP)) {
-				//Play button selected
-				controller.setSelectedButton(1);
-			}
-		}*/ else if(controller.getSelectedButton() == 3) {	//If Quit button is selected
-				if(controller.getKeys().get(MenuKeys.DOWN)) {					
-					controller.setSelectedButton(1);			//Play button selected
-				} else if(controller.getKeys().get(MenuKeys.UP)) {						
-						controller.setSelectedButton(1);		//Option button selected
-					}
-			} else {
-				//Nothing is selected
-				controller.setSelectedButton(0);
-			}
-	}
 	
 	private void mouseSelection() {
 		//Selection par la sourie
@@ -146,8 +108,6 @@ public class MenuScreen implements Screen, InputProcessor {
 	@Override
 	public void resize(int width, int height) {
 		renderer.setSize(width, height);
-		this.width = width;
-        this.height = height;
         ppuX = (float)width / CAMERA_WIDTH;
         ppuY = (float)height / CAMERA_HEIGHT;
 

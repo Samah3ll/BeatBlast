@@ -15,6 +15,11 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 
+/**
+ * Ecran de sélection.
+ * @author SamaHell
+ *
+ */
 public class SelectionScreen implements Screen, InputProcessor {
 	
 	private static final float BUTTON_WIDTH = 60f;
@@ -22,8 +27,6 @@ public class SelectionScreen implements Screen, InputProcessor {
 	private static final float CAMERA_WIDTH = 100f;
 	private static final float CAMERA_HEIGHT = 100f;
 	
-	private int width;
-    private int height;
     private float ppuX;
     private float ppuY;
 	
@@ -64,39 +67,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 	 * Méthodes
 	 */
 	
-	//Selection par le clavier
-	private void keyboardSelection() {		
-			if(controller.getSelectedButton() == 0) {		//If nothing is selected
-				if(controller.getKeys().get(SelectionKeys.DOWN)) {		
-					controller.setSelectedButton(1);		//Selection button selected
-				} else if(controller.getKeys().get(SelectionKeys.UP)) {		
-					controller.setSelectedButton(3);		//Back button selected
-				}
-			} else if(controller.getSelectedButton() == 1) {	//If Selection button is selected
-				if(controller.getKeys().get(SelectionKeys.DOWN)) {		
-					controller.setSelectedButton(2);		//Choose button selected
-				} else if(controller.getKeys().get(SelectionKeys.UP)) {		
-					controller.setSelectedButton(3);		//Back button selected
-				}
-			} else if(controller.getSelectedButton() == 2) {	//If Choose button is selected
-				if(controller.getKeys().get(SelectionKeys.DOWN)) {
-					controller.setSelectedButton(3);		//PLay button selected
-				} else if(controller.getKeys().get(SelectionKeys.UP)) {					
-					controller.setSelectedButton(1);		//Selection button selected
-				}
-			} else if(controller.getSelectedButton() == 3) {	//If PLay button is selected
-					if(controller.getKeys().get(SelectionKeys.DOWN)) {					
-						controller.setSelectedButton(1);			//Back button selected
-					} else if(controller.getKeys().get(SelectionKeys.UP)) {						
-							controller.setSelectedButton(2);		//Choose button selected
-					}
-				} else {
-					//Nothing is selected
-					controller.setSelectedButton(0);
-				}
-			
-	}
-	
+		
 	//Selection par la sourie
 	private void mouseSelection() {
 		//TODO modifier les valeurs pour qu'elles collent à cet écran.
@@ -157,8 +128,6 @@ public class SelectionScreen implements Screen, InputProcessor {
 	@Override
 	public void resize(int width, int height) {
 		renderer.setSize(width, height);
-		this.width = width;
-        this.height = height;
         ppuX = (float)width / CAMERA_WIDTH;
         ppuY = (float)height / CAMERA_HEIGHT;
 

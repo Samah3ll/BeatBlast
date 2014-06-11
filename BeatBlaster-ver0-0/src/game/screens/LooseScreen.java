@@ -9,6 +9,11 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 
+/**
+ * Ecran de défaite, il s'affiche une fois que le runner touche le sol (Runner.State == DYING).
+ * @author SamaHell
+ *
+ */
 public class LooseScreen implements Screen, InputProcessor {
 	
 	Game game;

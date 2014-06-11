@@ -10,6 +10,12 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 
+/**
+ * Ecran de pause, la conception de cet écran est très simpliste : l'écran de jeu est freezé, il faut appuyer sur "p" pour retourner 
+ * au jeu ou sur "m" pour retourner au menu.
+ * @author SamaHell
+ *
+ */
 public class PauseScreen implements Screen, InputProcessor {
 	
 	GameScreen oldScreen;
