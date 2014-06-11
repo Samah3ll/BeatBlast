@@ -119,7 +119,7 @@ public class BeatRoot {
 	protected static boolean ignoreWarnings = false;
 	
 	/** Avec ou sans visuel ?*/
-	private Boolean visu = true;
+	private Boolean visu = false;
 	
 	public static Writer writer;
 

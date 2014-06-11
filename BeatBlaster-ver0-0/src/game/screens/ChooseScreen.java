@@ -114,7 +114,7 @@ public class ChooseScreen implements Screen, InputProcessor {
 		
 	}
 	
-	//Selection par la sourie
+	//Selection par la souris
 	private void mouseSelection() {
 		if(controller.getMousePosition().x > 37f*ppuX && controller.getMousePosition().x < 5f * ppuX + BUTTON_WIDTH * ppuX
 				&& controller.getMousePosition().y > 80f * ppuY && controller.getMousePosition().y < 60f * ppuY + BUTTON_HEIGHT * ppuY) {
@@ -140,7 +140,6 @@ public class ChooseScreen implements Screen, InputProcessor {
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
 			if(ChooseController.isBackButtonSelected()) {
 				game.setScreen(new SelectionScreen(game));
-				//this.hide();
 			} else {
 				DataSong ds = reader.read(saveDirectory, savedFiles.get(selectedSong + scrolled));
 				String musicName = "\\" + savedFiles.get(selectedSong + scrolled);
