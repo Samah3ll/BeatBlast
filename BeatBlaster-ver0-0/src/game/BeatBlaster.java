@@ -4,6 +4,8 @@ package game;
 
 import java.io.File;
 
+import music.beatroot.BeatRoot;
+
 import com.badlogic.gdx.Game;
 
 import game.screens.MenuScreen;
@@ -12,10 +14,17 @@ public class BeatBlaster extends Game {
 		
 	final String path = System.getProperty("user.dir");
 	private String saveDirectory="";		//Dossier ou seront stockées les sauvegardes
-
+	public static BeatRoot beatroot;
+	
 	@Override
 	public void create() {
 		createSaveRepertory();
+		try{
+			beatroot = new BeatRoot(saveDirectory);
+			beatroot.getGui().setVisible(beatroot.getVisu());
+		}catch(NullPointerException e){
+			System.err.println("Aucune musique sélectionnée : " + e);
+		}
 		setScreen(new MenuScreen(this));
 		//setScreen(new GameScreen(this));
 	}

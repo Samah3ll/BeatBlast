@@ -172,11 +172,6 @@ public class GUI extends JFrame {
 			UIManager.setLookAndFeel(
 				UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) { }
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				BeatRoot.quit();
-			}
-		});
 		
 		preferences = new Parameters(this, "Preferences");
 		setPreferences();

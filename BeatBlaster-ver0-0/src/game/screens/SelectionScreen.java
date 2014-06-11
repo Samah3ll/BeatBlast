@@ -39,8 +39,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 	
 	Music selectedMusic;
 	final String path = System.getProperty("user.dir");
-	String saveDirectory;
-	private BeatRoot beatroot;
+
 	
 	/*
 	 * Constructeur
@@ -54,13 +53,6 @@ public class SelectionScreen implements Screen, InputProcessor {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		FileHandle musicFile = new FileHandle( path + "/res/audio/menu/Korobeinki.mp3");
 		selectedMusic = Gdx.audio.newMusic(musicFile);
-		saveDirectory = ((BeatBlaster)game).getSaveDirectory();
-		try{
-			beatroot = new BeatRoot(saveDirectory);
-			beatroot.getGui().setVisible(beatroot.getVisu());
-		}catch(NullPointerException e){
-			System.err.println("Aucune musique sélectionnée : " + e);
-		}
 	}
 	
 	/*
@@ -85,10 +77,7 @@ public class SelectionScreen implements Screen, InputProcessor {
 		} else {
 			controller.setSelectedButton(0);
 		}
-		
 	}
-	
-	
 	
 	/*
 	 * Implements Screen
@@ -105,10 +94,10 @@ public class SelectionScreen implements Screen, InputProcessor {
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
 			switch(controller.getSelectedButton()) {
 				case (1) : 
-					beatroot.getGui().loadAudioData();
-					if(beatroot.getVisu()){
-						beatroot.gui.getDisplayPanel().resizeSpectroForVisu(12);
-						beatroot.gui.getDisplayPanel().repaintImage();
+					BeatBlaster.beatroot.getGui().loadAudioData();
+					if(BeatBlaster.beatroot.getVisu()){
+						BeatBlaster.beatroot.gui.getDisplayPanel().resizeSpectroForVisu(12);
+						BeatBlaster.beatroot.gui.getDisplayPanel().repaintImage();
 					}
 					game.setScreen(new SelectionScreen(game));
 					break;
