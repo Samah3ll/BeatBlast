@@ -19,12 +19,8 @@ public class BeatBlaster extends Game {
 	@Override
 	public void create() {
 		createSaveRepertory();
-		try{
 			beatroot = new BeatRoot(saveDirectory);
 			beatroot.getGui().setVisible(beatroot.getVisu());
-		}catch(NullPointerException e){
-			System.err.println("Aucune musique sélectionnée : " + e);
-		}
 		setScreen(new MenuScreen(this));
 		//setScreen(new GameScreen(this));
 	}

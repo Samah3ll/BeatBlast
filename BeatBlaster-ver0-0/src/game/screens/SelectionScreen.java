@@ -94,7 +94,11 @@ public class SelectionScreen implements Screen, InputProcessor {
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {
 			switch(controller.getSelectedButton()) {
 				case (1) : 
-					BeatBlaster.beatroot.getGui().loadAudioData();
+					try{
+						BeatBlaster.beatroot.getGui().loadAudioData();
+					}catch(NullPointerException e){
+						System.err.println("Aucune musique sélectionnée : " + e);
+					}
 					if(BeatBlaster.beatroot.getVisu()){
 						BeatBlaster.beatroot.gui.getDisplayPanel().resizeSpectroForVisu(12);
 						BeatBlaster.beatroot.gui.getDisplayPanel().repaintImage();
