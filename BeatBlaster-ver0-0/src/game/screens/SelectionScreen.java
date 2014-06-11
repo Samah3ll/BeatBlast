@@ -88,7 +88,6 @@ public class SelectionScreen implements Screen, InputProcessor {
 		renderer.render();
 		
 		mouseSelection();
-		//keyboardSelection();
 		controller.checkSelection();
 		
 		if(controller.getKeys().get(SelectionKeys.VALIDATE) || controller.getMouseState()) {

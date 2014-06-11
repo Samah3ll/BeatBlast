@@ -81,7 +81,6 @@ public class MenuScreen implements Screen, InputProcessor {
 		renderer.render();
 		 		
 		mouseSelection();
-		//keyboardSelection();
 		controller.checkSelection();	
 		
 		if(controller.getKeys().get(MenuKeys.VALIDATE) || controller.getMouseState()) {
