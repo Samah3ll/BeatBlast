@@ -13,14 +13,13 @@ public class WinScreen implements InputProcessor, Screen {
 	
 	Game game;
 	WinController controller;
-	WinRenderer renderer;
+	WinRenderer renderer;	
 	
 	
-	
-	public WinScreen(Game game) {
+	public WinScreen(Game game, long score) {
 		this.game = game;
 		this.controller = new WinController();
-		this.renderer = new WinRenderer();
+		this.renderer = new WinRenderer(score);
 	}
 
 	/*

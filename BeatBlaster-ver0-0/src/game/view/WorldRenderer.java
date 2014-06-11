@@ -221,6 +221,7 @@ public class WorldRenderer {
 		}
 	 
 	 private void drawHUD() {
+		 
 		 position = runner.getPosition().toString();
 		 velocity = runner.getVelocity().toString();
 		 points = world.getPoint();

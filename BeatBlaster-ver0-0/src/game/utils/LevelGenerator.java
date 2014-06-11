@@ -16,7 +16,7 @@ public class LevelGenerator {
 	public LevelGenerator(DataSong ds) {
 		this.dataSong = ds;
 		nbBlocksBefore = (float)(coeff*timeBeforeMusicBegin/1000);//timeBeforeMusicBegin * coeff; //selon d = v*t
-		this.level = new Level((int)((ds.getMaxTimeSong() + 2 + nbBlocksBefore*2) * coeff), 16); //+2 pour le blocks de début et celui de fin
+		this.level = new Level((int)((ds.getMaxTimeSong()) * coeff + 2 + nbBlocksBefore*2), 16); //+2 pour le blocks de début et celui de fin
 	}
 	
 	public DataSong getDataSong(){

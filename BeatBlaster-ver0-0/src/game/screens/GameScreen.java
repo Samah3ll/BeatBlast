@@ -30,6 +30,7 @@ public class GameScreen implements Screen, InputProcessor {
 	Game game;
 	
 	Music selectedMusic;
+	long musicLength;
 			
 	
 	
@@ -37,6 +38,8 @@ public class GameScreen implements Screen, InputProcessor {
 		this.game = game;
 		this.selectedMusic = selectedMusic;
 		this.world = new World(ds);
+		this.musicLength = (long) ds.getMaxTimeSong();
+		//System.out.println("music length : " + musicLength);
 		this.renderer = new WorldRenderer(world);
 		this.controller = new RunnerController(world);
 		this.selectedMusic.setVolume(0.6f);
@@ -44,7 +47,7 @@ public class GameScreen implements Screen, InputProcessor {
 	}
 
 	@Override
-	public void render(float delta) {
+	public void render(float delta) {		
 		
 		//Décide de quand la musique démarre
 		if(!isMusicPlaid && System.currentTimeMillis() - currentTime > world.getLevelGenerator().getTimeBeforeMusicBegin()){
@@ -65,7 +68,7 @@ public class GameScreen implements Screen, InputProcessor {
 			world.deleteBlocks(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
 			world.deletPlateforms(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
 		}
-			
+		
 		if(controller.isDead()) {
 			this.pause();
 			renderer.hide();
@@ -73,8 +76,10 @@ public class GameScreen implements Screen, InputProcessor {
 		} else if(controller.isPaused()) {					
 			this.pause();
 			game.setScreen(new PauseScreen(game, this));
-		} else if(whereShouldBeRunnerWithMusic == world.getLevel().getWidth() - 20)  {
-			game.setScreen(new WinScreen(game));
+		} else if(selectedMusic.getPosition() >= musicLength)  {
+			this.pause();
+			renderer.hide();			
+			game.setScreen(new WinScreen(game, world.getPoint()));
 		} else {
 			renderer.moveCamera();
 			controller.update(delta);
