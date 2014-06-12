@@ -115,7 +115,7 @@ public class GUI extends JFrame {
 	public static final String SHOW_IBIS = "Inter-beat Intervals";
 	public static final String SHOW_BEATS = "Beats";
 	public static final String PLAY = "Play with beats";
-	public static final String PLAY_AUDIO = "Play without beats";
+	public static final String PLAY_AUDIO = "Play";
 	public static final String PLAY_BEATS = "Play beats only";
 	public static final String STOP = "Stop";
 	public static final String BEAT_TRACK = "Track beats";

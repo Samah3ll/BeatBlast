@@ -405,6 +405,16 @@ public class AudioProcessor {
 			freqMap[i++] = crossoverBin + (int)Math.round(midi) - crossoverMidi;
 		}
 		freqMapSize = freqMap[i-1] + 1;
+		
+//		freqMapSize = 84;
+//		int nb=0;
+//		for(int i =0; i<freqMap.length/4;i++){
+//			freqMap[i]=nb;
+//			if(i>=(nb+1)*4){
+//				nb++;
+//			}
+//		}
+//		System.out.println(nb);
 	} // makeFreqMap()
 
 	/** Calculates the weighted phase deviation onset detection function.
@@ -507,17 +517,19 @@ public class AudioProcessor {
 					cbIndex = 0;
 			}
 			Arrays.fill(imBuffer, 0);
-			FFT.magnitudePhaseFFT(reBuffer, imBuffer);
+			FFT.magnitudePhaseFFT(reBuffer, imBuffer); //reBuffer.lenght = 2048
 			Arrays.fill(newFrame, 0);
 			double flux = 0;
-			for (int i = 0; i <= fftSize/2; i++) {
+			for (int i = 0; i <= fftSize/2; i++) { //fftSize = 2048
 				if (reBuffer[i] > prevFrame[i])
 					flux += reBuffer[i] - prevFrame[i];
-				newFrame[freqMap[i]] += reBuffer[i];
+				newFrame[freqMap[i]] += reBuffer[i]; //freqMap.length=1025
 			}
+			//System.out.println(frames.length + " " + frames[0].length);  24260 84
+			//System.out.println(freqMapSize); //84
 			spectralFlux[frameCount] = flux;
 			for (int i = 0; i < freqMapSize; i++)
-				frames[frameCount][i] = newFrame[i];
+				frames[frameCount][i] = newFrame[i]; //newframe.lengh = 84
 			int index = cbIndex - (fftSize - hopSize);
 			if (index < 0)
 				index += fftSize;

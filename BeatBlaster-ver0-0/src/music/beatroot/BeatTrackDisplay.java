@@ -1598,7 +1598,7 @@ public class BeatTrackDisplay
 	
 	public void resizeSpectroForVisu(int nbLignes){
 		int sizeT = spectroLength;
-		int sizeF = spectro[0].length;	// 84 (for audio, cf 88? for midi)
+		int sizeF = spectro[0].length/3;	// 84 (for audio, cf 88? for midi)
 		
 		//petit calcul permettant d'avoir le nombre de lignes souhaité
 		int trancheVerticale = sizeF/nbLignes; 
