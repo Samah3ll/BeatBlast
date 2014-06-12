@@ -500,6 +500,7 @@ public class AudioProcessor {
 	 *  then (optionally) normalising and calculating onsets.
 	 */
 	protected void processFrame() {
+		System.out.println(fftSize);
 		if (getFrame()) {
 			for (int i = 0; i < fftSize; i++) {
 				reBuffer[i] = window[i] * circBuffer[cbIndex];
