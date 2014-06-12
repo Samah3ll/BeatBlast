@@ -145,6 +145,9 @@ public class ChooseRenderer {
 		if(num < 0) {
 			num = 0;
 		}
+		if(num > 7) {
+			num = 7;
+		}
 			
 		int x = 20;
 		int y = 80 - 5 * num;
@@ -175,7 +178,9 @@ public class ChooseRenderer {
 		if(lastEnd > savedFiles.size() - 2 && dx > 0) {
 			return;
 		}
+		
 		int pos = 0;
+		
 		for(int i = lastStart + dx; i <= lastEnd + dx; i++) {
 			printable.set(pos, savedFiles.get(i));
 			pos++;

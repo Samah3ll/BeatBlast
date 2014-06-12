@@ -1,0 +1,41 @@
+***************************************Beatrunner*****************************************
+					ver 1.0
+				Par SamaHell et Nabaki
+
+
+1/Mise en place.
+
+Il faut placer le jar et le dossier res dans un même dossier.
+
+
+2/Démarage.
+
+Double cliquer sur Beatrunner.jar.
+
+Attention : au premier lancement du jeu, celui-ci va créer un dossier save, ne pas le supprimer!
+
+3/Fonctionnement du jeu.
+
+	A/Menu
+
+Le premier écran ne permet que de quitter le jeu ou de passer à l'écran suivant.
+Le second écran (SelectionScreen) vous donne le choix entre ajouter une musique ou choisir la musique sur laquelle jouer (parmis les musiques déjà enregistrées).
+Une fois dans l'écran de choix de musique, il faut choisir une musique à l'aide des flèches haut et bas ou à l'aide de la molette de la souris. Pour valider son choix il suffit de cliquer ou d'appuyer sur entrée.
+
+	B/Jeu
+
+Il faut arriver au bout du niveau sans tomber. Les blocs disparaissent derière le joueur, si il est trop lent il tombe. Il faut également rammasser un maximum de pièces, pour cela il faut atteindre les plateformes les plus hautes et marcher sur les pièces.
+Le jeu se finit à la fin de la musique.
+
+
+4/Ajouter une musique.
+
+
+Pour ajouter une musique il faut aller à l'écran de séléction (SelectionScreen) et appuyer sur "ajouter une musique".
+
+Les musiques doivent impérativement être au format wave (.wav ou . WAV)*. Si votre musique préférée n'est pas à ce format vous pouvez utiliser le logiciel (gratuit) Super que vous pouvez télécharger à cette addresse : http://www.erightsoft.com/SUPER.html
+
+* : Précision du format : -fréquence d'échantillonnage (sampling freq) = 44100Hz
+			  -nombre de canaux (channels) = 2
+			  -bitrate = 1411kbps
+			  -audio codec = WAV-sowt-(pcm 16 little endian)

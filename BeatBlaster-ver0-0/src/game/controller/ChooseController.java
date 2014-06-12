@@ -45,6 +45,11 @@ public class ChooseController {
 		mouseIsPressed = false;
 		isBackButtonSelected = false;
 		mousePosition.set(0, 0);
+		keys.put(SelectionKeys.LEFT, false);
+		keys.put(SelectionKeys.RIGHT, false);
+		keys.put(SelectionKeys.VALIDATE, false);
+		keys.put(SelectionKeys.DOWN, false);
+		keys.put(SelectionKeys.UP, false);
 	}
 	
 	/*

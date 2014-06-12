@@ -105,8 +105,8 @@ public class ChooseScreen implements Screen, InputProcessor {
 			if(!renderer.isLastSong(selectedSong)) {
 				nextSong();
 				if(selectedSong > 7) {
-					previousSong();
 					renderer.scrollSelection(1);
+					//previousSong();
 				}
 			}				
 			
@@ -141,6 +141,10 @@ public class ChooseScreen implements Screen, InputProcessor {
 			if(ChooseController.isBackButtonSelected()) {
 				game.setScreen(new SelectionScreen(game));
 			} else {
+				if(selectedSong + scrolled > savedFiles.size() - 1) {
+					selectedSong = savedFiles.size() - 1;
+					scrolled = 0;
+				}
 				DataSong ds = reader.read(saveDirectory, savedFiles.get(selectedSong + scrolled));
 				String musicName = "\\" + savedFiles.get(selectedSong + scrolled);
 				musicName = (String) musicName.subSequence(0, musicName.length() - 4);
