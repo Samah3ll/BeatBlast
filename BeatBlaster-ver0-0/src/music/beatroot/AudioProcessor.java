@@ -500,7 +500,6 @@ public class AudioProcessor {
 	 *  then (optionally) normalising and calculating onsets.
 	 */
 	protected void processFrame() {
-		System.out.println(fftSize);
 		if (getFrame()) {
 			for (int i = 0; i < fftSize; i++) {
 				reBuffer[i] = window[i] * circBuffer[cbIndex];
@@ -543,10 +542,10 @@ public class AudioProcessor {
 				for (int i = 0; i < freqMapSize; i++)
 					frames[frameCount][i] = 0;
 			else {
-				if (normaliseMode == 1)
+				if (normaliseMode == 1) //pas là
 					for (int i = 0; i < freqMapSize; i++)
 						frames[frameCount][i] /= frameRMS;
-				else if (normaliseMode == 2)
+				else if (normaliseMode == 2) //ici
 					for (int i = 0; i < freqMapSize; i++)
 						frames[frameCount][i] /= ltAverage;
 				for (int i = 0; i < freqMapSize; i++) {
