@@ -145,23 +145,6 @@ public class Level {
 	}
 	
 	/**
-	 * Supprime la plateforme à la position spécifiée.
-	 * @param x l'abscisse de la plateforme à supprimer.
-	 * @param y l'ordonnée de la plateforme à supprimer.
-	 */
-	public void removePlateform(int x, int y) {
-		Plateform p;
-		if((p = getPlateform(x, y)) != null) {
-			for(int i = 0; i < p.getSize(); i++) {
-				removeBlock(x + i, y);
-			}
-			plateforms.remove(p);				
-			p.remove();
-			p = null;
-		}
-	}
-	
-	/**
 	 * Ajoute la piece c au niveau.
 	 * @param c : la pièce à ajouter.
 	 */

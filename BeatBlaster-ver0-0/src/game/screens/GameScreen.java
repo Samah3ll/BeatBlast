@@ -67,7 +67,6 @@ public class GameScreen implements Screen, InputProcessor {
 			
 			//Supprime les blocks du monde
 			world.deleteBlocks(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
-			world.deletPlateforms(whereShouldBeRunnerWithMusic -nbBlocksBeforeRunner);
 		}
 		
 		if(controller.isDead()) {

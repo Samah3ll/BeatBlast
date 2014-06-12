@@ -61,18 +61,6 @@ public class World {
 	}
 	
 	/**
-	 * Supprime toutes les plateformes qui sont avant la position spécifiée.
-	 * @param x : position jusqu'à laquelle les plateformes sont supprimées.
-	 */
-	public void deletPlateforms(float x) {
-		for(int i = 0; i < x; i++) {
-			for(int y = 0; y < level.getHeight(); y++) {
-				level.removePlateform(i, y);
-			}
-		}
-	}
-	
-	/**
 	 * 
 	 * @return une ArrayList qui contient les pièces du niveau.
 	 */

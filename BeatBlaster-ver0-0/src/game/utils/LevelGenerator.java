@@ -60,18 +60,24 @@ public class LevelGenerator {
 	 * @param ds le DataSong de la musique.
 	 */
 	public void generateSpectroBlocks(DataSong ds) {
+		
 		BasicPlateform p;
 		Coin c;
 		lastY = 0;
 		lastL = 0;
+		
 		for(int i = 0; i < ds.getBeats().size()-1; i++){
 			if( i<ds.getSpectro().length) {
+				
 				//abcisses, +1 pour les bounds
 				x = (float) (ds.getBeats().get(i)*coeff+1+nbBlocksBefore);
+				
 				// ordonnées, +1 pour les bounds
 				y = ds.bestSpectro(i)+1;
+				
 				//Longueur de la plateforme
 				l = ((ds.getBeats().get(i+1)-ds.getBeats().get(i))*coeff);
+				
 				//Position de la pièce sur la plateforme (au milieu de la plateforme).
 				coinPos = (float) Math.floor((1 + l) / 2);				
 				
